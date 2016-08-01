@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 28, 2013 10:27:45 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.opd.Exams" table="opd_patient_examination" lazy="false">
+    
+        <id name="examID" type="int">
+            <column name="examination_id" />
+            <generator class="native" />
+        </id>
+        
+       <many-to-one name="visit" class="core.classes.opd.Visit" fetch="join">
+            <column name="visit_id" />
+        </many-to-one>
+        
+        
+        
+        <property name="examDate" type="java.util.Date">
+            <column name="examination_date" />
+        </property>
+        <property name="examWeight" type="double">
+            <column name="examination_weight" />
+        </property>
+        <property name="examHeight" type="double">
+            <column name="examination_height" />
+        </property>
+        <property name="exambmi" type="double">
+            <column name="examination_bmi" />
+        </property>
+        <property name="examSysBP" type="double">
+            <column name="examination_sysBP" />
+        </property>
+        <property name="examDisatBP" type="double">
+            <column name="examination_diastBP" />
+        </property>
+        <property name="examTemp" type="double">
+            <column name="examination_temprature" />
+        </property>
+        <property name="examCreateDate" type="java.util.Date">
+            <column name="examination_create_date" />
+        </property>
+    
+          <many-to-one name="examCreateUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="examination_create_user" not-null="true"/>
+        </many-to-one> 
+        
+        
+        <property name="examLastUpdate" type="timestamp">
+            <column name="examination_lastupdate_date" />
+        </property>
+        
+         <many-to-one name="examLastUpdateUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="examination_lastupdate_user" not-null="true"/>
+        </many-to-one> 
+        
+        <property name="examActive" type="int">
+            <column name="examination_active" />
+        </property>
+     
+    </class>
+</hibernate-mapping>

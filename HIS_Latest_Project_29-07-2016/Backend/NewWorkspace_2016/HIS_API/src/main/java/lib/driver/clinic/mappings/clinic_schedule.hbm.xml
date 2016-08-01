@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.clinic.clinic_schedule" table="clinic_schedule">
+
+		<id name="attachment_ID" type="int">
+            <column name="attachment_id" />
+            <generator class="native" />
+        </id>
+							
+		<many-to-one name="clinic_visit_id" class="core.classes.clinic.clinic_visit" fetch="join">
+            <column name="clinic_visit_id" />
+        </many-to-one>
+        
+        <property name="attachment_type" type="java.lang.String">
+            <column name="attachment_type" />
+        </property>
+        <many-to-one name="create_user" class="core.classes.api.user.AdminUser" fetch="select">
+            <column name="create_user" />
+        </many-to-one>
+        <property name="mobile_no" type="int">
+            <column name="mobile_no" />
+        </property>
+        <property name="clinic_datetime" type="timestamp">
+            <column name="clinic_datetime" />
+        </property>
+        
+	</class>
+</hibernate-mapping>

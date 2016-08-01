@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 1, 2013 2:12:09 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.finance.HisFinReceipt" table="his_fin_receipt" catalog="HIS">
+        <id name="recId" type="java.lang.Integer">
+            <column name="rec_id" />
+            <generator class="identity" />
+        </id>
+        <property name="recVoucherNo" type="int">
+            <column name="rec_voucher_no" not-null="true" unique="true" />
+        </property>
+        <property name="recDateOfTranx" type="date">
+            <column name="rec_date_of_tranx" length="10" not-null="true" />
+        </property>
+        <property name="recDescription" type="string">
+            <column name="rec_description" length="225" not-null="true" />
+        </property>
+        <property name="recCrossEntry" type="java.lang.Double">
+            <column name="rec_cross_entry" precision="22" scale="0" />
+        </property>
+        <property name="recAmount" type="double">
+            <column name="rec_amount" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="recTotal" type="double">
+            <column name="rec_total" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="recReceivedForm" type="double">
+        	<column name="rec_ReceivedFrom" precision="22" scale="0" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

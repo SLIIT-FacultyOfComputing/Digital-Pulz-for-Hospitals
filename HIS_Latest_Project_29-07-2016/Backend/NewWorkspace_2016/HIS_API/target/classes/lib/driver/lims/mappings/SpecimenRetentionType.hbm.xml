@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.SpecimenRetentionType" table="lab_specimenretentiontype" catalog="HIS">
+        <id name="retention_TypeID" type="java.lang.Integer">
+            <column name="retention_type_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fCategory_ID" class="core.classes.lims.Category" fetch="select">
+            <column name="fcategory_id" />
+        </many-to-one>
+        <many-to-one name="fSub_CategryID" class="core.classes.lims.SubCategory" fetch="select">
+            <column name="fsub_category_id" />
+        </many-to-one>
+        <property name="retention_TypeName" type="string">
+            <column name="retention_type_name" length="40" />
+        </property>
+        <property name="duration" type="string">
+            <column name="duration" length="30" />
+        </property>
+        <set name="labSpecimens" table="lab_specimen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fretention_type_id" />
+            </key>
+            <one-to-many class="core.classes.lims.Specimen" />
+        </set> 
+	</class>
+</hibernate-mapping>

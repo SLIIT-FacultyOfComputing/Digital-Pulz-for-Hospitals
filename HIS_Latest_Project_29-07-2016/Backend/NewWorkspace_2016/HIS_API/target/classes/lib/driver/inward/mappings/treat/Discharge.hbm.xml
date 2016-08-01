@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 19, 2014 4:15:29 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.inward.treat.Discharge" table="ward_discharge" catalog="HIS"  lazy="false">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" />
+        </property>
+        <property name="image" type="java.lang.String">
+            <column name="image" />
+        </property>
+        <many-to-one name="bht_no" class="core.classes.inward.WardAdmission.Admission" fetch="join">
+            <column name="bht_no" />
+        </many-to-one>
+        <many-to-one name="create_user" class="core.classes.api.user.AdminUser" fetch="join" lazy="false">
+            <column name="create_user" />
+        </many-to-one>
+        <property name="create_date_time" type="java.util.Date">
+            <column name="create_datetime" />
+        </property>
+    </class>
+</hibernate-mapping>

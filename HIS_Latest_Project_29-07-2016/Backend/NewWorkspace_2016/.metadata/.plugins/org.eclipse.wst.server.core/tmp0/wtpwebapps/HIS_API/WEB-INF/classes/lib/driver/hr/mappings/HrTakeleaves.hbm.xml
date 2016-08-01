@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 23, 2014 2:36:13 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrTakeleaves" table="hr_takeleaves" catalog="HIS">
+        <composite-id name="id" class="core.classes.hr.HrTakeleavesId">
+            <key-property name="empId" type="int">
+                <column name="emp_ID" />
+            </key-property>
+            <key-property name="leaveTypeId" type="int">
+                <column name="leave_type_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="hrEmployee" class="core.classes.hr.HrEmployee" update="false" insert="false" fetch="select">
+            <column name="emp_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hrLeavetype" class="core.classes.hr.HrLeavetype" update="false" insert="false" fetch="select">
+            <column name="leave_type_ID" not-null="true" />
+        </many-to-one>
+        <property name="startDatetime" type="timestamp">
+            <column name="start_datetime" length="19" not-null="true" />
+        </property>
+        <property name="endDatetime" type="timestamp">
+            <column name="end_datetime" length="19" not-null="true" />
+        </property>
+        <property name="reason" type="string">
+            <column name="reason" length="100" not-null="true" />
+        </property>
+        <property name="approveStatus" type="string">
+            <column name="approve_status" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,356 @@
+package core.resources.opd;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.sound.midi.SysexMessage;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
+
+import core.classes.opd.Prescription;
+import core.classes.opd.PrescribeItem;
+import core.classes.pharmacy.MstDrugsNew;
+import flexjson.JSONSerializer;
+import flexjson.transformer.DateTransformer;
+import lib.driver.opd.driver_class.PrescriptionDBDriver;
+import lib.driver.pharmacy.driver_class.DrugDBDriver;
+
+/**
+ * This class define all the generic REST Services necessary for handling
+ * patient's Prescriptions
+ * 
+ * @author
+ * @version 1.0
+ */
+@Path("Prescription")
+public class PrescriptionResource {
+
+	PrescriptionDBDriver prescriptionDBDriver = new PrescriptionDBDriver();
+	DateFormat dateformat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	DateFormat dateformat2 = new SimpleDateFormat("yyyy-MM-dd");
+
+	/**
+	 * Add New Prescription 
+	 * @param jsonarray contains the prescribed medicines as a String array 
+	 * @param PID is a Integer Value
+	 * @param visitID is a Integer Value
+	 * @param userid is a Integer Value
+	 * @return A String and If Data inserted Successfully return is True else False.
+	 * @throws
+	 */
+	@POST
+	@Path("/addPrescription/{PID}/{VISITID}/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addPrescription(JSONArray jsonarray,
+			@PathParam("PID") int PID, @PathParam("VISITID") int visitID,
+			@PathParam("userid") int userid) {
+
+		try {
+			System.out.println(jsonarray.toString());
+			System.out.println(PID);
+			System.out.println(visitID);
+			System.out.println(userid);
+			int qty = 0;
+			
+			Prescription prescription = new Prescription();
+
+			prescription.setPrescriptionPrescribedBy(userid);
+			prescription.setPrescriptionDate(new Date());
+			prescription.setPrescriptionLastUpdate(new Date());
+			prescription.setPrescriptionCreateUser(userid);
+			prescription.setPrescriptionCreateDate(new Date());
+			prescription.setPrescriptionLastUpdateUser(userid);
+ 
+			for (int i = 0; i < jsonarray.length(); i++) {
+
+				JSONObject prescrption = (JSONObject) jsonarray
+						.getJSONObject(i);
+				int drugid = Integer.parseInt(prescrption.getString("drugid"));
+				String dosage = prescrption.getString("dosage");
+				String freq = prescrption.getString("freq");
+				String period = prescrption.getString("period");
+				System.out.println(dosage+freq+period+drugid);
+				PrescribeItem prescribeitem = new PrescribeItem();
+
+				MstDrugsNew drug = new DrugDBDriver().getDrugObjectById(drugid);
+
+				prescribeitem.setDrugID(drug);
+				prescribeitem.setPrescribeItemsDosage(dosage);
+				prescribeitem.setPrescribeItemsFrequency(freq);
+				prescribeitem.setPrescribeItemsPeriod(period);
+				int dosage_int = Integer.parseInt(dosage);
+				
+				//getting the day
+				int day = 0;
+				switch(freq){
+				case "Once a Day":
+					day = 1;
+					break;
+				case "Twice a Day":
+					day = 2;
+					break;
+				case "Thrice a Day":
+					day = 3;
+					break;
+				}
+				
+				//get period
+				int period_days = 0; //period to number of days
+				switch(period){
+				case "For 1 day":
+					period_days = 1;
+					break;
+				case "For 2 day":
+					period_days = 2;
+					break;
+				case "For 4 day":
+					period_days = 4;
+					break;
+				case "For 5 day":
+					period_days = 5;
+					break;
+				case "For 1 week":
+					period_days = 7;
+					break;
+				case "For 2 week":
+					period_days = 14;
+					break;
+				case "For 3 weeks":
+					period_days = 21;
+					break;
+				case "For 1 month":
+					period_days = 30;
+					break;
+				case "For 3 months":
+					period_days = 90;
+					break;
+				}
+				
+				//multiply
+				qty = dosage_int * day * period_days;
+			
+			prescribeitem.setPrescribeItemsQuantity(qty);
+			//adding the item
+
+				prescription.prescribeItems.add(prescribeitem);
+			}
+
+			if (prescriptionDBDriver.insertPrescription(prescription, visitID))
+				return "True";
+			else
+				return "False";
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "False";
+		}
+
+	}
+	
+	/***
+	 * Update Prescription Details
+	 * @param jsonarray contains the prescribed medicines as a String array 
+	 * @param patientid is a Integer Value
+	 * @param presid is a Integer Value
+	 * @param userid is a Integer Value
+	 * @return  A String and If Data Updated Successfully return is True else False.
+	 */
+
+	@POST
+	@Path("/updatePrescription/{patientid}/{presid}/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updatePrescription(JSONArray jsonarray,
+			@PathParam("patientid") int patientid,
+			@PathParam("presid") int presid, @PathParam("userid") int userid) {
+
+		try {
+		
+		 
+			Prescription prescription = new Prescription();
+			 
+			for (int i = 0; i < jsonarray.length(); i++) {
+			 
+			 	JSONObject presJSONObj =  jsonarray.getJSONObject(i);
+				
+			 	int drugid = -1;
+				String dosage = null;
+				String freq = null;
+				String period = null;
+
+				if (presJSONObj.getString("drugid").toString().startsWith("{")) {
+					drugid = Integer.parseInt(presJSONObj.getJSONObject("drugid")
+							.getString("dSrNo"));
+				} else {
+					drugid = Integer.parseInt(presJSONObj.getString("drugid"));
+				}
+			 
+				dosage = presJSONObj.getString("dosage");
+				freq = presJSONObj.getString("freq");
+				period = presJSONObj.getString("period");
+
+				System.out.println(drugid + " " + dosage + " " + freq + " "
+						+ period);
+
+				PrescribeItem prescribeitem = new PrescribeItem();
+
+				MstDrugsNew drug = new lib.driver.pharmacy.driver_class.DrugDBDriver()
+						.getDrugObjectById(drugid);
+
+				prescribeitem.setDrugID(drug);
+				prescribeitem.setPrescribeItemsDosage(dosage);
+				prescribeitem.setPrescribeItemsFrequency(freq);
+				prescribeitem.setPrescribeItemsPeriod(period);
+
+				prescription.prescribeItems.add(prescribeitem);
+ 
+			}
+
+		 	if (prescriptionDBDriver.updatePrescription(prescription, presid))
+				return "True";
+			else    
+				return "False";
+
+		} catch (Exception e) {
+			System.out.println("Error : " + e.getMessage());
+			return "False";
+		}
+
+	}
+
+	/**
+	 * Get Prescription By Prescription ID
+	 * @param PRES_ID Is An Integer Value
+	 * @return JSON String that contains all the Prescription Details
+	 */
+	@GET
+	@Path("/getPrescription/{PRES_ID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPrescriptionByPrescriptionId(
+			@PathParam("PRES_ID") int PRES_ID) {
+		try {
+
+			Prescription prescription = prescriptionDBDriver
+					.getPrescription(PRES_ID);
+
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer
+					.include("prescribeItems")
+					.transform(new DateTransformer("yyyy-MM-dd"),
+							"prescriptionDate", "prescriptionCreateDate",
+							"prescriptionLastUpdate",
+							"visit.patient.patientDateOfBirth",
+							"visit.patient.patientCreateDate",
+							"visit.patient.patientLastUpdate",
+							"visit.visitDate", "visit.visitLastUpdate",
+							"*.class").serialize(prescription);
+
+		} catch (Exception e) {
+			return "error" + e.getMessage();
+		}
+	}
+
+	/**
+	 * Get Prescription By Patient Id
+	 * @param patient_ID Is an Integer Value
+	 * @return JSON String that contains all the Prescription Details
+	 */
+	@GET
+	@Path("/getPrescriptionsByPatientID/{patientID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPrescriptionsByPatientID(@PathParam("patientID") int patient_ID) {
+				System.out.println(patient_ID);
+				try {
+
+			List<Prescription> prescription = prescriptionDBDriver
+					.getPrescriptionsByPatientID(patient_ID);
+
+			System.out.println(prescription);
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer
+					.exclude("*.class", "prescribeItems.prescriptionItemID",
+							"patient", "visit")
+					.include("prescribeItems")
+					.transform(new DateTransformer("yyyy-MM-dd"),
+							"prescriptionDate", "prescriptionCreateDate",
+							"prescriptionLastUpdate").serialize(prescription);
+
+		} catch (Exception e) {
+			return "error" + e.getMessage();
+		}
+	}
+	
+	
+	
+	@GET
+	@Path("/getPrescriptionsByPatientIDAfterprescribe/{patientID}/{date}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPrescriptionsByPatientIDAfterprescribe(@PathParam("patientID") int patient_ID,@PathParam("date") String date) {
+				System.out.println(patient_ID);
+				try {
+
+			List<Prescription> prescription = prescriptionDBDriver
+					.getPrescriptionsByPatientIDAfterprescribe(patient_ID,date);
+
+			System.out.println(prescription);
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer
+					.exclude("*.class", "prescribeItems.prescriptionItemID",
+							"patient", "visit")
+					.include("prescribeItems")
+					.transform(new DateTransformer("yyyy-MM-dd"),
+							"prescriptionDate", "prescriptionCreateDate",
+							"prescriptionLastUpdate").serialize(prescription);
+
+		} catch (Exception e) {
+			return "error" + e.getMessage();
+		}
+	}
+
+
+	@GET
+	@Path("/getPrescriptionsByPatientIDAfterprescribedetails/{patientID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPrescriptionsByPatientIDAfterprescribedetails(@PathParam("patientID") int patient_ID) {
+				System.out.println(patient_ID);
+				try {
+
+			List<List> prescription = prescriptionDBDriver
+					.getPrescriptionsByPatientIDAfterprescribedetails(patient_ID);
+
+			System.out.println(prescription);
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer
+					.exclude("*.class", "prescribeItems.prescriptionItemID",
+							"patient", "visit")
+					.include("prescribeItems")
+					.transform(new DateTransformer("yyyy-MM-dd"),
+							"prescriptionDate", "prescriptionCreateDate",
+							"prescriptionLastUpdate").serialize(prescription);
+
+		} catch (Exception e) {
+			return "error" + e.getMessage();
+		}
+	}
+	
+	
+	
+}

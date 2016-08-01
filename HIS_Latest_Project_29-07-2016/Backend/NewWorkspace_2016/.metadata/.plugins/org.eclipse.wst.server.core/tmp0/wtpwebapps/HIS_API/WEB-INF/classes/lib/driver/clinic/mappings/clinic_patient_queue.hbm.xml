@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.clinic.clinic_patient_queue" table="clinic_patient_queue">
+
+		<id name="clinic_queue_token_no" type="int">
+            <column name="clinic_queue_token_no" />
+            <generator class="native" />
+        </id>
+							
+		<many-to-one name="clinic_visit_id" class="core.classes.clinic.clinic_visit" fetch="join">
+            <column name="clinic_visit_id" />
+        </many-to-one>
+        
+        <property name="clinic_visit_type" type="java.lang.String">
+            <column name="clinic_visit_type" />
+        </property>
+        <many-to-one name="clinic_queue_assign_by" class="core.classes.api.user.AdminUser" fetch="select">
+            <column name="clinic_queue_assign_by" />
+        </many-to-one>
+        <property name="clinic_queue_status" type="java.lang.String">
+            <column name="clinic_queue_status" />
+        </property>
+        <property name="clinic_queue_assign_date" type="timestamp">
+            <column name="clinic_queue_assign_date" />
+        </property>
+        
+	</class>
+</hibernate-mapping>

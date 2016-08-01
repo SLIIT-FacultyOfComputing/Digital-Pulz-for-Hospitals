@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2014 1:40:36 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.pcu.PcuManualdispense" table="pcu_manualdispense" catalog="HIS">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="admitionId" type="int">
+            <column name="admition_id" not-null="true" />
+        </property>
+        <property name="SNumber" type="int">
+            <column name="s_number" not-null="true" />
+        </property>
+        <property name="dispensedDate" type="date">
+            <column name="dispensed_date" length="10" />
+        </property>
+        <property name="dispensedBy" type="java.lang.Integer">
+            <column name="dispensed_by" />
+        </property>
+        <property name="quanity" type="java.lang.Float">
+            <column name="quanity" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

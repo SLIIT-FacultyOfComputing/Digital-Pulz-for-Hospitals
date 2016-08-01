@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2014 2:42:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrWorkin" table="hr_workin" catalog="HIS">
+        <composite-id name="id" class="core.classes.hr.HrWorkinId">
+            <key-property name="empId" type="int">
+                <column name="emp_ID" />
+            </key-property>
+            <key-property name="deptId" type="int">
+                <column name="dept_ID" />
+            </key-property>
+            <key-property name="designationId" type="int">
+                <column name="designation_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="hrDesignation" class="core.classes.hr.HrDesignation" update="false" insert="false" fetch="select">
+            <column name="designation_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hrDepartment" class="core.classes.hr.HrDepartment" update="false" insert="false" fetch="select">
+            <column name="dept_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hrEmployee" class="core.classes.hr.HrEmployee" update="false" insert="false" fetch="select">
+            <column name="emp_ID" not-null="true" />
+        </many-to-one>
+        <property name="startDate" type="date">
+            <column name="start_date" length="10" not-null="false" />
+        </property>
+        <property name="endDate" type="date">
+            <column name="end_date" length="10" not-null="false" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="50" not-null="false" />
+        </property>
+        <property name="isActive" type="boolean">
+            <column name="is_active" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>

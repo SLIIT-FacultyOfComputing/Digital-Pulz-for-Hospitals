@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.SubFieldResults" table="lab_subfieldresults" catalog="HIS">
+        <id name="subFieldResult_ID" type="java.lang.Integer">
+            <column name="sub_field_result_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fMResultID" class="core.classes.lims.MainResults" fetch="select">
+            <column name="fmresult_id" />
+        </many-to-one>
+        <many-to-one name="fSubF_ID" class="core.classes.lims.SubTestFields" fetch="select">
+            <column name="fsubf_id" />
+        </many-to-one>
+        <many-to-one name="fParentF_ID" class="core.classes.lims.ParentTestFields" fetch="select">
+            <column name="fparentf_id" />
+        </many-to-one>
+        <property name="subFieldResult" type="string">
+            <column name="sub_field_result" />
+        </property>
+        <property name="result_FinalizedDate" type="timestamp">
+            <column name="result_finalized_date" length="19" not-null="true" />
+        </property>
+	    
+		
+	</class>
+</hibernate-mapping>

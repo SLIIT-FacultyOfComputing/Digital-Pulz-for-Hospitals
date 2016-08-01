@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2014 6:25:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrEmployee" table="hr_employee" catalog="HIS" lazy="false">
+        <id name="empId" type="java.lang.Integer">
+            <column name="emp_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string" >
+            <column name="title" length="50" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="first_name" length="50" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="50" not-null="true" />
+        </property>
+        <property name="birthday" type="date" >
+            <column name="birthday" length="10" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="50" not-null="true" />
+        </property>
+        <property name="civilStatus" type="string">
+            <column name="civil_status" length="50" not-null="true" />
+        </property>
+        <property name="empImage" type="binary">
+            <column name="emp_image" />
+        </property>
+        <property name="isActive" type="boolean">
+            <column name="is_active" not-null="true" />
+        </property>
+        <set name="hrHasleaveses" table="hr_hasleaves" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="emp_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrHasleaves" />
+        </set>
+        <set name="hrDepartments" table="hr_department" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="dept_head_ID" />
+            </key>
+            <one-to-many class="core.classes.hr.HrDepartment" />
+        </set>
+        
+        <set name="hrIdentities" table="hr_identity" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="emp_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrIdentity" />
+        </set>
+        <set name="hrWorkins" table="hr_workin" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="emp_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrWorkin" />
+        </set>
+        <set name="hrContacts" table="hr_contact" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="emp_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrContact" />
+        </set>
+        <set name="hrTakeleaveses" table="hr_takeleaves" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="emp_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrTakeleaves" />
+        </set>
+        <set name="hrAttendances" table="hr_attendance" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="employee_id" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrAttendance" />
+        </set>
+        <set name="hrAssignschedules" table="hr_assignschedule" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="emp_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrAssignschedule" />
+        </set>
+    </class>
+</hibernate-mapping>

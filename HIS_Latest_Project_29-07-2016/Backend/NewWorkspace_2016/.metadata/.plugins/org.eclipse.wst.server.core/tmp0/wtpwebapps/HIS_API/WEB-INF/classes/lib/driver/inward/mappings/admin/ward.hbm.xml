@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="core.classes.inward.admin.Ward" table="ward_wards" catalog="HIS"  lazy="false" >
+        <id name="wardNo" type="string">
+            <column name="ward_no" />
+            <generator class="assigned" />
+        </id>             
+        <property name="category" type="string">
+            <column name="category" length="100" not-null="false" />
+        </property>
+        <property name="wardGender" type="string">
+            <column name="ward_gender"   not-null="false" />
+        </property>
+
+		<set name="bedsSet" table="ward_beds" inverse="true" lazy="true" fetch="select" >
+            <key>
+                <column name="ward_no" not-null="true"/>
+            </key>
+            <one-to-many class="core.classes.inward.admin.Bed" />
+        </set>
+        
+        <set name="internalTransferSet" table="ward_internaltransfer" inverse="true" lazy="true" fetch="select" >
+            <key>
+                <column name="transfer_ward" not-null="true"/>
+            </key>
+            <one-to-many class="core.classes.inward.transfer.InternalTransfer" />
+        </set>                        
+    </class>
+</hibernate-mapping>

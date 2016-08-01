@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 19, 2014 12:07:34 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.inward.WardAdmission.Admission" table="ward_admission" catalog="HIS" lazy="false" >
+        <id name="bhtNo" type="java.lang.String">
+            <column name="bht_no" />
+            <generator class="assigned" />
+        </id>                           
+        <property name="bedNo" type="int">
+            <column name="bed_no" />
+        </property>
+        <property name="wardNo" type="java.lang.String">
+            <column name="ward_no" />
+        </property>        
+        <many-to-one name="patientID" class="core.classes.inward.WardAdmission.Inpatient" lazy="false" fetch="join" >
+            <column name="patient_id"  />
+        </many-to-one>        
+        <property name="dailyNo" type="int">
+            <column name="daily_no" />
+        </property>
+        <property name="monthlyNo" type="int">
+            <column name="monthly_no" />
+        </property>
+        <property name="yearlyNo" type="int">
+            <column name="yearly_no" />
+        </property>
+        <many-to-one name="DoctorID" class="core.classes.hr.HrEmployee" lazy="false" fetch="join">
+            <column name="doctor_id" not-null="true"/>
+        </many-to-one>
+        <property name="admitDateTime" type="java.util.Date">
+            <column name="admit_date_time" />
+        </property>
+        <property name="patientComplain" type="java.lang.String">
+            <column name="patient_complain" />
+        </property>
+        <property name="previousHistory" type="java.lang.String">
+            <column name="previous_history" />
+        </property>
+        
+        
+        <property name="dischargeType" type="java.lang.String">
+            <column name="discharge_type" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" />
+        </property>
+        
+        <property name="outcomes" type="java.lang.String">
+            <column name="outcomes" />
+        </property>
+        
+         <property name="referredto" type="java.lang.String">
+            <column name="referredto" />
+        </property>
+         <property name="dischargediagnosis" type="java.lang.String">
+            <column name="dischargediagnosis" />
+        </property>
+        
+          <property name="admissionUnit" type="java.lang.String">
+            <column name="admission_unit" />
+                </property>
+        
+         <property name="status" type="java.lang.String">
+            <column name="status" />
+        </property>
+        
+         <property name="sign" type="java.lang.String">
+            <column name="sign" />
+          </property>
+          
+           
+                       
+        
+        <many-to-one name="createdUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+            <column name="created_user" not-null="true"/>
+        </many-to-one>
+        <property name="createdDateTime" type="java.util.Date">
+            <column name="created_date_time" />
+        </property>
+        <many-to-one name="LastUpdatedUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+            <column name="last_updated_user" not-null="true"/>
+        </many-to-one>
+        <property name="LastUpdatedDateTime" type="java.util.Date">
+            <column name="last_updated_date_time" />
+        </property>
+        
+         <set name="internalTransferSet" table="ward_internaltransfer" inverse="true" lazy="true" fetch="select" >
+            <key>
+                <column name="transfer_ward" not-null="true"/>
+            </key>
+            <one-to-many class="core.classes.inward.transfer.InternalTransfer" />
+        </set>
+        
+        
+    </class>
+</hibernate-mapping>

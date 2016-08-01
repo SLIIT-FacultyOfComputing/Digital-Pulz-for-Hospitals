@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.SampleCenters" table="lab_samplecenters" catalog="HIS">
+        <id name="sampleCenter_ID" type="java.lang.Integer">
+            <column name="sample_center_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fSampleCenterLast_UpdatedUserID" class="core.classes.api.user.AdminUser" fetch="select">
+            <column name="fsample_center_last_updated_user_id" />
+        </many-to-one>
+      
+        <many-to-one name="fSampleCenter_AddedUserID" class="core.classes.api.user.AdminUser" fetch="select">
+            <column name="fsample_center_added_user_id" />
+        </many-to-one>
+        <many-to-one name="fSampleCenterType_ID" class="core.classes.lims.SampleCenterTypes" fetch="select">
+            <column name="fsample_center_type_id" />
+        </many-to-one>
+        <property name="sampleCenter_Name" type="string">
+            <column name="sample_center_name" length="30" not-null="true" />
+        </property>
+         <property name="contactNumber1" type="string">
+            <column name="contact_number_1" length="10" not-null="true" />
+        </property>
+           <property name="contactNumber2" type="string">
+            <column name="contact_number_2" length="10" not-null="true" />
+        </property>
+        <property name="sampleCenter_Incharge" type="string">
+            <column name="sample_center_incharge" length="30" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="30" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="sampleCenter_AddedDate" type="timestamp">
+            <column name="sample_center_added_date" length="19" not-null="true" />
+        </property>
+        <property name="sampleCenter_LastUpdatedDate" type="timestamp">
+            <column name="sample_center_last_updated_date" length="19" not-null="true" />
+        </property>
+     
+        <!-- <set name="Labtestrequests" table="lab_labtestrequest" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fsample_center_id" />
+            </key>
+            <one-to-many class="core.classes.lims.LabTestRequest" />
+        </set> -->
+
+	    
+		
+	</class>
+</hibernate-mapping>

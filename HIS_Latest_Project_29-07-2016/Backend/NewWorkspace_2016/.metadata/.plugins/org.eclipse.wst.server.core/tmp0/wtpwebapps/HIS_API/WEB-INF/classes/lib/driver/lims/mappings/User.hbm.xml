@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	 <class name="core.classes.lims.User" table="user">
+	 	<id name="userId"  column="user_id" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+		<property name="userName" column="user_name" type="string" /> 		  
+	 </class>
+</hibernate-mapping>

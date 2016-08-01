@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 30, 2013 3:52:38 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.inward.WardAdmission.Inpatient" table="opd_patient" catalog="HIS"  lazy="false" >
+        
+        <id name="patientID" type="java.lang.Integer">
+            <column name="patient_id" />
+            <generator class="native" />
+        </id>     
+        
+        <property name="patientTitle" type="string">
+            <column name="patient_title" length="5" not-null="true" />
+        </property>
+        <property name="patientFullName" type="string">
+            <column name="patient_fullname"   not-null="false" />
+        </property>
+        <property name="patientPersonalUsedName" type="string">
+            <column name="patient_personal_username"   not-null="false" />
+        </property>
+        <property name="patientNIC" type="string">
+            <column name="patient_NIC"    not-null="false" />
+        </property>
+         <property name="patientPassport" type="string">
+            <column name="patient_passport"  not-null="false" />
+        </property>
+        <property name="patientHIN" type="string">
+            <column name="patient_HIN" length="10" not-null="false" />
+        </property>
+        <property name="patientPhoto" type="string">
+            <column name="patient_photo" not-null="false" />
+        </property>
+         <property name="patientDateOfBirth" type="java.util.Date">
+            <column name="patient_DOB"  not-null="false" />
+        </property>    
+        <property name="patientTelephone" type="string">
+            <column name="patient_telephone" not-null="true" />
+        </property>
+       	<property name="patientGender" type="string">
+            <column name="patient_gender" not-null="true" />
+        </property> 
+        <property name="patientCivilStatus" type="string">
+            <column name="patient_civil_status"  not-null="true" />
+        </property>
+        <property name="patientPreferredLanguage" type="string">
+            <column name="patient_preferred_language"  not-null="true" />
+        </property>
+        <property name="patientCitizenship" type="string">
+            <column name="patient_citizenship" length="20" not-null="true" />
+        </property>
+        <property name="patientAddress" type="string">
+            <column name="patient_address"  not-null="true" />
+        </property>
+        <property name="patientContactPName" type="string">
+            <column name="patient_contact_p_name"   not-null="true" />
+        </property>
+        <property name="patientContactPNo" type="string">
+            <column name="patient_contact_p_no" not-null="true" />
+        </property>
+        
+        <property name="patientRemarks" type="string">
+            <column name="patient_remarks" />
+        </property>
+         
+         <property name="patientCreateDate" type="timestamp">
+            <column name="patient_create_date" />
+        </property>
+    
+         <many-to-one name="patientCreateUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="patient_create_user" not-null="true"/>
+        </many-to-one> 
+        
+         
+        
+        <property name="patientLastUpdate" type="timestamp">
+            <column name="patient_lastupdate_date" />
+        </property>
+   
+        
+            <many-to-one name="patientLastUpdateUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="patient_lastupdate_user" not-null="true"/>
+        </many-to-one> 
+        
+        
+        <property name="patientActive" type="int">
+            <column name="patient_active" />
+        </property>       
+         
+  
+<!-- 		 <set name="visits" table="opd_patient_visit" inverse="true" lazy="false" fetch="select" cascade="all"> -->
+<!-- 			<key column="patient_id" not-null="true"/> -->
+<!--          	<one-to-many class="core.classes.opd.Visit"/> -->
+<!--         </set> -->
+         
+        <set name="allergies" table="opd_patient_allergy" inverse="true" lazy="false" fetch="select" cascade="all">
+			<key column="patient_id" not-null="true"/>
+         	<one-to-many class="core.classes.opd.Allergy"/>
+        </set>
+        
+   		 
+  
+   		 <set name="attachments" table="opd_patient_attachment" inverse="true" lazy="false" fetch="select" cascade="all">
+			<key column="patient_id" not-null="true"/>
+         	<one-to-many class="core.classes.opd.Attachments"/>
+        </set>
+        
+         <set name="records" table="opd_patient_record" inverse="true" lazy="false" fetch="select" cascade="all">
+			<key column="patient_id" not-null="true"/>
+         	<one-to-many class="core.classes.opd.Record"/>
+        </set>
+        
+      
+       
+    </class>
+</hibernate-mapping>

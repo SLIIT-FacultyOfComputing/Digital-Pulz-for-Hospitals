@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.MainResults" table="lab_mainresults" catalog="HIS">
+        <id name="result_ID" type="java.lang.Integer">
+            <column name="result_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fTestRequest_ID" class="core.classes.lims.LabTestRequest" fetch="select">
+            <column name="ftest_request_id" />
+        </many-to-one>
+        <!-- <many-to-one name="freport_ID" class="core.classes.lims.Reports" fetch="select">
+            <column name="freport_ID" />
+        </many-to-one> -->
+        <many-to-one name="fParentF_ID" class="core.classes.lims.ParentTestFields" fetch="select">
+            <column name="fparentf_id" />
+        </many-to-one>
+        <property name="mainResult" type="string">
+            <column name="mainresult" />
+        </property>
+        <property name="result_FinalizedDate" type="timestamp">
+            <column name="result_finalized_date" length="19" not-null="true" />
+        </property>
+        <set name="labSubfieldresultses" table="lab_subfieldresults" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fmresult_id" />
+            </key>
+            <one-to-many class="core.classes.lims.SubFieldResults" />
+        </set>
+	    
+		
+	</class>
+</hibernate-mapping>

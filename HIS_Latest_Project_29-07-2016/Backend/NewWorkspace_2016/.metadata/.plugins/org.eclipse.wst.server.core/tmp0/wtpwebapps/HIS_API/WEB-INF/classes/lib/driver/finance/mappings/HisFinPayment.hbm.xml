@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 1, 2013 2:12:09 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.finance.HisFinPayment" table="his_fin_payment" catalog="HIS">
+        <id name="payId" type="java.lang.Integer">
+            <column name="pay_id" />
+            <generator class="identity" />
+        </id>
+        <property name="payVoucherNo" type="int">
+            <column name="pay_voucher_no" not-null="true" unique="true" />
+        </property>
+        <property name="payDateOfTranx" type="date">
+            <column name="pay_date_of_tranx" length="10" not-null="true" />
+        </property>
+        <property name="payDescription" type="string">
+            <column name="pay_description" not-null="true" />
+        </property>
+        <property name="payCrossEntry" type="java.lang.Double">
+            <column name="pay_cross_entry" precision="22" scale="0" />
+        </property>
+        <property name="payAmount" type="double">
+            <column name="pay_amount" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="payTotal" type="double">
+            <column name="pay_total" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="PayPaidFor" type="string">
+        	<column name="Pay_PaidFor" precision="22" scale="0" not-null="true"/>
+        </property>
+        	
+    </class>
+</hibernate-mapping>

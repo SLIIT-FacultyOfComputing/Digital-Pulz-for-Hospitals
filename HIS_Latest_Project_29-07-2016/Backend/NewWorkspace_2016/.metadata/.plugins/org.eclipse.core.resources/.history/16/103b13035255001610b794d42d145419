@@ -1,0 +1,527 @@
+package core.resources.opd;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import core.classes.opd.Queue;
+import core.classes.opd.Visit;
+import flexjson.JSONSerializer;
+import flexjson.transformer.DateTransformer;
+
+import lib.driver.api.driver_class.user.UserDBDriver;
+import lib.driver.opd.driver_class.QueueDBDriver;
+import lib.driver.opd.driver_class.VisitDBDriver;
+
+import core.classes.api.user.AdminPermission;
+import core.classes.api.user.AdminUser;
+import core.classes.api.user.AdminUserroles;
+import core.resources.api.user.UserResource;
+
+/**
+ * This class define all the generic REST Services necessary for handling the queue
+ * 
+ * @author Prabhath Jayampathi
+ * @version 1.0
+ */
+
+@Path("Queue")
+public class QueueResource {
+
+	//
+	public final static int MAX_PATIENT_PER_DAY = 5;
+	
+	public static class QueueStatus {
+		public int user;
+		public int qStatus = 0; // 0 : Open , 1 : Full , 2 : OnHold , 3 : Redirect
+	}
+
+	
+	//
+	
+	public static int qType = 0; // 0 : Regular , 1 : Visit
+	
+	public static ArrayList<QueueStatus> queueStatusList = new ArrayList<QueueStatus>();
+	//
+
+	public static int lastAssignedDcotor = -1;
+	
+	QueueDBDriver queueDBDriver = new QueueDBDriver();
+
+	/**
+	 * @param qJson
+	 * @return
+	 */
+	@POST
+	@Path("/addPatientToQueue")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addToQueue(JSONObject qJson) {
+
+		Queue queue = new Queue();
+		try {
+ 
+			queue.setQueueRemarks(qJson.getString("queueRemarks"));
+			queue.setQueueTokenAssignTime(new Date());
+			queue.setQueueStatus("Waiting");
+			int patientID = qJson.getInt("patient");
+			int assignedBy = qJson.getInt("queueAssignedBy");
+			int assignedTo = qJson.getInt("queueAssignedTo");
+			
+			lastAssignedDcotor = assignedTo;
+			 
+			if((new QueueDBDriver().getQueuePatientsByUserID(assignedTo).size() + 1) == MAX_PATIENT_PER_DAY)
+			{
+				  System.out.println("Making Q Full for " + assignedTo); 
+				  QueueStatus qs = new QueueStatus();
+				  qs.user = assignedTo;
+				  qs.qStatus = 1;
+				  queueStatusList.add(qs); 
+			}
+			
+			queueDBDriver.addToQueue(queue, patientID, assignedBy, assignedTo);
+			return "True";
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return "False";
+		} catch (Exception e) {
+			return "False";
+		}
+
+	}
+
+	/**
+	 * @param pID
+	 * @return
+	 */
+	@GET
+	@Path("/checkinPatient/{PID}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String checkinPatient(@PathParam("PID") int P) {
+		try {
+
+			int status = queueDBDriver.checkInPatient(P);
+			if (status == 1)
+				return "True";
+			else
+				return "False";
+
+		} catch (Exception e) {
+			return "False";
+		}
+	}
+
+	/**
+	 * @param pID
+	 * @return
+	 */
+	@GET
+	@Path("/checkoutPatient/{PID}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String checkoutPatient(@PathParam("PID") int pID) {
+		try {
+			int status = queueDBDriver.checkoutPatient(pID);
+			
+			
+			if (status == 1)
+				return "True";
+			else
+				return "False";
+
+		} catch (Exception e) {
+			return "False";
+		}
+	}
+
+	@GET
+	@Path("/getQueuePatientsByUserID/{userid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getQueuePatientsByUserID(@PathParam("userid") int userid) {
+		try {
+			List<Queue> queueRecord = queueDBDriver
+					.getQueuePatientsByUserID(userid);
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer
+					.include("patient.patientGender", "patient.patientTitle",
+							"patient.patientFullName", "patient.patientID","patient.patientHIN",
+							"queueTokenNo", "queueStatus").exclude("*")
+					.serialize(queueRecord);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "False";
+		}
+	}
+
+	@GET
+	@Path("/isPatientInQueue/{patientID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String isPatientInQueue(@PathParam("patientID") int patientID) {
+		try {
+			JSONSerializer serializer = new JSONSerializer();
+			Queue q = queueDBDriver.isPatientInQueue(patientID);
+			return serializer
+					.include("patient.patientID","patient.patientFullName","patient.patientTitle", "queueStatus", "queueTokenNo","queueAssignedTo.hrEmployee.firstName","queueAssignedTo.hrEmployee.lastName")
+					.exclude("*").serialize(q); 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+			return null;
+		}
+	}
+
+	@GET
+	@Path("/getCurrentInPatient/{doctor}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCurrentInPatient(@PathParam("doctor") int doctor) {
+		try {
+			JSONSerializer serializer = new JSONSerializer();
+			Queue q = queueDBDriver.getCurrentInPatient(doctor);
+			return serializer
+					.include("patient.patientID", "queueStatus", "queueTokenNo")
+					.exclude("*").serialize(q);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+			return null;
+		}
+	}
+
+	@GET
+	@Path("/getTreatedPatients/{userid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getTreatedPatients(@PathParam("userid") int userid) {
+		try {
+			List<Queue> queueRecord = queueDBDriver.getTreatedPatients(userid);
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.include("patient.patientID", "queueTokenNo")
+					.exclude("*").serialize(queueRecord);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "False";
+		}
+	}
+
+	@GET
+	@Path("/redirectQueue/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String redirectQueue(@PathParam("userid") int userid) {
+		try {
+
+			int status = queueDBDriver.redirectQueue(userid);
+
+			if (status == 1)
+				return "True";
+			else
+				return "False";
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "False";
+		}
+	}
+
+	@GET
+	@Path("/getUserQStatus/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getUserQStatus(@PathParam("userid") int userid) {
+		try {
+
+			for (QueueStatus status : queueStatusList) {
+				if (status.user == userid)
+					return String.valueOf(status.qStatus);
+			}
+			return "0";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "0";
+		}
+	}
+
+	@GET
+	@Path("/setQueueType")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String setQueueType() {
+		try {
+
+			if (qType == 0)
+				qType = 1;
+			else
+				qType = 0;
+			return "True";
+
+		} catch (Exception e) { 
+			return "False";
+		}
+	}
+
+	@GET
+	@Path("/getQueueType")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getQueueType() {
+		try {
+			return String.valueOf(qType);
+		} catch (Exception e) { 
+			return "False";
+		}
+	}
+	
+	
+	@GET
+	@Path("/holdQueue/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String holdQueue(@PathParam("userid") int userid) {
+		try {
+			boolean bExists = false;
+			
+			for (QueueStatus status : queueStatusList) {
+				
+				if (status.user == userid) {
+					
+					bExists = true;
+					
+					if (status.qStatus == 2)
+					{ 
+						queueStatusList.remove(status);
+						return "True";
+					}
+					else if (status.qStatus == 0)
+					{
+						status.qStatus = 2; 
+						return "True";
+					} 
+				}
+			}
+			
+			if(bExists == false)
+			{
+				QueueStatus qstat = new QueueStatus();
+				qstat.user = userid;
+				qstat.qStatus = 2;
+				queueStatusList.add(qstat);
+			}
+
+			return "True";
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "False";
+		}
+	}
+	
+	
+	/**
+	 * @param pID
+	 * @return
+	 */
+	@GET
+	@Path("/getNextAssignDoctor/{patientID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getNextAssignDoctor(@PathParam("patientID") int patientID){
+		try {
+			
+			JSONSerializer serializer = new JSONSerializer();
+			String roleName="Doctor";
+			List<AdminUser> userList = new UserDBDriver().getUserDetailsByUserRole(roleName);
+			
+		
+			System.out.println("queueStatusList  " + queueStatusList.toString());
+			 
+			for(QueueStatus qstat : queueStatusList)
+			{ 
+				for(AdminUser user : userList)
+				{  
+					if(qstat.user == user.getUserId())
+					{
+						System.out.println("Removing " + user.getUserName()+ "  " + qstat.qStatus );
+						userList.remove(user);  
+						break;
+					}
+					 
+				} 
+			}
+			  
+			System.out.println("userList  " + userList.toString());
+			
+			if(qType == 1 )
+			{
+				 
+				Visit visit = new VisitDBDriver().retrieveRecent(patientID ).get(0);
+				
+				if(visit !=null)
+				{
+					// recent visit doctor
+					AdminUser user = visit.getVisitDoctor();
+					for(int i=0;i<userList.size();i++)
+					{
+						if(userList.get(i).getUserId() == user.getUserId())
+						{
+							return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);
+						}
+					} 
+					
+					// recent visit doctor is not available in the userlist
+					user = userList.get(0); 
+					for(int i=0;i < userList.size();i++)
+					{  
+						if(userList.get(i).getUserId() == lastAssignedDcotor)
+						{ 
+							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
+						}
+					} 
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);
+				}else
+				{
+					// recent visit doctor is not available in the userlist
+					AdminUser user = userList.get(0); 
+					for(int i=0;i < userList.size();i++)
+					{  
+						if(userList.get(i).getUserId() == lastAssignedDcotor)
+						{ 
+							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
+						}
+					} 
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);
+					 
+				}
+				 
+			} else
+			{
+			
+				if(lastAssignedDcotor == -1)
+				{ 
+					AdminUser user = userList.get(0);
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);  
+				}else
+				{	
+				
+					AdminUser user = userList.get(0); 
+					for(int i=0;i < userList.size();i++)
+					{  
+						if(userList.get(i).getUserId() == lastAssignedDcotor)
+						{ 
+							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
+						}
+					}  
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);  
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error " + e.getMessage());
+			return "False";
+		}
+	}
+
+	
+	
+	//********
+	
+	public int getNextAssignDoctorID(int patientID){
+		try {
+			
+			String roleName="Doctor";
+			List<AdminUser> userList = new UserDBDriver().getUserDetailsByUserRole(roleName);
+			
+		
+			System.out.println("queueStatusList  " + queueStatusList.toString());
+			 
+			for(QueueStatus qstat : queueStatusList)
+			{ 
+				for(AdminUser user : userList)
+				{  
+					if(qstat.user == user.getUserId())
+					{
+						System.out.println("Removing " + user.getUserName()+ "  " + qstat.qStatus );
+						userList.remove(user);  
+						break;
+					}
+					 
+				} 
+			}
+			  
+			System.out.println("userList  " + userList.toString());
+			
+			if(qType == 1 )
+			{
+				 
+				Visit visit = new VisitDBDriver().retrieveRecent(patientID ).get(0);
+				7
+				if(visit !=null)
+				{
+					// recent visit doctor
+					AdminUser user = visit.getVisitDoctor();
+					for(int i=0;i<userList.size();i++)
+					{
+						if(userList.get(i).getUserId() == user.getUserId())
+						{
+							return user.getUserId();
+						}
+					} 
+					
+					// recent visit doctor is not available in the userlist
+					user = userList.get(0); 
+					for(int i=0;i < userList.size();i++)
+					{  
+						if(userList.get(i).getUserId() == lastAssignedDcotor)
+						{ 
+							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
+						}
+					} 
+					return user.getUserId();
+				}else
+				{
+					// recent visit doctor is not available in the userlist
+					AdminUser user = userList.get(0); 
+					for(int i=0;i < userList.size();i++)
+					{  
+						if(userList.get(i).getUserId() == lastAssignedDcotor)
+						{ 
+							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
+						}
+					} 
+					return  user.getUserId();
+					 
+				}
+				 
+			} else
+			{ 
+				if(lastAssignedDcotor == -1)
+				{  
+					AdminUser user = userList.get(0);
+					return user.getUserId();  
+				}else
+				{	
+				
+					AdminUser user = userList.get(0); 
+					for(int i=0;i < userList.size();i++)
+					{  
+						if(userList.get(i).getUserId() == lastAssignedDcotor)
+						{ 
+							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
+						}
+					}   
+					return user.getUserId();
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error " + e.getMessage());
+			return -1;
+		}
+	}
+	
+}

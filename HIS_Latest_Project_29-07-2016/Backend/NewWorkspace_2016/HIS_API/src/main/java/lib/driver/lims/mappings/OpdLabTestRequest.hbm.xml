@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2013 11:51:04 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <joined-subclass name="core.classes.lims.OPDLabTestRequest" lazy="false" extends="core.classes.lims.LabTestRequest" table="lab_opdlabrequest">
+       		<key column="opd_lab_test_request_id"></key>
+        	<many-to-one name="visitID" class="core.classes.opd.Visit" fetch="join">
+            <column name="patient_visit_id" />
+        </many-to-one>
+        	
+     </joined-subclass>
+</hibernate-mapping>
