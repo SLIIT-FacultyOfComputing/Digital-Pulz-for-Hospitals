@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- REST Post request by S.A. Udara Srimath Samaratunge -->
+<Requests>
+
+	<!-- HIS Rest post body for Test cases -->
+
+	<!--  Laboratory module -->
+
+	<request id="updateTest">
+                
+			{"test_ID":" 1","fTest_CategoryID":"Biochemistry","fTest_Sub_CategoryID":"Biochemistry_sub","fTest_LastUpdateUserID":"1","test_Name":"sam"}
+        
+	</request>
+	
+	<request id="updateLab">
+            {
+            	"flabType_ID":"1","flabDept_ID":"4","lab_Dept_Count":"3","flabLast_UpdatedUserID":"1","lab_ID":"15","lab_Name":"Inward","lab_Incharge":"Hasangi",
+            	"location":"Inward","email":"inward@hislims.com","contactNumber1":"0112345679","contactNumber2":"0112345615"
+            }
+	</request>
+	
+	<request id="addNewLab">                
+			{
+  				"flabType_ID":"1","flabDept_ID":"1","lab_Dept_Count":"2","flab_AddedUserID":"1","lab_Name":"udara","lab_Incharge":"Tester","location":"Test.",
+  				 "email":"015622615","contactNumber1":"120851542","contactNumber2":"1234567890"
+			}        
+	</request>
+	<request id="addNewLabType">                
+			{
+  				"lab_Type_Name":"TestLabType"
+			}        
+	</request>
+	
+	
+	<request id="updateLabType">
+		{
+			"labType_ID":"1","lab_Type_Name":"Internal"
+		}
+	</request>
+	<request id="addNewLabDepartment">
+		{
+			"labDept_Name":"TestDeptName"
+		}
+	</request>
+	<request id="updateLabDepartment">
+		{
+			"labDept_ID":"5","labDept_Name":"Toxicology"
+		}
+	</request>
+	<request id="addNewTest">
+			{
+			"test_IDName":"TN","test_Name":"Sample_Test","fTest_CategoryID":"1","fTest_Sub_CategoryID":"1","fTest_CreateUserID":"1"
+			}
+	</request>
+	<request id="updateTest">
+	{
+		"test_ID":" 1","fTest_CategoryID":"Biochemistry","fTest_Sub_CategoryID":"Biochemistry_sub","fTest_LastUpdateUserID":"1","test_Name":"S_TEST1"
+	}
+	
+	</request>
+	
+	
+	<request id="addNewSpecimenInfo">
+	{
+			"remarks":"35gg","stored_location":"test","stored_or_destroyed":"stored","fRetentionType_ID":"2","fSpecimentType_ID":"1","flabtestrequest_ID":"14","collected_date":"09\/29\/2016","stored_destroyed_date":"09\/19\/2016","fSpecimen_CollectedBy":1,"fSpecimen_ReceivededBy":2,"fSpecimen_DeliveredBy":3
+	}
+	</request>
+	
+	<request id="addNewLabType">                
+			{
+  				"lab_Type_Name":"TestLabType"
+			}        
+	</request>
+	
+	<request id="addMainResults">                
+			{
+				"Parentresults":[{"fParentF_ID":"1","fTestRequest_ID":"16","mainResult":"12"},{"fParentF_ID":"2","fTestRequest_ID":"16","mainResult":"21"},
+				{"fParentF_ID":"3","fTestRequest_ID":"16","mainResult":"5"},{"fParentF_ID":"4","fTestRequest_ID":"16","mainResult":"15"},{"fParentF_ID":"5","fTestRequest_ID":"16","mainResult":"2"},
+				{"fParentF_ID":"6","fTestRequest_ID":"16","mainResult":"15"},{"fParentF_ID":"7","fTestRequest_ID":"16","mainResult":"10"},{"fParentF_ID":"8","fTestRequest_ID":"16","mainResult":"2"},
+				{"fParentF_ID":"9","fTestRequest_ID":"16","mainResult":"15"},{"fParentF_ID":"10","fTestRequest_ID":"16","mainResult":"32"},{"fParentF_ID":"11","fTestRequest_ID":"16","mainResult":"25"},
+				{"fParentF_ID":"12","fTestRequest_ID":"16","mainResult":"15"},{"fParentF_ID":"13","fTestRequest_ID":"16","mainResult":"1"}]
+			}      
+	</request>
+	
+	<request id="addCategory">                
+			{
+				"category":"delete","sub_category":"delete1","specimen":"delete2","retention":"delete3","duration":"40"
+			}       
+	</request>
+	
+	<request id="addSubTestField">                
+			{
+				"parentField":"2", "testName":"test"
+			}     
+	</request>
+	<request id="addNewSampleCenter">
+			{
+			    "contactNumber1": "011234567",
+			    "contactNumber2": "011223457",
+			    "email": "asiriSampleLab@asirilab.com",
+			    "fSampleCenterLast_UpdatedUserID": {
+			      "userName": "Wasantha"
+			    },
+			    "fSampleCenterType_ID": 1,
+			    "fSampleCenter_AddedUserID": 1,
+			    "location": "Test",
+			    "sampleCenter_AddedDate": "2016-11-22",
+			    "sampleCenter_ID": 1,
+			    "sampleCenter_Incharge": "Tester",
+			    "sampleCenter_LastUpdatedDate": "2016-11-22",
+			    "sampleCenter_Name": "Test-SampleCollectionCenter"
+			  }
+	
+	</request>
+	
+	<request id="updateSampleCenter">
+		{
+		  "fSampleCenter_AddedUserID": 1,
+		  "fSampleCenterLast_UpdatedUserID": 1,  
+		  "sampleCenter_Name": "Test-SampleCollectionCenter",
+		  "sampleCenter_AddedDate": 1479889100817,
+		  "sampleCenter_ID": 38,
+		  "contactNumber2": "011223457",
+		  "contactNumber1": "011234567",
+		  "sampleCenter_LastUpdatedDate": 1479889100817,
+		  "location": "Test",
+		  "fSampleCenterType_ID": 1,
+		  "sampleCenter_Incharge": "Tester",
+		  "email": "Tester@test.com"
+		}
+	</request>
+	
+	<request id="addSampleCenterType">
+		  {
+		    "sample_Center_TypeName": "TestSampleCenterType"
+		  }
+	</request>
+	
+	<request id="updateSampleCenterType">	
+		  {
+		    "sampleCenterType_ID": 8,
+		    "sample_Center_TypeName": "TestSampleCenterType"
+		  }
+	</request>
+	
+	<request id="addPcuLabTestRequest">
+		{
+			"pcu_lab_test_request_id" : 2,
+			"pcu_patient_id" : 2
+		}
+	</request>
+	
+	<request id="addLabTestRequest">
+		{
+			"ftest_ID" : 30,
+			"fpatient_ID" : 20,
+			"flab_ID" : 13,
+			"comment" : "TestComment",
+			"priority" : "High",
+			"status" : "Report Issued",
+			"test_request_date" : "2016-11-24 10:21:20",
+			"test_due_date" : "2016-11-27 07:25:45",
+			"ftest_RequestPerson" : 1
+		}
+	</request>
+	
+	<request id="addCategory">                
+		{
+			"category":"delete","sub_category":"delete1","specimen":"delete2","retention":"delete3","duration":"40"
+		}       
+	</request>
+	
+	<request id="addSpecimenInfo">
+		{
+			"fSpecimen_CollectedBy": 1,
+			"fSpecimen_ReceivededBy": 2,
+			"fSpecimen_DeliveredBy": 3,
+			"fRetentionType_ID": 2,
+			"fSpecimentType_ID": 1,
+			"remarks": "TestRemarks",
+			"stored_location": "OPD",
+			"stored_or_destroyed": "Stored",
+			"stored_destroyed_date": "08/07/2016",
+			"collected_date": "08/07/2016"
+			
+		}
+	</request>
+	<request id="labTestRequest.status">
+		{
+			"reqID" : "12",
+			"status" :"status"
+		}
+	</request>
+	
+	<request id="addNewLabRange">
+		{
+		"gender":"Male","minAge":"30","unit":"%","minValue":"0.5","maxValue":"34","maxAge":"55","parentID":"10","fsubfield_ID":""
+		}
+	</request>
+
+
+	<request id="addNewLabSubRange">
+		{
+		"gender":"Female","minAge":"25","unit":"%","minValue":"0.5","maxValue":"65","maxAge":"45","parentID":"11","sub_field":"20"
+		}
+	</request>
+
+	<request id="addNewLabParent">
+		{
+		"parent_field_id_name":"PF","test_field_name":"CEDL","lab_test_id":"23"
+		}
+	</request>
+	
+	<request id="generateNewReport">
+		{
+		"fPatient_ID": 1,"fTestRequest_ID" : 1
+		}
+	</request>
+	
+	<!-- OPD Lab test request -->
+	
+	<request id="addOPDLabTestRequest">
+		{
+			"ftest_ID": "4","flab_ID" : "13", "visitID" : "7", "ftest_RequestPerson": "3", "fpatient_ID": "7", "comment" : "Requested" , "priority" : "High", "status" : "TestStatus"
+		}
+	</request>
+	
+	
+	<request id="updateOPDLabTestRequests">
+    {
+        	"ftest_ID": "4","flab_ID" : "13", "visitID" : "7", "ftest_RequestPerson": "3", "fpatient_ID": "7", "comment" : "Changed" , "priority" : "Low", "status" : "TestStatus"
+    }
+	</request>
+	
+	<!-- PCU Lab test request -->
+	
+	<request id="addPCURequest">
+	{
+		"ftest_ID": "4","flab_ID" : "13", "admintionID" :"2", "ftest_RequestPerson": "3", "fpatient_ID": "7", "comment" : "RequestedPUC" , "priority" : "High", "status" : "TestStatusPUC","due_date" : "2016-12-25"
+	}
+	</request>
+	
+		
+	
+	<request id="updatePCURequest">
+	{
+		"ftest_ID": "4","flab_ID" : "13", "admintionID" : "2", "ftest_RequestPerson": "3", "fpatient_ID": "1", "comment" : "RequestedPUCModified" , "priority" : "Low", "status" : "TestStatusPUCModified","due_date" : "2016-12-25"
+	}
+	</request>
+	
+	<!-- //////////////////////// -->
+	
+	<!-- //////// Sub Test Fields Results///// -->
+
+	<request id="addNewLabSubResults">
+		{
+			"subfieldsresults":[{"fMResultID":"1","fParentF_ID":"1","fSubF_ID":"1"}]
+		}
+	</request>
+	
+	<!--  OPD Module -->
+	
+	<request id="addAllergyUrl">
+		{
+		"pid": "1","userid" : "1", "name": "test", "status": "Current", "remarks" :  "testRemark"
+		}
+	</request>
+	
+	<request id="updateAllergyUrl">
+		{
+		"pid": "1","userid" : "1", "name": "test", "status": "Past", "remarks" :  "testRemarkUpdated", "active" = "1"
+		}
+	</request>
+	
+	<request id="addExamsUrl">
+		{
+		"visitid": "1","userid" : "1", "bmi" : "20.833333333333336", "DiastBP": "31", "SysBP": "51", "Temperature" :  "96.01", "Weight" : "55", "Height" : "120.0"
+		}
+	</request>
+	<request id="updateExamsUrl">
+		{
+		"visitid": "1","userid" : "1", "bmi" : "150", "DiastBP": "400", "SysBP": "400", "Temperature" :  "196.01", "Weight" : "600", "Height" : "100.0", "active" = "1"
+		}
+	</request>
+	<request id="addpatientUrl">
+		{
+		"title" : "Mr", "fullname" : "testAdd", "personalname" : "test", "nic" : "940110725V", "photo" : "null", "passport" : "98978996N", "dob" : "11-01-1994", "contactpname" : "test", "contactpno" : "0775570647", "gender" : "Male", "cstatus" : "single", "address" : "Malabe", "telephone" : "0114909474", "lang" : "Sinhala", "citizen" : "sri lankan",
+		"blood" : "B+", "remarks" : "testRemarks", "userid" :  "1"
+		}
+	</request>
+	<request id="updatePatientUrl">
+		{
+		"title" : "Ms", "fullname" : "testUpdated", "personalname" : "testUpdated", "nic" : "940110000V", "photo" : "null", "passport" : "98970000N", "dob" : "22-01-1990", "contactpname" : "testupdated", "contactpno" : "077555555", "gender" : "Male", "cstatus" : "single", "address" : "Malabe2", "telephone" : "0114909474", "lang" : "English", "citizen" : "sri lankan",
+		"blood" : "A+", "remarks" : "testRemarksUpdated", "userid" :  "1", "active" : "1"
+		}
+	</request>
+	
+	<request id="addPerscriptionUrl">
+		[{
+			"drugid" : "1",
+			"dosage" : "2",
+			"freq" : "Twice a Day",
+			"period" : "For 2 day"
+		},{
+			"drugid" : "2",
+			"dosage" : "1",
+			"freq" : "Twice a Day",
+			"period" : "For 2 day"
+		}]
+	</request>
+	
+	<request id="updatePrescriptionUrl">
+		[{
+			"drugid" : "1",
+			"dosage" : "5",
+			"freq" : "Once a Day",
+			"period" : "For 1 day"
+		},{
+			"drugid" : "2",
+			"dosage" : "5",
+			"freq" : "Once a Day",
+			"period" : "For 1 day"
+		}]
+	</request>
+	
+	<!-- OPD Attachment-->
+	
+	
+	<request id="addAttachment">
+		{
+		    "pid":"20","filetype":"opdfile","userid":"3","Remarks":"opdnote","attachname":"opdnew","filepath":"/opt/lampp/htdocs/SEP_Project/uploads/proposal1.pdf","active":"1","comment":"good"
+		}
+	</request>
+	
+		<request id="updateAttachment">
+		{
+		    "pid":"60","filetype":"opdnewfile","userid":"1","Remarks":"opdnewnote","attachname":"opdpatientfile","filepath":"/opt/lampp/htdocs/SEP_Project/uploads/proposal5.pdf","active":"1","comment":"good"
+		}
+	</request>
+	
+	<!-- //////////////////////// -->
+	
+		<!-- OPD Questionnaire-->
+		
+	<request id="addQuestionnaire">
+		{
+		    "name":"opdquestion","relateto":"opd","remarks":"opdquestionnaire","userid":"3","active":"1","question_list":[{"text":"Test","answertype":"Test2","answervals":"Test3"}]
+		}
+	</request>
+	
+	<request id="updateQuestionnaire">
+		{
+		    "name":"newopdquestion","relateto":"newopd","remarks":"TestRemark","userid":"3","active":"1","question_list":[{"text":"Test","answertype":"Test2","answervals":"Test3"}]
+		}
+	</request>
+	
+	
+	<request id="updateQuestionAnswer">
+		{
+		    "answersetID":"1","answerText":"answer"
+		}
+	</request>
+	
+	
+		<!-- OPD Record-->
+		
+	<request id="addRecord">
+		{
+		    "patient":"11","recordType":"0","recordText":"recordTest","recordVisibility":"me","recordCompleted":"0","recordCreateUser":"1"
+		}
+	</request>
+	
+		<request id="updateRecord">
+		{
+		    "patient":"11","recordType":"1","recordText":"updaterecordTest","recordVisibility":"all","recordCompleted":"0","recordLastUpdateUser":"1"
+		}
+	</request>
+	
+		<!-- //////////////////////// -->
+		
+	<!-- OPD Visit-->
+		
+	<request id="addVisit">
+		{
+		    "pid":"50","DateandTime":"2016-12-07 12:14:50","Injury":"TEST","Doctor":"1","Remarks":"TestRemark","visitCreateUser":"1","visitLastUpDateUser":"1","toDate":"2016-12-07 12:14:50","VisitType":"OPD","visitActive":"0"
+		}
+	</request>
+	
+		<request id="updateVisit">
+		{
+		    "pid":"50","DateandTime":"2016-12-07 12:14:50","Injury":"TEST","Doctor":"1","Remarks":"TestRemarkUpdated","visitCreateUser":"1","visitLastUpDateUser":"1","toDate":"2016-12-07 12:14:50","VisitType":"NEWOPD","visitActive":"0"
+		}
+	</request>
+	
+			
+	<request id="addQueue">
+		{
+		    "queueTokenNo":"1","patient":"4","queueAssignedBy":"3","queueAssignedTo":"1","Waiting":"Delete","queueRemarks":"opdqueue"
+		}
+	</request>
+	
+	<!-- Pharmacy Drug -->
+	
+	<request id="addBatch">
+		{
+			"b_mdate":"2013-07-11 11:35:34", "dname": "TestDrug", "b_edate" : "2014-07-11 11:35:34", "b_qty" : "100", "b_no" : "B01"
+		}
+	</request>
+	
+	<request id="updateBatch">
+		{
+			"dname": "TestDrug","dcat": "1", "duser":"1", "dstatus": "0", "dqty" : "200"
+		}
+	</request>
+	
+	<request id="insertDrug">
+		{
+			"dname": "TestDrug", "dtype":"Tab", "dprice":"1000", "drem":"Test", "userid":"1", "ddanger":"1000", "dreorder":"1000",
+			"ddosageid":"1", "ddosage":"1", "dfrequencyid":"1", "dfrequency":"Once a Day", "dcatid":"1"
+		}	
+	</request>
+	
+	<request id="updateDrug">
+		{
+			"dname": "TestDrug", "dtype":"all", "dprice":"2000", "drem":"TestUpdated", "userid":"1", "ddanger":"2000", "dreorder":"2000",
+			"ddosageid":"1", "ddosage":"1", "dfrequencyid":"1", "dfrequency":"Once a Day", "dcatid":"1"
+		}	
+	</request>
+	
+	<request id="addDrugFrequency">
+		{
+			"frequency": "Test times a Day"
+		}
+	</request>
+	
+	<request id="updateDrugFrequency">
+		{
+			"frequency": "Test times a Day Updated"
+		}
+	</request>
+	
+	<request id="approveRequest">
+		{
+			"id1" : {"id": "56"},
+			"qty1" : {"qty": "10"}
+		}
+	</request>
+	
+	<request id="requestDrug">
+		{
+			"user": "1", "id1": {"qty": "10", "name": "TestDrug"}
+		}
+	</request>
+	
+	<request id="drugDetailByDrugName">
+		{
+			"dname":"TestDrug","dbatch":"B01"
+		}
+	</request>
+	
+	<request id="insertMail">
+		{
+			"content":"Test Mail is Sent"
+		}
+	</request>
+	
+	<request id="dispenseDrug">
+		{
+			"dispense" : {"dispenseList" :[{"qty":"10"}]
+					},
+			"userid" : "1"
+		}
+	</request>
+	
+	<request id="saveDosage">
+		{
+			dosageList : [{"dosId" : "1", "dosage" : "2", "recordStatus" : "1"}]
+		}
+	</request>
+	
+	<request id="addPharmacy">
+		{
+		    "drug_srno":"8","drug_name":"TestDrug", "userId":"1","drugQty":"0","drug_reqid":"2","updatedDate":"2014-11-17 10:56:51"
+		}
+	</request>
+</Requests>

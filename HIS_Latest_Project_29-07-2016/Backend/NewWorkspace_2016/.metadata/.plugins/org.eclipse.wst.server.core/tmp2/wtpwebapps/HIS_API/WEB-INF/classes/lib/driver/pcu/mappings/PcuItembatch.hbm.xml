@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2014 1:40:36 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.pcu.PcuItembatch" table="pcu_itembatch" catalog="HIS">
+        <id name="batchId" type="int">
+            <column name="batch_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="recievedDate" type="date">
+            <column name="recieved_date" length="10" />
+        </property>
+        <set name="pcuItembatchrelations" table="pcu_itembatchrelation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="batch_no" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.pcu.PcuItembatchrelation" />
+        </set>
+    </class>
+</hibernate-mapping>

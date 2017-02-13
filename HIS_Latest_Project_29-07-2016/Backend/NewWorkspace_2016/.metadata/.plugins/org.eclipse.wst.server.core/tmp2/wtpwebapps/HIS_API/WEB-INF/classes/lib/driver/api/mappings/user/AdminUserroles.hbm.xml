@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 23, 2014 7:59:33 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.api.user.AdminUserroles" table="admin_userroles" catalog="HIS">
+        <id name="roleId" type="java.lang.Integer">
+            <column name="role_id" />
+            <generator class="identity" />
+        </id>
+        <property name="roleName" type="string">
+            <column name="role_name" length="50" not-null="true" />
+        </property>
+       <property name="isActive" type="boolean">
+            <column name="is_active" not-null="true" />
+        </property>
+        <set name="adminUsers" table="admin_user" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="role_id" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.api.user.AdminUser" />
+        </set>
+        <set name="adminPermissions" table="admin_rolepermissions" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="role_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="core.classes.api.user.AdminPermission">
+                <column name="permission_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

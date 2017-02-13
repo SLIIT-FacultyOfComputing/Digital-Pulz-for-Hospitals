@@ -41,7 +41,13 @@ public class ParentTestFieldsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return false;
+			}
 		}
 
 	}
@@ -74,7 +80,13 @@ public class ParentTestFieldsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 	
@@ -97,7 +109,13 @@ public class ParentTestFieldsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 	
@@ -129,7 +147,13 @@ public class ParentTestFieldsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 	
@@ -154,7 +178,13 @@ public class ParentTestFieldsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 	

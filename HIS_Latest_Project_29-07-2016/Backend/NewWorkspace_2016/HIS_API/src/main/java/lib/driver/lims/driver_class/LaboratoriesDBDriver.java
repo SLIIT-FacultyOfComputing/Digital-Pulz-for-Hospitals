@@ -57,6 +57,10 @@ public class LaboratoriesDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				throw ex;
+			}
 			return false;
 		}
 
@@ -221,7 +225,7 @@ public class LaboratoriesDBDriver {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			
+			throw e;
 		}
 		return true;
 	}

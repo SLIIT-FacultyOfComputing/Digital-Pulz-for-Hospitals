@@ -1,0 +1,26 @@
+#### URL Configurations ########################
+
+#baseUrl=http://172.16.21.251:8080/HIS_API/rest
+baseUrl=http://localhost:8080/HIS_API/rest
+
+#### Lab Details ###############################
+labUrl=/Laboratories/getAllLaboratories
+updateTest=/TestNames/updateTestNamesTest
+getLabByTypeUrl=/Laboratories/getLaboratoriesByLabType/
+
+addNewLabUrl=/Laboratories/addNewLaboratory
+updateLabUrl=/Laboratories/updateLaboratories 
+labDeleteUrl=/Laboratories/deleteLab/
+
+
+addNewLabTestRequest=/LabTestRequest/addLabTestRequest
+alllabtests = /LabTestRequest/getAllLabTestRequests
+getTestTypeUrl = /LabTestRequest/getTestRequestByRequestID
+addLabTypeUrl=/LabType/addLabType/
+
+addLab.labName=udara
+updateLab.labName=sam
+updateLab.labIncharge=UdaraTest
+updateLab.contactNumber1=9876543210
+
+addLabType.labTypeName=TestLabType

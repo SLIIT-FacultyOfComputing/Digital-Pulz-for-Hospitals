@@ -1,0 +1,254 @@
+<html>
+<head>
+<title>TestNG:  testPharmacy</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>testPharmacy</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>35/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Feb 13 13:05:12 IST 2017</td>
+</tr>
+<tr><td>Total time:</td><td>6 seconds (6594 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td>his.pharmacy.test his.lab.test.prescription </td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='DrugTestCase.addDrugBatchTestCase()'><b>addDrugBatchTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.addFrequencyTestCase()'><b>addFrequencyTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='ParmacyTestCase.addPharmacyTestCase()'><b>addPharmacyTestCase</b><br>Test class: ParmacyTestCase</td>
+<td></td>
+<td>0</td>
+<td>ParmacyTestCase@39aeed2f</td></tr>
+<tr>
+<td title='PrescriptionTestCase.addPrescriptionTestCase()'><b>addPrescriptionTestCase</b><br>Test class: PrescriptionTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTestCase@5c7fa833</td></tr>
+<tr>
+<td title='DrugTestCase.approveDrugRequestTestCase()'><b>approveDrugRequestTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.dispenseDrugTestCase()'><b>dispenseDrugTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllBatchNamesByDnameTestCase()'><b>getAllBatchNamesByDnameTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllDosagesTestCase()'><b>getAllDosagesTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllDrugCategoriesTestCase()'><b>getAllDrugCategoriesTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllDrugNamesTestCase()'><b>getAllDrugNamesTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllDrugReportsTestCase()'><b>getAllDrugReportsTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllDrugsTestCase()'><b>getAllDrugsTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getAllRequestsTestCase()'><b>getAllRequestsTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugByCategoryTestCase()'><b>getDrugByCategoryTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugByIdTestCase()'><b>getDrugByIdTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugDetailsByCategoryTestCase()'><b>getDrugDetailsByCategoryTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugDetailsByDNameTestCase()'><b>getDrugDetailsByDNameTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugDetailsByDrugNameTestCase()'><b>getDrugDetailsByDrugNameTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugDetailsTestCase()'><b>getDrugDetailsTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugDetailsWithParamTestCase()'><b>getDrugDetailsWithParamTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getDrugIdByDNameTestCase()'><b>getDrugIdByDNameTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getMailHistoryTestCase()'><b>getMailHistoryTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getPharmFrequencyTestCase()'><b>getPharmFrequencyTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.getPrecriptionListbyDateTestCase()'><b>getPrecriptionListbyDateTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='PrescriptionTestCase.getPrescriptionsByPatientTestCase()'><b>getPrescriptionsByPatientTestCase</b><br>Test class: PrescriptionTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTestCase@5c7fa833</td></tr>
+<tr>
+<td title='PrescriptionTestCase.getPrescriptionsByPrescriptionTestCase()'><b>getPrescriptionsByPrescriptionTestCase</b><br>Test class: PrescriptionTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTestCase@5c7fa833</td></tr>
+<tr>
+<td title='DrugTestCase.insertDrugTestCase()'><b>insertDrugTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.insertMailTestCase()'><b>insertMailTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='ParmacyTestCase.loadPharmacyTestCase()'><b>loadPharmacyTestCase</b><br>Test class: ParmacyTestCase</td>
+<td></td>
+<td>0</td>
+<td>ParmacyTestCase@39aeed2f</td></tr>
+<tr>
+<td title='DrugTestCase.requestDrugTestCase()'><b>requestDrugTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.saveDosageTestCase()'><b>saveDosageTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.updateDrugBatchTestCase()'><b>updateDrugBatchTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.updateDrugTestCase()'><b>updateDrugTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='DrugTestCase.updateFrequencyTestCase()'><b>updateFrequencyTestCase</b><br>Test class: DrugTestCase</td>
+<td></td>
+<td>0</td>
+<td>DrugTestCase@457e2f02</td></tr>
+<tr>
+<td title='PrescriptionTestCase.updatePrescriptionTestCase()'><b>updatePrescriptionTestCase</b><br>Test class: PrescriptionTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTestCase@5c7fa833</td></tr>
+</table><p>
+</body>
+</html>

@@ -15,8 +15,8 @@
 |
 */
 $config['base_url']	= 'http://localhost/lims_new/';
-define('SERVICE_BASE_URL','172.16.21.251:8080/HIS_API/rest/');
-//define('SERVICE_BASE_URL','localhost:8080/HIS_API/rest/');
+//define('SERVICE_BASE_URL','172.16.21.251:8080/HIS_API/rest/');
+define('SERVICE_BASE_URL','localhost:8080/HIS_API/rest/');
 define('SITE_BASE_URL','http://localhost/lims_new/');
 /*
 |--------------------------------------------------------------------------

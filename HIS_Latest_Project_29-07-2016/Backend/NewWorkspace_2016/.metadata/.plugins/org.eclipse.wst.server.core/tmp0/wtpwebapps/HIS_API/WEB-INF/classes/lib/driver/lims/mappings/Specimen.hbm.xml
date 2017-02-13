@@ -25,19 +25,19 @@
             <column name="fspecimen_collected_by" />
         </many-to-one>
         <property name="specimen_CollectedDate" type="timestamp">
-            <column name="specimen_collected_date" length="19" not-null="true" />
+            <column name="specimen_collected_date" length="19" not-null="false" />
         </property>
         <property name="specimen_ReceivedDate" type="timestamp">
-            <column name="specimen_received_date" length="19" not-null="true" />
+            <column name="specimen_received_date" length="19" not-null="false" />
         </property>
         <property name="remarks" type="string">
             <column name="remarks" length="300" />
         </property>
         <property name="specimen_DeliveredDate" type="timestamp">
-            <column name="specimen_delivered_date" length="19" not-null="true" />
+            <column name="specimen_delivered_date" length="19" not-null="false" />
         </property>
         <property name="specimen_stored_destroyed_date" type="timestamp">
-            <column name="specimen_stored_destroyed_date" length="19" not-null="true" />
+            <column name="specimen_stored_destroyed_date" length="19" not-null="false" />
         </property>
    		 <property name="stored_location" type="string">
             <column name="stored_location" length="40" not-null="true" />

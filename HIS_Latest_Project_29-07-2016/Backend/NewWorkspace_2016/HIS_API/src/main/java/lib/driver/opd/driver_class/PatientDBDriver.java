@@ -66,7 +66,14 @@ public class PatientDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -93,7 +100,7 @@ public class PatientDBDriver {
 			patient.setPatientFullName(pat.getPatientFullName());
 			patient.setPatientPersonalUsedName(pat.getPatientPersonalUsedName());
 			patient.setPatientNIC(pat.getPatientNIC());
-			patient.setPatientHIN(pat.getPatientHIN());
+			//patient.setPatientHIN(pat.getPatientHIN());
 
 			if (pat.getPatientPhoto() == null | pat.getPatientPhoto().isEmpty()
 					| pat.getPatientPhoto() == "null")
@@ -140,7 +147,14 @@ public class PatientDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -204,7 +218,14 @@ public class PatientDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 	}
@@ -235,7 +256,14 @@ public class PatientDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 
@@ -272,7 +300,14 @@ public class PatientDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 	}
@@ -308,7 +343,14 @@ public class PatientDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 	}

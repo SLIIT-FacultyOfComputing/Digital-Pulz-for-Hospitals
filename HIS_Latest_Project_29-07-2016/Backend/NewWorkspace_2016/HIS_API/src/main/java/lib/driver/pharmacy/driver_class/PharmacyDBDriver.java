@@ -30,9 +30,16 @@ public class PharmacyDBDriver {
 		try {
 			tx = session.beginTransaction();
 			PhramacyAssitanceStock pas=(PhramacyAssitanceStock)session.get(PhramacyAssitanceStock.class, d.getDrug_srno());
-			pas.setDrugQty(pas.getDrugQty()+d.getDrugQty());
-			session.saveOrUpdate(pas);
+			if(pas != null){
+				pas.setDrugQty(pas.getDrugQty()+d.getDrugQty());
+				session.saveOrUpdate(pas);
+			}
+			else
+			{
+				session.save(d);
+			}
 			tx.commit();
+			
 			status = true;
 
 		} catch (HibernateException e) {
@@ -44,7 +51,7 @@ public class PharmacyDBDriver {
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
-			// session.close();
+			//session.close();
 		}
 		return status;
     }

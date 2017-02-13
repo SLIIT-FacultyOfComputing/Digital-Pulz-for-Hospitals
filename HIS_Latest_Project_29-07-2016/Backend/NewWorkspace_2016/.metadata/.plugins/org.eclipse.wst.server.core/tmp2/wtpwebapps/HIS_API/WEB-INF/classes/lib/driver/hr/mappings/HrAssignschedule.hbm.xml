@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 26, 2014 4:29:27 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrAssignschedule" table="hr_assignschedule" catalog="HIS">
+        <composite-id name="id" class="core.classes.hr.HrAssignscheduleId">
+            <key-property name="empId" type="int">
+                <column name="emp_ID" />
+            </key-property>
+            <key-property name="shiftId" type="int">
+                <column name="shift_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="hrEmployee" class="core.classes.hr.HrEmployee" update="false" insert="false" fetch="select">
+            <column name="emp_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hrShifttimes" class="core.classes.hr.HrShifttimes" update="false" insert="false" fetch="select">
+            <column name="shift_ID" not-null="true" />
+        </many-to-one>
+        <property name="description" type="string">
+            <column name="description" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

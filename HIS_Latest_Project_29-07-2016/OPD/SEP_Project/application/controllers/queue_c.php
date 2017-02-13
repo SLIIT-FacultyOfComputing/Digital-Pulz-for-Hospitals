@@ -23,7 +23,7 @@ session_start();
                                     redirect($this->_site_base_url);
                                 }
 				$data['status'] = $status;
-				 
+				
 				
 				$data['visitid'] = '0';
 				$data['pid'] = $pid;

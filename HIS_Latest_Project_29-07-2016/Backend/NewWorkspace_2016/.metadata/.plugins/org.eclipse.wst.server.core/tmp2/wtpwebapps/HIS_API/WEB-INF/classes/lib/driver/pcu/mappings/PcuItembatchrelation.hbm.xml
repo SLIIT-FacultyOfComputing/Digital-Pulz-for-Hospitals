@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2014 1:40:36 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.pcu.PcuItembatchrelation" table="pcu_itembatchrelation" catalog="HIS">
+        <composite-id name="id" class="core.classes.pcu.PcuItembatchrelationId">
+            <key-property name="SNumber" type="int">
+                <column name="s_number" />
+            </key-property>
+            <key-property name="batchNo" type="int">
+                <column name="batch_no" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pcuItems" class="core.classes.pcu.PcuItems" update="false" insert="false" fetch="select">
+            <column name="s_number" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pcuItembatch" class="core.classes.pcu.PcuItembatch" update="false" insert="false" fetch="select">
+            <column name="batch_no" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="java.lang.Float">
+            <column name="quantity" precision="12" scale="0" />
+        </property>
+        <property name="expiryDate" type="date">
+            <column name="expiry_date" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

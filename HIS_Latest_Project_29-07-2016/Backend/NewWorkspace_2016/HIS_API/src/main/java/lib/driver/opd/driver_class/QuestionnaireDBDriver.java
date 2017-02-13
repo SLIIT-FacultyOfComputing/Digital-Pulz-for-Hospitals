@@ -34,6 +34,10 @@ public class QuestionnaireDBDriver {
 			tx = session.beginTransaction();
 			session.save(questionnaire);
 
+			for (Question item : questionnaire.questions) {
+				item.setQuestionnaireID(questionnaire);
+				session.save(item);
+			}
 			
 			tx.commit();
 			return true;
@@ -45,8 +49,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
-			return false;
+			else{
+				return false;
+			}
 		}
 	}
 
@@ -105,8 +114,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
-			return false;
+			else{
+				return false;
+			}
 		}
 	}
 
@@ -126,8 +140,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
-			return null;
+			else{
+				return null;
+			}
 		}
 	}
 
@@ -152,8 +171,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
-			return null;
+			else{
+				return null;
+			}
 		}
 	}
 
@@ -180,8 +204,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -204,8 +233,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -257,8 +291,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
-			return false;
+			else{
+				return false;
+			}
 		}
 	}
 
@@ -289,8 +328,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
-			return false;
+			else{
+				return false;
+			}
 		}
 	}
 
@@ -315,8 +359,13 @@ public class QuestionnaireDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 }

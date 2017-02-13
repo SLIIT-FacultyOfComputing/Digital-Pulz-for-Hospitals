@@ -1,0 +1,32 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.testng.annotations.Test;
+
+/**
+ * This class is for TestNG Integration Test cases related to all
+ * functionalities of LaboratoryTests in HIS Project. developed by Ratnayake V.C.
+ * 
+ * {@link BaseTestCase}
+ * 
+ * @author Ratnayake V.C
+ *
+ */
+public class LabTestRequestResourceTest extends BaseTestCase {
+	
+	public static final int SUCCESS_STATUS_CODE = 200;
+	
+	
+	  /**
+	   * test case for insert new lab test
+	   * @throws IOException
+	   * @throws JSONException
+	   */
+	  @Test
+	  public void addNewLabTest() throws IOException, JSONException {
+		  ArrayList<String> resArrayList = getHTTPResponse(properties.getProperty(TestCaseConstants.NEW_LAB_TEST_REQUEST), httpMethod, requestBody);
+	  }
+	
+
+}

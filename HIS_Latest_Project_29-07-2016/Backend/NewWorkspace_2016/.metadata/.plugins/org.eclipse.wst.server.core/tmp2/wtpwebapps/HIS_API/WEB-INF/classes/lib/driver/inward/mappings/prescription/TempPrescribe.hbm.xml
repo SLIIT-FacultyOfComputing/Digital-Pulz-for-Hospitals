@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 19, 2014 11:52:30 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.inward.prescription.TempPrescribe" table="ward_temp_prescribe" catalog="HIS"  lazy="false">
+        <id name="auto_id" type="int">
+            <column name="auto_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="term_id" class="core.classes.inward.prescription.PrescriptionTerms" fetch="join">
+            <column name="term_id" />
+        </many-to-one>
+        <many-to-one name="drug_id" class="core.classes.pharmacy.MstDrugsNew" fetch="join">
+            <column name="drug_id" />
+        </many-to-one>
+        <property name="dose" type="int">
+            <column name="dose" />
+        </property>
+        <property name="frequency" type="java.lang.String">
+            <column name="frequency" />
+        </property>
+    </class>
+</hibernate-mapping>

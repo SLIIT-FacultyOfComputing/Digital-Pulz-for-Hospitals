@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2014 6:25:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrDesignationgroup" table="hr_designationgroup" catalog="HIS">
+        <id name="groupId" type="java.lang.Integer">
+            <column name="group_id" />
+            <generator class="identity" />
+        </id>
+        <property name="groupName" type="string">
+            <column name="group_name" length="50" not-null="true" />
+        </property>
+        <set name="hrDesignations" table="hr_designation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="group" />
+            </key>
+            <one-to-many class="core.classes.hr.HrDesignation" />
+        </set>
+    </class>
+</hibernate-mapping>

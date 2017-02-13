@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.testng.eclipse.launchconfig">
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.testng.remote.RemoteTestNG"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HIS"/>
+<mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
+<mapEntry key="DrugTestCase" value="updatePrescriptionTestCase;getOpdGetQueueType;getOpdTestRequestByAttachID;insertDrugTestCase;updateExamTestCase;updateOPDLabRequests;addAllergyTestCase;getAllAllergyLiveTestCase;getOpdQueueRediectByUID;getAllOPDLabTestRequests;getPrescriptionsByPatientIDAfterprescribeTestCase;getOpdRecordTestRequestByHID;dispenseDrugTestCase;getAllergiesByPatientTestCase;updateAllergyTestCase;getOpdQueueIsPatientInByPID;getOpdHoldQuiueByUID;getExamsbyVisitIdTestCase;getOpdTestRequestByPID;addDrugBatchTestCase;getPrescriptionsByPatientIDAfterprescribeDetailsTestCase;addOpdAttachmentTestCase;getOpdQueueTreatedByUID;getOpdQueueCurrentInByDID;getOPDLabRequestsByVisit;getAllInjuryLiveTestCase;getExamsbyExamIdTestCase;updateOpdRecordTestCase;getAllergiesByAllergyIdTestCase;addExamTestCase;getOpdQueueCheckoutByPID;addPrescriptionTestCase;addOPDLabTestRequest;updateOpdAttachmentTestCase;generateChekDigitTestCase;addOpdQueueTestCase;getOpdQueueNextAssignByPID;getOpdQueueTestRequestByUID;serialNumberForHinTestCase;getOpdQueueCheckinByPID;getPrescriptionsByPrescriptionTestCase;deleteOPDLabTestRequest;addOpdRecordTestCase;getAllDrugNamesTestCase;getOpdTestRequestByPatientID;getOpdQueueStatusByUID;getPrescriptionsByPatientTestCase;getOpdSetQueue;getOPDLabRequestsByPatient"/>
+</mapAttribute>
+<listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
+<listEntry value="DrugTestCase"/>
+</listAttribute>
+<listAttribute key="org.testng.eclipse.METHOD_TEST_LIST">
+<listEntry value="updatePrescriptionTestCase"/>
+<listEntry value="getOpdGetQueueType"/>
+<listEntry value="getOpdTestRequestByAttachID"/>
+<listEntry value="insertDrugTestCase"/>
+<listEntry value="updateExamTestCase"/>
+<listEntry value="updateOPDLabRequests"/>
+<listEntry value="addAllergyTestCase"/>
+<listEntry value="getAllAllergyLiveTestCase"/>
+<listEntry value="getOpdQueueRediectByUID"/>
+<listEntry value="getAllOPDLabTestRequests"/>
+<listEntry value="getPrescriptionsByPatientIDAfterprescribeTestCase"/>
+<listEntry value="getOpdRecordTestRequestByHID"/>
+<listEntry value="dispenseDrugTestCase"/>
+<listEntry value="getAllergiesByPatientTestCase"/>
+<listEntry value="updateAllergyTestCase"/>
+<listEntry value="getOpdQueueIsPatientInByPID"/>
+<listEntry value="getOpdHoldQuiueByUID"/>
+<listEntry value="getExamsbyVisitIdTestCase"/>
+<listEntry value="getOpdTestRequestByPID"/>
+<listEntry value="addDrugBatchTestCase"/>
+<listEntry value="getPrescriptionsByPatientIDAfterprescribeDetailsTestCase"/>
+<listEntry value="addOpdAttachmentTestCase"/>
+<listEntry value="getOpdQueueTreatedByUID"/>
+<listEntry value="getOpdQueueCurrentInByDID"/>
+<listEntry value="getOPDLabRequestsByVisit"/>
+<listEntry value="getAllInjuryLiveTestCase"/>
+<listEntry value="getExamsbyExamIdTestCase"/>
+<listEntry value="updateOpdRecordTestCase"/>
+<listEntry value="getAllergiesByAllergyIdTestCase"/>
+<listEntry value="addExamTestCase"/>
+<listEntry value="getOpdQueueCheckoutByPID"/>
+<listEntry value="addPrescriptionTestCase"/>
+<listEntry value="addOPDLabTestRequest"/>
+<listEntry value="updateOpdAttachmentTestCase"/>
+<listEntry value="generateChekDigitTestCase"/>
+<listEntry value="addOpdQueueTestCase"/>
+<listEntry value="getOpdQueueNextAssignByPID"/>
+<listEntry value="getOpdQueueTestRequestByUID"/>
+<listEntry value="serialNumberForHinTestCase"/>
+<listEntry value="getOpdQueueCheckinByPID"/>
+<listEntry value="getPrescriptionsByPrescriptionTestCase"/>
+<listEntry value="deleteOPDLabTestRequest"/>
+<listEntry value="addOpdRecordTestCase"/>
+<listEntry value="getAllDrugNamesTestCase"/>
+<listEntry value="getOpdTestRequestByPatientID"/>
+<listEntry value="getOpdQueueStatusByUID"/>
+<listEntry value="getPrescriptionsByPatientTestCase"/>
+<listEntry value="getOpdSetQueue"/>
+<listEntry value="getOPDLabRequestsByPatient"/>
+</listAttribute>
+<listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>
+<mapAttribute key="org.testng.eclipse.PARAMETERS"/>
+<stringAttribute key="org.testng.eclipse.PRE_DEFINED_LISTENERS" value=""/>
+<intAttribute key="org.testng.eclipse.TYPE" value="4"/>
+</launchConfiguration>

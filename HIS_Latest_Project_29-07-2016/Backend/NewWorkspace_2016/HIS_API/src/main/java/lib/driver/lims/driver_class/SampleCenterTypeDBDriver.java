@@ -35,6 +35,10 @@ public class SampleCenterTypeDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null) {
+				throw ex;
+			}
+			else
 			return false;
 		}
 	}
@@ -65,7 +69,11 @@ public class SampleCenterTypeDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if (tx==null) {
+				throw ex;
+			}
+			else
+				return null;
 		}
 	}
 
@@ -77,10 +85,7 @@ public class SampleCenterTypeDBDriver {
 			SampleCenterTypes sampleCtype = (SampleCenterTypes) session.get(SampleCenterTypes.class,typeID);
 			
 			sampleCtype.setSample_Center_TypeName(SampleCentertype.getSample_Center_TypeName());
-		
-			
-
-		
+				
 			session.update(sampleCtype);
 			tx.commit();
 			return true;
@@ -94,6 +99,10 @@ public class SampleCenterTypeDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null) {
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -120,7 +129,7 @@ public class SampleCenterTypeDBDriver {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			throw e;
 			
 		}
 		return true;

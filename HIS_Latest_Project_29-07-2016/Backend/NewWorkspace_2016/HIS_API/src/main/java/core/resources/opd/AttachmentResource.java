@@ -12,13 +12,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import core.ErrorConstants;
 import core.classes.opd.Attachments;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
-
 import lib.driver.opd.driver_class.AttachmentDBDriver;
 
 /**
@@ -28,6 +29,8 @@ import lib.driver.opd.driver_class.AttachmentDBDriver;
  */
 @Path("Attachments")
 public class AttachmentResource {
+	
+	final static Logger logger = Logger.getLogger(AttachmentResource.class);
 
 	AttachmentDBDriver attachmentDBDriver=new AttachmentDBDriver();
 	
@@ -36,12 +39,14 @@ public class AttachmentResource {
 	 * Add New Attachment Details
 	 * @param atJson A Json Object that contains New Attachment Details
 	 * @return  Is A String and If Data Inserted Successfully return is True else False
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/addAttachment")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addAttachment(JSONObject atJson) {
+	public String addAttachment(JSONObject atJson) throws JSONException {
+		logger.info("add attachment");
 		Attachments attachment=new Attachments();
 		try{
 			attachment.setAttachName(atJson.getString("attachname"));
@@ -59,13 +64,33 @@ public class AttachmentResource {
 			int useriD=atJson.getInt("userid");
 			
 			attachmentDBDriver.saveAttachment(attachment,useriD, patientID);
-			return "True";
+			logger.info("successfully attachment added");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			
+			return jsonSerializer.include("pid").exclude("*.class","patient.*").serialize(attachment);
+			
 		}catch (JSONException e) {
 			e.printStackTrace();
-			return "False";
-		}
-		catch (Exception e) {
-			return "False";
+			logger.info("attachment not added");
+
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());		
+			
+			return jsonErrorObject.toString(); 
+
+		}catch (RuntimeException e)
+			{
+				logger.error("error adding attachment: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error adding attachment: "+ e.getMessage());
+			return null;
 		}	
 		
 	}
@@ -74,12 +99,14 @@ public class AttachmentResource {
 	/**Update Attachment Details
 	 * @param atJson A Json Object that contains New Attachment Details
 	 * @return Is A String and If Data Updated Successfully return is True else False
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/updateAttachments")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateAttachment(JSONObject atJson) {
+	public String updateAttachment(JSONObject atJson) throws JSONException {
+		logger.info("update attachment");
 		Attachments attachment=new Attachments();
 		try{
 			  
@@ -94,11 +121,28 @@ public class AttachmentResource {
 			int useriD=atJson.getInt("userid");
 			int attachid=atJson.getInt("attchid");
 			attachmentDBDriver.updateAttachments(attachid,useriD,attachment, patientID);
+			logger.info("successfully attachment updated");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			return jsonSerializer.include("attachname").serialize(attachment);			
+		}catch (JSONException e) {
+			logger.error("error updating attachment: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());		
 			
-			return "True";			
+			return jsonErrorObject.toString(); 
+		}catch (RuntimeException e)
+			{
+				logger.error("error updating attachment: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
 		}catch (Exception e) {
-			System.out.println(e.getMessage());
-			return "False";
+			logger.error("error updating attachment: "+e.getMessage());
+			return null;
 		}
 	}
 	
@@ -113,9 +157,11 @@ public class AttachmentResource {
 	@Path("/getAttachmentByAttachID/{ATTCHID}")
 	@Produces (MediaType.APPLICATION_JSON)
 	public String getAttachmentByAttachID(@PathParam("ATTCHID")int attchID) {
+		logger.info("get attachment by attach id");
 
 			List<Attachments> attachmentRecord = attachmentDBDriver.retriveAttachmentByAttachID(attchID);
 			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting attachment");
 			return  serializer.exclude("*.class","patient.*",
 					"attachLastUpDateUser.specialPermissions","attachLastUpDateUser.userRoles","attachLastUpDateUser.employees.department","attachLastUpDateUser.employees.leaves",
 					"attachCreateUser.specialPermissions", "attachCreateUser.userRoles","attachCreateUser.employees.department","attachCreateUser.employees.leaves",
@@ -134,9 +180,11 @@ public class AttachmentResource {
 	@Path("/getAttachmentByPID/{PID}")
 	@Produces (MediaType.APPLICATION_JSON)
 	public String getAttachmentsByPatientID(@PathParam("PID")int pID) {
+		logger.info("get attachments by patient id");
 
 			List<Attachments> attachmentRecord = attachmentDBDriver.retriveAttachmentByPatientID(pID);
 			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting attachment");
 			return  serializer.include("patient.patientID").exclude("*.class","patient.*").transform(new DateTransformer("yyyy-MM-dd"),"attachLastUpdate","attachCreateDate").serialize(attachmentRecord);
 		 
 	}

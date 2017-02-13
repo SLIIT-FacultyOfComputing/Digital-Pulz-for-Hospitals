@@ -258,7 +258,7 @@
 		<?php } ?>
 
 					<?php if($leftnavpage == 'patient_visit_v') { ?>
-                    <?php var_dump($visit[0]->visitID); ?>
+                    <?php //var_dump($visit[0]->visitID); ?>
 					<?php $isRecentVisit = ($recentvisit[0]->visitID == $visit[0]->visitID); ?>
 					<li class="header" id="patient_info_header" style="display: none;">PATIENT
 						INFORMATION</li>

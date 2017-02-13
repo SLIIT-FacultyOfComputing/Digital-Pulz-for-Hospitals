@@ -42,6 +42,7 @@ import flexjson.transformer.DateTransformer;
 
 import org.codehaus.jettison.json.JSONException;
 import org.hibernate.Session;
+import org.jboss.logging.Logger;
 /*import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;*/
 import org.codehaus.jettison.json.JSONObject;
@@ -66,8 +67,11 @@ import org.codehaus.jettison.json.JSONArray;
 
 
 
+
+
 import com.sun.research.ws.wadl.Application;
 
+import core.ErrorConstants;
 import core.classes.api.user.AdminUser;
 
 
@@ -99,6 +103,8 @@ import com.pharmacy.persistence.UserAction;*/
 @Path("DrugServices")
 public class DrugResource {
 
+	final static Logger logger=Logger.getLogger(DrugResource.class);
+	
 	DrugDBDriver drugDbDriver=new DrugDBDriver();
 	PrescriptionDBDriver prescriptionDbDriver = new PrescriptionDBDriver();
 	UserDBDriver userDbDriver=new UserDBDriver();
@@ -108,16 +114,19 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return a string value.True if the Data inserted successfully else it returns false
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/insertDrug")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String insertDrug(JSONObject json){
+	public String insertDrug(JSONObject json) throws JSONException{
+		logger.info("Entering insertDrug method...");
 		Date date = new Date();
 		String status = "";
 		int catid;
 		try {
+			
 			System.out.println(json);
 			MstDrugsNew drug = new MstDrugsNew();
 
@@ -132,6 +141,7 @@ public class DrugResource {
 			drug.setdQty(0);
 			drug.setStatusDanger(Integer.parseInt(json.get("ddanger").toString()));
 			drug.setStatusReOrder(Integer.parseInt(json.get("dreorder").toString()));
+			drug.setdActive(false);
 			MstDrugDosage dos = new MstDrugDosage();
 
 			dos.setDosId(Integer.parseInt(json.get("ddosageid").toString()));
@@ -155,14 +165,65 @@ public class DrugResource {
 
 			if (drugDbDriver.insertDrug(drug, catid)) {
 				status = "Drug Added Successfully!!!";
+				logger.info("Drug inserted ");
 			} else {
 				status = "fail";
+				logger.error("Error in inserting drugs");
 			}
 			return status;
 
-		} catch (Exception e) {
+		} 
+		catch(org.hibernate.exception.GenericJDBCException e)
+		{
+			logger.error("Exception in inserting new Drug"+e.getMessage());
 			e.printStackTrace();
-			return e.getMessage();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.ENTRY_ALREADY_EXISTS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.ENTRY_ALREADY_EXISTS.getMessage());
+			
+			return jsonErrorObject.toString();
+		}
+		catch( java.lang.Error e)
+		{
+			logger.error("Exception in inserting new Drug"+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(RuntimeException e)
+		{
+			logger.error("Exception in inserting new Drug"+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Exception in inserting new Drug"+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+								
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
+			logger.error("Exception in inserting new Drug"+e.getMessage());
+//			return e.getMessage();
+			return e.toString();
 		}
 		
 	}
@@ -173,12 +234,14 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return a string value.True if the Data Updated successfully else it returns false
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/updateDrug")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateDrug(JSONObject json) {
+	public String updateDrug(JSONObject json) throws JSONException {
+		logger.info("Entering updateDrug method...");
 		Date date = new Date();
 		String status = "";
 		int catid;
@@ -202,15 +265,60 @@ public class DrugResource {
 			
 			if (drugDbDriver.updateDrugDetails(drug)) {
 				status = "Drug Updated Successfully!!!";
+				logger.info("Drug updated");
 			} else {
 				status = "fail";
+				logger.error("Drug not updated");
 			}
 
 			
 			return status;
 
-		} catch (Exception e) {
+		} 
+		catch(JSONException e)
+		{
+			logger.error("Exception in updating drugs "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		catch(NullPointerException e)
+		{
+			logger.error("Exception in updating drugs "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.INVALID_ID.getCode());
+			jsonErrorObject.put("message", ErrorConstants.INVALID_ID.getMessage());
+					
+			return jsonErrorObject.toString();
+		}
+		catch(org.hibernate.exception.JDBCConnectionException e)
+		{
+			logger.error("Exception in updating drugs "+e.getMessage());
+			
 			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch (RuntimeException e) {
+			// TODO: handle exception
+			logger.error("Exception in updating drugs "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+								
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
+			logger.error("Exception in updating drugs "+e.getMessage());
 			return e.getMessage();
 		}
 
@@ -222,21 +330,36 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param dname
 	 * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrugIdByDrugName/{dname}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugIdByDrugName(@PathParam("dname") String dname)
+	public String getDrugIdByDrugName(@PathParam("dname") String dname) throws JSONException
 	{
-		
+		logger.info("Entering getDrugIdByDrugName...");
 		Integer srNo=0;
 		try {
-			
 			srNo = drugDbDriver.getDrugIDByDrugName(dname);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return e.getMessage().toString();
+			logger.info("Drug id of "+dname+": "+srNo);
+			
+		} 
+		catch(RuntimeException e){
+			logger.error("Exception in getting drug id of "+dname+": "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+								
+			return jsonErrorObject.toString();
 		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Exception in getting drug id of "+dname+": "+e.getMessage());
+			return e.getMessage().toString();
+//			return e.toString();
+		}
+		
+		
 		
 		return srNo.toString();
 	}
@@ -247,21 +370,37 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param srNo
 	 * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrugByID/{srNo}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugByID(@PathParam("srNo") int srNo)
+	public String getDrugByID(@PathParam("srNo") int srNo) throws JSONException
 	{
+		logger.info("Entering getDrugByID method...");
+		
 		List<MstDrugsNew> drug = null;
 		try {
 			
 			drug = drugDbDriver.getDrugByID(srNo);
+			logger.info("Getting drug of drug Id "+srNo+": "+drug);
+			
 			JSONSerializer serializer = new JSONSerializer();
 			return serializer.include("dSrNo","dName","dUnit","categories.dCategory","dPrice","dQty","frequency.frequency","dosage.dosage","statusDanger","statusReOrder").exclude("*").serialize(drug);
-		} catch (Exception e) {
+		} 
+		catch(RuntimeException e){
+			logger.error("Exception in getting drug of drug Id "+srNo+": "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+								
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
 			// TODO Auto-generated catch block
-			return e.getMessage().toString();
+			
+			logger.error("Exception in getting drug of drug Id "+srNo+": "+e.getMessage());
+			return e.toString();
 		}
 		
 		
@@ -273,11 +412,14 @@ public class DrugResource {
 	 * are to be expired within 90 days
 	 * @author Vishwa
 	 * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrug")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugs(){
+	public String getDrugs() throws JSONException{
+		
+		logger.info("Entering getDrugs method...");
 		try 
 		{
 
@@ -312,6 +454,7 @@ public class DrugResource {
             }
             if(name.length()==0)
             {
+            	logger.error("No drug names");
             	return "error";
             }
             else
@@ -326,7 +469,7 @@ public class DrugResource {
 				obj.put("expDObject", expD);
 				// String str = obj.toString();
 
-			
+				
 				JSONSerializer serializer = new JSONSerializer();
 				//System.out.println(obj);
 				//return serializer.serialize(obj);
@@ -335,9 +478,18 @@ public class DrugResource {
 													// object to the calling
 //													 controller.
             }
-		} catch (Exception e){
-			
-			return e.getMessage().toString();
+		} 
+		catch(RuntimeException e){
+			logger.error("Error in getting drugs "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+								
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e){
+			logger.error("Error in getting drugs "+e.getMessage());
+			return e.getMessage();
 		}
 		
 		
@@ -347,24 +499,38 @@ public class DrugResource {
 	 * Gives all the available Categories
 	 * @author Vishwa
 	 * @return A JSON object that contains all the Drug Categories 
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrugCategories")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugsCatagories() {
+	public String getDrugsCatagories() throws JSONException {
+		
+		logger.info("Entering getDrugsCatagories method...");
+		
 		try 
 		{
 			
 			List<MstDrugCategory> drugCat = drugDbDriver.getDrugCatagories();
+			logger.info("Getting drugs Categories "+drugCat);
+			
 			JSONObject category = new JSONObject();
-            
-
+          
 			JSONSerializer serializer = new JSONSerializer();
 			 
 		    return serializer.exclude("*.class").serialize(drugCat); // this will return a json object to the calling controller.
-		} catch (Exception e) 
-		{
+		} 
+		catch(RuntimeException e){
 			
+			logger.error("Error in getting drug categories. "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+								
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
+			 logger.error("Error in getting drug categories. "+e.getMessage());
 			 return e.getMessage().toString();
 		}
 	}
@@ -375,11 +541,15 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param category
 	 * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrugNamesByCategory/{category}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugFromCategory(@PathParam("category") String category) {
+	public String getDrugFromCategory(@PathParam("category") String category) throws JSONException {
+		
+		logger.info("Entering getDrugFromCategory method...");
+		
 		try 
 		{
 
@@ -389,19 +559,34 @@ public class DrugResource {
             
             if(drugs.isEmpty())
             {
+            	logger.error("Drugs of the category "+category+" is empty");
             	return "error";
             }
             else {
 				
+            	logger.info("Getting drugs of category "+category+" :"+drugs);
 				JSONSerializer serializer = new JSONSerializer();
 
 				//return serializer.exclude("DSrNo","DRemarks","DCreateDate","DCreateUser","DLastUpdate","DLastUpdateUser","DActive","DUnit","DPrice","DQty","categories","*.class").serialize(drugs); // this will return a json
 				return serializer.include("dName","dSrNo").exclude("*").serialize(drugs);
 				
 			}
-		} catch (Exception e) 
+		} 
+		catch(RuntimeException e)
 		{
+			logger.error("Exception in getDrugFromCategory method..."+e.getMessage());
 			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch (Exception e) 
+		{
+			 logger.error("Exception in ");
 			 return e.getMessage().toString();
 		}
 	}
@@ -412,24 +597,41 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param name
 	 * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrugDetailsByDrugName/{drug_name}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugDetails(@PathParam("drug_name") String name) {
+	public String getDrugDetails(@PathParam("drug_name") String name) throws JSONException {
+		
+		logger.info("Entering getDrugDetailsByDrugName mthod...");
+		
 		try 
 		{
-
-			
+		
 			List<MstDrugsNew> drugs = drugDbDriver.GetDrugDetailsByName(name);
+	        logger.info("Getting drug detail of drug "+name+": "+drugs);
 	        
-				JSONSerializer serializer = new JSONSerializer();
-				return serializer.include("categories.dCategory","dName","dPrice","dQty","dSrNo","dLastUpdate",
+			JSONSerializer serializer = new JSONSerializer();
+			return serializer.include("categories.dCategory","dName","dPrice","dQty","dSrNo","dLastUpdate",
 						"dCreateUser","dLastUpdateUser").exclude("*").transform(new DateTransformer("yyyy/MM/dd"), "dLastUpdate").serialize(drugs); 
 		
-		} catch (Exception e) 
+		} 
+		catch (RuntimeException e)
 		{
+			logger.error("Exception in getDrugDetails method..."+e.getMessage());
 			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch (Exception e) 
+		{
+			 logger.error("Error in getting drug details "+e.getMessage());
 			 return e.getMessage().toString();
 		}
 	}
@@ -440,16 +642,18 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param cat Is a string
 	 * @return  A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getDrugDetailsByCategory/{category}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getDrugDetailsByCategory(@PathParam("category") String cat) {
+	public String getDrugDetailsByCategory(@PathParam("category") String cat) throws JSONException {
+		logger.info("Entering getDrugDetailsByCategory method...");
 		try 
 		{
 			
 			List<MstDrugsNew> drugs = drugDbDriver.getDrugFromCategory(cat); 
-            
+			logger.info("Getting drug detail of category "+cat+": "+drugs);
 //            if(drugs.isEmpty())
 //            {
 //            	return "error";
@@ -463,23 +667,41 @@ public class DrugResource {
 						"statusReOrder","frequencies","dosages").exclude("*.class","dActive","dCreateDate","dCreateUser","dLastUpdate","dLastUpdateUser","dRemarks","dUnit").serialize(drugs);
 														// controller.
 //			}
-		} catch (Exception e) 
+		} 
+		catch(RuntimeException e)
 		{
+			logger.error("Error in getting drug details by category "+e.getMessage());
 			
-			 return e.getMessage().toString();
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) 
+		{
+			logger.error("Error in getting drug details by category "+e.getMessage());
+			e.printStackTrace();
+			return e.getMessage().toString();
 		}
 	}
 	
 	
 	/**
-	 * Gives all the Penidng drug requests
+	 * Gives all the Pending drug requests
 	 * @author Vishwa
 	 * @return A JSON object that contains all the requests Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getRequest")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getRequest() {
+	public String getRequest() throws JSONException {
+		
+		logger.info("Entering getRequest method...");
+		
 		try 
 		{
 			
@@ -489,20 +711,34 @@ public class DrugResource {
              
             if(details.isEmpty())
             {
+            	logger.error("No pending drug requests");
             	return "error";
             }
             else {
-            	
+            	logger.info("Getting Pending drug requests "+details);
 				JSONSerializer serializer = new JSONSerializer();
 
 				return serializer.include("drugs.dSrNo","drugs.dName","drugs.dQty").exclude("*.class","drugs.*","processedDate").transform(new DateTransformer("yyyy/MM/dd"), "requestedDate","processedDate").serialize(details); // this will return a json
 														// object to the calling
 														// controller.
 			}
-		} catch (Exception e) 
+		} 
+		catch(RuntimeException e)
 		{
+			logger.error("Error in getting pending drug requests "+e.getMessage());
 			
-			 return e.getMessage().toString();
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) 
+		{
+			logger.error("Error in getting pending drug requests "+e.getMessage());
+			return e.getMessage().toString();
 		}
 	}
 
@@ -515,13 +751,16 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return a string value.True if the Data inserted successfully else it returns false
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/addBatch")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addBatch(org.codehaus.jettison.json.JSONObject json) {
+	public String addBatch(org.codehaus.jettison.json.JSONObject json) throws JSONException {
 		System.out.println("add batch inside");
+		
+		logger.info("Entering add batch method...");
 		
 		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");		
 		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Colombo"));
@@ -537,13 +776,18 @@ public class DrugResource {
         try {
         	
         	System.out.println(json.get("b_mdate").toString());
-        	
 			drug = drugDbDriver.GetDrugByDrugName(json.get("dname").toString());
+			logger.info("Getting a drug "+drug);
 			System.out.println("4");
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block 
-			System.out.println("5");
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			logger.error("JSON Exception in adding batch "+e1.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
 		}
         
         int i = 1;
@@ -562,8 +806,9 @@ public class DrugResource {
 		try {
 			System.out.println("66");
 			 Date ManDate = dateFormat.parse(json.getString("b_mdate").toString());
+			 logger.info("Manufacture date parsed");
 	         Date ExpDate = dateFormat.parse(json.getString("b_edate").toString());
-	         
+	         logger.info("Expiry date parsed");
 	         System.out.println(ManDate);
 	         
 	         String dname = json.get("dname").toString();
@@ -588,18 +833,45 @@ public class DrugResource {
 			if(drugDbDriver.insertDrugBatch(drugSupp,drugSrNo, drugQty, qty))
 			{
 				status = "New Batch is Added!!!";
+				logger.info("New batch added");
 			}
 			else
 			{
 				status = "failed to add a batch";
+				logger.error("Error in adding new batch");
 			}
 
 			//session.getTransaction().commit();
 			return status;
 
-		} catch (Exception e) {
+		} 
+		catch(RuntimeException e)
+		{
+			logger.error("RuntimeException in adding new batch ..\n"+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Exception in adding new batch ..\n "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
+			logger.error("Exception in adding a new batch "+e.getMessage());
 			System.out.println("Exception in addBatch service");
 			return e.getMessage();
+//			return e.toString();
 			
 		}
 
@@ -611,12 +883,16 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return a string value.True if the Data inserted successfully else it returns false
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/requestDrug")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String requestDrug(JSONObject json) {
+	public String requestDrug(JSONObject json) throws JSONException {
+		
+		logger.info("Entering requestDrug method...");
+		
 		  DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	      Date date = new Date();
 	      String status="Default";
@@ -661,20 +937,58 @@ public class DrugResource {
 			if(drugDbDriver.insertDrugRequest(requests))
 			{
 					status = "Drug Request Sent!!!";
+					logger.info("New drug request inserted");
 			}
 			else
 			{
 					status = "fail";
+					logger.error("New drug request not inserted");
 			}
 
-		} catch (NumberFormatException e) {
+		} 
+		
+		catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
+			logger.error("Error in adding new drug request "+e.getMessage());
 			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch(IndexOutOfBoundsException e)
+		{
+			logger.error("Error in adding new drug request "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.INVALID_ID.getCode());
+			jsonErrorObject.put("message", ErrorConstants.INVALID_ID.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		catch(RuntimeException e)
+		{
+			logger.error("Error in adding new drug request "+e.getMessage());
+			
 			e.printStackTrace();
-		} catch(Exception e){
-			return e.getMessage()+"requestDrug";
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Error in adding new drug request "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		
+		catch(Exception e){
+			logger.error("Error in adding new drug request "+e.getMessage());
+//			return e.getMessage()+"requestDrug";
+			return e.toString();
 		}
 		return status;
 
@@ -687,14 +1001,19 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return a string value.True if the request approved successfully else it returns false
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/approveRequest")
 	//@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String approveRequest(JSONObject json) {
+	public String approveRequest(JSONObject json) throws JSONException {
+		
+		logger.info("Entering approveRequest method ...");
 		
 		try {
+			
+			
 			
 			int count = json.length() / 2;
 			int[] reqId = new int[count];
@@ -712,14 +1031,40 @@ public class DrugResource {
 	        boolean status=drugDbDriver.ApproveRequest(reqId,appQty);  
 	        if(status)
 	        {
+	        	logger.info("Request Approved");
 	        	return "Request Approved!!!";
 	        }
 	        else
 	        {
+	        	logger.error("Not enough Stock available");
 	        	return "Not enough Stock available!!!";
 	        }
 //			return "Test";
-		} catch (Exception e) {
+		} 
+		catch(RuntimeException e)
+		{
+			logger.error("Exception in approveRequest method ..."+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Exception in approveRequest method ..."+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
+			logger.error("Error in approveRequest method ..."+e.getMessage());
 			return e.getMessage();
 		}
 
@@ -731,13 +1076,16 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return a string value.True if the prescription dispense successfully else it returns false
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/dispenseDrug")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String dispenseDrug(JSONObject json) {
+	public String dispenseDrug(JSONObject json) throws JSONException {
 
+		logger.info("Entering dispenseDrug method ...");
+		
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			Date date = new Date();
 			String status;
@@ -745,10 +1093,12 @@ public class DrugResource {
 				
 				JSONArray dispenseJSONList = json.getJSONObject("dispense").getJSONArray("dispenseList");
 				List<TrnDispenseDrugs> dispenseList = new ArrayList<TrnDispenseDrugs>();
-
+				
+				
 				for (int i = 0; i < dispenseJSONList.length(); i++) {
 
 					JSONObject innerObject = dispenseJSONList.getJSONObject(i);
+					
 					
 					int drugQuantity = Integer.parseInt(innerObject.get("qty").toString());
 					System.out.println(drugQuantity);
@@ -758,6 +1108,7 @@ public class DrugResource {
 							.parseInt(innerObject.get("DSrNo").toString()));
 					if (drug != null) {
 						if (drug.getdQty() < drugQuantity) {
+							logger.info("Less amount");
 							return "less amount";
 						}
 
@@ -766,6 +1117,7 @@ public class DrugResource {
 						drug.setdQty(drug.getdQty() - drugQuantity);
 
 					} else {
+						logger.info("Drug not available");
 						return "not available";
 					}
 
@@ -785,16 +1137,40 @@ public class DrugResource {
 				//prescription related
 				
 				if (drugDbDriver.dispenseDrugs(dispenseList,prescription)) {
+					logger.info("Drug dispensed.");
 					status = "Drugs Dispensed!!!";
 				} else {
-					
+					logger.error("Drug not dispensed");
 					status = "fail";
 				}
 
 				return status;
 
-			} catch (Exception e) {
+			} 
+			catch(RuntimeException e)
+			{
+				logger.error("Exception in dispenseDrug method..."+e.getMessage());
+				
 				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch(JSONException e)
+			{
+				logger.error("Exception in dispenseDrug method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+							
+				return jsonErrorObject.toString();
+			}
+			catch (Exception e) {
+				logger.error("Exception in dispenseDrug method..."+e.getMessage());
 				return e.getMessage();
 			}
 
@@ -805,12 +1181,16 @@ public class DrugResource {
 	 * @author Mushi
 	 * @param json
 	 * @return  a string value.True if the data updated successfully else it returns false
+	 * @throws JSONException 
 	 */
 	 @POST
 	 @Path("/updateBatch")
 	 @Produces(MediaType.TEXT_PLAIN)
 	 @Consumes(MediaType.APPLICATION_JSON)
-	 public String updateBatch(JSONObject json){
+	 public String updateBatch(JSONObject json) throws JSONException{
+		 
+		 logger.info("Entering updateBatch method...");
+		 
 		 try {
 				System.out.println(json);
 				String dbatchno = json.get("dbatchno").toString();
@@ -822,13 +1202,36 @@ public class DrugResource {
 				int dQty = Integer.parseInt(json.get("dqty").toString());
 				System.out.println(dStatus);
 				drugDbDriver.updateBatch(dName, dbatchno, dQty, dCat, dUser, dSr,dStatus);
+				logger.info("Batch updated");
+				
 				System.out.println(dSr);
 				return "Updated Succesfully!!!";
-			} catch (JSONException e) {
+			}
+		 catch(RuntimeException e)
+			{
+			 logger.error("Error updateBatch method..."+e.getMessage());
+				
 				e.printStackTrace();
-				return "False";
-			} catch (Exception e) {
-				return "False";
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch(JSONException e)
+			{
+				logger.error("Error updateBatch method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+							
+				return jsonErrorObject.toString();
+			}
+		  catch (Exception e) {
+				logger.error("Error updateBatch method..."+e.getMessage());
+				return e.toString();
 			}
 	 }
 
@@ -837,12 +1240,14 @@ public class DrugResource {
 	  * @author Vishwa
 	  * @param json
 	  * @return
+	 * @throws JSONException 
 	  */
 	 @POST
 	 @Path("/getBatchDetailsByDrugName")
 	 @Produces(MediaType.APPLICATION_JSON)
 	 @Consumes(MediaType.APPLICATION_JSON)
-	 public String getDrugdetailsByDrugName(JSONObject json){
+	 public String getDrugdetailsByDrugName(JSONObject json) throws JSONException{
+		 logger.info("Entering getDrugdetailsByDrugName method...");
 		 List<TrnDrugsSupplied> drug = null;
 			List<TrnDrugsSupplied> drugReturn = null;
 			JSONArray list1 = new JSONArray();
@@ -867,10 +1272,34 @@ public class DrugResource {
 				}
 				JSONSerializer serializer = new JSONSerializer();
 				System.out.println(list1.toString());
+				logger.info("getDrugdetailsByDrugName method successfull. drug info: \n"+list1.toString());
 				return list1.toString();
 
-			} catch (Exception e) {
-
+			} 
+			catch(RuntimeException e)
+			{
+				logger.error("Exception in getDrugdetailsByDrugName method..."+e.getMessage());
+				
+				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch(JSONException e)
+			{
+				logger.error("Exception in getDrugdetailsByDrugName method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+							
+				return jsonErrorObject.toString();
+			}
+			catch (Exception e) {
+				logger.error("Exception in getDrugdetailsByDrugName method... "+e.getMessage());
 				return "error";
 			}
 	 }
@@ -881,15 +1310,19 @@ public class DrugResource {
 	  * @author Vishwa
 	  * @param date
 	  * @return A JSON object that contains all the prescriptions Details
+	 * @throws JSONException 
 	  */
 	 @GET
 	 @Path("/getDescriptionListByDate/{date}")
 	 @Produces(MediaType.TEXT_PLAIN)
-	 public String getPrescriptionListByDate(@PathParam("date") String date){
+	 public String getPrescriptionListByDate(@PathParam("date") String date) throws JSONException{
+		 
+		 logger.info("Entering getPrescriptionListByDate method...");
 		 try {
 
 				List<TrnDispenseDrugs> dispenseDrugs = drugDbDriver.getDispenseListByDate(date);
-
+				logger.info("Getting dispense list on "+date +": "+dispenseDrugs);
+				
 				JSONArray dispenseList = new JSONArray();
 				for (int i = 0; i < dispenseDrugs.size(); i++) {
 					TrnDispenseDrugs drugs = dispenseDrugs.get(i);
@@ -900,14 +1333,18 @@ public class DrugResource {
 
 					try {
 						List<AdminUser> users = userDbDriver.getUserDetailsByUserID(drugs.getUserId());
+						logger.info("Getting user details of user ID"+drugs.getUserId()+": "+users);
+						
 						if (users.size() > 0) {
 							AdminUser user = users.get(0);
 							dispense.put("dispenseUser", user.getUserName());
+							
 						} else {
 							dispense.put("dispenseUser", "K.A Saman Kumara");
 						}
 
 					} catch (Exception e) {
+						
 						dispense.put("dispenseUser", "K.A Saman Kumara");
 					}
 
@@ -925,8 +1362,22 @@ public class DrugResource {
 				} else {*/
 					return dispenseList.toString(); // controller.
 				//}
-			} catch (Exception e) {
+			} 
+		 catch(RuntimeException e)
+			{
+				logger.error("Error in getting prescription by date "+e.getMessage());
+				
+				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+		 catch (Exception e) {
 
+				logger.error("Error in getting prescription by date "+e.getMessage());
 				return e.getMessage().toString();
 			}
 	 }
@@ -936,15 +1387,20 @@ public class DrugResource {
 	  * @author Vishwa
 	  * @param json
 	  * @return 
+	 * @throws JSONException 
 	  */
 	 @POST
 	 @Path("/saveDosages")
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.TEXT_PLAIN)
-	 public String saveDosages(JSONObject json){
+	 public String saveDosages(JSONObject json) throws JSONException{
+		 
+		 logger.info("entering saveDosages method...");
+		 
 		 List<MstDrugDosage> dosages = new ArrayList<MstDrugDosage>();
 			try {
 				System.out.println("Came in!!!");
+				
 				org.codehaus.jettison.json.JSONArray frequencyJSONList = json
 						.getJSONArray("dosageList");
 				for (int i = 0; i < frequencyJSONList.length(); i++) {
@@ -954,9 +1410,11 @@ public class DrugResource {
 
 					MstDrugDosage dosage = new MstDrugDosage();
 					try {
+						
 						dosage.setDosId(Integer.parseInt(innerObject.get("dosId")
 								.toString()));
 					} catch (Exception e) {
+						
 					}
 					dosage.setDosage(innerObject.get("dosage").toString());
 					dosage.setRecordStatus(Integer.parseInt(innerObject.get(
@@ -965,14 +1423,39 @@ public class DrugResource {
 				}
 
 				if (drugDbDriver.insertDrugDosages(dosages)) {
+					logger.info("Saving dosages" +dosages);
 					return "success";
 				} else {
+					logger.error("Error in saving dosages ");
 					return "fail !";
 				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch(RuntimeException e)
+			{
+				logger.error("Exception in saveDosages method "+e.getMessage());
+				
 				e.printStackTrace();
-				return "JSON Error !";
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch(JSONException e)
+			{
+				logger.error("Exception in saveDosages method "+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+							
+				return jsonErrorObject.toString();
+			}
+			catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error("Exception in saveDosages method "+e.getMessage());
+				return "JSON Error ! "+ e.getMessage();
 			}
 	 }
 	 
@@ -980,19 +1463,39 @@ public class DrugResource {
 	  * Gives the list of Dosages
 	  * @author Vishwa
 	  * @return A JSON object that contains all the dosage Details
+	 * @throws JSONException 
 	  */
 	 @GET
 	 @Path("/getDosages")
 	 @Produces(MediaType.APPLICATION_JSON)
-	 public String getDosages(){
+	 public String getDosages() throws JSONException{
+		 
+		 logger.info("Entering getDosages method...");
+		 
 		 try{
 			 List<MstDrugDosage> dosageList = drugDbDriver.getDrugDosages();
+			 logger.info("Getting all dosages "+dosageList);
+			 
 			 JSONSerializer serializer = new JSONSerializer();
 			 return  serializer.include("dosId","dosage","recordStatus").exclude("*.class").serialize(dosageList);
 				
-	 }catch (Exception e) {
+		 }
+		 catch(RuntimeException e)
+		 {
+			logger.error("Exception in getDosages method... "+e.getMessage());
+			e.printStackTrace();
 
-			return e.getMessage().toString();
+				
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+			return jsonErrorObject.toString(); 	
+			 
+		 }
+		 catch (Exception e) {
+		 	logger.error("Exception in getDosages method... "+e.getMessage());
+			return e.getMessage();
 		} 
 	 }
 	 
@@ -1001,15 +1504,18 @@ public class DrugResource {
 	  * Gives the Details of the drugs which are low in stocks
 	  * @author Vishwa
 	  * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
 	  */
 	 @GET
 	 @Path("/drugreport")
 	 @Produces(MediaType.APPLICATION_JSON)
-	 public String drugReport(){
+	 public String drugReport() throws JSONException{
+		 
+		 logger.info("Entering drugReport method...");
 		 try{
 			
 				List Unames = drugDbDriver.getDrugReport(); 
-
+				logger.info("Getting drug report "+Unames);
 				JSONObject JUnames = new JSONObject();
 
 				int i = 1;
@@ -1041,9 +1547,23 @@ public class DrugResource {
 														// object to the calling
 														// controller.
 			 
-		 }catch (Exception e) {
-
-				return e.getMessage().toString();
+		 }
+		 catch(RuntimeException e)
+		 {
+			 	logger.error("Exception in drugReport method..."+e.getMessage());
+			 
+			 	e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+		 }
+		 catch (Exception e) {
+			 
+			 	logger.error("Exception in drugReport method..."+e.getMessage());
+				return e.getMessage();
 		 }
 	 }
 	 
@@ -1052,18 +1572,37 @@ public class DrugResource {
 	  * Gives the list of available Frequencies
 	  * @author Vishwa
 	  * @return A JSON object that contains all the Frequencies Details
+	 * @throws JSONException 
 	  */
 	 @GET
 	 @Path("/getPharmFrequency")
 	 @Produces(MediaType.APPLICATION_JSON)
-	 public String getPharmFrequncy(){
+	 public String getPharmFrequncy() throws JSONException{
+		 
+		 logger.info("Entering getPharmFrequncy method...");
+		 
 		 try{
-			List<MstDrugFrequency> frequencyList = drugDbDriver.getFrequency(); 
+			List<MstDrugFrequency> frequencyList = drugDbDriver.getFrequency();
+			logger.info("Getting pharmacy frequency"+frequencyList);
 			JSONSerializer serializer = new JSONSerializer();
 			return  serializer.include("freqId","frequency").exclude("*.class").serialize(frequencyList);
 			 
-		 }catch (Exception e) {
+		 }
+		 catch(RuntimeException e)
+		 {
+			 	logger.error("Error in getting pharmacy frequency "+e.getMessage());
+			 
+			 	e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+		 }
+		 catch (Exception e) {
 
+			 	logger.error("Error in getting pharmacy frequency "+e.getMessage());
 				return e.getMessage().toString();
 		 }
 	 }
@@ -1073,25 +1612,62 @@ public class DrugResource {
 	  * @author Vishwa
 	  * @param json
 	  * @return
+	 * @throws JSONException 
 	  */
 	 @POST
 	 @Path("/updateFrequency")
 	 @Produces(MediaType.TEXT_PLAIN)
 	 @Consumes(MediaType.APPLICATION_JSON)	 
-	 public String updateFrequency(JSONObject json){
+	 public String updateFrequency(JSONObject json) throws JSONException{
 		 //String result="";
+		 
+		 logger.info("Entering updateFrequency method...");
+		 
 		 try{
 			MstDrugFrequency frequency = new MstDrugFrequency();
 			frequency.setFreqId(json.getInt("frequencyId"));
 			frequency.setFrequency(json.getString("frequency"));
 			drugDbDriver.updateFrequency(frequency);
+			logger.info("Update frequency "+frequency);
+			
 			return "True";
-		}catch (JSONException e) {
-				e.printStackTrace();
-				return "False";
-		} 
-		catch (Exception e) {		 
-			return "False" ;
+		}
+		 catch(NullPointerException e)
+		 {
+			   logger.error("Exception in updateFrequency method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.INVALID_ID.getCode());
+				jsonErrorObject.put("message", ErrorConstants.INVALID_ID.getMessage());
+							
+				return jsonErrorObject.toString();
+		 }
+		 catch(RuntimeException e)
+		{
+			 logger.error("Exception in updateFrequency method..."+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Exception in updateFrequency method..."+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		catch (Exception e) {
+			logger.error("Exception in updateFrequency method..."+e.getMessage());
+			return e.getMessage();
+//			return e.toString();
 		}
 	 }
 	 
@@ -1101,27 +1677,50 @@ public class DrugResource {
 	  * @author Vishwa 
 	  * @param json
 	  * @return
+	 * @throws JSONException 
 	*/
 	@POST
 	@Path("/addFrequency")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String addFrequency(JSONObject json){
+	public String addFrequency(JSONObject json) throws JSONException{
+		
+		logger.info("Enetering addFrequency method...");
 		try {
 			MstDrugFrequency frequency = new MstDrugFrequency();
 			frequency.setFrequency(json.getString("frequency"));
 			drugDbDriver.addFrequency(frequency);
+			
+			logger.info("Adding frequency...");
 			return "True";
 
 		}
 		
-		catch (JSONException e) {
+		catch(RuntimeException e)
+		{
+			logger.error("Exception in addFrequency method "+e.getMessage());
+			
 			e.printStackTrace();
-			return "False";
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Exception in addFrequency method "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
 		}		
 		catch (Exception e) {
-			e.printStackTrace();
-			return "False";
+			logger.error("addFrequency method "+e.getMessage());
+			return e.getMessage();
 		}
 	}
 	
@@ -1131,27 +1730,54 @@ public class DrugResource {
 	 * @author Vishwa
 	 * @param json
 	 * @return
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/insertMail")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String insertMail(JSONObject json){
+	public String insertMail(JSONObject json) throws JSONException{
+		
+		logger.info("Entering insertMail method...");
 		try {
+			
 			MstMailHistory mailHistroy = new MstMailHistory();
 			int drugID=json.getInt("drugid");
+			logger.info("Drug Id :"+drugID);
+			
 			mailHistroy.setMailHistory_Content(json.getString("content"));
 			drugDbDriver.insertEmail(drugID, mailHistroy);
+			logger.info("Mail inserted ");
+			
 			return "True";
 
 		}
 		
-		catch (JSONException e) {
+		catch(RuntimeException e)
+		{
+			logger.error("Exception in inserting new Drug"+e.getMessage());
+			
 			e.printStackTrace();
-			return "False";
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch(JSONException e)
+		{
+			logger.error("Exception in updating drugs "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
 		}		
 		catch (Exception e) {
-			return "False";
+			logger.error("Exception: "+e.getMessage());
+			return e.toString();
 		}
 	}
 	
@@ -1159,20 +1785,38 @@ public class DrugResource {
 	 * Gives the history of mails sent for a particular drug
 	 * @author Vishwa
 	 * @return
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getMailHistory")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getMailHistroy(){
+	public String getMailHistroy() throws JSONException{
+		
+		logger.info("Entering getMailHistory method...");
+		
 		try{
 			List<MstMailHistory> mailList=drugDbDriver.getMailHistroy(); 
+			logger.info("Getting mail history "+mailList);
 			JSONSerializer serializer = new JSONSerializer();
 			return  serializer.include("mailHistory_ID","mailHistory_Content","mailHistory_SendDate","mailHistory_Drug.dSrNo","mailHistory_Drug.dName")
 										.exclude("*.class","mailHistory_Drug.*").transform(new DateTransformer("yyyy-MM-dd"),"mailHistory_SendDate")
 										.serialize(mailList);
 			 
-		 }catch (Exception e) {
-
+		 }
+		catch(RuntimeException e)
+		{
+			logger.error("Error in getting email history "+e.getMessage());
+			
+			e.printStackTrace();
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			return jsonErrorObject.toString(); 	
+		}
+		catch (Exception e) {
+			 	logger.error("Error in getting email history "+e.getMessage());
 				return e.getMessage().toString();
 		 }
 	}
@@ -1181,18 +1825,33 @@ public class DrugResource {
 		 * Get The Drug Names
 		 * @author Vishwa
 		 * @return
+		 * @throws JSONException 
 		 */
 		@GET
 		@Path("/getDrugNames")
 		@Produces(MediaType.APPLICATION_JSON)
-		public String getDrugNames() {
+		public String getDrugNames() throws JSONException {
+			
+			logger.info("Entering getDrugNames method...");
+			
 			try {
 				List<MstDrugsNew> drugName = drugDbDriver.getDrugNames();
-
+				logger.info("Getting drug names "+drugName);
+				
 				JSONSerializer serializer = new JSONSerializer();
 				return serializer.include("dName", "dSrNo").exclude("*")
 						.serialize(drugName);
-			} catch (Exception e) {
+			} 
+			catch(RuntimeException e){
+				logger.error("Error in getting drug names "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+									
+				return jsonErrorObject.toString();
+			}
+			catch (Exception e) {
+				logger.error("Error in getting drug names "+e.getMessage());
 				return e.getMessage().toString();
 			}
 		}
@@ -1201,20 +1860,39 @@ public class DrugResource {
 		 * Get the Drug details
 		 * @author Vishwa
 		 * @return
+		 * @throws JSONException 
 		 */
 		@GET
 		@Path("/getDrugDetails")
 		@Produces(MediaType.APPLICATION_JSON)
-		public String getDrugDetails() {
+		public String getDrugDetails() throws JSONException {
+			
+			logger.info("Entering getDrugDetails method...");
+			
 			try {
 				List<MstDrugsNew> drugDet = drugDbDriver.getDrugDetails();
-
+				logger.info("Getting all drug details "+drugDet);
+				
 				JSONSerializer serializer = new JSONSerializer();
 				return serializer
 						.include("dSrNo", "dName", "dSrNo", "dQty",
 								"statusReOrder", "statusDanger", "dUnit")
 						.exclude("*").serialize(drugDet);
-			} catch (Exception e) {
+			} 
+			catch (RuntimeException e)
+			{
+				logger.error("Exception in getDrugDetails method..."+e.getMessage());
+				
+				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch (Exception e) {
+				logger.error("Error in getting all drug details "+e.getMessage());
 				return e.getMessage().toString();
 			}
 		}
@@ -1224,18 +1902,37 @@ public class DrugResource {
 		 * @author Vishwa
 		 * @param dname
 		 * @return
+		 * @throws JSONException 
 		 */
 		@GET
 		@Path("/getDrugDetailsByDName/{dname}")
 		@Produces(MediaType.APPLICATION_JSON)
-		public String getDrugDetailsByDName(@PathParam("dname") String dname) {
+		public String getDrugDetailsByDName(@PathParam("dname") String dname) throws JSONException {
+			logger.info("Entering getDrugDetailsByDName method...");
+			
 			try {
 				List<MstDrugsNew> drugDet = drugDbDriver.getDrugDetailsByDName(dname);
-
+				logger.info("Getting drug details for drug "+dname+": "+drugDet);
+				
 				JSONSerializer serializer = new JSONSerializer();
 				return serializer.include("dName", "dSrNo", "dUnit", "dPrice")
 						.exclude("*").serialize(drugDet);
-			} catch (Exception e) {
+			} 
+			catch (RuntimeException e)
+			{
+				logger.error("Error in getting drug details "+e.getMessage());
+				
+				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				logger.error("Error in getting drug details "+e.getMessage());
 				return e.getMessage().toString();
 			}
 		}
@@ -1245,21 +1942,48 @@ public class DrugResource {
 		 * @author Vishwa
 		 * @param dSrNo
 		 * @return
+		 * @throws JSONException 
 		 */
 		@GET
 		@Path("/getBatchesBydName/{dSrNo}")
 		@Produces(MediaType.APPLICATION_JSON)
-		public String getBatchesByDname(@PathParam("dSrNo") int dSrNo) {
+		public String getBatchesByDname(@PathParam("dSrNo") int dSrNo) throws JSONException {
+			
+			logger.info("Entering getBatchesByDname method...");
+			
 			try {
 				List batchNo = drugDbDriver.getDrugBatch(dSrNo);
+				logger.info("Getting batches for drug "+dSrNo+": "+batchNo);
 				JSONSerializer serializer = new JSONSerializer();
 				return serializer.serialize(batchNo);
-			} catch (Exception e) {
+			} 
+			catch(IndexOutOfBoundsException e)
+			{
+				logger.error("Exception in getBatchesByDname method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.INVALID_ID.getCode());
+				jsonErrorObject.put("message", ErrorConstants.INVALID_ID.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+				
+			}
+			catch (RuntimeException e) {
+				logger.error("Exception in getBatchesByDname method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return e.getMessage().toString();
+				logger.error("Exception in getBatchesByDname method..."+e.getMessage());
+				return e.getMessage();
 			}
 		}
+	
 	
 	 
 

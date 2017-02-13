@@ -44,7 +44,13 @@ public class SpecimenRetentionTypeDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return false;
+			}
 		}
 
 	}
@@ -77,7 +83,14 @@ public class SpecimenRetentionTypeDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -94,8 +107,6 @@ public class SpecimenRetentionTypeDBDriver {
 		Transaction tx = null;
 		try {
 			
-			
-			
 			tx = session.beginTransaction();
 			Query query1 = session.createQuery("select c from Category as c where c.category_ID=:catID");
 			query1.setParameter("catID", catID);
@@ -109,8 +120,6 @@ public class SpecimenRetentionTypeDBDriver {
 			List<SubCategory> testList1 = query2.list();
 			SubCategory SubcatObject=testList1.get(0);
 			tx.commit();
-			
-			
 			
 			
 			tx = session.beginTransaction();
@@ -129,7 +138,13 @@ public class SpecimenRetentionTypeDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 

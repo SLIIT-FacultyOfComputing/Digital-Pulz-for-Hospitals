@@ -12,11 +12,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import core.ErrorConstants;
 import core.classes.lims.ParentTestFields;
+import core.resources.opd.LiveSearch;
 import flexjson.JSONSerializer;
 import lib.driver.lims.driver_class.ParentTestFieldsDBDriver;
 import lib.driver.lims.driver_class.TestFieldsRangeDBDriver;
@@ -24,6 +27,8 @@ import lib.driver.lims.driver_class.TestNamesDBDriver;
 
 @Path("ParentTestFields")
 public class ParentTestFieldsResource {
+	
+	final static Logger logger = Logger.getLogger(ParentTestFieldsResource.class);
 
 ParentTestFieldsDBDriver parentfieldDBDriver= new ParentTestFieldsDBDriver();
 TestFieldsRangeDBDriver testFieldsRangeDBDriver= new TestFieldsRangeDBDriver();
@@ -34,7 +39,7 @@ TestNamesDBDriver testNamesDBDriver= new TestNamesDBDriver();
 	@Path("/addNewParentTestField")
 	@Produces("text/plain")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addNewParentField(JSONObject obj)
+	public String addNewParentField(JSONObject obj) throws JSONException
 	{
 		/*try {
 			JSONArray data = obj.getJSONArray("parentfileds");
@@ -65,7 +70,7 @@ TestNamesDBDriver testNamesDBDriver= new TestNamesDBDriver();
 			}
 			return "TRUE";*/
 		
-		
+		logger.info("add new parent field");
 		ParentTestFields pf = new ParentTestFields();
 		try {
 			int id = obj.getInt("lab_test_id");
@@ -79,12 +84,29 @@ TestNamesDBDriver testNamesDBDriver= new TestNamesDBDriver();
 		//	pf.setfTest_NameID(testNamesDBDriver.getTestNameByID(Integer.parseInt(data.getJSONObject(curr).getString("fTest_NameID"))));
 		
 			parentfieldDBDriver.addNewParentTestField(pf);
-			return "true";
+			logger.info("successfully parent field added");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			return jsonSerializer.include("lab_test_id").exclude("*.class").serialize(pf);
 		} catch (JSONException e) {
-			System.out.print(e.getMessage());
-			e.printStackTrace();
+			logger.error("error adding parent test field: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());			
+			
+			return jsonErrorObject.toString(); 
 		}
-		return "false";
+		catch (RuntimeException e)
+		{
+			logger.error("error adding parent test field: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		//logger.info("parent field not added");
+		//return "null";
+		//return "False";
 	}
 	
 	@GET
@@ -92,9 +114,11 @@ TestNamesDBDriver testNamesDBDriver= new TestNamesDBDriver();
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllParenTestFields()
 	{
+		logger.info("get all parent test fields");
 		List<ParentTestFields> parentTestFIeldsList =   parentfieldDBDriver.getParentTeatFieldsList();
 		JSONSerializer serializer = new JSONSerializer();
-		return  serializer.include("fTest_NameID.test_Name").exclude("*.class","fTest_NameID.*").serialize(parentTestFIeldsList);
+		logger.info("successfully getting all parent field");
+		return  serializer.include("fTest_NameID.test_Name", "fTest_NameID.test_ID").exclude("*.class","fTest_NameID.*").serialize(parentTestFIeldsList);
 	}
 	
 	@GET
@@ -102,8 +126,10 @@ TestNamesDBDriver testNamesDBDriver= new TestNamesDBDriver();
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllParenTestFieldsByID(@PathParam("ID")int TestID)
 	{
+		logger.info("get all parent test fields by test id");
 		List<ParentTestFields> parentTestFIeldsList =   parentfieldDBDriver.getParentField(TestID);
 		JSONSerializer serializer = new JSONSerializer();
+		logger.info("successfully getting parent field");
 		return  serializer.exclude("*.class").serialize(parentTestFIeldsList);
 	}
 	
@@ -111,9 +137,11 @@ TestNamesDBDriver testNamesDBDriver= new TestNamesDBDriver();
 	@Path("/getMaxParentID")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String GetMAxParentID()
-	{
+	{	 
+		logger.info("get maximum patent id");
 		String MaxID =   parentfieldDBDriver.getMaxParentID();
 		JSONSerializer serializer = new JSONSerializer();
+		logger.info("successfully getting max parent field id");
 		return  serializer.exclude("*.class").serialize(MaxID);
 	}
 	

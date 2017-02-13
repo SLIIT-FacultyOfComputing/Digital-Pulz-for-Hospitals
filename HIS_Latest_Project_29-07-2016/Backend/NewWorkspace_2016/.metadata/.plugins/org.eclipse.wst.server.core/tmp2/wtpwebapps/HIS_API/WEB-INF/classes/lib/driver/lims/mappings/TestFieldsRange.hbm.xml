@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.TestFieldsRange" table="lab_testfieldsrange" catalog="HIS">
+        <id name="range_ID" type="java.lang.Integer">
+            <column name="range_id" />
+            <generator class="identity" />
+        </id>
+        <property name="gender" type="string">
+            <column name="gender" length="10" not-null="true" />
+        </property>
+        <property name="minage" type="int">
+            <column name="minage" not-null="true" />
+        </property>
+        <property name="maxage" type="int">
+            <column name="max_age" not-null="true" />
+        </property>
+        <property name="unit" type="string">
+            <column name="unit" length="15" />
+        </property>
+        <property name="minVal" type="double">
+            <column name="min_val" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="maxVal" type="double">
+            <column name="max_val" precision="22" scale="0" not-null="true" />
+        </property>
+        <many-to-one name="fparentfield_ID" class="core.classes.lims.ParentTestFields" fetch="select">
+            <column name="fparent_field_id" />
+        </many-to-one>
+        <many-to-one name="fsubfield_ID" class="core.classes.lims.SubTestFields" fetch="select">
+            <column name="fsub_field_id" />
+        </many-to-one>
+       <!--  <set name="labParenttestfieldses" table="lab_parenttestfields" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fTest_RangeID" />
+            </key>
+            <one-to-many class="core.classes.lims.ParentTestFields" />
+        </set> -->
+        <!-- <set name="labSubtestfieldses" table="lab_subtestfields" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fTest_RangeID" />
+            </key>
+            <one-to-many class="core.classes.lims.SubTestFields" />
+        </set> -->
+		
+	</class>
+</hibernate-mapping>

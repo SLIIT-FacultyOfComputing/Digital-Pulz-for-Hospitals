@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- REST Post request by S.A. Udara Srimath Samaratunge -->
+<Requests>
+
+	<!-- HIS Rest post body for Test cases -->
+
+	<request id="updateTest">
+                
+			{"test_ID":" 1","fTest_CategoryID":"Biochemistry","fTest_Sub_CategoryID":"Biochemistry_sub","fTest_LastUpdateUserID":"1","test_Name":"sam"}
+        
+	</request>
+	
+	<request id="updateLab">
+            {
+            	"flabType_ID":"1","flabDept_ID":"4","lab_Dept_Count":"3","flabLast_UpdatedUserID":"1","lab_ID":"15","lab_Name":"Inward","lab_Incharge":"Hasangi",
+            	"location":"Inward","email":"inward@hislims.com","contactNumber1":"0112345679","contactNumber2":"0112345615"
+            }
+	</request>
+	
+	<request id="addNewLab">                
+			{
+  				"flabType_ID":"1","flabDept_ID":"1","lab_Dept_Count":"2","flab_AddedUserID":"1","lab_Name":"udara","lab_Incharge":"Tester","location":"Test.",
+  				 "email":"015622615","contactNumber1":"120851542","contactNumber2":"1234567890"
+			}        
+	</request>
+	<request id="addNewLabType">                
+			{
+  				"lab_Type_Name":"TestLabType"
+
+			}        
+	</request>
+	
+</Requests>

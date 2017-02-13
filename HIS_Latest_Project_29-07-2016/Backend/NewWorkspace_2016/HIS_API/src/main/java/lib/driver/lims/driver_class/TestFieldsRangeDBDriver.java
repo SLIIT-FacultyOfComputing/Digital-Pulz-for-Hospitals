@@ -33,7 +33,13 @@ public class TestFieldsRangeDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return false;
+			}
 		}
 	}
 	
@@ -64,7 +70,13 @@ public class TestFieldsRangeDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -89,7 +101,13 @@ public class TestFieldsRangeDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 	
