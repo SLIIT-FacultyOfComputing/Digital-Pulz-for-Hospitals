@@ -14,6 +14,7 @@ class Login extends CI_Controller {
     }
 
     function logout() {
+
         $this->session->unset_userdata('logged_in');
         session_destroy();
         
@@ -40,7 +41,6 @@ class Login extends CI_Controller {
         $row = $this->login_model->login($username, $password);
 		
         $_SESSION['user'] = -1;  // initialize user session
-	
         
         if ($row) {
             $data['status'] = 'ok';

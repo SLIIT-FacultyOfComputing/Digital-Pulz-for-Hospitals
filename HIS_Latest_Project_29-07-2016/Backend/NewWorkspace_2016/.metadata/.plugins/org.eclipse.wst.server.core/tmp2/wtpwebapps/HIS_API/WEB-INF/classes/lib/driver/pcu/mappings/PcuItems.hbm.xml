@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 20, 2014 1:40:36 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.pcu.PcuItems" table="pcu_items" catalog="HIS">
+        <id name="SNumber" type="int">
+            <column name="s_number" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" length="65535" />
+        </property>
+        <property name="lastStockRecieved" type="timestamp">
+            <column name="last_stock_recieved" length="19" not-null="true" />
+        </property>
+        <property name="measurement" type="string">
+            <column name="measurement" length="20" />
+        </property>
+        <property name="reorderLevel" type="java.lang.Float">
+            <column name="reorder_level" precision="12" scale="0" />
+        </property>
+        <set name="pcuItembatchrelations" table="pcu_itembatchrelation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="s_number" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.pcu.PcuItembatchrelation" />
+        </set>
+    </class>
+</hibernate-mapping>

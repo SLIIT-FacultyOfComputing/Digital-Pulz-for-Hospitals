@@ -50,8 +50,14 @@ public class TestNamesDBDriver {
 				} catch (HibernateException he) {
 					System.err.println("Error rolling back transaction");
 				}
+			
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -85,6 +91,11 @@ public class TestNamesDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -109,6 +120,10 @@ public class TestNamesDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null) {
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -132,6 +147,10 @@ public class TestNamesDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null) {
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -168,6 +187,11 @@ public class TestNamesDBDriver {
 				}
 				throw ex;
 			}
+			if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -196,7 +220,7 @@ public class TestNamesDBDriver {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			
+			throw e;
 		}
 		return true;
 	}

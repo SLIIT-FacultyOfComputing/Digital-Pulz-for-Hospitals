@@ -38,7 +38,14 @@ public class SubCategoryDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -71,7 +78,14 @@ public class SubCategoryDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 
@@ -113,7 +127,14 @@ public class SubCategoryDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -137,7 +158,7 @@ public class SubCategoryDBDriver {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			throw e;
 			
 		}
 		return true;
@@ -167,7 +188,14 @@ public class SubCategoryDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}

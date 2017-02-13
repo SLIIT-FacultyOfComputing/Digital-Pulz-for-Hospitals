@@ -1,0 +1,58 @@
+<suite name="Suite1" verbose="1" >
+	<test name="testLaboratory">
+		<classes>
+			<class name="LabDepartmentsTestCase" />
+			<class name="LabTypeTestCase" />
+			<class name="TestNamesTestCase" />
+			<class name="MainResultsTestCase" />
+			<class name="CategoryTestCase" />
+			<class name="SubCategoryTestCase" />
+			<class name="SpecimenTypeTestCase" />
+			<class name="SpecimenRetentionTypeTestCase" />
+			<class name="SubTestFieldsTestCase" />
+			<class name="SubTestFieldsResultsTestCase" />
+			<class name="LabTestRequestTestCase" />
+			<class name="LabTestRequestFiltersTestCase" />
+			<class name="SampleCenterTestCase" />
+			<class name="SampleCenterTypeTestCase" />
+			<class name="TestFieldsRangeTestCase" />
+			<class name="ParentTestFieldsTestCase" />
+			<class name="ReportTestCase" />
+			<class name="LabTestCase" />
+			<class name="OPDLabTestRequestTestCase" />
+			<class name="PCULabTestRequestTestCase" />
+		</classes>
+	</test>
+	<test name="testOPD">
+		<classes>
+			<class name="AllergyTestCase" />
+			<class name="ExamsTestCase" />
+			<class name="OutPatientTestCase" />
+			<class name="HinTestCase" />
+			<class name="OpdLiveSearchTestCase" />
+			<class name="OpdAttachmentTestCase" />
+			<class name="OpdQueueTestCase" />
+			<class name="OpdRecordTestCase" />
+			<class name="OpdVisitTestCase" />
+			<class name="OpdQuestionnaireTestCase" />
+		</classes>
+	</test>
+	<test name="testPharmacy">
+		<groups>
+        	<dependencies>
+        		<group name="his.pharmacy.test" depends-on="his.lab.test.prescription" />
+            </dependencies>
+
+			<run>
+				<include name="his.pharmacy.test"/>
+				<include name="his.lab.test.prescription"/>
+			</run>
+
+		</groups>
+		<classes>
+			<class name="DrugTestCase" />
+			<class name="PrescriptionTestCase" />
+			<class name="ParmacyTestCase" />
+		</classes>
+	</test>
+</suite>

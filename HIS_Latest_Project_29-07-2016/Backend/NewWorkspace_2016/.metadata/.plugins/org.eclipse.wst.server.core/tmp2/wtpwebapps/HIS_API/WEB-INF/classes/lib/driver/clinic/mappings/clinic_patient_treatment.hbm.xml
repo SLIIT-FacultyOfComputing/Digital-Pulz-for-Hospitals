@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.clinic.clinic_patient_treatment" table="clinic_patient_treatment">
+
+		<id name="treatment_id" type="int">
+            <column name="treatment_id" />
+            <generator class="native" />
+        </id>
+							
+		<many-to-one name="clinic_visit_id" class="core.classes.clinic.clinic_visit" fetch="join">
+            <column name="clinic_visit_id" />
+        </many-to-one>
+        
+        <many-to-one name="prescriptionItems_ID" class="core.classes.opd.Prescription" fetch="select">
+            <column name="prescriptionItems_ID" />
+        </many-to-one>
+        <property name="clinic_doc" type="java.lang.String">
+            <column name="clinic_doc" />
+        </property>
+        <property name="clinic_diagnosis" type="java.lang.String">
+            <column name="clinic_diagnosis" />
+        </property>
+          <property name="clinic_remarks" type="java.lang.String">
+            <column name="clinic_remarks" />
+        </property>
+        <property name="clinic_date" type="timestamp">
+            <column name="clinic_date" />
+        </property>
+        
+	</class>
+</hibernate-mapping>

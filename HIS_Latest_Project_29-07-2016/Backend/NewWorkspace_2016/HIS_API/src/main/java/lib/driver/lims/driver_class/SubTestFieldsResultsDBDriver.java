@@ -43,7 +43,13 @@ public class SubTestFieldsResultsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return false;
+			}
 		}
 
 	}
@@ -76,7 +82,13 @@ public class SubTestFieldsResultsDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
 			return null;
+			}
 		}
 	}
 	

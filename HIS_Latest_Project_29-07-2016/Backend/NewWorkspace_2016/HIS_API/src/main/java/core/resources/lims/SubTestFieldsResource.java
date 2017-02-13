@@ -50,15 +50,15 @@ public String addNewParentField(JSONObject obj)
 		
 		
 			subtestfieldsDBDriver.addNewSubTestField(sf);
-		
+			
 		
 	} catch (JSONException e) {
 		e.printStackTrace();
-		return null; 
+		return e.getMessage(); 
 	}     	        
 	catch (Exception e) {
 		System.out.println(e.getMessage());
-		return null; 
+		return e.getMessage(); 
 	}
 	return "TRUE";
 }

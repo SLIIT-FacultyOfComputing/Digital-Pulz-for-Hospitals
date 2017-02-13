@@ -1,0 +1,354 @@
+<html>
+<head>
+<title>TestNG:  testOPD</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>testOPD</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>55/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Feb 13 13:04:57 IST 2017</td>
+</tr>
+<tr><td>Total time:</td><td>14 seconds (14682 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='OutPatientTestCase.PatientDetailsTestCase()'><b>PatientDetailsTestCase</b><br>Test class: OutPatientTestCase</td>
+<td></td>
+<td>0</td>
+<td>OutPatientTestCase@215be6bb</td></tr>
+<tr>
+<td title='AllergyTestCase.addAllergyTestCase()'><b>addAllergyTestCase</b><br>Test class: AllergyTestCase</td>
+<td></td>
+<td>0</td>
+<td>AllergyTestCase@32d992b2</td></tr>
+<tr>
+<td title='ExamsTestCase.addExamTestCase()'><b>addExamTestCase</b><br>Test class: ExamsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ExamsTestCase@548b7f67</td></tr>
+<tr>
+<td title='OpdAttachmentTestCase.addOpdAttachmentTestCase()'><b>addOpdAttachmentTestCase</b><br>Test class: OpdAttachmentTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdAttachmentTestCase@5dfcfece</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase()'><b>addOpdQuestionnaireTestCase</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdQueueTestCase.addOpdQueueTestCase()'><b>addOpdQueueTestCase</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdRecordTestCase.addOpdRecordTestCase()'><b>addOpdRecordTestCase</b><br>Test class: OpdRecordTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdRecordTestCase@4439f31e</td></tr>
+<tr>
+<td title='OpdVisitTestCase.addOpdVisitTestCase()'><b>addOpdVisitTestCase</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+<tr>
+<td title='HinTestCase.generateChekDigitTestCase()'><b>generateChekDigitTestCase</b><br>Test class: HinTestCase</td>
+<td></td>
+<td>0</td>
+<td>HinTestCase@5f375618</td></tr>
+<tr>
+<td title='OpdLiveSearchTestCase.getAllAllergyLiveTestCase()'><b>getAllAllergyLiveTestCase</b><br>Test class: OpdLiveSearchTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdLiveSearchTestCase@50c87b21</td></tr>
+<tr>
+<td title='OpdLiveSearchTestCase.getAllInjuryLiveTestCase()'><b>getAllInjuryLiveTestCase</b><br>Test class: OpdLiveSearchTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdLiveSearchTestCase@50c87b21</td></tr>
+<tr>
+<td title='OutPatientTestCase.getAllPatientsTestCase()'><b>getAllPatientsTestCase</b><br>Test class: OutPatientTestCase</td>
+<td></td>
+<td>1</td>
+<td>OutPatientTestCase@215be6bb</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.getAllQuestionnaireTestCase()'><b>getAllQuestionnaireTestCase</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='AllergyTestCase.getAllergiesByAllergyIdTestCase()'><b>getAllergiesByAllergyIdTestCase</b><br>Test class: AllergyTestCase</td>
+<td></td>
+<td>0</td>
+<td>AllergyTestCase@32d992b2</td></tr>
+<tr>
+<td title='AllergyTestCase.getAllergiesByPatientTestCase()'><b>getAllergiesByPatientTestCase</b><br>Test class: AllergyTestCase</td>
+<td></td>
+<td>0</td>
+<td>AllergyTestCase@32d992b2</td></tr>
+<tr>
+<td title='ExamsTestCase.getExamsbyExamIdTestCase()'><b>getExamsbyExamIdTestCase</b><br>Test class: ExamsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ExamsTestCase@548b7f67</td></tr>
+<tr>
+<td title='ExamsTestCase.getExamsbyVisitIdTestCase()'><b>getExamsbyVisitIdTestCase</b><br>Test class: ExamsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ExamsTestCase@548b7f67</td></tr>
+<tr>
+<td title='OutPatientTestCase.getMaxPatientIDTestCase()'><b>getMaxPatientIDTestCase</b><br>Test class: OutPatientTestCase</td>
+<td></td>
+<td>0</td>
+<td>OutPatientTestCase@215be6bb</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.getOpdAnswer()'><b>getOpdAnswer</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdGetQueueType()'><b>getOpdGetQueueType</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdHoldQuiueByUID()'><b>getOpdHoldQuiueByUID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.getOpdQuestionByQID()'><b>getOpdQuestionByQID</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.getOpdQuestionnaireByVisitType()'><b>getOpdQuestionnaireByVisitType</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.getOpdQuestionniareByQID()'><b>getOpdQuestionniareByQID</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueCheckinByPID()'><b>getOpdQueueCheckinByPID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueCheckoutByPID()'><b>getOpdQueueCheckoutByPID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueCurrentInByDID()'><b>getOpdQueueCurrentInByDID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueIsPatientInByPID()'><b>getOpdQueueIsPatientInByPID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueNextAssignByPID()'><b>getOpdQueueNextAssignByPID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueRediectByUID()'><b>getOpdQueueRediectByUID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>1</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueStatusByUID()'><b>getOpdQueueStatusByUID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueTestRequestByUID()'><b>getOpdQueueTestRequestByUID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdQueueTreatedByUID()'><b>getOpdQueueTreatedByUID</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdRecordTestCase.getOpdRecordTestRequestByHID()'><b>getOpdRecordTestRequestByHID</b><br>Test class: OpdRecordTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdRecordTestCase@4439f31e</td></tr>
+<tr>
+<td title='OpdQueueTestCase.getOpdSetQueue()'><b>getOpdSetQueue</b><br>Test class: OpdQueueTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQueueTestCase@7ac7a4e4</td></tr>
+<tr>
+<td title='OpdAttachmentTestCase.getOpdTestRequestByAttachID()'><b>getOpdTestRequestByAttachID</b><br>Test class: OpdAttachmentTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdAttachmentTestCase@5dfcfece</td></tr>
+<tr>
+<td title='OpdAttachmentTestCase.getOpdTestRequestByPID()'><b>getOpdTestRequestByPID</b><br>Test class: OpdAttachmentTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdAttachmentTestCase@5dfcfece</td></tr>
+<tr>
+<td title='OpdRecordTestCase.getOpdTestRequestByPatientID()'><b>getOpdTestRequestByPatientID</b><br>Test class: OpdRecordTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdRecordTestCase@4439f31e</td></tr>
+<tr>
+<td title='OpdVisitTestCase.getOpdVisitForReports()'><b>getOpdVisitForReports</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+<tr>
+<td title='OpdVisitTestCase.getOpdVisitRecentRequestByPID()'><b>getOpdVisitRecentRequestByPID</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+<tr>
+<td title='OpdVisitTestCase.getOpdVisitTestByVisitId()'><b>getOpdVisitTestByVisitId</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+<tr>
+<td title='OpdVisitTestCase.getOpdVisitTestRequestByPID()'><b>getOpdVisitTestRequestByPID</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+<tr>
+<td title='OpdVisitTestCase.getOpdVisitTestRequestByVisitDate()'><b>getOpdVisitTestRequestByVisitDate</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+<tr>
+<td title='OutPatientTestCase.getPatientsForDoctorTestCase()'><b>getPatientsForDoctorTestCase</b><br>Test class: OutPatientTestCase</td>
+<td></td>
+<td>1</td>
+<td>OutPatientTestCase@215be6bb</td></tr>
+<tr>
+<td title='OutPatientTestCase.registerPatientTestCase()'><b>registerPatientTestCase</b><br>Test class: OutPatientTestCase</td>
+<td></td>
+<td>0</td>
+<td>OutPatientTestCase@215be6bb</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.saveOpdQuestionAnswer()'><b>saveOpdQuestionAnswer</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='HinTestCase.serialNumberForHinTestCase()'><b>serialNumberForHinTestCase</b><br>Test class: HinTestCase</td>
+<td></td>
+<td>1</td>
+<td>HinTestCase@5f375618</td></tr>
+<tr>
+<td title='AllergyTestCase.updateAllergyTestCase()'><b>updateAllergyTestCase</b><br>Test class: AllergyTestCase</td>
+<td></td>
+<td>0</td>
+<td>AllergyTestCase@32d992b2</td></tr>
+<tr>
+<td title='ExamsTestCase.updateExamTestCase()'><b>updateExamTestCase</b><br>Test class: ExamsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ExamsTestCase@548b7f67</td></tr>
+<tr>
+<td title='OutPatientTestCase.updateExamTestCase()'><b>updateExamTestCase</b><br>Test class: OutPatientTestCase</td>
+<td></td>
+<td>0</td>
+<td>OutPatientTestCase@215be6bb</td></tr>
+<tr>
+<td title='OpdAttachmentTestCase.updateOpdAttachmentTestCase()'><b>updateOpdAttachmentTestCase</b><br>Test class: OpdAttachmentTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdAttachmentTestCase@5dfcfece</td></tr>
+<tr>
+<td title='OpdRecordTestCase.updateOpdRecordTestCase()'><b>updateOpdRecordTestCase</b><br>Test class: OpdRecordTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdRecordTestCase@4439f31e</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.updateQuestionAnswerTestCase()'><b>updateQuestionAnswerTestCase</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdQuestionnaireTestCase.updateQuestionniareTestCase()'><b>updateQuestionniareTestCase</b><br>Test class: OpdQuestionnaireTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdQuestionnaireTestCase@1810399e</td></tr>
+<tr>
+<td title='OpdVisitTestCase.updateVisitTestCase()'><b>updateVisitTestCase</b><br>Test class: OpdVisitTestCase</td>
+<td></td>
+<td>0</td>
+<td>OpdVisitTestCase@6d78f375</td></tr>
+</table><p>
+</body>
+</html>

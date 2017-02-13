@@ -1,0 +1,489 @@
+<html>
+<head>
+<title>TestNG:  testLaboratory</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>testLaboratory</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>82/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Feb 13 13:04:32 IST 2017</td>
+</tr>
+<tr><td>Total time:</td><td>25 seconds (25415 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='SubTestFieldsTestCase.GetMaxSubTestFieldTestCase()'><b>GetMaxSubTestFieldTestCase</b><br>Test class: SubTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubTestFieldsTestCase@4909b8da</td></tr>
+<tr>
+<td title='SubTestFieldsTestCase.GetTestSubFieldsTestCase()'><b>GetTestSubFieldsTestCase</b><br>Test class: SubTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubTestFieldsTestCase@4909b8da</td></tr>
+<tr>
+<td title='TestFieldsRangeTestCase.addLabFieldRangeTestCase()'><b>addLabFieldRangeTestCase</b><br>Test class: TestFieldsRangeTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestFieldsRangeTestCase@68837a77</td></tr>
+<tr>
+<td title='TestFieldsRangeTestCase.addLabFieldSubRangeTestCase()'><b>addLabFieldSubRangeTestCase</b><br>Test class: TestFieldsRangeTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestFieldsRangeTestCase@68837a77</td></tr>
+<tr>
+<td title='ParentTestFieldsTestCase.addLabParentTestCase()'><b>addLabParentTestCase</b><br>Test class: ParentTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ParentTestFieldsTestCase@3567135c</td></tr>
+<tr>
+<td title='LabTestCase.addLaboratoryTestCase()'><b>addLaboratoryTestCase</b><br>Test class: LabTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestCase@15975490</td></tr>
+<tr>
+<td title='MainResultsTestCase.addMainResultsTestCase()'><b>addMainResultsTestCase</b><br>Test class: MainResultsTestCase</td>
+<td></td>
+<td>1</td>
+<td>MainResultsTestCase@6615435c</td></tr>
+<tr>
+<td title='CategoryTestCase.addNewCatDetailsTestCase()'><b>addNewCatDetailsTestCase</b><br>Test class: CategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>CategoryTestCase@3f2a3a5</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.addNewLabTestRequestTestCase()'><b>addNewLabTestRequestTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='SampleCenterTestCase.addNewSampleCenterTestCase()'><b>addNewSampleCenterTestCase</b><br>Test class: SampleCenterTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTestCase@47f6473</td></tr>
+<tr>
+<td title='SubTestFieldsTestCase.addNewSubTestFieldTestCase()'><b>addNewSubTestFieldTestCase</b><br>Test class: SubTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubTestFieldsTestCase@4909b8da</td></tr>
+<tr>
+<td title='OPDLabTestRequestTestCase.addOPDLabTestRequest()'><b>addOPDLabTestRequest</b><br>Test class: OPDLabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>OPDLabTestRequestTestCase@1936f0f5</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.addPcuLabTestRequestTestCase()'><b>addPcuLabTestRequestTestCase</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='SampleCenterTypeTestCase.addSampleCenterTypeTestCase()'><b>addSampleCenterTypeTestCase</b><br>Test class: SampleCenterTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTypeTestCase@60addb54</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.addSpecimenInfoTestCase()'><b>addSpecimenInfoTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='SubTestFieldsResultsTestCase.addSubFieldsResultsTestCase()'><b>addSubFieldsResultsTestCase</b><br>Test class: SubTestFieldsResultsTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubTestFieldsResultsTestCase@614c5515</td></tr>
+<tr>
+<td title='CategoryTestCase.deleteCategoryTestCase()'><b>deleteCategoryTestCase</b><br>Test class: CategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>CategoryTestCase@3f2a3a5</td></tr>
+<tr>
+<td title='LabTestCase.deleteLabTestCase()'><b>deleteLabTestCase</b><br>Test class: LabTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestCase@15975490</td></tr>
+<tr>
+<td title='TestNamesTestCase.deleteLabTestsTestCase()'><b>deleteLabTestsTestCase</b><br>Test class: TestNamesTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestNamesTestCase@4157f54e</td></tr>
+<tr>
+<td title='LabTypeTestCase.deleteLabTypeTestCase()'><b>deleteLabTypeTestCase</b><br>Test class: LabTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTypeTestCase@4cb2c100</td></tr>
+<tr>
+<td title='LabDepartmentsTestCase.deleteLabTypeTestCase()'><b>deleteLabTypeTestCase</b><br>Test class: LabDepartmentsTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabDepartmentsTestCase@90f6bfd</td></tr>
+<tr>
+<td title='OPDLabTestRequestTestCase.deleteOPDLabTestRequest()'><b>deleteOPDLabTestRequest</b><br>Test class: OPDLabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>OPDLabTestRequestTestCase@1936f0f5</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.deleteOPDLabTestRequest()'><b>deleteOPDLabTestRequest</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='SampleCenterTestCase.deleteSampleCenterTestCase()'><b>deleteSampleCenterTestCase</b><br>Test class: SampleCenterTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTestCase@47f6473</td></tr>
+<tr>
+<td title='SampleCenterTypeTestCase.deleteSampleCenterTypeTestCase()'><b>deleteSampleCenterTypeTestCase</b><br>Test class: SampleCenterTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTypeTestCase@60addb54</td></tr>
+<tr>
+<td title='SubCategoryTestCase.deleteSubCategoryTestCase()'><b>deleteSubCategoryTestCase</b><br>Test class: SubCategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubCategoryTestCase@2d554825</td></tr>
+<tr>
+<td title='ReportTestCase.generateNewReportTestCase()'><b>generateNewReportTestCase</b><br>Test class: ReportTestCase</td>
+<td></td>
+<td>0</td>
+<td>ReportTestCase@327471b5</td></tr>
+<tr>
+<td title='CategoryTestCase.getAllCategoriesTestCase()'><b>getAllCategoriesTestCase</b><br>Test class: CategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>CategoryTestCase@3f2a3a5</td></tr>
+<tr>
+<td title='ParentTestFieldsTestCase.getAllLabParentByIDTestCase()'><b>getAllLabParentByIDTestCase</b><br>Test class: ParentTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ParentTestFieldsTestCase@3567135c</td></tr>
+<tr>
+<td title='ParentTestFieldsTestCase.getAllLabParentTestCase()'><b>getAllLabParentTestCase</b><br>Test class: ParentTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ParentTestFieldsTestCase@3567135c</td></tr>
+<tr>
+<td title='TestFieldsRangeTestCase.getAllLabRangeTestCase()'><b>getAllLabRangeTestCase</b><br>Test class: TestFieldsRangeTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestFieldsRangeTestCase@68837a77</td></tr>
+<tr>
+<td title='SubTestFieldsResultsTestCase.getAllLabSubResultsTestCase()'><b>getAllLabSubResultsTestCase</b><br>Test class: SubTestFieldsResultsTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubTestFieldsResultsTestCase@614c5515</td></tr>
+<tr>
+<td title='LabTestRequestFiltersTestCase.getAllLabTestRequestByLocationTestCase()'><b>getAllLabTestRequestByLocationTestCase</b><br>Test class: LabTestRequestFiltersTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestFiltersTestCase@6b143ee9</td></tr>
+<tr>
+<td title='LabTestRequestFiltersTestCase.getAllLabTestRequestByPIDTestCase()'><b>getAllLabTestRequestByPIDTestCase</b><br>Test class: LabTestRequestFiltersTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestFiltersTestCase@6b143ee9</td></tr>
+<tr>
+<td title='TestNamesTestCase.getAllLabTestsTestCase()'><b>getAllLabTestsTestCase</b><br>Test class: TestNamesTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestNamesTestCase@4157f54e</td></tr>
+<tr>
+<td title='LabDepartmentsTestCase.getAllLaboratoriesTestCase()'><b>getAllLaboratoriesTestCase</b><br>Test class: LabDepartmentsTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabDepartmentsTestCase@90f6bfd</td></tr>
+<tr>
+<td title='LabTestCase.getAllLaboratoriesTestCase()'><b>getAllLaboratoriesTestCase</b><br>Test class: LabTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestCase@15975490</td></tr>
+<tr>
+<td title='MainResultsTestCase.getAllMainResultsTestCase()'><b>getAllMainResultsTestCase</b><br>Test class: MainResultsTestCase</td>
+<td></td>
+<td>0</td>
+<td>MainResultsTestCase@6615435c</td></tr>
+<tr>
+<td title='OPDLabTestRequestTestCase.getAllOPDLabTestRequests()'><b>getAllOPDLabTestRequests</b><br>Test class: OPDLabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>OPDLabTestRequestTestCase@1936f0f5</td></tr>
+<tr>
+<td title='LabTestRequestFiltersTestCase.getAllPatientsTestCase()'><b>getAllPatientsTestCase</b><br>Test class: LabTestRequestFiltersTestCase</td>
+<td></td>
+<td>1</td>
+<td>LabTestRequestFiltersTestCase@6b143ee9</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.getAllPcuLabTestCase()'><b>getAllPcuLabTestCase</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='ReportTestCase.getAllReportTestCase()'><b>getAllReportTestCase</b><br>Test class: ReportTestCase</td>
+<td></td>
+<td>0</td>
+<td>ReportTestCase@327471b5</td></tr>
+<tr>
+<td title='SampleCenterTypeTestCase.getAllSampleCenterTypesTestCase()'><b>getAllSampleCenterTypesTestCase</b><br>Test class: SampleCenterTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTypeTestCase@60addb54</td></tr>
+<tr>
+<td title='SampleCenterTestCase.getAllSampleCentersTestCase()'><b>getAllSampleCentersTestCase</b><br>Test class: SampleCenterTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTestCase@47f6473</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getAllSpecimenRetTypesTestCase()'><b>getAllSpecimenRetTypesTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='SpecimenRetentionTypeTestCase.getAllSpecimenRetentionTypeByIdTestCase()'><b>getAllSpecimenRetentionTypeByIdTestCase</b><br>Test class: SpecimenRetentionTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SpecimenRetentionTypeTestCase@6fb554cc</td></tr>
+<tr>
+<td title='SpecimenRetentionTypeTestCase.getAllSpecimenRetentionTypeTestCase()'><b>getAllSpecimenRetentionTypeTestCase</b><br>Test class: SpecimenRetentionTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SpecimenRetentionTypeTestCase@6fb554cc</td></tr>
+<tr>
+<td title='SpecimenTypeTestCase.getAllSpecimenTypeByIdTestCase()'><b>getAllSpecimenTypeByIdTestCase</b><br>Test class: SpecimenTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SpecimenTypeTestCase@77b52d12</td></tr>
+<tr>
+<td title='SpecimenTypeTestCase.getAllSpecimenTypeTestCase()'><b>getAllSpecimenTypeTestCase</b><br>Test class: SpecimenTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SpecimenTypeTestCase@77b52d12</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getAllSpecimenTypeTestCase()'><b>getAllSpecimenTypeTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='SubCategoryTestCase.getAllSubCategoriesByIdTestCase()'><b>getAllSubCategoriesByIdTestCase</b><br>Test class: SubCategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubCategoryTestCase@2d554825</td></tr>
+<tr>
+<td title='SubCategoryTestCase.getAllSubCategoriesTestCase()'><b>getAllSubCategoriesTestCase</b><br>Test class: SubCategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubCategoryTestCase@2d554825</td></tr>
+<tr>
+<td title='MainResultsTestCase.getAllSubCategoriesTestCase()'><b>getAllSubCategoriesTestCase</b><br>Test class: MainResultsTestCase</td>
+<td></td>
+<td>0</td>
+<td>MainResultsTestCase@6615435c</td></tr>
+<tr>
+<td title='SubTestFieldsTestCase.getAllSubTestFieldsTestCase()'><b>getAllSubTestFieldsTestCase</b><br>Test class: SubTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubTestFieldsTestCase@4909b8da</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getAllTestRequestsTestCase()'><b>getAllTestRequestsTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>1</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='LabTestCase.getLabTestRequestByID()'><b>getLabTestRequestByID</b><br>Test class: LabTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestCase@15975490</td></tr>
+<tr>
+<td title='ParentTestFieldsTestCase.getMaxParentIDTestCase()'><b>getMaxParentIDTestCase</b><br>Test class: ParentTestFieldsTestCase</td>
+<td></td>
+<td>0</td>
+<td>ParentTestFieldsTestCase@3567135c</td></tr>
+<tr>
+<td title='TestNamesTestCase.getMaxTestIDTestCase()'><b>getMaxTestIDTestCase</b><br>Test class: TestNamesTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestNamesTestCase@4157f54e</td></tr>
+<tr>
+<td title='OPDLabTestRequestTestCase.getOPDLabRequestsByPatient()'><b>getOPDLabRequestsByPatient</b><br>Test class: OPDLabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>OPDLabTestRequestTestCase@1936f0f5</td></tr>
+<tr>
+<td title='OPDLabTestRequestTestCase.getOPDLabRequestsByVisit()'><b>getOPDLabRequestsByVisit</b><br>Test class: OPDLabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>OPDLabTestRequestTestCase@1936f0f5</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.getPcuLabTestByAdminID()'><b>getPcuLabTestByAdminID</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.getPcuLabTestByPatientID()'><b>getPcuLabTestByPatientID</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.getPcuLabTestByReqID()'><b>getPcuLabTestByReqID</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getRequestsByPatientIDTestCase()'><b>getRequestsByPatientIDTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='SampleCenterTestCase.getSampleCentersByLabTypeTestCase()'><b>getSampleCentersByLabTypeTestCase</b><br>Test class: SampleCenterTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTestCase@47f6473</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getSpecimenByRequestIDTestCase()'><b>getSpecimenByRequestIDTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getSpecimenIDByRequestIDTestCase()'><b>getSpecimenIDByRequestIDTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.getTestRequestByRequestIDTestCase()'><b>getTestRequestByRequestIDTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='LabDepartmentsTestCase.insertLabDepartmentTestCase()'><b>insertLabDepartmentTestCase</b><br>Test class: LabDepartmentsTestCase</td>
+<td></td>
+<td>5</td>
+<td>LabDepartmentsTestCase@90f6bfd</td></tr>
+<tr>
+<td title='TestNamesTestCase.insertLabTestsTestCase()'><b>insertLabTestsTestCase</b><br>Test class: TestNamesTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestNamesTestCase@4157f54e</td></tr>
+<tr>
+<td title='LabTypeTestCase.insertLabTypeTestCase()'><b>insertLabTypeTestCase</b><br>Test class: LabTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTypeTestCase@4cb2c100</td></tr>
+<tr>
+<td title='LabTestRequestTestCase.setStatusTestCase()'><b>setStatusTestCase</b><br>Test class: LabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestRequestTestCase@6be46e8f</td></tr>
+<tr>
+<td title='CategoryTestCase.updateCategoriesDetailsTestCase()'><b>updateCategoriesDetailsTestCase</b><br>Test class: CategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>CategoryTestCase@3f2a3a5</td></tr>
+<tr>
+<td title='LabDepartmentsTestCase.updateLabDepartmentTestCase()'><b>updateLabDepartmentTestCase</b><br>Test class: LabDepartmentsTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabDepartmentsTestCase@90f6bfd</td></tr>
+<tr>
+<td title='LabTypeTestCase.updateLabTypeTestCase()'><b>updateLabTypeTestCase</b><br>Test class: LabTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTypeTestCase@4cb2c100</td></tr>
+<tr>
+<td title='LabTestCase.updateLaboratoryTestCase()'><b>updateLaboratoryTestCase</b><br>Test class: LabTestCase</td>
+<td></td>
+<td>0</td>
+<td>LabTestCase@15975490</td></tr>
+<tr>
+<td title='OPDLabTestRequestTestCase.updateOPDLabRequests()'><b>updateOPDLabRequests</b><br>Test class: OPDLabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>OPDLabTestRequestTestCase@1936f0f5</td></tr>
+<tr>
+<td title='PCULabTestRequestTestCase.updatePCULabRequests()'><b>updatePCULabRequests</b><br>Test class: PCULabTestRequestTestCase</td>
+<td></td>
+<td>0</td>
+<td>PCULabTestRequestTestCase@5f2050f6</td></tr>
+<tr>
+<td title='SampleCenterTestCase.updateSampleCenterDetailsTestCase()'><b>updateSampleCenterDetailsTestCase</b><br>Test class: SampleCenterTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTestCase@47f6473</td></tr>
+<tr>
+<td title='SampleCenterTypeTestCase.updateSampleCenterTypesTestCase()'><b>updateSampleCenterTypesTestCase</b><br>Test class: SampleCenterTypeTestCase</td>
+<td></td>
+<td>0</td>
+<td>SampleCenterTypeTestCase@60addb54</td></tr>
+<tr>
+<td title='SubCategoryTestCase.updateSubCategoriesDetailsTestCase()'><b>updateSubCategoriesDetailsTestCase</b><br>Test class: SubCategoryTestCase</td>
+<td></td>
+<td>0</td>
+<td>SubCategoryTestCase@2d554825</td></tr>
+<tr>
+<td title='TestNamesTestCase.updateTestsTestCase()'><b>updateTestsTestCase</b><br>Test class: TestNamesTestCase</td>
+<td></td>
+<td>0</td>
+<td>TestNamesTestCase@4157f54e</td></tr>
+</table><p>
+</body>
+</html>

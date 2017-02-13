@@ -118,6 +118,12 @@ public class DrugDBDriver {
             {
                 tx.rollback(); 
                 e.printStackTrace();
+                throw e;
+            }
+            else if(tx==null)
+            {
+            	e.printStackTrace();
+            	throw e;
             }
             return status;
         }
@@ -162,6 +168,11 @@ public class DrugDBDriver {
 			if (tx != null) {
 				tx.rollback();
 				e.printStackTrace();
+				throw e;
+			}
+			else if(tx==null)
+			{
+				throw e;
 			}
 		}
 		return status;
@@ -244,7 +255,8 @@ public class DrugDBDriver {
        {
             tx = session.beginTransaction();
             //Gets the values from the database and assign it to a List
-            drugs = session.createQuery("FROM TrnDrugsSupplied as s where DATEDIFF(s.dExpiryDate,NOW())<=90").list();//***Query changed
+            drugs = session.createQuery("FROM TrnDrugsSupplied as s where DATEDIFF(NOW(),s.dExpiryDate)<=90").list();//***Query changed from DATEDIFF(s.dExpiryDate,NOW())<=90 
+
             tx.commit();
             
        }
@@ -292,8 +304,19 @@ public class DrugDBDriver {
             {
                 tx.rollback(); 
                 e1.printStackTrace();
+                throw e1;
+                
             }
+           if(tx==null)
+           {
+        	   throw e1;
+           }
        }
+       
+       catch (Exception e) {
+		// TODO: handle exception
+    	   throw e;
+	}
        
        return srNo;
    }
@@ -323,7 +346,14 @@ public class DrugDBDriver {
             {
                 tx.rollback(); 
                 e1.printStackTrace();
+                throw e1;
             }
+           else if(tx==null)
+           {
+        	   tx.rollback(); 
+               e1.printStackTrace();
+               throw e1;
+           }
        }
        
        return drugs;
@@ -419,7 +449,13 @@ public class DrugDBDriver {
             {
                 tx.rollback(); 
                 e1.printStackTrace();
+                throw e1;
             }
+           else if(tx==null)
+           {
+        	   throw e1;
+           }
+           
        }
        
        return drug;
@@ -852,6 +888,7 @@ public class DrugDBDriver {
 				session.getTransaction().rollback();
 			}
 			e1.printStackTrace();
+			throw e1;
 		} finally {
 			// session.close();
 		}

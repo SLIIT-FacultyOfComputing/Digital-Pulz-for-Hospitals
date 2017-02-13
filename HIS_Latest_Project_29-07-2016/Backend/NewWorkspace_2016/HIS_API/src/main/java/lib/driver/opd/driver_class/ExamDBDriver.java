@@ -44,8 +44,15 @@ public class ExamDBDriver {
 				}
 				throw ex;
 			}
-			return false;
-		}	
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		
 	}
 	
@@ -80,8 +87,15 @@ public class ExamDBDriver {
 				}
 				throw ex;
 			}
-			return false;
-		}	
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 	
 	public List<Exams> retriveExamsByVisit(int vID){
@@ -105,8 +119,15 @@ public class ExamDBDriver {
 				}
 				throw ex;
 			}
-			return null;
-		}		
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
 	
 	
@@ -131,7 +152,13 @@ public class ExamDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else {
+				return null;
+			}
 		}
 		
 		

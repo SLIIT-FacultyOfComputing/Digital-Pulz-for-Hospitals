@@ -32,7 +32,14 @@ public class CategoryDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 	
@@ -62,7 +69,13 @@ public class CategoryDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 	
@@ -89,7 +102,14 @@ public class CategoryDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -114,7 +134,7 @@ public class CategoryDBDriver {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			throw e;
 			
 		}
 		return true;

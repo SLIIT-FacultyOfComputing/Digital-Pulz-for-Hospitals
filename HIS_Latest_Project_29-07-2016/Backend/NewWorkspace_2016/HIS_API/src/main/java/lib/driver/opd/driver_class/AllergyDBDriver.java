@@ -47,7 +47,14 @@ public class AllergyDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}		
 		
 	}
@@ -79,7 +86,14 @@ public class AllergyDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -106,7 +120,14 @@ public class AllergyDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -131,7 +152,14 @@ public class AllergyDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -165,7 +193,14 @@ public class AllergyDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -188,7 +223,14 @@ public class AllergyDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	

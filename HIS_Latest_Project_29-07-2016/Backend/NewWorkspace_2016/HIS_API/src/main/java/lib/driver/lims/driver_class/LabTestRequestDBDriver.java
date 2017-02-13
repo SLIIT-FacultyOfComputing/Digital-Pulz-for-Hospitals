@@ -66,6 +66,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -90,6 +95,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 	}
@@ -155,6 +165,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -179,6 +194,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -212,6 +232,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -322,6 +347,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -347,6 +377,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -371,6 +406,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -412,6 +452,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -437,6 +482,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -461,6 +511,11 @@ public class LabTestRequestDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}

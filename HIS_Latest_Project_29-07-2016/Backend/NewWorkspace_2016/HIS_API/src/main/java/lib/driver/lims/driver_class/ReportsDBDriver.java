@@ -83,7 +83,13 @@ public class ReportsDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 	/*public Reports getReportsByRequestID(int id) {
