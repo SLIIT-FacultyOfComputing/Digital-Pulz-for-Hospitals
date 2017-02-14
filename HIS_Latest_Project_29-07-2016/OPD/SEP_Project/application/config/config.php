@@ -18,7 +18,9 @@
 //define('SERVICE_BASE_URL','http://localhost:8080/OPD_BASE/'); 
 
 $config['base_url']	= 'http://localhost/SEP_Project/';
-define('SERVICE_BASE_URL','http://172.16.21.251:8080/HIS_API/rest/');
+//define('SERVICE_BASE_URL',':172.16.21.251:8080/HIS_API/rest/');
+
+define('SERVICE_BASE_URL','localhost:8080/HIS_API/rest/');
 define('SITE_BASE_URL','http://localhost/SEP_Project/');
 
 // '172.16.21.144:8080/HIS_API/rest/'

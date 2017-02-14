@@ -72,7 +72,14 @@ public class PcuLabTestRequestDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -105,7 +112,14 @@ public class PcuLabTestRequestDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 
@@ -129,7 +143,14 @@ public class PcuLabTestRequestDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	public List<PcuLabTestRequest> getLabTestRequestsByPid(int patientID) {
@@ -161,7 +182,14 @@ public class PcuLabTestRequestDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	public List<PcuLabTestRequest> getLabTestRequestsByAdmissionID(int pcuadminid) {
@@ -193,7 +221,14 @@ public class PcuLabTestRequestDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -220,7 +255,14 @@ public class PcuLabTestRequestDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}

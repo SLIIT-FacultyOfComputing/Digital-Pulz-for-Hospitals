@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite1]">
+  <test name="testLaboratory(failed)">
+    <classes>
+      <class name="PCULabTestRequestTestCase">
+        <methods>
+          <include name="getAllPcuLabTestCase"/>
+          <include name="getPcuLabTestByAdminID"/>
+          <include name="updatePCULabRequests"/>
+          <include name="deleteOPDLabTestRequest"/>
+          <include name="addPcuLabTestRequestTestCase"/>
+          <include name="getPcuLabTestByPatientID"/>
+          <include name="getPcuLabTestByReqID"/>
+        </methods>
+      </class> <!-- PCULabTestRequestTestCase -->
+    </classes>
+  </test> <!-- testLaboratory(failed) -->
+</suite> <!-- Failed suite [Suite1] -->

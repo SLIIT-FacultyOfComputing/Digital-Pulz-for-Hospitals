@@ -13,18 +13,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import core.ErrorConstants;
 import core.classes.opd.Queue;
 import core.classes.opd.Visit;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
-
 import lib.driver.api.driver_class.user.UserDBDriver;
 import lib.driver.opd.driver_class.QueueDBDriver;
 import lib.driver.opd.driver_class.VisitDBDriver;
-
 import core.classes.api.user.AdminPermission;
 import core.classes.api.user.AdminUser;
 import core.classes.api.user.AdminUserroles;
@@ -39,6 +39,8 @@ import core.resources.api.user.UserResource;
 
 @Path("Queue")
 public class QueueResource {
+	
+	final static Logger logger = Logger.getLogger(QueueResource.class);
 
 	//
 	public final static int MAX_PATIENT_PER_DAY = 5;
@@ -63,12 +65,14 @@ public class QueueResource {
 	/**
 	 * @param qJson
 	 * @return
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/addPatientToQueue")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addToQueue(JSONObject qJson) {
+	public String addToQueue(JSONObject qJson) throws JSONException {
+		logger.info("add patient to queue");
 
 		Queue queue = new Queue();
 		try {
@@ -92,13 +96,29 @@ public class QueueResource {
 			}
 			
 			queueDBDriver.addToQueue(queue, patientID, assignedBy, assignedTo);
-			return "True";
+			logger.info("successfully queue added");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			return jsonSerializer.include("patient").serialize(queue);
 
 		} catch (JSONException e) {
-			e.printStackTrace();
-			return "False";
+			logger.error("error adding queue: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());		
+			
+			return jsonErrorObject.toString(); 
+		}catch (RuntimeException e)
+			{
+				logger.error("error adding queue: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
 		} catch (Exception e) {
-			return "False";
+			logger.error("error adding queue: "+e.getMessage());
+			return null;
 		}
 
 	}
@@ -106,78 +126,132 @@ public class QueueResource {
 	/**
 	 * @param pID
 	 * @return
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/checkinPatient/{PID}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String checkinPatient(@PathParam("PID") int P) {
+	public String checkinPatient(@PathParam("PID") int P) throws JSONException {
+		logger.info("checkin patient");
 		try {
 
 			int status = queueDBDriver.checkInPatient(P);
-			if (status == 1)
-				return "True";
-			else
-				return "False";
+			if (status == 1){
+				logger.info("successfully checked patient");
+				return String.valueOf(status);
+			}
+			else{
+				logger.info("patient not checked");
+				return String.valueOf(status);
+			}
 
+		}catch (RuntimeException e)
+			{
+				logger.error("error checking in patient: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
 		} catch (Exception e) {
-			return "False";
+			logger.error("error checking in patient: "+e.getMessage());
+			return null;
+			
 		}
 	}
 
 	/**
 	 * @param pID
 	 * @return
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/checkoutPatient/{PID}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String checkoutPatient(@PathParam("PID") int pID) {
+	public String checkoutPatient(@PathParam("PID") int pID) throws JSONException {
+		logger.info("checkout patient");
 		try {
 			int status = queueDBDriver.checkoutPatient(pID);
 			
 			
-			if (status == 1)
-				return "True";
+			if (status == 1){
+				logger.info("successfully checked patient");
+				return String.valueOf(status);
+			}
 			else
-				return "False";
+				logger.info("patient not checked");
+			return String.valueOf(status);
 
-		} catch (Exception e) {
-			return "False";
+		} catch (RuntimeException e)
+			{
+				logger.error("error checking out patient: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error checking out patient: "+e.getMessage());
+			return null;
 		}
 	}
 
 	@GET
 	@Path("/getQueuePatientsByUserID/{userid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getQueuePatientsByUserID(@PathParam("userid") int userid) {
+	public String getQueuePatientsByUserID(@PathParam("userid") int userid) throws JSONException {
+		logger.info("get queue patient by user id");
 		try {
 			List<Queue> queueRecord = queueDBDriver
 					.getQueuePatientsByUserID(userid);
 			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting queue patient");
 
 			return serializer
 					.include("patient.patientGender", "patient.patientTitle",
 							"patient.patientFullName", "patient.patientID","patient.patientHIN",
 							"queueTokenNo", "queueStatus").exclude("*")
 					.serialize(queueRecord);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return "False";
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting queue: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting queue: "+e.getMessage());
+			return null;
 		}
 	}
 
 	@GET
 	@Path("/isPatientInQueue/{patientID}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String isPatientInQueue(@PathParam("patientID") int patientID) {
+	public String isPatientInQueue(@PathParam("patientID") int patientID) throws JSONException {
+		logger.info("is patient in queue");
 		try {
 			JSONSerializer serializer = new JSONSerializer();
 			Queue q = queueDBDriver.isPatientInQueue(patientID);
+			logger.info("successfully checked patient in queue");
 			return serializer
 					.include("patient.patientID","patient.patientFullName","patient.patientTitle", "queueStatus", "queueTokenNo","queueAssignedTo.hrEmployee.firstName","queueAssignedTo.hrEmployee.lastName")
 					.exclude("*").serialize(q); 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (RuntimeException e)
+			{
+				logger.error("error checking patient in queue: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error checking patient in queue: "+e.getMessage());
 
 			return null;
 		}
@@ -186,68 +260,114 @@ public class QueueResource {
 	@GET
 	@Path("/getCurrentInPatient/{doctor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCurrentInPatient(@PathParam("doctor") int doctor) {
+	public String getCurrentInPatient(@PathParam("doctor") int doctor) throws JSONException {
+		logger.info("get current in patient");
 		try {
 			JSONSerializer serializer = new JSONSerializer();
 			Queue q = queueDBDriver.getCurrentInPatient(doctor);
+			logger.info("successfully getting current patient");
 			return serializer
 					.include("patient.patientID", "queueStatus", "queueTokenNo")
 					.exclude("*").serialize(q);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting current patient: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting current patient: "+e.getMessage());
 
-			return null;
+			return e.getMessage();
 		}
 	}
 
 	@GET
 	@Path("/getTreatedPatients/{userid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getTreatedPatients(@PathParam("userid") int userid) {
+	public String getTreatedPatients(@PathParam("userid") int userid) throws JSONException {
+		logger.info("get treated patients");
 		try {
 			List<Queue> queueRecord = queueDBDriver.getTreatedPatients(userid);
 			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting treated  patient");
 
 			return serializer.include("patient.patientID", "queueTokenNo")
 					.exclude("*").serialize(queueRecord);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return "False";
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting treated  patient: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting treated  patient: "+e.getMessage());
+			return e.getMessage();
 		}
 	}
 
 	@GET
 	@Path("/redirectQueue/{userid}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String redirectQueue(@PathParam("userid") int userid) {
+	public String redirectQueue(@PathParam("userid") int userid) throws JSONException {
+		logger.info("redirect queue");
 		try {
 
 			int status = queueDBDriver.redirectQueue(userid);
 
-			if (status == 1)
-				return "True";
+			if (status == 1){
+				logger.info("successfully redirect queue");
+				return String.valueOf(status);
+			}
 			else
-				return "False";
+				logger.info("not redirect queue");
+			return String.valueOf(status);
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return "False";
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting redirect queue: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting redirect queue: "+e.getMessage());
+			return null;
 		}
 	}
 
 	@GET
 	@Path("/getUserQStatus/{userid}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getUserQStatus(@PathParam("userid") int userid) {
+	public String getUserQStatus(@PathParam("userid") int userid) throws JSONException {
+		logger.info("get user queue status");
 		try {
 
 			for (QueueStatus status : queueStatusList) {
 				if (status.user == userid)
+					logger.info("successfully getting queue status");
 					return String.valueOf(status.qStatus);
 			}
 			return "0";
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting queue status: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting queue status: "+e.getMessage());
 			return "0";
 		}
 	}
@@ -255,28 +375,51 @@ public class QueueResource {
 	@GET
 	@Path("/setQueueType")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String setQueueType() {
+	public String setQueueType() throws JSONException {
+		logger.info("set queue type");
 		try {
 
 			if (qType == 0)
 				qType = 1;
 			else
 				qType = 0;
-			return "True";
+			logger.info("successfully setting queue type");
+			return String.valueOf(qType);
 
-		} catch (Exception e) { 
-			return "False";
+		} catch (RuntimeException e)
+			{
+				logger.error("error setting queue type: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) { 
+			logger.error("error setting queue type: "+e.getMessage());
+			return null;
 		}
 	}
 
 	@GET
 	@Path("/getQueueType")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getQueueType() {
+	public String getQueueType() throws JSONException {
+		logger.info("get queue type");
 		try {
 			return String.valueOf(qType);
+		}catch (RuntimeException e)
+			{
+				logger.error("error setting queue type: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
 		} catch (Exception e) { 
-			return "False";
+			logger.error("error setting queue type: "+e.getMessage());
+			return null;
 		}
 	}
 	
@@ -284,7 +427,8 @@ public class QueueResource {
 	@GET
 	@Path("/holdQueue/{userid}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String holdQueue(@PathParam("userid") int userid) {
+	public String holdQueue(@PathParam("userid") int userid) throws JSONException {
+		logger.info("hold queue");
 		try {
 			boolean bExists = false;
 			
@@ -297,12 +441,13 @@ public class QueueResource {
 					if (status.qStatus == 2)
 					{ 
 						queueStatusList.remove(status);
-						return "True";
+						return String.valueOf(status.qStatus);
+						
 					}
 					else if (status.qStatus == 0)
 					{
 						status.qStatus = 2; 
-						return "True";
+						return String.valueOf(status.qStatus);
 					} 
 				}
 			}
@@ -314,11 +459,21 @@ public class QueueResource {
 				qstat.qStatus = 2;
 				queueStatusList.add(qstat);
 			}
-
-			return "True";
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return "False";
+			logger.info("successfully holding queue");
+			//return "True";
+			return String.valueOf(userid);
+		} catch (RuntimeException e)
+			{
+				logger.error("error holding queue: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error holding queue: "+e.getMessage());
+			return null;
 		}
 	}
 	
@@ -326,11 +481,13 @@ public class QueueResource {
 	/**
 	 * @param pID
 	 * @return
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getNextAssignDoctor/{patientID}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getNextAssignDoctor(@PathParam("patientID") int patientID){
+	public String getNextAssignDoctor(@PathParam("patientID") int patientID) throws JSONException{
+		logger.info("get next assign doctor");
 		try {
 			
 			JSONSerializer serializer = new JSONSerializer();
@@ -420,9 +577,18 @@ public class QueueResource {
 				}
 			}
 			
-		} catch (Exception e) {
-			System.out.println("Error " + e.getMessage());
-			return "False";
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting next assign doctor: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting next assign doctor: "+e.getMessage());
+			return null;
 		}
 	}
 
@@ -519,7 +685,7 @@ public class QueueResource {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Error " + e.getMessage());
+			logger.error("error getting next assign doctor: "+e.getMessage());
 			return -1;
 		}
 	}

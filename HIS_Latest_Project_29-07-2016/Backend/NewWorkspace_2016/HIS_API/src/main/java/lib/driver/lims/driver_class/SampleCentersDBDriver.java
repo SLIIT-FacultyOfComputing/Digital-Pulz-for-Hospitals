@@ -52,6 +52,11 @@ public class SampleCentersDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -86,7 +91,14 @@ public class SampleCentersDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx==null)
+			{
+				throw ex;
+				
+			}
+			else
+				return null;
+			
 		}
 	}
 	
@@ -109,6 +121,11 @@ public class SampleCentersDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx== null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -142,6 +159,11 @@ public class SampleCentersDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -180,6 +202,11 @@ public class SampleCentersDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -206,7 +233,7 @@ public class SampleCentersDBDriver {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			throw e;
 			
 		}
 		return true;

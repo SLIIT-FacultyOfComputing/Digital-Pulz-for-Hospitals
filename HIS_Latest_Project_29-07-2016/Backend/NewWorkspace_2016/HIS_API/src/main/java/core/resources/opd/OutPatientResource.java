@@ -22,8 +22,11 @@ import javax.ws.rs.core.MediaType;
 
 import lib.driver.opd.driver_class.PatientDBDriver;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+
+import core.ErrorConstants;
 import core.classes.opd.Hin;
 //import core.classes.api.standards.hin.GenerateHin;
 import core.classes.opd.OutPatient;
@@ -44,7 +47,7 @@ public class OutPatientResource {
 
 	PatientDBDriver patientDBDriver = new PatientDBDriver();
 	HinResources hin = new HinResources();
-	
+	final static Logger log = Logger.getLogger(OutPatientResource.class);
 	
 	
 	DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -54,18 +57,18 @@ public class OutPatientResource {
 	 * Register Patient Details
 	 * @param pJson A Json Object that contains New Patient Details
 	 * @return Is A String and If Data inserted Successfully return is True else False.
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/registerPatient")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String registerPatient(JSONObject pJson)
+	public String registerPatient(JSONObject pJson) throws JSONException
 	{
 		System.out.println(pJson);
-		
 
 		
-		
+		log.info("Entering the register Patient method");
 		try {
 			OutPatient patient  =  new OutPatient();
 			Hin patientHin = new Hin();
@@ -131,12 +134,44 @@ public class OutPatientResource {
 		
 			patientDBDriver.insertPatient(patient,userid,pJson.get("dob").toString());
 			 
+			
+			log.info("registering Patient Successful, PatientID = "+patient.getPatientID());
+			
 			JSONSerializer jsonSerializer = new JSONSerializer();
 			return jsonSerializer.include("patientID").exclude("*").serialize(patient);
-		} catch (Exception e) {
-			 System.out.println(e.getMessage());
-			 
-			return null; 
+		} 
+		catch (JSONException e) {
+			log.error("Runtime Exception in registering patient, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in registering patient, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while registering patient, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
 		}
 
 	}
@@ -146,12 +181,15 @@ public class OutPatientResource {
 	 * Get Patient Details By Patient ID
 	 * @param patientId Is An Integer Value
 	 * @return JSON String that contains all the Patient Details
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getPatientsByPID/{patientId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String PatientDetails(@PathParam("patientId")int patientId)
+	public String PatientDetails(@PathParam("patientId")int patientId) throws JSONException
 	{
+		log.info("Entering the get Patients by PID method");
+		try{
 		Patient patient =  new OutPatient();
 		patient = patientDBDriver.getPatientDetails(patientId);
 		JSONSerializer jsonSerializer = new JSONSerializer();
@@ -161,20 +199,47 @@ public class OutPatientResource {
 			"patientCreateUser.specialPermissions", "patientCreateUser.userRoles","core.classes.hr.HrEmployee.password"
 			).include("allergies","visits","exams","attachments","records","laborders",
 						"answerSets","answerSets.questionnaireID").serialize(patient);
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in getting Patients by PID, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting Patients by PID, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+
 	}
 	  
 	/**
 	 * Update Patient details
 	 * @param pJson A Json Object that contains New Patient Details
 	 * @return Is A String and If Data Updated Successfully return is True else False.
+	 * @throws JSONException 
 	 */
 	
 	@POST
 	@Path("/updatePatient")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String changePatientDetails(JSONObject pJson)
+	public String changePatientDetails(JSONObject pJson) throws JSONException
 	{
+		log.info("Entering the update Patients by PID method");
 		try {
 			System.out.println(pJson.toString());
 			
@@ -184,7 +249,8 @@ public class OutPatientResource {
 			patient.setPatientFullName(pJson.get("fullname").toString());
 			patient.setPatientPersonalUsedName(pJson.getString("personalname"));
 			patient.setPatientNIC(pJson.get("nic").toString());
-			patient.setPatientHIN(pJson.get("hin").toString());
+			//patient.setPatientHIN(pJson.get("hin").toString());
+			
 			patient.setPatientPhoto(pJson.get("photo").toString());
 			patient.setPatientPassport(pJson.get("passport").toString());
 			
@@ -209,12 +275,45 @@ public class OutPatientResource {
 			int userid = pJson.getInt("userid");
 			int patientid = pJson.getInt("pid");
 			patientDBDriver.updatePatient(patientid,patient,userid,pJson.get("dob").toString());
-			return "True";	
 			
-		} catch (Exception e) {
-			 
-			return "False";
+			log.info("updating Patient Successful, PatientID = "+patient.getPatientID());
+			return patient.getPatientID() + "";	
+			
+		} 
+		catch (JSONException e) {
+			log.error("Runtime Exception in updating Patients, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
 		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in registering patient, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while updating Patients, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+
 	}
 	
 	/**
@@ -226,29 +325,61 @@ public class OutPatientResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPatientList()
 	{
-		System.out.println("hsjgsjdhdbskhd");
-		List<OutPatient> patientList =   patientDBDriver.getPatientList();
-		JSONSerializer serializer = new JSONSerializer();
-		return  serializer.exclude("*.class","patientCreateUser.hrEmployee.birthday").transform(new DateTransformer("yyyy-MM-dd"),"patientCreateDate","patientLastUpdate").serialize(patientList);
+		log.info("Entering the get all Patients method");
+		try{
+			List<OutPatient> patientList =   patientDBDriver.getPatientList();
+			JSONSerializer serializer = new JSONSerializer();
+			return  serializer.exclude("*.class","patientCreateUser.hrEmployee.birthday").transform(new DateTransformer("yyyy-MM-dd"),"patientCreateDate","patientLastUpdate").serialize(patientList);
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting all Patients, message:" + e.getMessage());
+			return e.getMessage();
+		}
+	
 	}
-	
-	
 	
 	/**
 	 * Get Patient Details By Visit Type
 	 * @param userid Is an Integer value
 	 * @param visitype is an String Value
 	 * @return 
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/{userid}/{visitype}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getPatients(@PathParam("userid")int userid,@PathParam("visitype")int visitype) {
-		
-		OutPatient patient =  new OutPatient();
-		patient = patientDBDriver.getPatient_By_VisitType(userid, visitype);
-		JSONSerializer jsonSerializer = new JSONSerializer();
-		return jsonSerializer.exclude("*.class").transform(new DateTransformer("yyyy-MM-dd"), "patientDateOfBirth","patientCreateDate","patientLastUpdate").serialize(patient);
+	public String getPatients(@PathParam("userid")int userid,@PathParam("visitype")int visitype) throws JSONException {
+		log.info("Entering the get patients by userid & visitype method");
+		try{
+			OutPatient patient =  new OutPatient();
+			patient = patientDBDriver.getPatient_By_VisitType(userid, visitype);
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			return jsonSerializer.exclude("*.class").transform(new DateTransformer("yyyy-MM-dd"), "patientDateOfBirth","patientCreateDate","patientLastUpdate").serialize(patient);
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in getting patients by userid & visitype, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting patients by userid & visitype, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
 	}
 	
 	
@@ -259,14 +390,16 @@ public class OutPatientResource {
 	 * @param userID
 	 * @param visitType
 	 * @return
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getPatientsForDoctor/{userid}/{visitype}")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getPatientsForDoctor(@PathParam("userid")int userID,@PathParam("visitype")int visitType) {
+	public String getPatientsForDoctor(@PathParam("userid")int userID,@PathParam("visitype")int visitType) throws JSONException {
+		
+		log.info("Entering the get patients for Doctor method");
 		try 
 		{
-			 
 		   List<Visit> uList = patientDBDriver.getPatientsForDoctor(userID, visitType);
 			 
            JSONSerializer serializer = new JSONSerializer();
@@ -274,9 +407,29 @@ public class OutPatientResource {
 				   transform(new DateTransformer("yyyy-MM-dd"), "patient.patientDateOfBirth",
 						   "patient.patientCreateDate","patient.patientLastUpdate",
 						   "visitLastUpdate").serialize(uList);
-		} catch (Exception e) 
+		} 
+		catch(RuntimeException e)
 		{
-			 return "error";
+			log.error("Runtime Exception in getting patients for doctor, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting patients for doctor, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
 		}
 	}
 	
@@ -285,19 +438,42 @@ public class OutPatientResource {
 	 * @param userID
 	 * @param visitType
 	 * @return
+	 * @throws JSONException 
 	 */
 	@GET
 	@Path("/getMaxPatientID")
 	@Produces (MediaType.APPLICATION_JSON)
-	public String getMaxPatientID() {
+	public String getMaxPatientID() throws JSONException {
+		
+		log.info("Entering the get max patient ID method");
 		try 
 		{
 			String id = patientDBDriver.getMaxPatientID();
 			JSONSerializer jsonSerializer = new JSONSerializer();
 			return jsonSerializer.serialize(id);
-		} catch (Exception e) 
+		} 
+		catch(RuntimeException e)
 		{
-			 return "error";
+			log.error("Runtime Exception in getting max patient ID, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting max patient ID, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
 		}
 	}
 	

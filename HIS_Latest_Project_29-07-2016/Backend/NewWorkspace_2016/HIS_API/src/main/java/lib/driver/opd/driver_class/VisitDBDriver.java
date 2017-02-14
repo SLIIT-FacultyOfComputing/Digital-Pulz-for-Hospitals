@@ -58,8 +58,13 @@ public class VisitDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return false;
+			}
 		}
 
 	}
@@ -87,8 +92,13 @@ public class VisitDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return false;
+			}
 		}
 
 	}
@@ -112,8 +122,13 @@ public class VisitDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -136,8 +151,13 @@ public class VisitDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -161,8 +181,13 @@ public class VisitDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 		
 	}
@@ -185,9 +210,14 @@ public class VisitDBDriver {
 				} catch (HibernateException he) {
 					System.err.println("Error rolling back transaction");
 				}
-			 
+			 throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 	 
@@ -227,9 +257,14 @@ public class VisitDBDriver {
 				} catch (HibernateException he) {
 					System.err.println("Error rolling back transaction");
 				}
-			 
+			 throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 	

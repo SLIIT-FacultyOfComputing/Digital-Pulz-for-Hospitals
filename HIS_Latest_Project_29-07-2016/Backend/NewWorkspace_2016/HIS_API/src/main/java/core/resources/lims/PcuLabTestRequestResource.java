@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.apache.log4j.Logger;
 
+import core.ErrorConstants;
 import core.classes.lims.Category;
 import core.classes.lims.InwardLabTestRequest;
 import core.classes.lims.LabTestRequest;
@@ -36,14 +38,17 @@ public class PcuLabTestRequestResource {
 
 
 
-PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
+	PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
+	final static Logger logger=Logger.getLogger(PcuLabTestRequestResource.class);
+	
 	
 	@POST
 	@Path("/addPcuLabTestRequest")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addPcuLabTestRequest(JSONObject pJson)
+	public String addPcuLabTestRequest(JSONObject pJson) throws JSONException
 	{
+		
 
 		try {
 			
@@ -63,13 +68,22 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 			.parse(pJson.getString("due_date")));
 			
 			requestDBDriver.addNewLabTestRequest(request, testID, admissionID, labID,patientID, userid);
+			logger.info("New Lab Request Added: "+request);
 			
 			JSONSerializer jsonSerializer = new JSONSerializer();
 			return jsonSerializer.include("pcu_lab_test_request_id").serialize(request);
+			
 		} catch (Exception e) {
-			 System.out.println(e.getMessage());
-			 
-			return null; 
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+			 /*System.out.println(e.getMessage());
+			 logger.error("Error in adding new PCU Lab request"+e.getMessage());
+			return e.getMessage();*/ 
 		}
 
 	}
@@ -81,6 +95,9 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 	{
 		
 		List<PcuLabTestRequest> testRequestsList =   requestDBDriver.getTestRequestsList();
+		
+		logger.info("PUC Lab Test Requests "+testRequestsList);
+		
 		JSONSerializer serializer = new JSONSerializer();
 		return  serializer.include("admintionID.admitionId","ftest_ID.test_ID","ftest_ID.test_IDName","ftest_ID.test_Name","admintionID.patientId.patientID","admintionID.patientId.patientFullName","fspecimen_ID.specimen_ID.*","flab_ID.lab_ID.*","flab_ID.lab_Name.*","ftest_RequestPerson.userID.*","ftest_RequestPerson.userName.*"
 				,"fsample_CenterID.sampleCenter_ID.*","fsample_CenterID.sampleCenter_Name.*").exclude("*.class","fspecimen_ID.*","flab_ID.*","ftest_RequestPerson.*","fsample_CenterID.*","admintionID.*","ftest_ID.*","ftest_RequestPerson.*").transform(new DateTransformer("yyyy-MM-dd"),"test_RequestDate","test_DueDate").serialize(testRequestsList);
@@ -92,6 +109,8 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 	public String getrquestsById(@PathParam("request_id")int RequestId)
 	{
 		PcuLabTestRequest testRequestsList =  requestDBDriver.getTestRequestByID(RequestId);
+		
+		logger.info("PUC Lab Test Requests "+testRequestsList);
 		JSONSerializer serializer = new JSONSerializer();
 		return  serializer.include("admintionID.admitionId","ftest_ID.test_ID","ftest_ID.test_IDName","ftest_ID.test_Name","admintionID.patientId.patientID","admintionID.patientId.patientFullName","fspecimen_ID.specimen_ID.*","flab_ID.lab_ID.*","flab_ID.lab_Name.*","ftest_RequestPerson.userID.*","ftest_RequestPerson.userName.*"
 				,"fsample_CenterID.sampleCenter_ID.*","fsample_CenterID.sampleCenter_Name.*").exclude("*.class","fspecimen_ID.*","flab_ID.*","ftest_RequestPerson.*","fsample_CenterID.*","admintionID.*","ftest_ID.*","ftest_RequestPerson.*").transform(new DateTransformer("yyyy-MM-dd"),"test_RequestDate","test_DueDate").serialize(testRequestsList);
@@ -103,6 +122,8 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 	public String getAllrquestsByPid(@PathParam("patientID")int patientID)
 	{
 		List<PcuLabTestRequest> testRequestsList =  requestDBDriver.getLabTestRequestsByPid(patientID);
+		logger.info("PUC Lab Test Requests by Patient Id "+testRequestsList);
+		
 		JSONSerializer serializer = new JSONSerializer();
 		return  serializer.include("admintionID.admitionId","ftest_ID.test_ID","ftest_ID.test_IDName","ftest_ID.test_Name","admintionID.patientId.patientID","admintionID.patientId.patientFullName","fspecimen_ID.specimen_ID.*","flab_ID.lab_ID.*","flab_ID.lab_Name.*","ftest_RequestPerson.userID.*","ftest_RequestPerson.userName.*"
 				,"fsample_CenterID.sampleCenter_ID.*","fsample_CenterID.sampleCenter_Name.*").exclude("*.class","fspecimen_ID.*","flab_ID.*","ftest_RequestPerson.*","fsample_CenterID.*","admintionID.*","ftest_ID.*","ftest_RequestPerson.*").transform(new DateTransformer("yyyy-MM-dd"),"test_RequestDate","test_DueDate").serialize(testRequestsList);
@@ -114,6 +135,8 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 	public String getAllrquestsByBht(@PathParam("pcuadminId")int pcuadminId)
 	{
 		List<PcuLabTestRequest> testRequestsList =  requestDBDriver.getLabTestRequestsByAdmissionID(pcuadminId);
+		logger.info("PUC Lab Test Requests by Admin Id "+testRequestsList);
+		
 		JSONSerializer serializer = new JSONSerializer();
 		return  serializer.include("admintionID.admitionId","ftest_ID.test_ID","ftest_ID.test_IDName","ftest_ID.test_Name","admintionID.patientId.patientID","admintionID.patientId.patientFullName","fspecimen_ID.specimen_ID.*","flab_ID.lab_ID.*","flab_ID.lab_Name.*","ftest_RequestPerson.userID.*","ftest_RequestPerson.userName.*"
 				,"fsample_CenterID.sampleCenter_ID.*","fsample_CenterID.sampleCenter_Name.*").exclude("*.class","fspecimen_ID.*","flab_ID.*","ftest_RequestPerson.*","fsample_CenterID.*","admintionID.*","ftest_ID.*","ftest_RequestPerson.*").transform(new DateTransformer("yyyy-MM-dd"),"test_RequestDate","test_DueDate").serialize(testRequestsList);
@@ -123,7 +146,7 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 	@Path("/updatePCURequestTest")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updatePCURequestDetailsTest(JSONObject pJson)
+	public String updatePCURequestDetailsTest(JSONObject pJson) throws JSONException
 	{
 		
 		
@@ -137,32 +160,45 @@ PcuLabTestRequestDBDriver requestDBDriver = new PcuLabTestRequestDBDriver();
 			request.setTest_DueDate(new SimpleDateFormat("yyyy-MM-dd")
 			.parse(pJson.getString("due_date")));
 			
-	
+			
 	
 			requestDBDriver.updateInwardTestRequest(requestid, request);
 			
-			
-			return "True";	
+			logger.info("PCU lab request with request Id"+requestid+" updated");
+			return String.valueOf(requestid);	
 			
 		} catch (Exception e) {
 			 
-			return "False";
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			return jsonErrorObject.toString(); 
+			/*logger.error("Error in updating PCU lab test request: "+e.getMessage());
+			return e.getMessage();*/
 		}
 	}
 	
 	@GET
 	@Path("/deletePCUTestRequest/{Reqid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String deletePCURequest(@PathParam("Reqid") int Reqid) {
+	public String deletePCURequest(@PathParam("Reqid") int Reqid) throws JSONException {
 		//String status="";
 		try {
 			
 			requestDBDriver.DeletePCUTestRequest(Reqid);
+			logger.info("PCU lab request with request Id:"+Reqid+" deleted");
 			
+			return String.valueOf(Reqid);
 			
-			return "True";	
 		} catch (Exception e) {
-			return "False";
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.DELETE_ERROR.getCode());
+			jsonErrorObject.put("message", ErrorConstants.DELETE_ERROR.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			/*logger.error("Error in deleting PCU Lab test request with request id "+Reqid+": "+e.getMessage());
+			return e.getMessage();*/
 		}
 	}
 }

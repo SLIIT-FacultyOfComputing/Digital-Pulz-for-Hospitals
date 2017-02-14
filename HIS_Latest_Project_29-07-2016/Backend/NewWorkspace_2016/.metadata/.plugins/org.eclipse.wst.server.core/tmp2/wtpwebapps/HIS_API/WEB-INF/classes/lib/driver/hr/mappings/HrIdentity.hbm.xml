@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 23, 2014 2:36:13 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrIdentity" table="hr_identity" catalog="HIS">
+        <composite-id name="id" class="core.classes.hr.HrIdentityId">
+            <key-property name="identityTypeId" type="int">
+                <column name="identity_type_ID" />
+            </key-property>
+            <key-property name="empId" type="int">
+                <column name="emp_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="hrIdentitytype" class="core.classes.hr.HrIdentitytype" update="false" insert="false" fetch="select">
+            <column name="identity_type_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hrEmployee" class="core.classes.hr.HrEmployee" update="false" insert="false" fetch="select">
+            <column name="emp_ID" not-null="true" />
+        </many-to-one>
+        <property name="identity" type="string">
+            <column name="identity" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

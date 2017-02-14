@@ -12,13 +12,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import core.ErrorConstants;
 import core.classes.opd.Record;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
-
 import lib.driver.opd.driver_class.RecordDBDriver;
 
 /**
@@ -31,15 +32,19 @@ public class RecordResource {
 	
 	RecordDBDriver rdbDriver = new RecordDBDriver();
 	
+	final static Logger logger = Logger.getLogger(RecordResource.class);
+	
 	/**
 	 * @param hJson
 	 * @return
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/addRecord")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addHistory(JSONObject hJson) {
+	public String addHistory(JSONObject hJson) throws JSONException {
+		logger.info("add history");
 		Record record = new Record();
 		try {
 			   	
@@ -55,12 +60,31 @@ public class RecordResource {
 			record.setRecordCreateDate(new Date());
 			record.setRecordLastUpdate(new Date()); 
 			rdbDriver.saveRecord(record, createuser, patientID);	
-			
-			return "True";
+			logger.info("successfully history added");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			return jsonSerializer.include("patient").exclude("*.class","patient.*", "recordCreateUser.*", "hrEmployee.*").serialize(record);
 
+		}
+		catch (JSONException e) {
+			logger.error("error adding history: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());		
+			
+			return jsonErrorObject.toString(); 
+		} 
+		catch (RuntimeException e)
+		{
+			logger.error("error adding history: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			return jsonErrorObject.toString();
 		} catch (Exception e) {
-			e.printStackTrace();
-			return "False";
+			
+			logger.error("error adding history: "+ e.getMessage());
+			return null;
 		}
  		 
 
@@ -70,12 +94,14 @@ public class RecordResource {
 	/**
 	 * @param hJson
 	 * @return
+	 * @throws JSONException 
 	 */
 	@POST
 	@Path("/updateRecord/")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateRecord(JSONObject hJson) {
+	public String updateRecord(JSONObject hJson) throws JSONException {
+		logger.info("update record");
 		Record record = new Record();
 		try {
 			  
@@ -90,11 +116,30 @@ public class RecordResource {
 			record.setRecordLastUpdate(new Date()); 
 			
 			rdbDriver.updateRecord( recid, record, updateuser ); 
-			return "True";
+			logger.info("successfully history updated");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			return jsonSerializer.include("patientRecordID").serialize(record);
+			//return "True";
 
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		 	return "False" ;
+		}catch (JSONException e) {
+			logger.error("error updating history: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());		
+			
+			return jsonErrorObject.toString(); 
+		} 
+		catch (RuntimeException e)
+		{
+			logger.error("error updating history: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			return jsonErrorObject.toString();
+		} catch (Exception e) {
+			logger.error("error updating history: "+e.getMessage());
+			return null;
 		}
 	}
 	
@@ -106,13 +151,15 @@ public class RecordResource {
 	@Path("/getNotesByPatientID/{patientID}")
 	@Produces (MediaType.APPLICATION_JSON)
 	public String getNotesByPatientID(@PathParam("patientID")int patientID) {
+		logger.info("get notes by patient id");
 
 			List<Record> record = rdbDriver.getNotesByPatientID(patientID);
 			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting notes");
 			return  serializer.exclude(
 					"*.class","patient",
-					"recordLastUpDateUser.specialPermissions","recordLastUpDateUser.userRoles","recordLastUpDateUser.employees.department","recordLastUpDateUser.employees.leaves",
-					"recordCreateUser.specialPermissions", "recordCreateUser.userRoles","recordCreateUser.employees.department","recordCreateUser.employees.leaves"
+					"recordLastUpdateUser.*",
+					"recordCreateUser.*"
 					).include("*").serialize(record);
  
 	}
@@ -125,9 +172,11 @@ public class RecordResource {
 	@Path("/getRecordRecordByRecordID/{hid}")
 	@Produces (MediaType.APPLICATION_JSON)
 	public String getRecordRecordByRecordID(@PathParam("hid")int hID) {
+		logger.info("get records by record id");
 
 			List<Record> record = rdbDriver.getRecordRecordByRecordID(hID);
 			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting records");
 			return  serializer.include("patients.patientID").exclude("*.class","patients.*").transform(new DateTransformer("yyyy-MM-dd"),"histroyLastUpdate","histroyCreateDate").serialize(record);
  
 	}

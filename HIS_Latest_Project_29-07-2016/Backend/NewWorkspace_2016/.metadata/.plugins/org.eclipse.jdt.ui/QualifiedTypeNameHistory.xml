@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="org.json.JSONException"/>
+<fullyQualifiedTypeName name="org.jboss.logging.Logger.Level"/>
+<fullyQualifiedTypeName name="org.apache.commons.logging.impl.Log4JLogger"/>
+<fullyQualifiedTypeName name="org.jboss.logging.Logger"/>
+<fullyQualifiedTypeName name="org.apache.log4j.PropertyConfigurator"/>
+<fullyQualifiedTypeName name="org.hibernate.jdbc.Expectations"/>
+<fullyQualifiedTypeName name="core.resources.lims.MainResultsResource"/>
+<fullyQualifiedTypeName name="core.resources.lims.LabTestRequestFiltersResource"/>
+<fullyQualifiedTypeName name="core.resources.opd.PrescriptionResource"/>
+<fullyQualifiedTypeName name="core.classes.opd.Record"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+<fullyQualifiedTypeName name="org.apache.log4j.spi.ErrorCode"/>
+<fullyQualifiedTypeName name="org.codehaus.jettison.json.JSONException"/>
+<fullyQualifiedTypeName name="java.lang.IndexOutOfBoundsException"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="core.ErrorConstants"/>
+<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="javassist.tools.rmi.ObjectNotFoundException"/>
+<fullyQualifiedTypeName name="org.hibernate.ObjectNotFoundException"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>

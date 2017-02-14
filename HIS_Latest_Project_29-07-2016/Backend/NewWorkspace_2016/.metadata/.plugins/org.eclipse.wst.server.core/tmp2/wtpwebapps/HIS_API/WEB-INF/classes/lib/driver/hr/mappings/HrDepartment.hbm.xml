@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 23, 2014 2:36:13 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.HrDepartment" table="hr_department" catalog="HIS">
+        <id name="deptId" type="java.lang.Integer">
+            <column name="dept_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="hrEmployee" class="core.classes.hr.HrEmployee" fetch="select">
+            <column name="dept_head_ID" not-null="true" />
+        </many-to-one>
+        <property name="deptName" type="string">
+            <column name="dept_name" length="50" not-null="true" />
+        </property>
+        <set name="hrWorkins" table="hr_workin" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="dept_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrWorkin" />
+        </set>
+        <set name="hrShifttimeses" table="hr_shifttimes" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="dept_ID" not-null="true" />
+            </key>
+            <one-to-many class="core.classes.hr.HrShifttimes" />
+        </set>
+    </class>
+</hibernate-mapping>

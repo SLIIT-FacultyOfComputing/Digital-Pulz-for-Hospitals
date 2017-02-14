@@ -16,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
@@ -38,6 +39,8 @@ import lib.driver.pharmacy.driver_class.DrugDBDriver;
 @Path("Prescription")
 public class PrescriptionResource {
 
+	final static Logger log = Logger.getLogger(PrescriptionResource.class);
+	
 	PrescriptionDBDriver prescriptionDBDriver = new PrescriptionDBDriver();
 	DateFormat dateformat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	DateFormat dateformat2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,7 +61,7 @@ public class PrescriptionResource {
 	public String addPrescription(JSONArray jsonarray,
 			@PathParam("PID") int PID, @PathParam("VISITID") int visitID,
 			@PathParam("userid") int userid) {
-
+		log.info("Entering the add Prescription with PID, visitID and userID method");
 		try {
 			System.out.println(jsonarray.toString());
 			System.out.println(PID);
@@ -149,14 +152,19 @@ public class PrescriptionResource {
 				prescription.prescribeItems.add(prescribeitem);
 			}
 
+			
 			if (prescriptionDBDriver.insertPrescription(prescription, visitID))
-				return "True";
+			{
+				log.info("Inserting Prescription and Prescription items Successful, prescription ID = "+ prescription.getPrescriptionID());
+				return prescription.getPrescriptionID() + "";
+			}
 			else
 				return "False";
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return "False";
+			log.error("Error while adding prescription and prescription Items, message:" + e.getMessage());
+			return e.getMessage();
 		}
 
 	}
@@ -177,7 +185,8 @@ public class PrescriptionResource {
 	public String updatePrescription(JSONArray jsonarray,
 			@PathParam("patientid") int patientid,
 			@PathParam("presid") int presid, @PathParam("userid") int userid) {
-
+		
+		log.info("Entering the updating Prescription with PID, presId and userID method");
 		try {
 		
 		 
@@ -221,13 +230,17 @@ public class PrescriptionResource {
 			}
 
 		 	if (prescriptionDBDriver.updatePrescription(prescription, presid))
-				return "True";
+		 	{
+		 		log.info("Inserting Prescription and Prescription items Successful, prescription ID = "+ prescription.getPrescriptionID());			
+				return presid + "";
+		 	}
 			else    
 				return "False";
 
 		} catch (Exception e) {
 			System.out.println("Error : " + e.getMessage());
-			return "False";
+			log.error("Error while updating prescription and prescription Items, message:" + e.getMessage());
+			return e.getMessage();
 		}
 
 	}
@@ -242,6 +255,8 @@ public class PrescriptionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPrescriptionByPrescriptionId(
 			@PathParam("PRES_ID") int PRES_ID) {
+		
+		log.info("Entering the get Prescription with presID");
 		try {
 
 			Prescription prescription = prescriptionDBDriver
@@ -261,6 +276,8 @@ public class PrescriptionResource {
 							"*.class").serialize(prescription);
 
 		} catch (Exception e) {
+			
+			log.error("Error while getting Prescription with presID, message:" + e.getMessage());
 			return "error" + e.getMessage();
 		}
 	}
@@ -277,6 +294,7 @@ public class PrescriptionResource {
 				System.out.println(patient_ID);
 				try {
 
+			log.info("Entering the get Prescription with patient ID");
 			List<Prescription> prescription = prescriptionDBDriver
 					.getPrescriptionsByPatientID(patient_ID);
 
@@ -292,6 +310,7 @@ public class PrescriptionResource {
 							"prescriptionLastUpdate").serialize(prescription);
 
 		} catch (Exception e) {
+			log.error("Error while getting Prescription with patient ID, message:" + e.getMessage());
 			return "error" + e.getMessage();
 		}
 	}
@@ -305,6 +324,7 @@ public class PrescriptionResource {
 				System.out.println(patient_ID);
 				try {
 
+			log.info("Entering the get Prescription with patient ID after prescribe with patient ID & Date");
 			List<Prescription> prescription = prescriptionDBDriver
 					.getPrescriptionsByPatientIDAfterprescribe(patient_ID,date);
 
@@ -320,6 +340,8 @@ public class PrescriptionResource {
 							"prescriptionLastUpdate").serialize(prescription);
 
 		} catch (Exception e) {
+			
+			log.error("Error while getting Prescription with patient ID after prescribe with patient ID & Date, message:" + e.getMessage());
 			return "error" + e.getMessage();
 		}
 	}

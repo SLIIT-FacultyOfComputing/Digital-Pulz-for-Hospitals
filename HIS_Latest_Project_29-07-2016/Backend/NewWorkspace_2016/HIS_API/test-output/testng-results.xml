@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="4" failed="2" total="6" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="34" started-at="2016-11-21T05:26:02Z" finished-at="2016-11-21T05:26:02Z">
+    <groups>
+      <group name="his.lab.test">
+        <method signature="LabTestCase.addLaboratoryTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="addLaboratoryTestCase" class="LabTestCases.LabTestCase"/>
+        <method signature="LabTestCase.getLabTestRequestByID()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="getLabTestRequestByID" class="LabTestCases.LabTestCase"/>
+        <method signature="LabTestCase.insertLabTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="insertLabTestCase" class="LabTestCases.LabTestCase"/>
+        <method signature="LabTestCase.getAllLaboratoriesTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="getAllLaboratoriesTestCase" class="LabTestCases.LabTestCase"/>
+        <method signature="LabTestCase.updateLaboratoryTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="updateLaboratoryTestCase" class="LabTestCases.LabTestCase"/>
+        <method signature="LabTestCase.deleteLabTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="deleteLabTestCase" class="LabTestCases.LabTestCase"/>
+      </group> <!-- his.lab.test -->
+    </groups>
+    <test name="Default test" duration-ms="34" started-at="2016-11-21T05:26:02Z" finished-at="2016-11-21T05:26:02Z">
+      <class name="LabTestCases.LabTestCase">
+        <test-method status="FAIL" signature="addLaboratoryTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="addLaboratoryTestCase" duration-ms="12" started-at="2016-11-21T10:56:02Z" finished-at="2016-11-21T10:56:02Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at LabTestCases.RequestUtil.requestByID(RequestUtil.java:46)
+	at LabTestCases.LabTestCase.addLaboratoryTestCase(LabTestCase.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1224)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
+	at org.testng.TestNG.run(TestNG.java:1057)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addLaboratoryTestCase -->
+        <test-method status="FAIL" signature="insertLabTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="insertLabTestCase" duration-ms="4" started-at="2016-11-21T10:56:02Z" finished-at="2016-11-21T10:56:02Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at LabTestCases.RequestUtil.requestByID(RequestUtil.java:46)
+	at LabTestCases.LabTestCase.insertLabTestCase(LabTestCase.java:37)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1224)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
+	at org.testng.TestNG.run(TestNG.java:1057)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insertLabTestCase -->
+        <test-method status="SKIP" signature="getLabTestRequestByID()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="getLabTestRequestByID" duration-ms="1" started-at="2016-11-21T10:56:02Z" depends-on-methods="LabTestCases.LabTestCase.addLaboratoryTestCase" finished-at="2016-11-21T10:56:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getLabTestRequestByID -->
+        <test-method status="SKIP" signature="getAllLaboratoriesTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="getAllLaboratoriesTestCase" duration-ms="0" started-at="2016-11-21T10:56:02Z" depends-on-methods="LabTestCases.LabTestCase.insertLabTestCase" finished-at="2016-11-21T10:56:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLaboratoriesTestCase -->
+        <test-method status="SKIP" signature="updateLaboratoryTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="updateLaboratoryTestCase" duration-ms="1" started-at="2016-11-21T10:56:02Z" depends-on-methods="LabTestCases.LabTestCase.addLaboratoryTestCase, LabTestCases.LabTestCase.getAllLaboratoriesTestCase, LabTestCases.LabTestCase.getLabTestRequestByID" finished-at="2016-11-21T10:56:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateLaboratoryTestCase -->
+        <test-method status="SKIP" signature="deleteLabTestCase()[pri:0, instance:LabTestCases.LabTestCase@6615435c]" name="deleteLabTestCase" duration-ms="0" started-at="2016-11-21T10:56:02Z" depends-on-methods="LabTestCases.LabTestCase.addLaboratoryTestCase, LabTestCases.LabTestCase.getAllLaboratoriesTestCase, LabTestCases.LabTestCase.updateLaboratoryTestCase, LabTestCases.LabTestCase.getLabTestRequestByID" finished-at="2016-11-21T10:56:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLabTestCase -->
+      </class> <!-- LabTestCases.LabTestCase -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

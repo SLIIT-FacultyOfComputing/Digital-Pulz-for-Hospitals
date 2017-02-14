@@ -43,8 +43,13 @@ public class AttachmentDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return false;
+			}
 		}
 	}
 	
@@ -88,8 +93,13 @@ public class AttachmentDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return false;
+			}
 		}
 	}
 	
@@ -116,8 +126,13 @@ public class AttachmentDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 	
@@ -142,8 +157,13 @@ public class AttachmentDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 	

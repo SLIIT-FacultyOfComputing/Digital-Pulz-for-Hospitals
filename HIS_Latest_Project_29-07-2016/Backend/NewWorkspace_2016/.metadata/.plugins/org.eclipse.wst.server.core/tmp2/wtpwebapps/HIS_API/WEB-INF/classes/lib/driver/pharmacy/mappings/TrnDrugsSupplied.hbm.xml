@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 17, 2013 11:31:02 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.pharmacy.TrnDrugsSupplied" table="pharm_drugssupplied" lazy="false">
+        <composite-id name="id" class="core.classes.pharmacy.TrnDrugsSuppliedId" >
+            <key-many-to-one name="drugs" class="core.classes.pharmacy.MstDrugsNew" lazy="false" >
+        		<column name="drug_supplied_srno" not-null="true" />
+        	</key-many-to-one>
+            <key-property name="dBatchNo" type="string">
+                <column name="drug_supplied_batchno" length="200" />
+            </key-property>
+        </composite-id>
+        
+        <property name="dName" type="string">
+            <column name="drug_supplied_name" length="130" not-null="true" />
+        </property>
+        <property name="dQty" type="java.lang.Integer">
+            <column name="drug_supplied_qty" />
+        </property>
+        <property name="dManufacturer" type="string">
+            <column name="drug_supplied_manufactrure" length="500" />
+        </property>
+        <property name="dManufactDate" type="timestamp">
+            <column name="drug_supplied_manufact_date" length="19" />
+        </property>
+        <property name="dExpiryDate" type="timestamp">
+            <column name="drug_supplied_expirydate" length="19" />
+        </property>
+        <property name="dCreateDate" type="timestamp">
+            <column name="drug_supplied_create_date" length="19" />
+        </property>
+        <property name="dCreateUser" type="int">
+            <column name="drug_supplied_create_user"  />
+        </property>
+        <property name="dLastUpdate" type="timestamp">
+            <column name="drug_supplied_lastupdate_date" length="19" />
+        </property>
+        <property name="dLastUpdateUser" type="int">
+            <column name="drug_supplied_lastupdate_user"  />
+        </property>
+        <property name="batchStatus" type="string">
+            <column name="drug_supplied_status" />
+        </property>
+    </class>
+</hibernate-mapping>

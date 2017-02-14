@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.SubTestFields" table="lab_subtestfields" catalog="HIS">
+        <id name="sub_TestFieldID" type="java.lang.Integer">
+            <column name="sub_test_field_id" />
+            <generator class="identity" />
+        </id>
+        <!-- <many-to-one name="fTest_RangeID" class="core.classes.lims.TestFieldsRange" fetch="select">
+            <column name="fTest_RangeID" />
+        </many-to-one> -->
+        <many-to-one name="fPar_Test_FieldID" class="core.classes.lims.ParentTestFields" fetch="select">
+            <column name="fpar_test_field_id" />
+        </many-to-one>
+        <property name="subField_IDName" type="string">
+            <column name="sub_field_id_name" length="5" not-null="true" />
+        </property>
+        <property name="subtest_FieldName" type="string">
+            <column name="sub_test_field_name" length="80" not-null="true" />
+        </property>
+        <set name="labSubfieldresultses" table="lab_subfieldresults" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fsubf_id" />
+            </key>
+            <one-to-many class="core.classes.lims.SubFieldResults" />
+        </set>
+	    <set name="labestFieldsranges" table="lab_testfieldsrange" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fsub_field_id" />
+            </key>
+            <one-to-many class="core.classes.lims.TestFieldsRange" />
+        </set>
+		
+	</class>
+</hibernate-mapping>

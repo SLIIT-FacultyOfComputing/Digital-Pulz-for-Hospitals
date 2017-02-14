@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2013 9:25:17 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+	<class name="core.classes.lims.ParentTestFields" table="lab_parenttestfields" catalog="HIS">
+        <id name="parent_FieldID" type="java.lang.Integer">
+            <column name="parent_field_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fTest_NameID" class="core.classes.lims.TestNames" fetch="select" >
+            <column name="ftest_name_id" />
+        </many-to-one>
+      
+        <property name="parentField_IDName" type="string">
+            <column name="parent_field_id_name" length="5" not-null="true" />
+        </property>
+        <property name="parent_FieldName" type="string">
+            <column name="parent_field_name" length="80" not-null="true" />
+        </property>
+        <set name="labSubfieldresultses" table="lab_subfieldresults" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fparentf_id" />
+            </key>
+            <one-to-many class="core.classes.lims.SubFieldResults" />
+        </set>
+        <set name="labMainresultses" table="lab_mainresults" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fparentf_id" />
+            </key>
+            <one-to-many class="core.classes.lims.MainResults" />
+        </set>
+        <set name="labSubtestfieldses" table="lab_subtestfields" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fpar_test_field_id" />
+            </key>
+            <one-to-many class="core.classes.lims.SubTestFields" />
+        </set>
+         <set name="labestFieldsranges" table="lab_testfieldsrange" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fparent_field_id" />
+            </key>
+            <one-to-many class="core.classes.lims.TestFieldsRange" />
+        </set>
+	    
+		
+	</class>
+</hibernate-mapping>

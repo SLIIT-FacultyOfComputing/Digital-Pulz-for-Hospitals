@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.testng.eclipse.launchconfig">
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.testng.remote.RemoteTestNG"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HIS"/>
+<mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
+<mapEntry key="DrugTestCase" value="updateDrugTestCase;getAllDrugReportsTestCase;getDrugByCategoryTestCase;requestDrugTestCase;getDrugDetailsByCategoryTestCase;getPrecriptionListbyDateTestCase;getAllRequestsTestCase;getDrugIdByDNameTestCase;getDrugDetailsTestCase;getDrugByIdTestCase;approveDrugRequestTestCase;getAllDrugNamesTestCase;getAllDrugsTestCase;getAllDosagesTestCase;getDrugDetailsWithParamTestCase;insertDrugTestCase;getPharmFrequencyTestCase;dispenseDrugTestCase;getMailHistoryTestCase;addFrequencyTestCase;getAllBatchNamesByDnameTestCase;getDrugDetailsByDNameTestCase;updateFrequencyTestCase;insertMailTestCase;updateDrugBatchTestCase;getDrugDetailsByDrugNameTestCase;saveDosageTestCase;getAllDrugCategoriesTestCase;addDrugBatchTestCase"/>
+<mapEntry key="PrescriptionTestCase" value="addPrescriptionTestCase;updatePrescriptionTestCase;getPrescriptionsByPrescriptionTestCase;getPrescriptionsByPatientTestCase"/>
+</mapAttribute>
+<listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
+<listEntry value="DrugTestCase"/>
+<listEntry value="PrescriptionTestCase"/>
+</listAttribute>
+<booleanAttribute key="org.testng.eclipse.DEBUG" value="false"/>
+<listAttribute key="org.testng.eclipse.GROUP_LIST"/>
+<listAttribute key="org.testng.eclipse.GROUP_LIST_CLASS"/>
+<stringAttribute key="org.testng.eclipse.LOG_LEVEL" value="2"/>
+<listAttribute key="org.testng.eclipse.METHOD_TEST_LIST">
+<listEntry value="updateDrugTestCase"/>
+<listEntry value="getAllDrugReportsTestCase"/>
+<listEntry value="getDrugByCategoryTestCase"/>
+<listEntry value="requestDrugTestCase"/>
+<listEntry value="getDrugDetailsByCategoryTestCase"/>
+<listEntry value="getPrecriptionListbyDateTestCase"/>
+<listEntry value="getAllRequestsTestCase"/>
+<listEntry value="getDrugIdByDNameTestCase"/>
+<listEntry value="getDrugDetailsTestCase"/>
+<listEntry value="getDrugByIdTestCase"/>
+<listEntry value="approveDrugRequestTestCase"/>
+<listEntry value="getAllDrugNamesTestCase"/>
+<listEntry value="getAllDrugsTestCase"/>
+<listEntry value="addPrescriptionTestCase"/>
+<listEntry value="getAllDosagesTestCase"/>
+<listEntry value="updatePrescriptionTestCase"/>
+<listEntry value="getDrugDetailsWithParamTestCase"/>
+<listEntry value="insertDrugTestCase"/>
+<listEntry value="getPharmFrequencyTestCase"/>
+<listEntry value="dispenseDrugTestCase"/>
+<listEntry value="getMailHistoryTestCase"/>
+<listEntry value="addFrequencyTestCase"/>
+<listEntry value="getAllBatchNamesByDnameTestCase"/>
+<listEntry value="getDrugDetailsByDNameTestCase"/>
+<listEntry value="updateFrequencyTestCase"/>
+<listEntry value="insertMailTestCase"/>
+<listEntry value="updateDrugBatchTestCase"/>
+<listEntry value="getDrugDetailsByDrugNameTestCase"/>
+<listEntry value="getPrescriptionsByPrescriptionTestCase"/>
+<listEntry value="saveDosageTestCase"/>
+<listEntry value="getAllDrugCategoriesTestCase"/>
+<listEntry value="getPrescriptionsByPatientTestCase"/>
+<listEntry value="addDrugBatchTestCase"/>
+</listAttribute>
+<listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>
+<mapAttribute key="org.testng.eclipse.PARAMETERS"/>
+<stringAttribute key="org.testng.eclipse.PRE_DEFINED_LISTENERS" value=""/>
+<stringAttribute key="org.testng.eclipse.PROTOCOL" value="json"/>
+<intAttribute key="org.testng.eclipse.TYPE" value="1"/>
+<booleanAttribute key="org.testng.eclipse.VERBOSE" value="false"/>
+</launchConfiguration>

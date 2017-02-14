@@ -34,7 +34,14 @@ public class MainResultsDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	}
@@ -67,7 +74,13 @@ public class MainResultsDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 
@@ -83,7 +96,7 @@ public class MainResultsDBDriver {
 			tx.commit();
 			return mainResultsList;
 		}
-		 catch (RuntimeException ex) {
+		catch (RuntimeException ex) {
 				if (tx != null && tx.isActive()) {
 					try {
 						tx.rollback();
@@ -92,7 +105,14 @@ public class MainResultsDBDriver {
 					}
 					throw ex;
 				}
-				return null;
+				else if(tx == null)
+				{
+					throw ex;
+				}
+				else
+				{
+					return null;
+				}
 			}
 	}
 	
@@ -127,7 +147,14 @@ public class MainResultsDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 		
 		
@@ -153,7 +180,14 @@ public class MainResultsDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 

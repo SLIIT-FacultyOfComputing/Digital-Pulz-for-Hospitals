@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="172" passed="172">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite1" duration-ms="46789" started-at="2017-02-13T07:34:32Z" finished-at="2017-02-13T07:35:19Z">
+    <groups>
+      <group name="his.pharmacy.test">
+        <method signature="DrugTestCase.addFrequencyTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="addFrequencyTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllDosagesTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDosagesTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllDrugCategoriesTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugCategoriesTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllDrugReportsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugReportsTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllDrugsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugsTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugDetailsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getMailHistoryTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getMailHistoryTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getPharmFrequencyTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getPharmFrequencyTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.insertDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="insertDrugTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.addDrugBatchTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="addDrugBatchTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllDrugNamesTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugNamesTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.dispenseDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="dispenseDrugTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllBatchNamesByDnameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllBatchNamesByDnameTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugByCategoryTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugByCategoryTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugByIdTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugByIdTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugDetailsByCategoryTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsByCategoryTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugDetailsByDNameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsByDNameTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugDetailsByDrugNameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsByDrugNameTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugDetailsWithParamTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsWithParamTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getDrugIdByDNameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugIdByDNameTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getPrecriptionListbyDateTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getPrecriptionListbyDateTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.insertMailTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="insertMailTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.requestDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="requestDrugTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.getAllRequestsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllRequestsTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.approveDrugRequestTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="approveDrugRequestTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.saveDosageTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="saveDosageTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.updateDrugBatchTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="updateDrugBatchTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.updateDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="updateDrugTestCase" class="DrugTestCase"/>
+        <method signature="DrugTestCase.updateFrequencyTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="updateFrequencyTestCase" class="DrugTestCase"/>
+        <method signature="ParmacyTestCase.addPharmacyTestCase()[pri:0, instance:ParmacyTestCase@39aeed2f]" name="addPharmacyTestCase" class="ParmacyTestCase"/>
+        <method signature="ParmacyTestCase.loadPharmacyTestCase()[pri:0, instance:ParmacyTestCase@39aeed2f]" name="loadPharmacyTestCase" class="ParmacyTestCase"/>
+      </group> <!-- his.pharmacy.test -->
+      <group name="his.opd.test.outpatient">
+        <method signature="OutPatientTestCase.registerPatientTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="registerPatientTestCase" class="OutPatientTestCase"/>
+        <method signature="OutPatientTestCase.getAllPatientsTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="getAllPatientsTestCase" class="OutPatientTestCase"/>
+        <method signature="OutPatientTestCase.getMaxPatientIDTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="getMaxPatientIDTestCase" class="OutPatientTestCase"/>
+        <method signature="OutPatientTestCase.getPatientsForDoctorTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="getPatientsForDoctorTestCase" class="OutPatientTestCase"/>
+        <method signature="OutPatientTestCase.updateExamTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="updateExamTestCase" class="OutPatientTestCase"/>
+        <method signature="OutPatientTestCase.PatientDetailsTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="PatientDetailsTestCase" class="OutPatientTestCase"/>
+      </group> <!-- his.opd.test.outpatient -->
+      <group name="his.lab.test.prescription">
+        <method signature="PrescriptionTestCase.addPrescriptionTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="addPrescriptionTestCase" class="PrescriptionTestCase"/>
+        <method signature="PrescriptionTestCase.getPrescriptionsByPatientTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="getPrescriptionsByPatientTestCase" class="PrescriptionTestCase"/>
+        <method signature="PrescriptionTestCase.getPrescriptionsByPrescriptionTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="getPrescriptionsByPrescriptionTestCase" class="PrescriptionTestCase"/>
+        <method signature="PrescriptionTestCase.updatePrescriptionTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="updatePrescriptionTestCase" class="PrescriptionTestCase"/>
+      </group> <!-- his.lab.test.prescription -->
+      <group name="his.lab.test.specimenretention">
+        <method signature="SpecimenRetentionTypeTestCase.getAllSpecimenRetentionTypeByIdTestCase()[pri:0, instance:SpecimenRetentionTypeTestCase@6fb554cc]" name="getAllSpecimenRetentionTypeByIdTestCase" class="SpecimenRetentionTypeTestCase"/>
+        <method signature="SpecimenRetentionTypeTestCase.getAllSpecimenRetentionTypeTestCase()[pri:0, instance:SpecimenRetentionTypeTestCase@6fb554cc]" name="getAllSpecimenRetentionTypeTestCase" class="SpecimenRetentionTypeTestCase"/>
+      </group> <!-- his.lab.test.specimenretention -->
+      <group name="his.lab.test.specimen">
+        <method signature="SpecimenTypeTestCase.getAllSpecimenTypeTestCase()[pri:0, instance:SpecimenTypeTestCase@77b52d12]" name="getAllSpecimenTypeTestCase" class="SpecimenTypeTestCase"/>
+        <method signature="SpecimenTypeTestCase.getAllSpecimenTypeByIdTestCase()[pri:0, instance:SpecimenTypeTestCase@77b52d12]" name="getAllSpecimenTypeByIdTestCase" class="SpecimenTypeTestCase"/>
+      </group> <!-- his.lab.test.specimen -->
+      <group name="his.lab.test">
+        <method signature="CategoryTestCase.addNewCatDetailsTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="addNewCatDetailsTestCase" class="CategoryTestCase"/>
+        <method signature="CategoryTestCase.getAllCategoriesTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="getAllCategoriesTestCase" class="CategoryTestCase"/>
+        <method signature="CategoryTestCase.updateCategoriesDetailsTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="updateCategoriesDetailsTestCase" class="CategoryTestCase"/>
+        <method signature="LabDepartmentsTestCase.insertLabDepartmentTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="insertLabDepartmentTestCase" class="LabDepartmentsTestCase"/>
+        <method signature="LabDepartmentsTestCase.getAllLaboratoriesTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="getAllLaboratoriesTestCase" class="LabDepartmentsTestCase"/>
+        <method signature="LabDepartmentsTestCase.updateLabDepartmentTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="updateLabDepartmentTestCase" class="LabDepartmentsTestCase"/>
+        <method signature="LabDepartmentsTestCase.deleteLabTypeTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="deleteLabTypeTestCase" class="LabDepartmentsTestCase"/>
+        <method signature="LabTestCase.addLaboratoryTestCase()[pri:0, instance:LabTestCase@15975490]" name="addLaboratoryTestCase" class="LabTestCase"/>
+        <method signature="LabTestCase.getAllLaboratoriesTestCase()[pri:0, instance:LabTestCase@15975490]" name="getAllLaboratoriesTestCase" class="LabTestCase"/>
+        <method signature="LabTestCase.getLabTestRequestByID()[pri:0, instance:LabTestCase@15975490]" name="getLabTestRequestByID" class="LabTestCase"/>
+        <method signature="LabTestCase.updateLaboratoryTestCase()[pri:0, instance:LabTestCase@15975490]" name="updateLaboratoryTestCase" class="LabTestCase"/>
+        <method signature="LabTestCase.deleteLabTestCase()[pri:0, instance:LabTestCase@15975490]" name="deleteLabTestCase" class="LabTestCase"/>
+        <method signature="LabTestRequestFiltersTestCase.getAllPatientsTestCase()[pri:0, instance:LabTestRequestFiltersTestCase@6b143ee9]" name="getAllPatientsTestCase" class="LabTestRequestFiltersTestCase"/>
+        <method signature="LabTestRequestFiltersTestCase.getAllLabTestRequestByLocationTestCase()[pri:0, instance:LabTestRequestFiltersTestCase@6b143ee9]" name="getAllLabTestRequestByLocationTestCase" class="LabTestRequestFiltersTestCase"/>
+        <method signature="LabTestRequestFiltersTestCase.getAllLabTestRequestByPIDTestCase()[pri:0, instance:LabTestRequestFiltersTestCase@6b143ee9]" name="getAllLabTestRequestByPIDTestCase" class="LabTestRequestFiltersTestCase"/>
+        <method signature="LabTestRequestTestCase.addNewLabTestRequestTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="addNewLabTestRequestTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.addSpecimenInfoTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="addSpecimenInfoTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getAllTestRequestsTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getAllTestRequestsTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getSpecimenByRequestIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getSpecimenByRequestIDTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getSpecimenIDByRequestIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getSpecimenIDByRequestIDTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getAllSpecimenTypeTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getAllSpecimenTypeTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getAllSpecimenRetTypesTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getAllSpecimenRetTypesTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getRequestsByPatientIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getRequestsByPatientIDTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.getTestRequestByRequestIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getTestRequestByRequestIDTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTestRequestTestCase.setStatusTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="setStatusTestCase" class="LabTestRequestTestCase"/>
+        <method signature="LabTypeTestCase.insertLabTypeTestCase()[pri:0, instance:LabTypeTestCase@4cb2c100]" name="insertLabTypeTestCase" class="LabTypeTestCase"/>
+        <method signature="LabTypeTestCase.deleteLabTypeTestCase()[pri:0, instance:LabTypeTestCase@4cb2c100]" name="deleteLabTypeTestCase" class="LabTypeTestCase"/>
+        <method signature="LabTypeTestCase.updateLabTypeTestCase()[pri:0, instance:LabTypeTestCase@4cb2c100]" name="updateLabTypeTestCase" class="LabTypeTestCase"/>
+        <method signature="MainResultsTestCase.addMainResultsTestCase()[pri:0, instance:MainResultsTestCase@6615435c]" name="addMainResultsTestCase" class="MainResultsTestCase"/>
+        <method signature="MainResultsTestCase.getAllMainResultsTestCase()[pri:0, instance:MainResultsTestCase@6615435c]" name="getAllMainResultsTestCase" class="MainResultsTestCase"/>
+        <method signature="MainResultsTestCase.getAllSubCategoriesTestCase()[pri:0, instance:MainResultsTestCase@6615435c]" name="getAllSubCategoriesTestCase" class="MainResultsTestCase"/>
+        <method signature="PCULabTestRequestTestCase.addPcuLabTestRequestTestCase()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="addPcuLabTestRequestTestCase" class="PCULabTestRequestTestCase"/>
+        <method signature="PCULabTestRequestTestCase.getAllPcuLabTestCase()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getAllPcuLabTestCase" class="PCULabTestRequestTestCase"/>
+        <method signature="PCULabTestRequestTestCase.getPcuLabTestByAdminID()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getPcuLabTestByAdminID" class="PCULabTestRequestTestCase"/>
+        <method signature="PCULabTestRequestTestCase.getPcuLabTestByPatientID()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getPcuLabTestByPatientID" class="PCULabTestRequestTestCase"/>
+        <method signature="PCULabTestRequestTestCase.getPcuLabTestByReqID()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getPcuLabTestByReqID" class="PCULabTestRequestTestCase"/>
+        <method signature="PCULabTestRequestTestCase.updatePCULabRequests()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="updatePCULabRequests" class="PCULabTestRequestTestCase"/>
+        <method signature="PCULabTestRequestTestCase.deleteOPDLabTestRequest()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="deleteOPDLabTestRequest" class="PCULabTestRequestTestCase"/>
+        <method signature="ParentTestFieldsTestCase.addLabParentTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="addLabParentTestCase" class="ParentTestFieldsTestCase"/>
+        <method signature="ParentTestFieldsTestCase.getAllLabParentTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="getAllLabParentTestCase" class="ParentTestFieldsTestCase"/>
+        <method signature="ParentTestFieldsTestCase.getAllLabParentByIDTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="getAllLabParentByIDTestCase" class="ParentTestFieldsTestCase"/>
+        <method signature="ParentTestFieldsTestCase.getMaxParentIDTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="getMaxParentIDTestCase" class="ParentTestFieldsTestCase"/>
+        <method signature="ReportTestCase.generateNewReportTestCase()[pri:0, instance:ReportTestCase@327471b5]" name="generateNewReportTestCase" class="ReportTestCase"/>
+        <method signature="ReportTestCase.getAllReportTestCase()[pri:0, instance:ReportTestCase@327471b5]" name="getAllReportTestCase" class="ReportTestCase"/>
+        <method signature="SampleCenterTestCase.addNewSampleCenterTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="addNewSampleCenterTestCase" class="SampleCenterTestCase"/>
+        <method signature="SampleCenterTestCase.getAllSampleCentersTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="getAllSampleCentersTestCase" class="SampleCenterTestCase"/>
+        <method signature="SampleCenterTestCase.getSampleCentersByLabTypeTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="getSampleCentersByLabTypeTestCase" class="SampleCenterTestCase"/>
+        <method signature="SampleCenterTestCase.updateSampleCenterDetailsTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="updateSampleCenterDetailsTestCase" class="SampleCenterTestCase"/>
+        <method signature="SampleCenterTestCase.deleteSampleCenterTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="deleteSampleCenterTestCase" class="SampleCenterTestCase"/>
+        <method signature="SampleCenterTypeTestCase.addSampleCenterTypeTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="addSampleCenterTypeTestCase" class="SampleCenterTypeTestCase"/>
+        <method signature="SampleCenterTypeTestCase.getAllSampleCenterTypesTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="getAllSampleCenterTypesTestCase" class="SampleCenterTypeTestCase"/>
+        <method signature="SampleCenterTypeTestCase.updateSampleCenterTypesTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="updateSampleCenterTypesTestCase" class="SampleCenterTypeTestCase"/>
+        <method signature="SampleCenterTypeTestCase.deleteSampleCenterTypeTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="deleteSampleCenterTypeTestCase" class="SampleCenterTypeTestCase"/>
+        <method signature="CategoryTestCase.deleteCategoryTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="deleteCategoryTestCase" class="CategoryTestCase"/>
+        <method signature="SubTestFieldsResultsTestCase.addSubFieldsResultsTestCase()[pri:0, instance:SubTestFieldsResultsTestCase@614c5515]" name="addSubFieldsResultsTestCase" class="SubTestFieldsResultsTestCase"/>
+        <method signature="SubTestFieldsResultsTestCase.getAllLabSubResultsTestCase()[pri:0, instance:SubTestFieldsResultsTestCase@614c5515]" name="getAllLabSubResultsTestCase" class="SubTestFieldsResultsTestCase"/>
+        <method signature="SubTestFieldsTestCase.addNewSubTestFieldTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="addNewSubTestFieldTestCase" class="SubTestFieldsTestCase"/>
+        <method signature="SubTestFieldsTestCase.getAllSubTestFieldsTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="getAllSubTestFieldsTestCase" class="SubTestFieldsTestCase"/>
+        <method signature="SubTestFieldsTestCase.GetMaxSubTestFieldTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="GetMaxSubTestFieldTestCase" class="SubTestFieldsTestCase"/>
+        <method signature="SubTestFieldsTestCase.GetTestSubFieldsTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="GetTestSubFieldsTestCase" class="SubTestFieldsTestCase"/>
+        <method signature="TestFieldsRangeTestCase.addLabFieldRangeTestCase()[pri:0, instance:TestFieldsRangeTestCase@68837a77]" name="addLabFieldRangeTestCase" class="TestFieldsRangeTestCase"/>
+        <method signature="TestFieldsRangeTestCase.addLabFieldSubRangeTestCase()[pri:0, instance:TestFieldsRangeTestCase@68837a77]" name="addLabFieldSubRangeTestCase" class="TestFieldsRangeTestCase"/>
+        <method signature="TestFieldsRangeTestCase.getAllLabRangeTestCase()[pri:0, instance:TestFieldsRangeTestCase@68837a77]" name="getAllLabRangeTestCase" class="TestFieldsRangeTestCase"/>
+        <method signature="TestNamesTestCase.getAllLabTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="getAllLabTestsTestCase" class="TestNamesTestCase"/>
+        <method signature="TestNamesTestCase.insertLabTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="insertLabTestsTestCase" class="TestNamesTestCase"/>
+        <method signature="TestNamesTestCase.getMaxTestIDTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="getMaxTestIDTestCase" class="TestNamesTestCase"/>
+        <method signature="TestNamesTestCase.updateTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="updateTestsTestCase" class="TestNamesTestCase"/>
+        <method signature="TestNamesTestCase.deleteLabTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="deleteLabTestsTestCase" class="TestNamesTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="addOpdQuestionnaireTestCase" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getAllQuestionnaireTestCase" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.getOpdQuestionByQID()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdQuestionByQID" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.updateQuestionniareTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="updateQuestionniareTestCase" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.getOpdQuestionnaireByVisitType()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdQuestionnaireByVisitType" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.getOpdQuestionniareByQID()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdQuestionniareByQID" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.saveOpdQuestionAnswer()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="saveOpdQuestionAnswer" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.updateQuestionAnswerTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="updateQuestionAnswerTestCase" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdQuestionnaireTestCase.getOpdAnswer()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdAnswer" class="OpdQuestionnaireTestCase"/>
+        <method signature="OpdVisitTestCase.addOpdVisitTestCase()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="addOpdVisitTestCase" class="OpdVisitTestCase"/>
+        <method signature="OpdVisitTestCase.getOpdVisitRecentRequestByPID()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitRecentRequestByPID" class="OpdVisitTestCase"/>
+        <method signature="OpdVisitTestCase.getOpdVisitTestRequestByPID()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitTestRequestByPID" class="OpdVisitTestCase"/>
+        <method signature="OpdVisitTestCase.getOpdVisitForReports()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitForReports" class="OpdVisitTestCase"/>
+        <method signature="OpdVisitTestCase.getOpdVisitTestRequestByVisitDate()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitTestRequestByVisitDate" class="OpdVisitTestCase"/>
+        <method signature="OpdVisitTestCase.updateVisitTestCase()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="updateVisitTestCase" class="OpdVisitTestCase"/>
+        <method signature="OpdVisitTestCase.getOpdVisitTestByVisitId()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitTestByVisitId" class="OpdVisitTestCase"/>
+      </group> <!-- his.lab.test -->
+      <group name="his.opd.test">
+        <method signature="OPDLabTestRequestTestCase.addOPDLabTestRequest()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="addOPDLabTestRequest" class="OPDLabTestRequestTestCase"/>
+        <method signature="OPDLabTestRequestTestCase.getAllOPDLabTestRequests()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="getAllOPDLabTestRequests" class="OPDLabTestRequestTestCase"/>
+        <method signature="OPDLabTestRequestTestCase.getOPDLabRequestsByPatient()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="getOPDLabRequestsByPatient" class="OPDLabTestRequestTestCase"/>
+        <method signature="OPDLabTestRequestTestCase.getOPDLabRequestsByVisit()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="getOPDLabRequestsByVisit" class="OPDLabTestRequestTestCase"/>
+        <method signature="OPDLabTestRequestTestCase.updateOPDLabRequests()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="updateOPDLabRequests" class="OPDLabTestRequestTestCase"/>
+        <method signature="OPDLabTestRequestTestCase.deleteOPDLabTestRequest()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="deleteOPDLabTestRequest" class="OPDLabTestRequestTestCase"/>
+        <method signature="AllergyTestCase.addAllergyTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="addAllergyTestCase" class="AllergyTestCase"/>
+        <method signature="AllergyTestCase.getAllergiesByPatientTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="getAllergiesByPatientTestCase" class="AllergyTestCase"/>
+        <method signature="AllergyTestCase.updateAllergyTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="updateAllergyTestCase" class="AllergyTestCase"/>
+        <method signature="AllergyTestCase.getAllergiesByAllergyIdTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="getAllergiesByAllergyIdTestCase" class="AllergyTestCase"/>
+        <method signature="ExamsTestCase.addExamTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="addExamTestCase" class="ExamsTestCase"/>
+        <method signature="ExamsTestCase.getExamsbyVisitIdTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="getExamsbyVisitIdTestCase" class="ExamsTestCase"/>
+        <method signature="ExamsTestCase.updateExamTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="updateExamTestCase" class="ExamsTestCase"/>
+        <method signature="ExamsTestCase.getExamsbyExamIdTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="getExamsbyExamIdTestCase" class="ExamsTestCase"/>
+        <method signature="HinTestCase.serialNumberForHinTestCase()[pri:0, instance:HinTestCase@5f375618]" name="serialNumberForHinTestCase" class="HinTestCase"/>
+        <method signature="HinTestCase.generateChekDigitTestCase()[pri:0, instance:HinTestCase@5f375618]" name="generateChekDigitTestCase" class="HinTestCase"/>
+        <method signature="OpdAttachmentTestCase.addOpdAttachmentTestCase()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="addOpdAttachmentTestCase" class="OpdAttachmentTestCase"/>
+        <method signature="OpdAttachmentTestCase.updateOpdAttachmentTestCase()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="updateOpdAttachmentTestCase" class="OpdAttachmentTestCase"/>
+        <method signature="OpdAttachmentTestCase.getOpdTestRequestByPID()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="getOpdTestRequestByPID" class="OpdAttachmentTestCase"/>
+        <method signature="OpdAttachmentTestCase.getOpdTestRequestByAttachID()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="getOpdTestRequestByAttachID" class="OpdAttachmentTestCase"/>
+        <method signature="OpdLiveSearchTestCase.getAllAllergyLiveTestCase()[pri:0, instance:OpdLiveSearchTestCase@50c87b21]" name="getAllAllergyLiveTestCase" class="OpdLiveSearchTestCase"/>
+        <method signature="OpdLiveSearchTestCase.getAllInjuryLiveTestCase()[pri:0, instance:OpdLiveSearchTestCase@50c87b21]" name="getAllInjuryLiveTestCase" class="OpdLiveSearchTestCase"/>
+        <method signature="OpdQueueTestCase.addOpdQueueTestCase()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="addOpdQueueTestCase" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueCheckinByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueCheckinByPID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueCheckoutByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueCheckoutByPID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueTestRequestByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueTestRequestByUID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueIsPatientInByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueIsPatientInByPID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueCurrentInByDID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueCurrentInByDID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueTreatedByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueTreatedByUID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueRediectByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueRediectByUID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueStatusByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueStatusByUID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdSetQueue()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdSetQueue" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdGetQueueType()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdGetQueueType" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdHoldQuiueByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdHoldQuiueByUID" class="OpdQueueTestCase"/>
+        <method signature="OpdQueueTestCase.getOpdQueueNextAssignByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueNextAssignByPID" class="OpdQueueTestCase"/>
+        <method signature="OpdRecordTestCase.addOpdRecordTestCase()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="addOpdRecordTestCase" class="OpdRecordTestCase"/>
+        <method signature="OpdRecordTestCase.getOpdTestRequestByPatientID()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="getOpdTestRequestByPatientID" class="OpdRecordTestCase"/>
+        <method signature="OpdRecordTestCase.updateOpdRecordTestCase()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="updateOpdRecordTestCase" class="OpdRecordTestCase"/>
+        <method signature="OpdRecordTestCase.getOpdRecordTestRequestByHID()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="getOpdRecordTestRequestByHID" class="OpdRecordTestCase"/>
+      </group> <!-- his.opd.test -->
+      <group name="his.lab.test.subcategory">
+        <method signature="SubCategoryTestCase.getAllSubCategoriesTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="getAllSubCategoriesTestCase" class="SubCategoryTestCase"/>
+        <method signature="SubCategoryTestCase.getAllSubCategoriesByIdTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="getAllSubCategoriesByIdTestCase" class="SubCategoryTestCase"/>
+        <method signature="SubCategoryTestCase.updateSubCategoriesDetailsTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="updateSubCategoriesDetailsTestCase" class="SubCategoryTestCase"/>
+        <method signature="SubCategoryTestCase.deleteSubCategoryTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="deleteSubCategoryTestCase" class="SubCategoryTestCase"/>
+      </group> <!-- his.lab.test.subcategory -->
+    </groups>
+    <test name="testLaboratory" duration-ms="25415" started-at="2017-02-13T07:34:32Z" finished-at="2017-02-13T07:34:57Z">
+      <class name="PCULabTestRequestTestCase">
+        <test-method status="PASS" signature="addPcuLabTestRequestTestCase()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="addPcuLabTestRequestTestCase" duration-ms="479" started-at="2017-02-13T13:04:45Z" finished-at="2017-02-13T13:04:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addPcuLabTestRequestTestCase -->
+        <test-method status="PASS" signature="getAllPcuLabTestCase()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getAllPcuLabTestCase" duration-ms="30" started-at="2017-02-13T13:04:54Z" depends-on-methods="PCULabTestRequestTestCase.addPcuLabTestRequestTestCase" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllPcuLabTestCase -->
+        <test-method status="PASS" signature="getPcuLabTestByAdminID()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getPcuLabTestByAdminID" duration-ms="395" started-at="2017-02-13T13:04:54Z" depends-on-methods="PCULabTestRequestTestCase.addPcuLabTestRequestTestCase" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPcuLabTestByAdminID -->
+        <test-method status="PASS" signature="getPcuLabTestByPatientID()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getPcuLabTestByPatientID" duration-ms="346" started-at="2017-02-13T13:04:54Z" depends-on-methods="PCULabTestRequestTestCase.addPcuLabTestRequestTestCase" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPcuLabTestByPatientID -->
+        <test-method status="PASS" signature="getPcuLabTestByReqID()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="getPcuLabTestByReqID" duration-ms="399" started-at="2017-02-13T13:04:56Z" depends-on-methods="PCULabTestRequestTestCase.addPcuLabTestRequestTestCase, PCULabTestRequestTestCase.getPcuLabTestByPatientID" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPcuLabTestByReqID -->
+        <test-method status="PASS" signature="updatePCULabRequests()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="updatePCULabRequests" duration-ms="258" started-at="2017-02-13T13:04:56Z" depends-on-methods="PCULabTestRequestTestCase.addPcuLabTestRequestTestCase, PCULabTestRequestTestCase.getPcuLabTestByReqID" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatePCULabRequests -->
+        <test-method status="PASS" signature="deleteOPDLabTestRequest()[pri:0, instance:PCULabTestRequestTestCase@5f2050f6]" name="deleteOPDLabTestRequest" duration-ms="441" started-at="2017-02-13T13:04:56Z" depends-on-methods="PCULabTestRequestTestCase.getAllPcuLabTestCase, PCULabTestRequestTestCase.updatePCULabRequests, PCULabTestRequestTestCase.addPcuLabTestRequestTestCase, PCULabTestRequestTestCase.getPcuLabTestByReqID, PCULabTestRequestTestCase.getPcuLabTestByPatientID" finished-at="2017-02-13T13:04:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteOPDLabTestRequest -->
+      </class> <!-- PCULabTestRequestTestCase -->
+      <class name="TestFieldsRangeTestCase">
+        <test-method status="PASS" signature="addLabFieldRangeTestCase()[pri:0, instance:TestFieldsRangeTestCase@68837a77]" name="addLabFieldRangeTestCase" duration-ms="187" started-at="2017-02-13T13:04:43Z" finished-at="2017-02-13T13:04:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addLabFieldRangeTestCase -->
+        <test-method status="PASS" signature="addLabFieldSubRangeTestCase()[pri:0, instance:TestFieldsRangeTestCase@68837a77]" name="addLabFieldSubRangeTestCase" duration-ms="193" started-at="2017-02-13T13:04:44Z" finished-at="2017-02-13T13:04:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addLabFieldSubRangeTestCase -->
+        <test-method status="PASS" signature="getAllLabRangeTestCase()[pri:0, instance:TestFieldsRangeTestCase@68837a77]" name="getAllLabRangeTestCase" duration-ms="65" started-at="2017-02-13T13:04:51Z" depends-on-methods="TestFieldsRangeTestCase.addLabFieldRangeTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabRangeTestCase -->
+      </class> <!-- TestFieldsRangeTestCase -->
+      <class name="LabTestRequestTestCase">
+        <test-method status="PASS" signature="addNewLabTestRequestTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="addNewLabTestRequestTestCase" duration-ms="338" started-at="2017-02-13T13:04:41Z" finished-at="2017-02-13T13:04:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewLabTestRequestTestCase -->
+        <test-method status="PASS" signature="addSpecimenInfoTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="addSpecimenInfoTestCase" duration-ms="183" started-at="2017-02-13T13:04:48Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addSpecimenInfoTestCase -->
+        <test-method status="PASS" signature="getAllTestRequestsTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getAllTestRequestsTestCase" duration-ms="1389" started-at="2017-02-13T13:04:48Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase" finished-at="2017-02-13T13:04:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllTestRequestsTestCase -->
+        <test-method status="PASS" signature="getSpecimenByRequestIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getSpecimenByRequestIDTestCase" duration-ms="42" started-at="2017-02-13T13:04:55Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.addSpecimenInfoTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getSpecimenByRequestIDTestCase -->
+        <test-method status="PASS" signature="getTestRequestByRequestIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getTestRequestByRequestIDTestCase" duration-ms="70" started-at="2017-02-13T13:04:55Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.getAllTestRequestsTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTestRequestByRequestIDTestCase -->
+        <test-method status="PASS" signature="getSpecimenIDByRequestIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getSpecimenIDByRequestIDTestCase" duration-ms="33" started-at="2017-02-13T13:04:56Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.addSpecimenInfoTestCase, LabTestRequestTestCase.getSpecimenByRequestIDTestCase" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getSpecimenIDByRequestIDTestCase -->
+        <test-method status="PASS" signature="getAllSpecimenTypeTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getAllSpecimenTypeTestCase" duration-ms="28" started-at="2017-02-13T13:04:56Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.addSpecimenInfoTestCase, LabTestRequestTestCase.getSpecimenIDByRequestIDTestCase, LabTestRequestTestCase.getSpecimenByRequestIDTestCase" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSpecimenTypeTestCase -->
+        <test-method status="PASS" signature="getAllSpecimenRetTypesTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getAllSpecimenRetTypesTestCase" duration-ms="23" started-at="2017-02-13T13:04:57Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.addSpecimenInfoTestCase, LabTestRequestTestCase.getSpecimenIDByRequestIDTestCase, LabTestRequestTestCase.getAllSpecimenTypeTestCase, LabTestRequestTestCase.getSpecimenByRequestIDTestCase" finished-at="2017-02-13T13:04:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSpecimenRetTypesTestCase -->
+        <test-method status="PASS" signature="getRequestsByPatientIDTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="getRequestsByPatientIDTestCase" duration-ms="118" started-at="2017-02-13T13:04:57Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.getAllSpecimenRetTypesTestCase, LabTestRequestTestCase.addSpecimenInfoTestCase, LabTestRequestTestCase.getSpecimenIDByRequestIDTestCase, LabTestRequestTestCase.getAllSpecimenTypeTestCase, LabTestRequestTestCase.getSpecimenByRequestIDTestCase" finished-at="2017-02-13T13:04:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getRequestsByPatientIDTestCase -->
+        <test-method status="PASS" signature="setStatusTestCase()[pri:0, instance:LabTestRequestTestCase@6be46e8f]" name="setStatusTestCase" duration-ms="103" started-at="2017-02-13T13:04:57Z" depends-on-methods="LabTestRequestTestCase.addNewLabTestRequestTestCase, LabTestRequestTestCase.getAllSpecimenRetTypesTestCase, LabTestRequestTestCase.addSpecimenInfoTestCase, LabTestRequestTestCase.getSpecimenIDByRequestIDTestCase, LabTestRequestTestCase.getAllSpecimenTypeTestCase, LabTestRequestTestCase.getSpecimenByRequestIDTestCase" finished-at="2017-02-13T13:04:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setStatusTestCase -->
+      </class> <!-- LabTestRequestTestCase -->
+      <class name="CategoryTestCase">
+        <test-method status="PASS" signature="addNewCatDetailsTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="addNewCatDetailsTestCase" duration-ms="375" started-at="2017-02-13T13:04:40Z" finished-at="2017-02-13T13:04:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewCatDetailsTestCase -->
+        <test-method status="PASS" signature="getAllCategoriesTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="getAllCategoriesTestCase" duration-ms="29" started-at="2017-02-13T13:04:47Z" depends-on-methods="CategoryTestCase.addNewCatDetailsTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllCategoriesTestCase -->
+        <test-method status="PASS" signature="updateCategoriesDetailsTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="updateCategoriesDetailsTestCase" duration-ms="71" started-at="2017-02-13T13:04:54Z" depends-on-methods="CategoryTestCase.getAllCategoriesTestCase, CategoryTestCase.addNewCatDetailsTestCase" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateCategoriesDetailsTestCase -->
+        <test-method status="PASS" signature="deleteCategoryTestCase()[pri:0, instance:CategoryTestCase@3f2a3a5]" name="deleteCategoryTestCase" duration-ms="31" depends-on-groups="his.lab.test.subcategory" started-at="2017-02-13T13:04:56Z" depends-on-methods="CategoryTestCase.getAllCategoriesTestCase, CategoryTestCase.addNewCatDetailsTestCase, CategoryTestCase.updateCategoriesDetailsTestCase" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteCategoryTestCase -->
+      </class> <!-- CategoryTestCase -->
+      <class name="ParentTestFieldsTestCase">
+        <test-method status="PASS" signature="addLabParentTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="addLabParentTestCase" duration-ms="257" started-at="2017-02-13T13:04:44Z" finished-at="2017-02-13T13:04:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addLabParentTestCase -->
+        <test-method status="PASS" signature="getAllLabParentTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="getAllLabParentTestCase" duration-ms="40" started-at="2017-02-13T13:04:51Z" depends-on-methods="ParentTestFieldsTestCase.addLabParentTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabParentTestCase -->
+        <test-method status="PASS" signature="getAllLabParentByIDTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="getAllLabParentByIDTestCase" duration-ms="129" started-at="2017-02-13T13:04:55Z" depends-on-methods="ParentTestFieldsTestCase.getAllLabParentTestCase, ParentTestFieldsTestCase.addLabParentTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabParentByIDTestCase -->
+        <test-method status="PASS" signature="getMaxParentIDTestCase()[pri:0, instance:ParentTestFieldsTestCase@3567135c]" name="getMaxParentIDTestCase" duration-ms="31" started-at="2017-02-13T13:04:55Z" depends-on-methods="ParentTestFieldsTestCase.getAllLabParentTestCase, ParentTestFieldsTestCase.addLabParentTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getMaxParentIDTestCase -->
+      </class> <!-- ParentTestFieldsTestCase -->
+      <class name="LabTestCase">
+        <test-method status="PASS" signature="addLaboratoryTestCase()[pri:0, instance:LabTestCase@15975490]" name="addLaboratoryTestCase" duration-ms="161" started-at="2017-02-13T13:04:45Z" finished-at="2017-02-13T13:04:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addLaboratoryTestCase -->
+        <test-method status="PASS" signature="getAllLaboratoriesTestCase()[pri:0, instance:LabTestCase@15975490]" name="getAllLaboratoriesTestCase" duration-ms="158" started-at="2017-02-13T13:04:51Z" depends-on-methods="LabTestCase.addLaboratoryTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLaboratoriesTestCase -->
+        <test-method status="PASS" signature="getLabTestRequestByID()[pri:0, instance:LabTestCase@15975490]" name="getLabTestRequestByID" duration-ms="207" started-at="2017-02-13T13:04:51Z" depends-on-methods="LabTestCase.addLaboratoryTestCase" finished-at="2017-02-13T13:04:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getLabTestRequestByID -->
+        <test-method status="PASS" signature="updateLaboratoryTestCase()[pri:0, instance:LabTestCase@15975490]" name="updateLaboratoryTestCase" duration-ms="210" started-at="2017-02-13T13:04:55Z" depends-on-methods="LabTestCase.addLaboratoryTestCase, LabTestCase.getAllLaboratoriesTestCase, LabTestCase.getLabTestRequestByID" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateLaboratoryTestCase -->
+        <test-method status="PASS" signature="deleteLabTestCase()[pri:0, instance:LabTestCase@15975490]" name="deleteLabTestCase" duration-ms="30" started-at="2017-02-13T13:04:56Z" depends-on-methods="LabTestCase.addLaboratoryTestCase, LabTestCase.getAllLaboratoriesTestCase, LabTestCase.updateLaboratoryTestCase, LabTestCase.getLabTestRequestByID" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLabTestCase -->
+      </class> <!-- LabTestCase -->
+      <class name="SubTestFieldsResultsTestCase">
+        <test-method status="PASS" signature="addSubFieldsResultsTestCase()[pri:0, instance:SubTestFieldsResultsTestCase@614c5515]" name="addSubFieldsResultsTestCase" duration-ms="245" started-at="2017-02-13T13:04:41Z" finished-at="2017-02-13T13:04:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addSubFieldsResultsTestCase -->
+        <test-method status="PASS" signature="getAllLabSubResultsTestCase()[pri:0, instance:SubTestFieldsResultsTestCase@614c5515]" name="getAllLabSubResultsTestCase" duration-ms="45" started-at="2017-02-13T13:04:48Z" depends-on-methods="SubTestFieldsResultsTestCase.addSubFieldsResultsTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabSubResultsTestCase -->
+      </class> <!-- SubTestFieldsResultsTestCase -->
+      <class name="LabDepartmentsTestCase">
+        <test-method status="PASS" signature="insertLabDepartmentTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="insertLabDepartmentTestCase" duration-ms="5638" started-at="2017-02-13T13:04:32Z" finished-at="2017-02-13T13:04:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insertLabDepartmentTestCase -->
+        <test-method status="PASS" signature="getAllLaboratoriesTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="getAllLaboratoriesTestCase" duration-ms="49" started-at="2017-02-13T13:04:46Z" depends-on-methods="LabDepartmentsTestCase.insertLabDepartmentTestCase" finished-at="2017-02-13T13:04:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLaboratoriesTestCase -->
+        <test-method status="PASS" signature="updateLabDepartmentTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="updateLabDepartmentTestCase" duration-ms="78" started-at="2017-02-13T13:04:46Z" depends-on-methods="LabDepartmentsTestCase.insertLabDepartmentTestCase" finished-at="2017-02-13T13:04:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateLabDepartmentTestCase -->
+        <test-method status="PASS" signature="deleteLabTypeTestCase()[pri:0, instance:LabDepartmentsTestCase@90f6bfd]" name="deleteLabTypeTestCase" duration-ms="44" started-at="2017-02-13T13:04:54Z" depends-on-methods="LabDepartmentsTestCase.updateLabDepartmentTestCase, LabDepartmentsTestCase.insertLabDepartmentTestCase" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLabTypeTestCase -->
+      </class> <!-- LabDepartmentsTestCase -->
+      <class name="SampleCenterTestCase">
+        <test-method status="PASS" signature="addNewSampleCenterTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="addNewSampleCenterTestCase" duration-ms="141" started-at="2017-02-13T13:04:43Z" finished-at="2017-02-13T13:04:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewSampleCenterTestCase -->
+        <test-method status="PASS" signature="getAllSampleCentersTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="getAllSampleCentersTestCase" duration-ms="124" started-at="2017-02-13T13:04:50Z" depends-on-methods="SampleCenterTestCase.addNewSampleCenterTestCase" finished-at="2017-02-13T13:04:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSampleCentersTestCase -->
+        <test-method status="PASS" signature="getSampleCentersByLabTypeTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="getSampleCentersByLabTypeTestCase" duration-ms="110" started-at="2017-02-13T13:04:50Z" depends-on-methods="SampleCenterTestCase.addNewSampleCenterTestCase" finished-at="2017-02-13T13:04:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getSampleCentersByLabTypeTestCase -->
+        <test-method status="PASS" signature="updateSampleCenterDetailsTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="updateSampleCenterDetailsTestCase" duration-ms="236" started-at="2017-02-13T13:04:50Z" depends-on-methods="SampleCenterTestCase.addNewSampleCenterTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateSampleCenterDetailsTestCase -->
+        <test-method status="PASS" signature="deleteSampleCenterTestCase()[pri:0, instance:SampleCenterTestCase@47f6473]" name="deleteSampleCenterTestCase" duration-ms="56" started-at="2017-02-13T13:04:55Z" depends-on-methods="SampleCenterTestCase.updateSampleCenterDetailsTestCase, SampleCenterTestCase.addNewSampleCenterTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteSampleCenterTestCase -->
+      </class> <!-- SampleCenterTestCase -->
+      <class name="SpecimenTypeTestCase">
+        <test-method status="PASS" signature="getAllSpecimenTypeTestCase()[pri:0, instance:SpecimenTypeTestCase@77b52d12]" name="getAllSpecimenTypeTestCase" duration-ms="86" started-at="2017-02-13T13:04:40Z" finished-at="2017-02-13T13:04:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSpecimenTypeTestCase -->
+        <test-method status="PASS" signature="getAllSpecimenTypeByIdTestCase()[pri:0, instance:SpecimenTypeTestCase@77b52d12]" name="getAllSpecimenTypeByIdTestCase" duration-ms="61" started-at="2017-02-13T13:04:48Z" depends-on-methods="SpecimenTypeTestCase.getAllSpecimenTypeTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSpecimenTypeByIdTestCase -->
+      </class> <!-- SpecimenTypeTestCase -->
+      <class name="MainResultsTestCase">
+        <test-method status="PASS" signature="addMainResultsTestCase()[pri:0, instance:MainResultsTestCase@6615435c]" name="addMainResultsTestCase" duration-ms="1221" started-at="2017-02-13T13:04:39Z" finished-at="2017-02-13T13:04:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addMainResultsTestCase -->
+        <test-method status="PASS" signature="getAllMainResultsTestCase()[pri:0, instance:MainResultsTestCase@6615435c]" name="getAllMainResultsTestCase" duration-ms="900" started-at="2017-02-13T13:04:46Z" depends-on-methods="MainResultsTestCase.addMainResultsTestCase" finished-at="2017-02-13T13:04:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllMainResultsTestCase -->
+        <test-method status="PASS" signature="getAllSubCategoriesTestCase()[pri:0, instance:MainResultsTestCase@6615435c]" name="getAllSubCategoriesTestCase" duration-ms="428" started-at="2017-02-13T13:04:47Z" depends-on-methods="MainResultsTestCase.addMainResultsTestCase" finished-at="2017-02-13T13:04:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSubCategoriesTestCase -->
+      </class> <!-- MainResultsTestCase -->
+      <class name="SampleCenterTypeTestCase">
+        <test-method status="PASS" signature="addSampleCenterTypeTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="addSampleCenterTypeTestCase" duration-ms="34" started-at="2017-02-13T13:04:43Z" finished-at="2017-02-13T13:04:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addSampleCenterTypeTestCase -->
+        <test-method status="PASS" signature="getAllSampleCenterTypesTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="getAllSampleCenterTypesTestCase" duration-ms="29" started-at="2017-02-13T13:04:51Z" depends-on-methods="SampleCenterTypeTestCase.addSampleCenterTypeTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSampleCenterTypesTestCase -->
+        <test-method status="PASS" signature="updateSampleCenterTypesTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="updateSampleCenterTypesTestCase" duration-ms="60" started-at="2017-02-13T13:04:51Z" depends-on-methods="SampleCenterTypeTestCase.addSampleCenterTypeTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateSampleCenterTypesTestCase -->
+        <test-method status="PASS" signature="deleteSampleCenterTypeTestCase()[pri:0, instance:SampleCenterTypeTestCase@60addb54]" name="deleteSampleCenterTypeTestCase" duration-ms="32" started-at="2017-02-13T13:04:55Z" depends-on-methods="SampleCenterTypeTestCase.getAllSampleCenterTypesTestCase, SampleCenterTypeTestCase.updateSampleCenterTypesTestCase, SampleCenterTypeTestCase.addSampleCenterTypeTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteSampleCenterTypeTestCase -->
+      </class> <!-- SampleCenterTypeTestCase -->
+      <class name="SubTestFieldsTestCase">
+        <test-method status="PASS" signature="addNewSubTestFieldTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="addNewSubTestFieldTestCase" duration-ms="109" started-at="2017-02-13T13:04:41Z" finished-at="2017-02-13T13:04:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewSubTestFieldTestCase -->
+        <test-method status="PASS" signature="getAllSubTestFieldsTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="getAllSubTestFieldsTestCase" duration-ms="39" started-at="2017-02-13T13:04:48Z" depends-on-methods="SubTestFieldsTestCase.addNewSubTestFieldTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSubTestFieldsTestCase -->
+        <test-method status="PASS" signature="GetMaxSubTestFieldTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="GetMaxSubTestFieldTestCase" duration-ms="29" started-at="2017-02-13T13:04:55Z" depends-on-methods="SubTestFieldsTestCase.getAllSubTestFieldsTestCase, SubTestFieldsTestCase.addNewSubTestFieldTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GetMaxSubTestFieldTestCase -->
+        <test-method status="PASS" signature="GetTestSubFieldsTestCase()[pri:0, instance:SubTestFieldsTestCase@4909b8da]" name="GetTestSubFieldsTestCase" duration-ms="102" started-at="2017-02-13T13:04:55Z" depends-on-methods="SubTestFieldsTestCase.getAllSubTestFieldsTestCase, SubTestFieldsTestCase.addNewSubTestFieldTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GetTestSubFieldsTestCase -->
+      </class> <!-- SubTestFieldsTestCase -->
+      <class name="SpecimenRetentionTypeTestCase">
+        <test-method status="PASS" signature="getAllSpecimenRetentionTypeByIdTestCase()[pri:0, instance:SpecimenRetentionTypeTestCase@6fb554cc]" name="getAllSpecimenRetentionTypeByIdTestCase" duration-ms="240" started-at="2017-02-13T13:04:41Z" finished-at="2017-02-13T13:04:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSpecimenRetentionTypeByIdTestCase -->
+        <test-method status="PASS" signature="getAllSpecimenRetentionTypeTestCase()[pri:0, instance:SpecimenRetentionTypeTestCase@6fb554cc]" name="getAllSpecimenRetentionTypeTestCase" duration-ms="35" started-at="2017-02-13T13:04:48Z" depends-on-methods="SpecimenRetentionTypeTestCase.getAllSpecimenRetentionTypeByIdTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSpecimenRetentionTypeTestCase -->
+      </class> <!-- SpecimenRetentionTypeTestCase -->
+      <class name="LabTypeTestCase">
+        <test-method status="PASS" signature="insertLabTypeTestCase()[pri:0, instance:LabTypeTestCase@4cb2c100]" name="insertLabTypeTestCase" duration-ms="93" started-at="2017-02-13T13:04:37Z" finished-at="2017-02-13T13:04:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insertLabTypeTestCase -->
+        <test-method status="PASS" signature="updateLabTypeTestCase()[pri:0, instance:LabTypeTestCase@4cb2c100]" name="updateLabTypeTestCase" duration-ms="370" started-at="2017-02-13T13:04:38Z" finished-at="2017-02-13T13:04:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateLabTypeTestCase -->
+        <test-method status="PASS" signature="deleteLabTypeTestCase()[pri:0, instance:LabTypeTestCase@4cb2c100]" name="deleteLabTypeTestCase" duration-ms="39" started-at="2017-02-13T13:04:46Z" depends-on-methods="LabTypeTestCase.insertLabTypeTestCase" finished-at="2017-02-13T13:04:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLabTypeTestCase -->
+      </class> <!-- LabTypeTestCase -->
+      <class name="OPDLabTestRequestTestCase">
+        <test-method status="PASS" signature="addOPDLabTestRequest()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="addOPDLabTestRequest" duration-ms="461" started-at="2017-02-13T13:04:45Z" finished-at="2017-02-13T13:04:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addOPDLabTestRequest -->
+        <test-method status="PASS" signature="getAllOPDLabTestRequests()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="getAllOPDLabTestRequests" duration-ms="297" started-at="2017-02-13T13:04:52Z" depends-on-methods="OPDLabTestRequestTestCase.addOPDLabTestRequest" finished-at="2017-02-13T13:04:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllOPDLabTestRequests -->
+        <test-method status="PASS" signature="getOPDLabRequestsByPatient()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="getOPDLabRequestsByPatient" duration-ms="414" started-at="2017-02-13T13:04:52Z" depends-on-methods="OPDLabTestRequestTestCase.addOPDLabTestRequest" finished-at="2017-02-13T13:04:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOPDLabRequestsByPatient -->
+        <test-method status="PASS" signature="getOPDLabRequestsByVisit()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="getOPDLabRequestsByVisit" duration-ms="458" started-at="2017-02-13T13:04:52Z" depends-on-methods="OPDLabTestRequestTestCase.addOPDLabTestRequest" finished-at="2017-02-13T13:04:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOPDLabRequestsByVisit -->
+        <test-method status="PASS" signature="updateOPDLabRequests()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="updateOPDLabRequests" duration-ms="817" started-at="2017-02-13T13:04:53Z" depends-on-methods="OPDLabTestRequestTestCase.addOPDLabTestRequest" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateOPDLabRequests -->
+        <test-method status="PASS" signature="deleteOPDLabTestRequest()[pri:0, instance:OPDLabTestRequestTestCase@1936f0f5]" name="deleteOPDLabTestRequest" duration-ms="437" started-at="2017-02-13T13:04:55Z" depends-on-methods="OPDLabTestRequestTestCase.getOPDLabRequestsByPatient, OPDLabTestRequestTestCase.addOPDLabTestRequest, OPDLabTestRequestTestCase.getOPDLabRequestsByVisit, OPDLabTestRequestTestCase.updateOPDLabRequests, OPDLabTestRequestTestCase.getAllOPDLabTestRequests" finished-at="2017-02-13T13:04:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteOPDLabTestRequest -->
+      </class> <!-- OPDLabTestRequestTestCase -->
+      <class name="ReportTestCase">
+        <test-method status="PASS" signature="generateNewReportTestCase()[pri:0, instance:ReportTestCase@327471b5]" name="generateNewReportTestCase" duration-ms="414" started-at="2017-02-13T13:04:44Z" finished-at="2017-02-13T13:04:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- generateNewReportTestCase -->
+        <test-method status="PASS" signature="getAllReportTestCase()[pri:0, instance:ReportTestCase@327471b5]" name="getAllReportTestCase" duration-ms="345" started-at="2017-02-13T13:04:51Z" depends-on-methods="ReportTestCase.generateNewReportTestCase" finished-at="2017-02-13T13:04:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllReportTestCase -->
+      </class> <!-- ReportTestCase -->
+      <class name="SubCategoryTestCase">
+        <test-method status="PASS" signature="getAllSubCategoriesTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="getAllSubCategoriesTestCase" duration-ms="83" started-at="2017-02-13T13:04:40Z" finished-at="2017-02-13T13:04:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSubCategoriesTestCase -->
+        <test-method status="PASS" signature="getAllSubCategoriesByIdTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="getAllSubCategoriesByIdTestCase" duration-ms="44" started-at="2017-02-13T13:04:48Z" depends-on-methods="SubCategoryTestCase.getAllSubCategoriesTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllSubCategoriesByIdTestCase -->
+        <test-method status="PASS" signature="updateSubCategoriesDetailsTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="updateSubCategoriesDetailsTestCase" duration-ms="129" started-at="2017-02-13T13:04:48Z" depends-on-methods="SubCategoryTestCase.getAllSubCategoriesTestCase" finished-at="2017-02-13T13:04:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateSubCategoriesDetailsTestCase -->
+        <test-method status="PASS" signature="deleteSubCategoryTestCase()[pri:0, instance:SubCategoryTestCase@2d554825]" name="deleteSubCategoryTestCase" duration-ms="32" depends-on-groups="his.lab.test.specimen, his.lab.test.specimenretention" started-at="2017-02-13T13:04:54Z" depends-on-methods="SubCategoryTestCase.getAllSubCategoriesByIdTestCase, SubCategoryTestCase.updateSubCategoriesDetailsTestCase" finished-at="2017-02-13T13:04:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteSubCategoryTestCase -->
+      </class> <!-- SubCategoryTestCase -->
+      <class name="LabTestRequestFiltersTestCase">
+        <test-method status="PASS" signature="getAllPatientsTestCase()[pri:0, instance:LabTestRequestFiltersTestCase@6b143ee9]" name="getAllPatientsTestCase" duration-ms="1813" started-at="2017-02-13T13:04:41Z" finished-at="2017-02-13T13:04:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllPatientsTestCase -->
+        <test-method status="PASS" signature="getAllLabTestRequestByLocationTestCase()[pri:0, instance:LabTestRequestFiltersTestCase@6b143ee9]" name="getAllLabTestRequestByLocationTestCase" duration-ms="333" started-at="2017-02-13T13:04:49Z" depends-on-methods="LabTestRequestFiltersTestCase.getAllPatientsTestCase" finished-at="2017-02-13T13:04:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabTestRequestByLocationTestCase -->
+        <test-method status="PASS" signature="getAllLabTestRequestByPIDTestCase()[pri:0, instance:LabTestRequestFiltersTestCase@6b143ee9]" name="getAllLabTestRequestByPIDTestCase" duration-ms="348" started-at="2017-02-13T13:04:50Z" depends-on-methods="LabTestRequestFiltersTestCase.getAllPatientsTestCase" finished-at="2017-02-13T13:04:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabTestRequestByPIDTestCase -->
+      </class> <!-- LabTestRequestFiltersTestCase -->
+      <class name="TestNamesTestCase">
+        <test-method status="PASS" signature="getAllLabTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="getAllLabTestsTestCase" duration-ms="619" started-at="2017-02-13T13:04:38Z" finished-at="2017-02-13T13:04:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllLabTestsTestCase -->
+        <test-method status="PASS" signature="insertLabTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="insertLabTestsTestCase" duration-ms="260" started-at="2017-02-13T13:04:39Z" finished-at="2017-02-13T13:04:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insertLabTestsTestCase -->
+        <test-method status="PASS" signature="getMaxTestIDTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="getMaxTestIDTestCase" duration-ms="34" started-at="2017-02-13T13:04:46Z" depends-on-methods="TestNamesTestCase.insertLabTestsTestCase" finished-at="2017-02-13T13:04:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getMaxTestIDTestCase -->
+        <test-method status="PASS" signature="updateTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="updateTestsTestCase" duration-ms="309" started-at="2017-02-13T13:04:46Z" depends-on-methods="TestNamesTestCase.insertLabTestsTestCase" finished-at="2017-02-13T13:04:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateTestsTestCase -->
+        <test-method status="PASS" signature="deleteLabTestsTestCase()[pri:0, instance:TestNamesTestCase@4157f54e]" name="deleteLabTestsTestCase" duration-ms="54" started-at="2017-02-13T13:04:54Z" depends-on-methods="TestNamesTestCase.updateTestsTestCase, TestNamesTestCase.insertLabTestsTestCase, TestNamesTestCase.getMaxTestIDTestCase" finished-at="2017-02-13T13:04:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteLabTestsTestCase -->
+      </class> <!-- TestNamesTestCase -->
+    </test> <!-- testLaboratory -->
+    <test name="testOPD" duration-ms="14682" started-at="2017-02-13T07:34:57Z" finished-at="2017-02-13T07:35:12Z">
+      <class name="OutPatientTestCase">
+        <test-method status="PASS" signature="registerPatientTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="registerPatientTestCase" duration-ms="132" started-at="2017-02-13T13:04:59Z" finished-at="2017-02-13T13:04:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- registerPatientTestCase -->
+        <test-method status="PASS" signature="getAllPatientsTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="getAllPatientsTestCase" duration-ms="1770" started-at="2017-02-13T13:04:59Z" depends-on-methods="OutPatientTestCase.registerPatientTestCase" finished-at="2017-02-13T13:05:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllPatientsTestCase -->
+        <test-method status="PASS" signature="getMaxPatientIDTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="getMaxPatientIDTestCase" duration-ms="32" started-at="2017-02-13T13:05:01Z" depends-on-methods="OutPatientTestCase.registerPatientTestCase, OutPatientTestCase.getAllPatientsTestCase" finished-at="2017-02-13T13:05:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getMaxPatientIDTestCase -->
+        <test-method status="PASS" signature="getPatientsForDoctorTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="getPatientsForDoctorTestCase" duration-ms="1477" started-at="2017-02-13T13:05:01Z" depends-on-methods="OutPatientTestCase.registerPatientTestCase, OutPatientTestCase.getAllPatientsTestCase" finished-at="2017-02-13T13:05:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPatientsForDoctorTestCase -->
+        <test-method status="PASS" signature="updateExamTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="updateExamTestCase" duration-ms="226" started-at="2017-02-13T13:05:02Z" depends-on-methods="OutPatientTestCase.registerPatientTestCase, OutPatientTestCase.getAllPatientsTestCase" finished-at="2017-02-13T13:05:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateExamTestCase -->
+        <test-method status="PASS" signature="PatientDetailsTestCase()[pri:0, instance:OutPatientTestCase@215be6bb]" name="PatientDetailsTestCase" duration-ms="424" started-at="2017-02-13T13:05:03Z" depends-on-methods="OutPatientTestCase.registerPatientTestCase, OutPatientTestCase.getAllPatientsTestCase, OutPatientTestCase.updateExamTestCase" finished-at="2017-02-13T13:05:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PatientDetailsTestCase -->
+      </class> <!-- OutPatientTestCase -->
+      <class name="OpdVisitTestCase">
+        <test-method status="PASS" signature="addOpdVisitTestCase()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="addOpdVisitTestCase" duration-ms="82" started-at="2017-02-13T13:05:11Z" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addOpdVisitTestCase -->
+        <test-method status="PASS" signature="getOpdVisitRecentRequestByPID()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitRecentRequestByPID" duration-ms="120" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdVisitTestCase.addOpdVisitTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdVisitRecentRequestByPID -->
+        <test-method status="PASS" signature="getOpdVisitTestRequestByPID()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitTestRequestByPID" duration-ms="85" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdVisitTestCase.addOpdVisitTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdVisitTestRequestByPID -->
+        <test-method status="PASS" signature="getOpdVisitForReports()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitForReports" duration-ms="32" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdVisitTestCase.getOpdVisitTestRequestByPID, OpdVisitTestCase.addOpdVisitTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdVisitForReports -->
+        <test-method status="PASS" signature="getOpdVisitTestRequestByVisitDate()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitTestRequestByVisitDate" duration-ms="76" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdVisitTestCase.getOpdVisitTestRequestByPID, OpdVisitTestCase.addOpdVisitTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdVisitTestRequestByVisitDate -->
+        <test-method status="PASS" signature="updateVisitTestCase()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="updateVisitTestCase" duration-ms="73" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdVisitTestCase.getOpdVisitTestRequestByPID, OpdVisitTestCase.addOpdVisitTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateVisitTestCase -->
+        <test-method status="PASS" signature="getOpdVisitTestByVisitId()[pri:0, instance:OpdVisitTestCase@6d78f375]" name="getOpdVisitTestByVisitId" duration-ms="68" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdVisitTestCase.updateVisitTestCase, OpdVisitTestCase.getOpdVisitTestRequestByPID, OpdVisitTestCase.addOpdVisitTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdVisitTestByVisitId -->
+      </class> <!-- OpdVisitTestCase -->
+      <class name="OpdRecordTestCase">
+        <test-method status="PASS" signature="addOpdRecordTestCase()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="addOpdRecordTestCase" duration-ms="266" started-at="2017-02-13T13:05:09Z" finished-at="2017-02-13T13:05:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addOpdRecordTestCase -->
+        <test-method status="PASS" signature="getOpdTestRequestByPatientID()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="getOpdTestRequestByPatientID" duration-ms="318" started-at="2017-02-13T13:05:10Z" depends-on-methods="OpdRecordTestCase.addOpdRecordTestCase" finished-at="2017-02-13T13:05:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdTestRequestByPatientID -->
+        <test-method status="PASS" signature="updateOpdRecordTestCase()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="updateOpdRecordTestCase" duration-ms="274" started-at="2017-02-13T13:05:10Z" depends-on-methods="OpdRecordTestCase.getOpdTestRequestByPatientID, OpdRecordTestCase.addOpdRecordTestCase" finished-at="2017-02-13T13:05:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateOpdRecordTestCase -->
+        <test-method status="PASS" signature="getOpdRecordTestRequestByHID()[pri:0, instance:OpdRecordTestCase@4439f31e]" name="getOpdRecordTestRequestByHID" duration-ms="246" started-at="2017-02-13T13:05:10Z" depends-on-methods="OpdRecordTestCase.getOpdTestRequestByPatientID, OpdRecordTestCase.addOpdRecordTestCase, OpdRecordTestCase.updateOpdRecordTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdRecordTestRequestByHID -->
+      </class> <!-- OpdRecordTestCase -->
+      <class name="OpdQuestionnaireTestCase">
+        <test-method status="PASS" signature="addOpdQuestionnaireTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="addOpdQuestionnaireTestCase" duration-ms="38" started-at="2017-02-13T13:05:11Z" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addOpdQuestionnaireTestCase -->
+        <test-method status="PASS" signature="getAllQuestionnaireTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getAllQuestionnaireTestCase" duration-ms="12" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllQuestionnaireTestCase -->
+        <test-method status="PASS" signature="getOpdQuestionByQID()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdQuestionByQID" duration-ms="15" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQuestionByQID -->
+        <test-method status="PASS" signature="updateQuestionniareTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="updateQuestionniareTestCase" duration-ms="6" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateQuestionniareTestCase -->
+        <test-method status="PASS" signature="getOpdQuestionnaireByVisitType()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdQuestionnaireByVisitType" duration-ms="15" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase, OpdQuestionnaireTestCase.updateQuestionniareTestCase, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQuestionnaireByVisitType -->
+        <test-method status="PASS" signature="getOpdQuestionniareByQID()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdQuestionniareByQID" duration-ms="15" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase, OpdQuestionnaireTestCase.updateQuestionniareTestCase, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQuestionniareByQID -->
+        <test-method status="PASS" signature="saveOpdQuestionAnswer()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="saveOpdQuestionAnswer" duration-ms="368" started-at="2017-02-13T13:05:11Z" depends-on-methods="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase, OpdQuestionnaireTestCase.updateQuestionniareTestCase, OpdQuestionnaireTestCase.getOpdQuestionByQID, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- saveOpdQuestionAnswer -->
+        <test-method status="PASS" signature="updateQuestionAnswerTestCase()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="updateQuestionAnswerTestCase" duration-ms="9" started-at="2017-02-13T13:05:12Z" depends-on-methods="OpdQuestionnaireTestCase.getAllQuestionnaireTestCase, OpdQuestionnaireTestCase.saveOpdQuestionAnswer, OpdQuestionnaireTestCase.updateQuestionniareTestCase, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase" finished-at="2017-02-13T13:05:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateQuestionAnswerTestCase -->
+        <test-method status="PASS" signature="getOpdAnswer()[pri:0, instance:OpdQuestionnaireTestCase@1810399e]" name="getOpdAnswer" duration-ms="339" started-at="2017-02-13T13:05:12Z" depends-on-methods="OpdQuestionnaireTestCase.saveOpdQuestionAnswer, OpdQuestionnaireTestCase.updateQuestionniareTestCase, OpdQuestionnaireTestCase.addOpdQuestionnaireTestCase, OpdQuestionnaireTestCase.updateQuestionAnswerTestCase" finished-at="2017-02-13T13:05:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdAnswer -->
+      </class> <!-- OpdQuestionnaireTestCase -->
+      <class name="AllergyTestCase">
+        <test-method status="PASS" signature="addAllergyTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="addAllergyTestCase" duration-ms="353" started-at="2017-02-13T13:04:57Z" finished-at="2017-02-13T13:04:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAllergyTestCase -->
+        <test-method status="PASS" signature="getAllergiesByPatientTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="getAllergiesByPatientTestCase" duration-ms="219" started-at="2017-02-13T13:04:58Z" depends-on-methods="AllergyTestCase.addAllergyTestCase" finished-at="2017-02-13T13:04:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllergiesByPatientTestCase -->
+        <test-method status="PASS" signature="updateAllergyTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="updateAllergyTestCase" duration-ms="256" started-at="2017-02-13T13:04:58Z" depends-on-methods="AllergyTestCase.addAllergyTestCase, AllergyTestCase.getAllergiesByPatientTestCase" finished-at="2017-02-13T13:04:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateAllergyTestCase -->
+        <test-method status="PASS" signature="getAllergiesByAllergyIdTestCase()[pri:0, instance:AllergyTestCase@32d992b2]" name="getAllergiesByAllergyIdTestCase" duration-ms="188" started-at="2017-02-13T13:04:58Z" depends-on-methods="AllergyTestCase.updateAllergyTestCase, AllergyTestCase.addAllergyTestCase, AllergyTestCase.getAllergiesByPatientTestCase" finished-at="2017-02-13T13:04:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllergiesByAllergyIdTestCase -->
+      </class> <!-- AllergyTestCase -->
+      <class name="OpdLiveSearchTestCase">
+        <test-method status="PASS" signature="getAllAllergyLiveTestCase()[pri:0, instance:OpdLiveSearchTestCase@50c87b21]" name="getAllAllergyLiveTestCase" duration-ms="29" started-at="2017-02-13T13:05:05Z" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllAllergyLiveTestCase -->
+        <test-method status="PASS" signature="getAllInjuryLiveTestCase()[pri:0, instance:OpdLiveSearchTestCase@50c87b21]" name="getAllInjuryLiveTestCase" duration-ms="12" started-at="2017-02-13T13:05:05Z" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllInjuryLiveTestCase -->
+      </class> <!-- OpdLiveSearchTestCase -->
+      <class name="OpdAttachmentTestCase">
+        <test-method status="PASS" signature="addOpdAttachmentTestCase()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="addOpdAttachmentTestCase" duration-ms="186" started-at="2017-02-13T13:05:05Z" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addOpdAttachmentTestCase -->
+        <test-method status="PASS" signature="updateOpdAttachmentTestCase()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="updateOpdAttachmentTestCase" duration-ms="25" started-at="2017-02-13T13:05:05Z" depends-on-methods="OpdAttachmentTestCase.addOpdAttachmentTestCase" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateOpdAttachmentTestCase -->
+        <test-method status="PASS" signature="getOpdTestRequestByPID()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="getOpdTestRequestByPID" duration-ms="411" started-at="2017-02-13T13:05:05Z" depends-on-methods="OpdAttachmentTestCase.updateOpdAttachmentTestCase, OpdAttachmentTestCase.addOpdAttachmentTestCase" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdTestRequestByPID -->
+        <test-method status="PASS" signature="getOpdTestRequestByAttachID()[pri:0, instance:OpdAttachmentTestCase@5dfcfece]" name="getOpdTestRequestByAttachID" duration-ms="689" started-at="2017-02-13T13:05:05Z" depends-on-methods="OpdAttachmentTestCase.updateOpdAttachmentTestCase, OpdAttachmentTestCase.getOpdTestRequestByPID, OpdAttachmentTestCase.addOpdAttachmentTestCase" finished-at="2017-02-13T13:05:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdTestRequestByAttachID -->
+      </class> <!-- OpdAttachmentTestCase -->
+      <class name="OpdQueueTestCase">
+        <test-method status="PASS" signature="addOpdQueueTestCase()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="addOpdQueueTestCase" duration-ms="866" started-at="2017-02-13T13:05:06Z" finished-at="2017-02-13T13:05:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addOpdQueueTestCase -->
+        <test-method status="PASS" signature="getOpdQueueCheckinByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueCheckinByPID" duration-ms="184" started-at="2017-02-13T13:05:07Z" depends-on-methods="OpdQueueTestCase.addOpdQueueTestCase" finished-at="2017-02-13T13:05:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueCheckinByPID -->
+        <test-method status="PASS" signature="getOpdQueueCheckoutByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueCheckoutByPID" duration-ms="156" started-at="2017-02-13T13:05:07Z" depends-on-methods="OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.addOpdQueueTestCase" finished-at="2017-02-13T13:05:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueCheckoutByPID -->
+        <test-method status="PASS" signature="getOpdQueueTestRequestByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueTestRequestByUID" duration-ms="240" started-at="2017-02-13T13:05:07Z" depends-on-methods="OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueCheckoutByPID" finished-at="2017-02-13T13:05:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueTestRequestByUID -->
+        <test-method status="PASS" signature="getOpdQueueIsPatientInByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueIsPatientInByPID" duration-ms="247" started-at="2017-02-13T13:05:07Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueCheckoutByPID" finished-at="2017-02-13T13:05:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueIsPatientInByPID -->
+        <test-method status="PASS" signature="getOpdQueueCurrentInByDID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueCurrentInByDID" duration-ms="66" started-at="2017-02-13T13:05:08Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueCheckoutByPID" finished-at="2017-02-13T13:05:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueCurrentInByDID -->
+        <test-method status="PASS" signature="getOpdQueueTreatedByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueTreatedByUID" duration-ms="81" started-at="2017-02-13T13:05:08Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueCheckoutByPID" finished-at="2017-02-13T13:05:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueTreatedByUID -->
+        <test-method status="PASS" signature="getOpdQueueRediectByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueRediectByUID" duration-ms="1187" started-at="2017-02-13T13:05:08Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueCheckoutByPID, OpdQueueTestCase.getOpdQueueTreatedByUID" finished-at="2017-02-13T13:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueRediectByUID -->
+        <test-method status="PASS" signature="getOpdQueueStatusByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueStatusByUID" duration-ms="12" started-at="2017-02-13T13:05:09Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueRediectByUID, OpdQueueTestCase.getOpdQueueCheckoutByPID, OpdQueueTestCase.getOpdQueueTreatedByUID" finished-at="2017-02-13T13:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueStatusByUID -->
+        <test-method status="PASS" signature="getOpdSetQueue()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdSetQueue" duration-ms="6" started-at="2017-02-13T13:05:09Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueRediectByUID, OpdQueueTestCase.getOpdQueueCheckoutByPID, OpdQueueTestCase.getOpdQueueTreatedByUID, OpdQueueTestCase.getOpdQueueStatusByUID" finished-at="2017-02-13T13:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdSetQueue -->
+        <test-method status="PASS" signature="getOpdGetQueueType()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdGetQueueType" duration-ms="7" started-at="2017-02-13T13:05:09Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdQueueRediectByUID, OpdQueueTestCase.getOpdQueueCheckoutByPID, OpdQueueTestCase.getOpdQueueTreatedByUID, OpdQueueTestCase.getOpdQueueStatusByUID, OpdQueueTestCase.getOpdSetQueue" finished-at="2017-02-13T13:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdGetQueueType -->
+        <test-method status="PASS" signature="getOpdHoldQuiueByUID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdHoldQuiueByUID" duration-ms="23" started-at="2017-02-13T13:05:09Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdGetQueueType, OpdQueueTestCase.getOpdQueueRediectByUID, OpdQueueTestCase.getOpdQueueCheckoutByPID, OpdQueueTestCase.getOpdQueueTreatedByUID, OpdQueueTestCase.getOpdQueueStatusByUID, OpdQueueTestCase.getOpdSetQueue" finished-at="2017-02-13T13:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdHoldQuiueByUID -->
+        <test-method status="PASS" signature="getOpdQueueNextAssignByPID()[pri:0, instance:OpdQueueTestCase@7ac7a4e4]" name="getOpdQueueNextAssignByPID" duration-ms="321" started-at="2017-02-13T13:05:09Z" depends-on-methods="OpdQueueTestCase.getOpdQueueTestRequestByUID, OpdQueueTestCase.getOpdQueueCheckinByPID, OpdQueueTestCase.getOpdQueueIsPatientInByPID, OpdQueueTestCase.addOpdQueueTestCase, OpdQueueTestCase.getOpdGetQueueType, OpdQueueTestCase.getOpdHoldQuiueByUID, OpdQueueTestCase.getOpdQueueRediectByUID, OpdQueueTestCase.getOpdQueueCheckoutByPID, OpdQueueTestCase.getOpdQueueTreatedByUID, OpdQueueTestCase.getOpdQueueStatusByUID, OpdQueueTestCase.getOpdSetQueue" finished-at="2017-02-13T13:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getOpdQueueNextAssignByPID -->
+      </class> <!-- OpdQueueTestCase -->
+      <class name="HinTestCase">
+        <test-method status="PASS" signature="serialNumberForHinTestCase()[pri:0, instance:HinTestCase@5f375618]" name="serialNumberForHinTestCase" duration-ms="1526" started-at="2017-02-13T13:05:03Z" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- serialNumberForHinTestCase -->
+        <test-method status="PASS" signature="generateChekDigitTestCase()[pri:0, instance:HinTestCase@5f375618]" name="generateChekDigitTestCase" duration-ms="28" started-at="2017-02-13T13:05:05Z" depends-on-methods="HinTestCase.serialNumberForHinTestCase" finished-at="2017-02-13T13:05:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- generateChekDigitTestCase -->
+      </class> <!-- HinTestCase -->
+      <class name="ExamsTestCase">
+        <test-method status="PASS" signature="addExamTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="addExamTestCase" duration-ms="225" started-at="2017-02-13T13:04:58Z" finished-at="2017-02-13T13:04:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addExamTestCase -->
+        <test-method status="PASS" signature="getExamsbyVisitIdTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="getExamsbyVisitIdTestCase" duration-ms="232" started-at="2017-02-13T13:04:58Z" depends-on-methods="ExamsTestCase.addExamTestCase" finished-at="2017-02-13T13:04:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getExamsbyVisitIdTestCase -->
+        <test-method status="PASS" signature="updateExamTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="updateExamTestCase" duration-ms="170" started-at="2017-02-13T13:04:59Z" depends-on-methods="ExamsTestCase.addExamTestCase, ExamsTestCase.getExamsbyVisitIdTestCase" finished-at="2017-02-13T13:04:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateExamTestCase -->
+        <test-method status="PASS" signature="getExamsbyExamIdTestCase()[pri:0, instance:ExamsTestCase@548b7f67]" name="getExamsbyExamIdTestCase" duration-ms="146" started-at="2017-02-13T13:04:59Z" depends-on-methods="ExamsTestCase.updateExamTestCase, ExamsTestCase.addExamTestCase, ExamsTestCase.getExamsbyVisitIdTestCase" finished-at="2017-02-13T13:04:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getExamsbyExamIdTestCase -->
+      </class> <!-- ExamsTestCase -->
+    </test> <!-- testOPD -->
+    <test name="testPharmacy" duration-ms="6594" started-at="2017-02-13T07:35:12Z" finished-at="2017-02-13T07:35:19Z">
+      <class name="PrescriptionTestCase">
+        <test-method status="PASS" signature="addPrescriptionTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="addPrescriptionTestCase" duration-ms="920" started-at="2017-02-13T13:05:12Z" finished-at="2017-02-13T13:05:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addPrescriptionTestCase -->
+        <test-method status="PASS" signature="getPrescriptionsByPatientTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="getPrescriptionsByPatientTestCase" duration-ms="386" started-at="2017-02-13T13:05:13Z" depends-on-methods="PrescriptionTestCase.addPrescriptionTestCase" finished-at="2017-02-13T13:05:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPrescriptionsByPatientTestCase -->
+        <test-method status="PASS" signature="getPrescriptionsByPrescriptionTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="getPrescriptionsByPrescriptionTestCase" duration-ms="264" started-at="2017-02-13T13:05:13Z" depends-on-methods="PrescriptionTestCase.getPrescriptionsByPatientTestCase, PrescriptionTestCase.addPrescriptionTestCase" finished-at="2017-02-13T13:05:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPrescriptionsByPrescriptionTestCase -->
+        <test-method status="PASS" signature="updatePrescriptionTestCase()[pri:0, instance:PrescriptionTestCase@5c7fa833]" name="updatePrescriptionTestCase" duration-ms="711" started-at="2017-02-13T13:05:13Z" depends-on-methods="PrescriptionTestCase.getPrescriptionsByPrescriptionTestCase, PrescriptionTestCase.addPrescriptionTestCase" finished-at="2017-02-13T13:05:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updatePrescriptionTestCase -->
+      </class> <!-- PrescriptionTestCase -->
+      <class name="ParmacyTestCase">
+        <test-method status="PASS" signature="addPharmacyTestCase()[pri:0, instance:ParmacyTestCase@39aeed2f]" name="addPharmacyTestCase" duration-ms="43" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addPharmacyTestCase -->
+        <test-method status="PASS" signature="loadPharmacyTestCase()[pri:0, instance:ParmacyTestCase@39aeed2f]" name="loadPharmacyTestCase" duration-ms="31" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadPharmacyTestCase -->
+      </class> <!-- ParmacyTestCase -->
+      <class name="DrugTestCase">
+        <test-method status="PASS" signature="addFrequencyTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="addFrequencyTestCase" duration-ms="26" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:14Z" finished-at="2017-02-13T13:05:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addFrequencyTestCase -->
+        <test-method status="PASS" signature="getAllDosagesTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDosagesTestCase" duration-ms="43" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:14Z" finished-at="2017-02-13T13:05:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllDosagesTestCase -->
+        <test-method status="PASS" signature="getAllDrugCategoriesTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugCategoriesTestCase" duration-ms="246" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:14Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllDrugCategoriesTestCase -->
+        <test-method status="PASS" signature="getAllDrugReportsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugReportsTestCase" duration-ms="150" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllDrugReportsTestCase -->
+        <test-method status="PASS" signature="getAllDrugsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugsTestCase" duration-ms="27" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllDrugsTestCase -->
+        <test-method status="PASS" signature="getDrugDetailsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsTestCase" duration-ms="110" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugDetailsTestCase -->
+        <test-method status="PASS" signature="getMailHistoryTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getMailHistoryTestCase" duration-ms="22" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getMailHistoryTestCase -->
+        <test-method status="PASS" signature="getPharmFrequencyTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getPharmFrequencyTestCase" duration-ms="118" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPharmFrequencyTestCase -->
+        <test-method status="PASS" signature="insertDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="insertDrugTestCase" duration-ms="110" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insertDrugTestCase -->
+        <test-method status="PASS" signature="saveDosageTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="saveDosageTestCase" duration-ms="33" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- saveDosageTestCase -->
+        <test-method status="PASS" signature="addDrugBatchTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="addDrugBatchTestCase" duration-ms="130" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" depends-on-methods="DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addDrugBatchTestCase -->
+        <test-method status="PASS" signature="getAllDrugNamesTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllDrugNamesTestCase" duration-ms="170" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" depends-on-methods="DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllDrugNamesTestCase -->
+        <test-method status="PASS" signature="updateDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="updateDrugTestCase" duration-ms="164" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:15Z" depends-on-methods="DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateDrugTestCase -->
+        <test-method status="PASS" signature="updateFrequencyTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="updateFrequencyTestCase" duration-ms="35" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:16Z" depends-on-methods="DrugTestCase.addFrequencyTestCase, DrugTestCase.getPharmFrequencyTestCase" finished-at="2017-02-13T13:05:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateFrequencyTestCase -->
+        <test-method status="PASS" signature="dispenseDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="dispenseDrugTestCase" duration-ms="638" depends-on-groups="his.lab.test.prescription, his.lab.test.prescription" started-at="2017-02-13T13:05:16Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dispenseDrugTestCase -->
+        <test-method status="PASS" signature="getAllBatchNamesByDnameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllBatchNamesByDnameTestCase" duration-ms="127" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:16Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase" finished-at="2017-02-13T13:05:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllBatchNamesByDnameTestCase -->
+        <test-method status="PASS" signature="getDrugByCategoryTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugByCategoryTestCase" duration-ms="125" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:16Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugByCategoryTestCase -->
+        <test-method status="PASS" signature="getDrugByIdTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugByIdTestCase" duration-ms="129" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugByIdTestCase -->
+        <test-method status="PASS" signature="getDrugDetailsByCategoryTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsByCategoryTestCase" duration-ms="142" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugDetailsByCategoryTestCase -->
+        <test-method status="PASS" signature="getDrugDetailsByDNameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsByDNameTestCase" duration-ms="155" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugDetailsByDNameTestCase -->
+        <test-method status="PASS" signature="getDrugDetailsByDrugNameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsByDrugNameTestCase" duration-ms="126" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugDetailsByDrugNameTestCase -->
+        <test-method status="PASS" signature="getDrugDetailsWithParamTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugDetailsWithParamTestCase" duration-ms="131" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugDetailsWithParamTestCase -->
+        <test-method status="PASS" signature="getDrugIdByDNameTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getDrugIdByDNameTestCase" duration-ms="133" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDrugIdByDNameTestCase -->
+        <test-method status="PASS" signature="insertMailTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="insertMailTestCase" duration-ms="144" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:17Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insertMailTestCase -->
+        <test-method status="PASS" signature="requestDrugTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="requestDrugTestCase" duration-ms="257" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:18Z" depends-on-methods="DrugTestCase.addDrugBatchTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- requestDrugTestCase -->
+        <test-method status="PASS" signature="updateDrugBatchTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="updateDrugBatchTestCase" duration-ms="149" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:18Z" depends-on-methods="DrugTestCase.getAllDrugNamesTestCase, DrugTestCase.addDrugBatchTestCase" finished-at="2017-02-13T13:05:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateDrugBatchTestCase -->
+        <test-method status="PASS" signature="getPrecriptionListbyDateTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getPrecriptionListbyDateTestCase" duration-ms="220" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:18Z" depends-on-methods="DrugTestCase.dispenseDrugTestCase" finished-at="2017-02-13T13:05:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPrecriptionListbyDateTestCase -->
+        <test-method status="PASS" signature="getAllRequestsTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="getAllRequestsTestCase" duration-ms="176" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:18Z" depends-on-methods="DrugTestCase.requestDrugTestCase" finished-at="2017-02-13T13:05:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllRequestsTestCase -->
+        <test-method status="PASS" signature="approveDrugRequestTestCase()[pri:0, instance:DrugTestCase@457e2f02]" name="approveDrugRequestTestCase" duration-ms="171" depends-on-groups="his.lab.test.prescription" started-at="2017-02-13T13:05:18Z" depends-on-methods="DrugTestCase.getAllRequestsTestCase, DrugTestCase.requestDrugTestCase, DrugTestCase.insertDrugTestCase" finished-at="2017-02-13T13:05:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- approveDrugRequestTestCase -->
+      </class> <!-- DrugTestCase -->
+    </test> <!-- testPharmacy -->
+  </suite> <!-- Suite1 -->
+</testng-results>

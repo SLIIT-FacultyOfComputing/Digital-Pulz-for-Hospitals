@@ -35,6 +35,10 @@ public class  LabDepartmentDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				throw ex;
+			}
 			return false;
 		}
 	}
@@ -119,7 +123,7 @@ public class  LabDepartmentDBDriver {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			
+			throw e;
 		}
 		return true;
 	}

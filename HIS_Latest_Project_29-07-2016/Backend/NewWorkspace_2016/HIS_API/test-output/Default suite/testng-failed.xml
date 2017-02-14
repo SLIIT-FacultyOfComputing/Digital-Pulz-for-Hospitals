@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="LabTestCases.LabTestCase">
+        <methods>
+          <include name="addLaboratoryTestCase"/>
+          <include name="deleteLabTestCase"/>
+          <include name="insertLabTestCase"/>
+          <include name="getAllLaboratoriesTestCase"/>
+          <include name="getLabTestRequestByID"/>
+          <include name="updateLaboratoryTestCase"/>
+        </methods>
+      </class> <!-- LabTestCases.LabTestCase -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

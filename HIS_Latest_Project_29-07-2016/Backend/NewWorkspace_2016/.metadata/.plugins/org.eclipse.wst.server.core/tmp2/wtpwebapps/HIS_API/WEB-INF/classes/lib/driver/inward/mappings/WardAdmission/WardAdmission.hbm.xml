@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 29, 2014 6:02:39 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.inward.WardAdmission.WardAdmission" table="ward_admission" catalog="HIS"  lazy="false">
+        <id name="bhtNo" type="java.lang.String">
+            <column name="bht_no" />
+            <generator class="assigned" />
+        </id>
+        <property name="DoctorID" type="int">
+            <column name="doctor_id" />
+        </property>
+        <property name="patientID" type="java.lang.String">
+            <column name="patient_id" />
+        </property>
+        <property name="bedNo" type="int">
+            <column name="bed_no" />
+        </property>
+        <property name="wardNo" type="java.lang.String">
+            <column name="ward_no" />
+        </property>
+        <property name="dailyNo" type="int">
+            <column name="daily_no" />
+        </property>
+        <property name="monthlyNo" type="int">
+            <column name="monthly_no" />
+        </property>
+        <property name="yearlyNo" type="int">
+            <column name="yearly_no" />
+        </property>
+        <property name="admitDateTime" type="java.util.Date">
+            <column name="admit_date_time" />
+        </property>
+        <property name="patientComplain" type="java.lang.String">
+            <column name="patient_complain" />
+        </property>
+        <property name="previousHistory" type="java.lang.String">
+            <column name="previous_history" />
+        </property>
+        <property name="createdUser" type="int">
+            <column name="created_user" />
+        </property>
+        <property name="createdDateTime" type="java.util.Date">
+            <column name="created_date_time" />
+        </property>
+        <property name="LastUpdatedUser" type="int">
+            <column name="last_updated_user" />
+        </property>
+        <property name="LastUpdatedDateTime" type="java.util.Date">
+            <column name="last_updated_date_time" />
+        </property>
+    </class>
+</hibernate-mapping>

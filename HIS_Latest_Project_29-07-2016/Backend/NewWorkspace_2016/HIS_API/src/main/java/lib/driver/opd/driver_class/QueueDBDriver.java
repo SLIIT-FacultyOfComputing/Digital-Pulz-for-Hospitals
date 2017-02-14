@@ -131,8 +131,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return false;
+			}
 		}
 
 	}
@@ -174,8 +179,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return 0;
+			}
 		}
 	}
 
@@ -210,8 +220,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return 0;
+			}
 		}
 	}
 
@@ -240,8 +255,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -255,7 +275,11 @@ public class QueueDBDriver {
 			Query query = session
 					.createQuery("from Queue as q where (q.patient=:patient AND (queueStatus='Waiting' OR queueStatus='In'))");
 			query.setParameter("patient", patient);
-			Queue q = (Queue) query.list().get(0);
+			
+			Queue q = null;
+			if(query.list().size() > 0)
+				q = (Queue) query.list().get(0);
+			
 			tx.commit();
 			return q;
 		} catch (RuntimeException ex) {
@@ -266,8 +290,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -279,8 +308,14 @@ public class QueueDBDriver {
 			AdminUser user = (AdminUser) session.get(AdminUser.class, doctor);
 			Query query = session
 					.createQuery("from Queue as q where (q.queueAssignedTo=:user AND q.queueStatus='In')");
-			query.setParameter("AdminUser", user);
-			Queue q = (Queue) query.list().get(0);
+			query.setParameter("user", user);//AdminUser - changed to user
+			Queue q = null;
+			
+			if(query.list().size() > 0)
+			{
+				q = (Queue) query.list().get(0);
+			}
+			
 			tx.commit();
 			return q;
 		} catch (RuntimeException ex) {
@@ -291,8 +326,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -317,8 +357,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return null;
+			}
 		}
 	}
 
@@ -370,8 +415,13 @@ public class QueueDBDriver {
 					System.err.println("Error rolling back transaction");
 				}
 				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
 			}
+			else{
 			return 0;
+			}
 		}
 	}
 

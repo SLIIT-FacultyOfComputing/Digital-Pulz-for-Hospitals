@@ -36,6 +36,11 @@ public class LabTypeDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 	}
@@ -66,6 +71,11 @@ public class LabTypeDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return null;
 		}
 	}
@@ -94,6 +104,11 @@ public class LabTypeDBDriver {
 				}
 				throw ex;
 			}
+			else if(tx==null)
+			{
+				throw ex;
+			}
+			else
 			return false;
 		}
 
@@ -120,6 +135,7 @@ public class LabTypeDBDriver {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			throw e;
 			
 		}
 		return true;
