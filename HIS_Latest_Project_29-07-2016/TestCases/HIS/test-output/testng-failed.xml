@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]">
-  <test name="Default test(failed)">
+<suite name="Failed suite [Suite1]">
+  <test name="testInward(failed)">
     <classes>
-      <class name="LabTestCase">
+      <class name="LiquidBalanceTestCase">
         <methods>
-          <include name="updateLaboratoryTestCase"/>
-          <include name="getAllLaboratoriesTestCase"/>
-          <include name="addLaboratoryTestCase"/>
-          <include name="deleteLabTestCase"/>
-          <include name="getLabTestRequestByID"/>
+          <include name="addNewchartDetails"/>
+          <include name="getChartDetails"/>
         </methods>
-      </class> <!-- LabTestCase -->
+      </class> <!-- LiquidBalanceTestCase -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- testInward(failed) -->
+</suite> <!-- Failed suite [Suite1] -->

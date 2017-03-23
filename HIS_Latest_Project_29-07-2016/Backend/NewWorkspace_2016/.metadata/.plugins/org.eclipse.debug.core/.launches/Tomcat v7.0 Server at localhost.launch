@@ -8,6 +8,6 @@
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_121"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="start"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;C:\HIS from svn\NewWorkspace_2016\.metadata\.plugins\org.eclipse.wst.server.core\tmp2&quot; -Dcatalina.home=&quot;C:\xampp\tomcat&quot; -Dwtp.deploy=&quot;C:\HIS from svn\NewWorkspace_2016\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps&quot; -Djava.endorsed.dirs=&quot;C:\xampp\tomcat\endorsed&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\.metadata\.plugins\org.eclipse.wst.server.core\tmp2&quot; -Dcatalina.home=&quot;C:\xampp\tomcat&quot; -Dwtp.deploy=&quot;D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps&quot; -Djava.endorsed.dirs=&quot;C:\xampp\tomcat\endorsed&quot;"/>
 <stringAttribute key="server-id" value="Tomcat v7.0 Server at localhost"/>
 </launchConfiguration>

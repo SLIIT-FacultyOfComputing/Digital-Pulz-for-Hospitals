@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2017 at 08:36 AM
+-- Generation Time: Mar 23, 2017 at 05:34 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -874,7 +874,10 @@ INSERT INTO `lab_labtestrequest` (`lab_test_request_id`, `ftest_id`, `fpatient_i
 (24, 1, 13, 13, 'aaa', 'High', 'Report Issued', '2016-07-22 09:07:49', '2016-07-22 09:07:49', 1),
 (25, 2, 7, 13, 'qeq', 'High', 'Report Issued', '2016-07-25 07:57:56', '2016-07-25 07:57:56', 1),
 (26, 30, 11, 13, 'l', 'High', 'Sample Required', '2016-07-25 08:10:32', '2016-07-25 08:10:32', 1),
-(27, 30, 11, 13, 'cfg', 'High', 'Report Issued', '2016-07-25 08:12:51', '2016-07-25 08:12:51', 1);
+(27, 30, 11, 13, 'cfg', 'High', 'Report Issued', '2016-07-25 08:12:51', '2016-07-25 08:12:51', 1),
+(40, 3, 75, 13, 'new', 'High', 'Report Issued', '2017-03-16 01:22:04', '2017-03-16 01:22:04', 1),
+(41, 2, 74, 13, 'new test', 'High', 'Report Issued', '2017-03-16 03:32:57', '2017-03-16 03:32:57', 1),
+(42, 1, 75, 13, 'urgunt', 'High', 'Report Issued', '2017-03-23 03:22:10', '2017-03-23 03:22:10', 1);
 
 -- --------------------------------------------------------
 
@@ -1007,7 +1010,23 @@ INSERT INTO `lab_mainresults` (`result_id`, `mainresult`, `ftest_request_id`, `f
 (110, '32', 12, 5, '2016-07-27 07:03:20'),
 (111, '123', 12, 3, '2016-07-27 07:03:20'),
 (112, '213', 12, 2, '2016-07-27 07:03:20'),
-(113, '32', 12, 11, '2016-07-27 07:03:20');
+(113, '32', 12, 11, '2016-07-27 07:03:20'),
+(166, '10', 40, 50, '2017-03-16 01:25:30'),
+(167, '10', 41, 31, '2017-03-16 03:49:30'),
+(168, '23', 42, 2, '2017-03-23 03:26:19'),
+(169, '234', 42, 8, '2017-03-23 03:26:19'),
+(170, '43', 42, 9, '2017-03-23 03:26:19'),
+(171, '345', 42, 12, '2017-03-23 03:26:19'),
+(172, '34', 42, 11, '2017-03-23 03:26:19'),
+(173, 'e', 42, 4, '2017-03-23 03:26:19'),
+(174, '34', 42, 3, '2017-03-23 03:26:19'),
+(175, '2', 42, 6, '2017-03-23 03:26:19'),
+(176, '5', 42, 10, '2017-03-23 03:26:19'),
+(177, '2', 42, 13, '2017-03-23 03:26:19'),
+(178, '2', 42, 51, '2017-03-23 03:26:19'),
+(179, '1', 42, 5, '2017-03-23 03:26:19'),
+(180, '10', 42, 1, '2017-03-23 03:26:19'),
+(181, '32', 42, 7, '2017-03-23 03:26:19');
 
 -- --------------------------------------------------------
 
@@ -1071,7 +1090,9 @@ INSERT INTO `lab_parenttestfields` (`parent_field_id`, `parent_field_id_name`, `
 (42, 'PF', 'p1', 40),
 (43, 'PF', 'p2', 40),
 (44, 'PF', 'tttt', 44),
-(45, 'PF', 'iii', 44);
+(45, 'PF', 'iii', 44),
+(50, 'PF', 'test1', 3),
+(51, 'PF', 'Field 1', 1);
 
 -- --------------------------------------------------------
 
@@ -1192,7 +1213,10 @@ INSERT INTO `lab_specimen` (`specimen_id`, `specimen_collected_date`, `specimen_
 (19, '2017-06-06 18:30:00', '2017-06-06 18:30:00', 'etrw', '2017-06-06 18:30:00', '2016-05-07 18:30:00', 'ewrew', 'stored', 1, 2, 3, 1, 1, 10),
 (20, '2018-01-06 18:30:00', '2018-01-06 18:30:00', 'wr', '2018-01-06 18:30:00', '2016-06-07 18:30:00', 'wer', 'stored', 1, 2, 3, 2, 1, 12),
 (21, '2018-01-06 18:30:00', '2018-01-06 18:30:00', 'fdsaf', '2018-01-06 18:30:00', '2016-04-07 18:30:00', 'dfs', 'destroyed', 1, 2, 3, 1, 1, 13),
-(22, '2018-01-06 18:30:00', '2018-01-06 18:30:00', 'dg', '2018-01-06 18:30:00', '2016-04-07 18:30:00', 'gfd', 'stored', 1, 2, 3, 1, 1, 15);
+(22, '2018-01-06 18:30:00', '2018-01-06 18:30:00', 'dg', '2018-01-06 18:30:00', '2016-04-07 18:30:00', 'gfd', 'stored', 1, 2, 3, 1, 1, 15),
+(27, '2018-04-02 18:30:00', '2018-04-02 18:30:00', 'new sample', '2018-04-02 18:30:00', '2018-09-02 18:30:00', 'in house', 'stored', 1, 2, 3, 1, 1, 40),
+(28, '2019-05-02 18:30:00', '2019-05-02 18:30:00', 'new', '2019-05-02 18:30:00', '2019-06-02 18:30:00', 'in house', 'stored', 1, 2, 3, 1, 1, 41),
+(29, '2019-05-02 18:30:00', '2019-05-02 18:30:00', 'new', '2019-05-02 18:30:00', '2019-05-02 18:30:00', 'in house', 'stored', 1, 2, 3, 1, 1, 42);
 
 -- --------------------------------------------------------
 
@@ -1214,7 +1238,8 @@ CREATE TABLE `lab_specimenretentiontype` (
 
 INSERT INTO `lab_specimenretentiontype` (`retention_type_id`, `retention_type_name`, `duration`, `fcategory_id`, `fsub_category_id`) VALUES
 (1, 'Blood Fluids', '3 days', 1, 1),
-(2, 'wre', '43', 2, 2);
+(2, 'wre', '43', 2, 2),
+(3, 'new SRType', '10', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -1235,7 +1260,8 @@ CREATE TABLE `lab_specimentype` (
 
 INSERT INTO `lab_specimentype` (`specimen_type_id`, `specimen_type_name`, `fcategory_id`, `fsub_category_id`) VALUES
 (1, 'Blood Smear', 1, 1),
-(2, 'wer', 2, 2);
+(2, 'wer', 2, 2),
+(3, 'new sType', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -1296,7 +1322,8 @@ CREATE TABLE `lab_testcategory` (
 
 INSERT INTO `lab_testcategory` (`category_id`, `category_id_name`, `category_name`) VALUES
 (1, 'TC', 'Biochemistry'),
-(2, 'TC', 'dddd');
+(2, 'TC', 'dddd'),
+(3, 'TC', 'New Cat');
 
 -- --------------------------------------------------------
 
@@ -1372,7 +1399,11 @@ INSERT INTO `lab_testfieldsrange` (`range_id`, `gender`, `minage`, `unit`, `min_
 (49, 'Male', 30, '%', 0.5, 34, 55, 10, NULL),
 (50, 'Female', 25, '%', 0.5, 65, 45, 11, NULL),
 (51, 'Male', 30, '%', 0.5, 34, 55, 10, NULL),
-(52, 'Female', 25, '%', 0.5, 65, 45, 11, NULL);
+(52, 'Female', 25, '%', 0.5, 65, 45, 11, NULL),
+(53, 'Male', 30, '%', 0.5, 34, 55, 10, NULL),
+(54, 'Female', 25, '%', 0.5, 65, 45, 11, NULL),
+(55, 'Male', 30, '%', 0.5, 34, 55, 10, NULL),
+(56, 'Female', 25, '%', 0.5, 65, 45, 11, NULL);
 
 -- --------------------------------------------------------
 
@@ -1397,7 +1428,7 @@ CREATE TABLE `lab_testnames` (
 --
 
 INSERT INTO `lab_testnames` (`test_id`, `test_id_name`, `test_name`, `test_created_date`, `test_last_update`, `ftest_category_id`, `ftest_sub_category_id`, `ftest_create_user_id`, `ftest_last_update_user_id`) VALUES
-(1, 'TN', 'sam', '2016-11-18 07:54:36', '2016-11-18 07:54:36', 1, 1, NULL, 1),
+(1, 'TN', 'sam', '2017-03-16 03:58:38', '2017-03-16 03:58:38', 1, 1, NULL, 1),
 (2, 'TN', 'Fasting Blood Sugar', '2015-07-27 08:46:00', '2015-07-25 12:46:31', 1, 1, 1, 1),
 (3, 'TN', 'Random Blood Sugar', '2015-07-27 08:45:50', '2015-07-25 12:51:10', 1, 1, 1, 1),
 (4, 'TN', 'PPBS', '2015-07-27 08:45:42', '2015-07-25 12:51:10', 1, 1, 1, 1),
@@ -1439,7 +1470,9 @@ INSERT INTO `lab_testnames` (`test_id`, `test_id_name`, `test_name`, `test_creat
 (41, 'TN', 'test1_new', '2016-07-22 09:06:27', '2016-07-22 09:06:27', 1, 1, 1, 1),
 (42, 'TN', 'rwqa', '2016-07-22 09:22:38', '2016-07-22 09:22:38', 1, 1, 1, 1),
 (43, 'TN', 'rrrrrrrrrrrrrrrrrrrrrr', '2016-07-27 05:23:16', '2016-07-27 05:23:16', 1, NULL, 1, 1),
-(44, 'TN', 'ppp', '2016-07-27 05:23:39', '2016-07-27 05:23:39', 1, NULL, 1, 1);
+(44, 'TN', 'ppp', '2016-07-27 05:23:39', '2016-07-27 05:23:39', 1, NULL, 1, 1),
+(49, 'TN', 'New Lab test', '2017-03-16 03:52:55', '2017-03-16 03:52:55', 1, 1, 1, 1),
+(50, 'TN', 'New test type 1', '2017-03-23 03:28:39', '2017-03-23 03:28:39', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1460,7 +1493,8 @@ CREATE TABLE `lab_testsubcategory` (
 
 INSERT INTO `lab_testsubcategory` (`sub_category_id`, `sub_category_id_name`, `sub_category_name`, `fcategory_id`) VALUES
 (1, 'SC', 'Biochemistry_sub', 1),
-(2, 'SC', 'sub1', 2);
+(2, 'SC', 'sub1', 2),
+(3, 'SC', 'new Sub Cat', 3);
 
 -- --------------------------------------------------------
 
@@ -1614,7 +1648,11 @@ INSERT INTO `opd_patient` (`patient_id`, `patient_title`, `patient_fullname`, `p
 (71, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000715', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-13 12:38:43', 1, '2017-03-13 12:38:45', 1, 1),
 (72, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000723', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-13 12:40:42', 1, '2017-03-13 12:40:44', 1, 1),
 (73, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000731', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-13 12:45:11', 1, '2017-03-13 12:45:13', 1, 1),
-(74, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000749', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-13 14:03:21', 1, '2017-03-13 14:03:24', 1, 1);
+(74, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000749', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-13 14:03:21', 1, '2017-03-13 14:03:24', 1, 1),
+(75, 'Mr.', 'Namal', '', '940110726V', '', '12340000756', 'null', '1994-01-01', '0775555555', 'Male', 'Single', 'Sinhala', ' Sri Lanka', 'A+', 'SLIIT, B263, Malabe, Western Province, Sri Lanka', ' ', ' ', '', '2017-03-16 06:46:14', 3, '2017-03-16 06:46:14', 3, 1),
+(76, 'Mr.', 'TestPatientNew', '', '940110726V', '', '12340000764', 'null', '2008-01-07', '0775555555', 'Male', 'Single', 'Sinhala', 'Sri Lanka', 'A+', 'SLIIT, B263, Malabe, Western Province, Sri Lanka', ' ', ' ', '', '2017-03-20 14:07:54', 3, '2017-03-20 14:07:54', 3, 1),
+(77, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000772', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-23 10:48:49', 1, '2017-03-23 10:48:52', 1, 1),
+(78, 'Ms', 'testUpdated', 'testUpdated', '940110000V', '98970000N', '12340000780', 'null', '0016-06-16', '0114909474', 'Male', 'single', 'English', 'sri lankan', 'A+', 'Malabe2', 'testupdated', '077555555', 'testRemarksUpdated', '2017-03-23 10:56:42', 1, '2017-03-23 10:56:45', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1671,7 +1709,10 @@ INSERT INTO `opd_patient_allergy` (`allergy_id`, `patient_id`, `allergy_name`, `
 (29, 5, 'Peanut Allergy', 'Past', 'pp', '2015-09-14 09:57:41', 1, '2015-09-14 09:57:41', 1, 1),
 (30, 51, 'pplp', 'Past', '', '2015-09-14 10:27:27', 1, '2015-09-14 10:27:27', 1, 1),
 (31, 68, 'two Allergy', 'Past', '', '2015-09-14 12:44:20', 3, '2015-09-14 12:44:20', 3, 1),
-(32, 5, 'aaa', 'Past', '', '2016-02-24 18:36:05', 1, '2016-02-24 18:36:05', 1, 1);
+(32, 5, 'aaa', 'Past', '', '2016-02-24 18:36:05', 1, '2016-02-24 18:36:05', 1, 1),
+(37, 75, 'Dust allergy', 'Current', '', '2017-03-16 06:46:23', 3, '2017-03-16 06:46:23', 3, 1),
+(38, 75, 'Dust allergy', 'Past', 'dust', '2017-03-16 08:54:50', 3, '2017-03-16 08:54:50', 3, 1),
+(39, 76, 'Dust allergy', 'Current', 'new', '2017-03-20 14:08:08', 3, '2017-03-20 14:08:08', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -1755,7 +1796,10 @@ INSERT INTO `opd_patient_examination` (`examination_id`, `visit_id`, `examinatio
 (13, 51, '2015-08-05 11:54:00', 45, 150, 20, 52, 32, 96.02, '2015-08-05 11:54:00', 1, '2015-08-05 11:54:00', 1, 1),
 (14, 67, '2015-08-06 14:16:10', 50, 180, 15.432098765432098, 52, 32, 96, '2015-08-06 14:16:10', 1, '2015-08-06 14:16:10', 1, 1),
 (15, 71, '2015-08-12 12:04:06', 45, 180, 13.888888888888888, 55, 34, 96.02, '2015-08-12 12:04:06', 1, '2015-08-12 12:04:06', 1, 1),
-(16, 80, '2015-09-18 13:26:55', 0.05, 15.02, 2.21630812711325, 51, 31, 96.02, '2015-09-18 13:26:55', 1, '2015-09-18 13:26:55', 1, 1);
+(16, 80, '2015-09-18 13:26:55', 0.05, 15.02, 2.21630812711325, 51, 31, 96.02, '2015-09-18 13:26:55', 1, '2015-09-18 13:26:55', 1, 1),
+(21, 120, '2017-03-16 06:48:48', 45, 150, 20, 80, 120, 98, '2017-03-16 06:48:48', 1, '2017-03-16 06:48:48', 1, 1),
+(22, 121, '2017-03-16 09:02:09', 45, 150, 20, 120, 120, 98, '2017-03-16 09:02:09', 1, '2017-03-16 09:02:09', 1, 1),
+(23, 122, '2017-03-20 14:10:04', 45, 120, 31.25, 120, 120, 98, '2017-03-20 14:10:04', 1, '2017-03-20 14:10:04', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1862,7 +1906,11 @@ INSERT INTO `opd_patient_queue` (`queue_token_no`, `patient_id`, `queue_assign_t
 (2, 8, '2016-07-25 13:41:55', 3, 7, 'Waiting', ''),
 (2, 8, '2016-07-27 12:03:33', 3, 7, 'Waiting', 'wqewqeq'),
 (2, 14, '2016-07-27 12:03:55', 3, 6, 'Waiting', '123'),
-(2, 4, '2016-07-27 12:05:13', 3, 6, 'In', 'sdfs');
+(2, 4, '2016-07-27 12:05:13', 3, 6, 'In', 'sdfs'),
+(1, 75, '2017-03-16 06:46:54', 3, 1, 'Delete', ''),
+(2, 74, '2017-03-16 08:56:33', 3, 1, 'Delete', ''),
+(1, 76, '2017-03-20 14:08:31', 3, 1, 'Delete', ''),
+(3, 75, '2017-03-23 08:33:55', 3, 5, 'In', '');
 
 -- --------------------------------------------------------
 
@@ -2048,7 +2096,11 @@ INSERT INTO `opd_patient_visit` (`visit_id`, `patient_id`, `visit_date`, `visit_
 (112, 11, '2016-07-25 13:44:27', 'werwq', 1, '                            rqwr', 1, '2016-07-25 13:44:27', 1, 'OPD', 0),
 (113, 4, '2016-07-27 12:07:27', 'wqe', 1, 'ds', 1, '2016-07-27 12:07:27', 1, 'OPD', 0),
 (114, 8, '2016-07-27 12:13:04', 'knee', 1, 'wqe', 1, '2016-07-27 12:13:04', 1, 'OPD', 0),
-(115, 8, '2016-07-27 12:14:50', 'wqe', 1, 'asdad', 1, '2016-07-27 12:14:50', 1, 'OPD', 0);
+(115, 8, '2016-07-27 12:14:50', 'wqe', 1, 'asdad', 1, '2016-07-27 12:14:50', 1, 'OPD', 0),
+(120, 75, '2017-03-16 06:47:09', 'cold', 1, '', 1, '2017-03-16 06:47:09', 1, 'OPD', 0),
+(121, 74, '2017-03-16 08:59:56', 'Cold', 1, '                            ', 1, '2017-03-16 08:59:56', 1, 'OPD', 0),
+(122, 76, '2017-03-20 14:09:01', 'cold', 1, '                            ', 1, '2017-03-20 14:09:01', 1, 'OPD', 0),
+(123, 75, '2017-03-23 08:34:21', 'fever', 1, '                            ', 1, '2017-03-23 08:34:21', 1, 'OPD', 0);
 
 -- --------------------------------------------------------
 
@@ -2100,7 +2152,13 @@ INSERT INTO `opd_prescription` (`prescription_id`, `visit_id`, `prescription_pre
 (25, 1, 1, '2017-03-13', '1', '2017-03-13', 1, '2017-03-13', 1),
 (26, 1, 1, '2017-03-13', '1', '2017-03-13', 1, '2017-03-13', 1),
 (27, 1, 1, '2017-03-13', '1', '2017-03-13', 1, '2017-03-13', 1),
-(28, 1, 1, '2017-03-13', '1', '2017-03-13', 1, '2017-03-13', 1);
+(28, 1, 1, '2017-03-13', '1', '2017-03-13', 1, '2017-03-13', 1),
+(29, 120, 1, '2017-03-16', '1', '2017-03-16', 1, '2017-03-16', 1),
+(30, 121, 2, '2017-03-16', '0', '2017-03-16', 2, '2017-03-16', 2),
+(31, 122, 1, '2017-03-20', '0', '2017-03-20', 1, '2017-03-20', 1),
+(32, 122, 2, '2017-03-20', '0', '2017-03-20', 2, '2017-03-20', 2),
+(33, 1, 1, '2017-03-23', '1', '2017-03-23', 1, '2017-03-23', 1),
+(34, 1, 1, '2017-03-23', '1', '2017-03-23', 1, '2017-03-23', 1);
 
 -- --------------------------------------------------------
 
@@ -2150,7 +2208,12 @@ INSERT INTO `opd_prescription_item` (`prescription_item_id`, `prescription_id`, 
 (25, 22, 2, 'Twice a Day', '1', 'For 2 day', 4),
 (26, 23, 1, ' Thrice a Day', '2', 'For 4 day', 0),
 (27, 23, 2, 'Twice a Day', '1', 'For 2 day', 4),
-(28, 24, 1, ' Thrice a Day', '2', 'For 5 day', 0);
+(28, 24, 1, ' Thrice a Day', '2', 'For 5 day', 0),
+(45, 29, 12, 'Twice a Day', '1', 'For 4 day', 8),
+(46, 30, 12, ' Thrice a Day', '2', 'For 5 day', 0),
+(47, 30, 2, 'Twice a Day', '1', 'For 1 month', 60),
+(48, 31, 1, 'Twice a Day', '2', 'For 4 day', 16),
+(49, 31, 12, 'Twice a Day', '1', 'For 4 day', 8);
 
 -- --------------------------------------------------------
 
@@ -2221,7 +2284,9 @@ INSERT INTO `opd_questionnaire` (`questionnaire_id`, `questionnaire_name`, `ques
 (1, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-13 12:38:51', 3, '2017-03-13 12:38:51', 3, 1),
 (2, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-13 12:40:48', 3, '2017-03-13 12:40:48', 3, 1),
 (3, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-13 12:45:16', 3, '2017-03-13 12:45:16', 3, 1),
-(4, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-13 14:03:29', 3, '2017-03-13 14:03:29', 3, 1);
+(4, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-13 14:03:29', 3, '2017-03-13 14:03:29', 3, 1),
+(5, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-23 10:48:59', 3, '2017-03-23 10:48:59', 3, 1),
+(6, 'opdquestion', 'opd', 'opdquestionnaire', '2017-03-23 10:56:50', 3, '2017-03-23 10:56:50', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -2473,7 +2538,7 @@ CREATE TABLE `pharm_asst_stock` (
 INSERT INTO `pharm_asst_stock` (`drug_srno`, `drug_name`, `drugQty`, `requestedUserID`, `updatedDate`) VALUES
 (1, 'Methyldopa', 0, 4, '2016-07-27 06:49:54'),
 (2, 'Captopril', 642, 4, '2015-07-18 05:53:36'),
-(12, 'Asprin', 340, 4, '2015-07-30 05:35:33');
+(12, 'Asprin', 332, 4, '2017-03-16 01:29:49');
 
 -- --------------------------------------------------------
 
@@ -2532,7 +2597,8 @@ INSERT INTO `pharm_dispensedrug` (`dispense_drugs_id`, `dispense_drugs_srno`, `d
 (39, 1, 'Methyldopa', '', 4, '2015-07-30 11:05:33', 16),
 (40, 1, 'Methyldopa', '', 4, '2015-07-30 14:10:40', 8),
 (41, 1, 'Methyldopa', '', 4, '2016-07-25 13:39:17', 0),
-(42, 1, 'Methyldopa', '', 4, '2016-07-27 12:19:54', 0);
+(42, 1, 'Methyldopa', '', 4, '2016-07-27 12:19:54', 0),
+(47, 12, 'Asprin', '', 4, '2017-03-16 06:59:49', 8);
 
 -- --------------------------------------------------------
 
@@ -2592,7 +2658,7 @@ INSERT INTO `pharm_drug` (`drug_srno`, `drug_name`, `drug_remarks`, `drug_create
 (7, 'Enalapril', 'New Arrival', '2013-07-31 12:36:55', 1, '2013-08-29 18:30:00', 1, 1, 'Tab', 1, 12, 0, 100, 25),
 (8, 'Afrin', '', '2014-11-17 05:26:51', 2, '2014-11-17 05:26:51', 2, 1, 'Amp', 2, 31.1, 0, 200, 25),
 (11, ' Ampicillin ', 'ftdt', '2016-07-25 08:06:02', 2, '2016-07-25 08:06:02', 2, 1, 'Spray', 1, 130, 34, 1000, 500),
-(12, 'Asprin', '', '2013-08-18 17:30:54', 0, '2015-07-30 05:35:34', 4, 0, 'Tab', 1, 123, 340, 500, 100),
+(12, 'Asprin', '', '2013-08-18 17:30:54', 0, '2017-03-16 04:03:46', 4, 0, 'Tab', 1, 123, 332, 500, 100),
 (13, ' Ampicillin 250mg', 'New', '2013-08-20 11:31:43', 0, '2014-09-09 11:14:00', 0, 0, 'Amp', 1, 13, 2000, 3000, 200),
 (14, ' Ampicillin 250mg', 'New Arrival', '2013-08-22 04:21:59', 0, '2014-09-09 11:14:00', 0, 0, 'Cap', 1, 10, 0, 1000, 200),
 (15, 'Asprin 500mg', '', '2014-11-16 05:49:03', 2, '2014-11-16 05:49:03', 2, 0, 'Spray', 1, 200, 0, 32, 20),
@@ -3004,7 +3070,9 @@ INSERT INTO `ward_beds` (`bed_id`, `bed_no`, `bed_type`, `ward_no`, `availabilit
 (60, 13, 'Normal', 'Ward-01', 'Test', NULL),
 (61, 13, 'Normal', 'Ward-01', 'Test', NULL),
 (62, 13, 'Normal', 'Ward-01', 'Test', NULL),
-(63, 13, 'Normal', 'Ward-01', 'Test', NULL);
+(63, 13, 'Normal', 'Ward-01', 'Test', NULL),
+(64, 13, 'Normal', 'Ward-01', 'Test', NULL),
+(65, 13, 'Normal', 'Ward-01', 'Test', NULL);
 
 -- --------------------------------------------------------
 
@@ -3132,7 +3200,7 @@ CREATE TABLE `ward_liquidbalancechart` (
 INSERT INTO `ward_liquidbalancechart` (`row_no`, `bht_no`, `date_time`, `Oral`, `Saline`, `Output`) VALUES
 (1, '201419', '2015-06-08 09:02:00', 100, 80, 20),
 (2, '201419', '2015-06-14 09:02:00', 120, 20, 100),
-(3, '201415', '2015-07-02 10:11:00', 100, 20, 32),
+(3, '201419', '2015-07-02 10:11:00', 100, 20, 32),
 (4, '201410', '2015-10-26 10:10:00', 120, 20, 100),
 (5, '201412', '2015-09-16 05:05:00', 100, 45, 55),
 (6, '201412', '2015-09-16 05:06:00', 100, 45, 55),
@@ -3443,7 +3511,9 @@ CREATE TABLE `ward_temperaturechart` (
 --
 
 INSERT INTO `ward_temperaturechart` (`row_no`, `bht_no`, `temperature`, `date_time`) VALUES
-(1, '201410', 55.5, '2015-08-25 10:05:00');
+(1, '201410', 55.5, '2015-08-25 10:05:00'),
+(2, '99999', 100, '2017-01-01 01:10:00'),
+(3, '99999', 100, '2017-01-01 01:10:00');
 
 -- --------------------------------------------------------
 
@@ -4517,92 +4587,92 @@ ALTER TABLE `lab_externallabresults`
 -- AUTO_INCREMENT for table `lab_labdepartments`
 --
 ALTER TABLE `lab_labdepartments`
-  MODIFY `lab_dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `lab_dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `lab_laboratories`
 --
 ALTER TABLE `lab_laboratories`
-  MODIFY `lab_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `lab_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `lab_labtestrequest`
 --
 ALTER TABLE `lab_labtestrequest`
-  MODIFY `lab_test_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `lab_test_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `lab_mainresults`
 --
 ALTER TABLE `lab_mainresults`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 --
 -- AUTO_INCREMENT for table `lab_parenttestfields`
 --
 ALTER TABLE `lab_parenttestfields`
-  MODIFY `parent_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `parent_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `lab_reports`
 --
 ALTER TABLE `lab_reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `lab_samplecenters`
 --
 ALTER TABLE `lab_samplecenters`
-  MODIFY `sample_center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sample_center_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `lab_samplecentertypes`
 --
 ALTER TABLE `lab_samplecentertypes`
-  MODIFY `sample_center_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sample_center_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `lab_specimen`
 --
 ALTER TABLE `lab_specimen`
-  MODIFY `specimen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `specimen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `lab_specimenretentiontype`
 --
 ALTER TABLE `lab_specimenretentiontype`
-  MODIFY `retention_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `retention_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `lab_specimentype`
 --
 ALTER TABLE `lab_specimentype`
-  MODIFY `specimen_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `specimen_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `lab_subfieldresults`
 --
 ALTER TABLE `lab_subfieldresults`
-  MODIFY `sub_field_result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sub_field_result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `lab_subtestfields`
 --
 ALTER TABLE `lab_subtestfields`
-  MODIFY `sub_test_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `sub_test_field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `lab_testcategory`
 --
 ALTER TABLE `lab_testcategory`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `lab_testfieldsrange`
 --
 ALTER TABLE `lab_testfieldsrange`
-  MODIFY `range_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `range_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `lab_testnames`
 --
 ALTER TABLE `lab_testnames`
-  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `lab_testsubcategory`
 --
 ALTER TABLE `lab_testsubcategory`
-  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `lab_types`
 --
 ALTER TABLE `lab_types`
-  MODIFY `lab_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `lab_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `liveallergies`
 --
@@ -4617,22 +4687,22 @@ ALTER TABLE `liveinjury`
 -- AUTO_INCREMENT for table `opd_patient`
 --
 ALTER TABLE `opd_patient`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT for table `opd_patient_allergy`
 --
 ALTER TABLE `opd_patient_allergy`
-  MODIFY `allergy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `allergy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `opd_patient_attachment`
 --
 ALTER TABLE `opd_patient_attachment`
-  MODIFY `attachment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `attachment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `opd_patient_examination`
 --
 ALTER TABLE `opd_patient_examination`
-  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `examination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `opd_patient_history`
 --
@@ -4642,42 +4712,42 @@ ALTER TABLE `opd_patient_history`
 -- AUTO_INCREMENT for table `opd_patient_record`
 --
 ALTER TABLE `opd_patient_record`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `opd_patient_visit`
 --
 ALTER TABLE `opd_patient_visit`
-  MODIFY `visit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `visit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 --
 -- AUTO_INCREMENT for table `opd_prescription`
 --
 ALTER TABLE `opd_prescription`
-  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `opd_prescription_item`
 --
 ALTER TABLE `opd_prescription_item`
-  MODIFY `prescription_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `prescription_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `opd_question`
 --
 ALTER TABLE `opd_question`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `opd_questionanswer`
 --
 ALTER TABLE `opd_questionanswer`
-  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `opd_questionanswerset`
 --
 ALTER TABLE `opd_questionanswerset`
-  MODIFY `answer_setid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `answer_setid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `opd_questionnaire`
 --
 ALTER TABLE `opd_questionnaire`
-  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `pcu_admition`
 --
@@ -4717,7 +4787,7 @@ ALTER TABLE `pcu_requesteditems`
 -- AUTO_INCREMENT for table `pharm_dispensedrug`
 --
 ALTER TABLE `pharm_dispensedrug`
-  MODIFY `dispense_drugs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `dispense_drugs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `pharm_dosage`
 --
@@ -4727,7 +4797,7 @@ ALTER TABLE `pharm_dosage`
 -- AUTO_INCREMENT for table `pharm_drug`
 --
 ALTER TABLE `pharm_drug`
-  MODIFY `drug_srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `drug_srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `pharm_drugcategory`
 --
@@ -4742,52 +4812,52 @@ ALTER TABLE `pharm_drugmanufacturer`
 -- AUTO_INCREMENT for table `pharm_drugrequests`
 --
 ALTER TABLE `pharm_drugrequests`
-  MODIFY `request_drug_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `request_drug_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pharm_email`
 --
 ALTER TABLE `pharm_email`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pharm_frequency`
 --
 ALTER TABLE `pharm_frequency`
-  MODIFY `frequency_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `frequency_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `ward_admission_request`
 --
 ALTER TABLE `ward_admission_request`
-  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `ward_beds`
 --
 ALTER TABLE `ward_beds`
-  MODIFY `bed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `bed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `ward_diabeticchart`
 --
 ALTER TABLE `ward_diabeticchart`
-  MODIFY `row_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `row_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ward_externaltransfer`
 --
 ALTER TABLE `ward_externaltransfer`
-  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ward_internaltransfer`
 --
 ALTER TABLE `ward_internaltransfer`
-  MODIFY `tranfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `tranfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `ward_liquidbalancechart`
 --
 ALTER TABLE `ward_liquidbalancechart`
-  MODIFY `row_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `row_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `ward_nursenote`
 --
 ALTER TABLE `ward_nursenote`
-  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ward_operations`
 --
@@ -4797,7 +4867,7 @@ ALTER TABLE `ward_operations`
 -- AUTO_INCREMENT for table `ward_prescriptionitem`
 --
 ALTER TABLE `ward_prescriptionitem`
-  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `ward_prescriptions`
 --
@@ -4807,7 +4877,7 @@ ALTER TABLE `ward_prescriptions`
 -- AUTO_INCREMENT for table `ward_prescription_terms`
 --
 ALTER TABLE `ward_prescription_terms`
-  MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 --
 -- AUTO_INCREMENT for table `ward_signature`
 --
@@ -4822,17 +4892,17 @@ ALTER TABLE `ward_surgicalobsrchart`
 -- AUTO_INCREMENT for table `ward_temperaturechart`
 --
 ALTER TABLE `ward_temperaturechart`
-  MODIFY `row_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `row_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ward_temp_prescribe`
 --
 ALTER TABLE `ward_temp_prescribe`
-  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 --
 -- AUTO_INCREMENT for table `ward_treatment`
 --
 ALTER TABLE `ward_treatment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -5424,3 +5424,53 @@ java -ea -classpath C:\eclipse\plugins\org.testng.eclipse_6.9.12.201607091356\li
   Class:     org.testng.remote.RemoteTestNG
   Args:      -serport 52355 -protocol json -d C:\HIS from svn\TestCases\HIS\test-output C:\Users\NISALD~1\AppData\Local\Temp\testng-eclipse--938259141\testng-customsuite.xml
 java -ea -classpath C:\eclipse\plugins\org.testng.eclipse_6.9.12.201607091356\lib\testng-remote.jar:C:\HIS from svn\TestCases\HIS\bin:C:\HIS from svn\TestCases\HIS\lib\apache-httpcomponents-httpcore.jar:C:\HIS from svn\TestCases\HIS\lib\apache-httpcomponents-httpclient.jar:C:\HIS from svn\TestCases\HIS\lib\org-apache-commons-logging.jar:C:\HIS from svn\TestCases\HIS\lib\gson-2.2.2.jar:C:\HIS from svn\TestCases\HIS\lib\jcommander.jar:C:\HIS from svn\TestCases\HIS\lib\org.json.jar:C:\HIS from svn\TestCases\HIS\lib\testng-6.8.5.jar org.testng.remote.RemoteTestNG -serport 52355 -protocol json -d C:\HIS from svn\TestCases\HIS\test-output C:\Users\NISALD~1\AppData\Local\Temp\testng-eclipse--938259141\testng-customsuite.xml
+!SESSION 2017-03-23 10:44:54.140 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.8.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.m2e.logback.configuration 2 0 2017-03-23 10:45:09.785
+!MESSAGE Exception while setting up logging:org.eclipse.osgi.internal.framework.EquinoxConfiguration$1 cannot be cast to java.lang.String
+!STACK 0
+java.lang.ClassCastException: org.eclipse.osgi.internal.framework.EquinoxConfiguration$1 cannot be cast to java.lang.String
+	at org.eclipse.m2e.logback.configuration.LogHelper.logJavaProperties(LogHelper.java:26)
+	at org.eclipse.m2e.logback.configuration.LogPlugin.loadConfiguration(LogPlugin.java:189)
+	at org.eclipse.m2e.logback.configuration.LogPlugin.configureLogback(LogPlugin.java:144)
+	at org.eclipse.m2e.logback.configuration.LogPlugin.access$2(LogPlugin.java:107)
+	at org.eclipse.m2e.logback.configuration.LogPlugin$1.run(LogPlugin.java:62)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-03-23 10:45:34.565
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-03-23 10:45:34.565
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nisal De Silva'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.testng.eclipse 1 0 2017-03-23 10:48:23.804
+!MESSAGE [TestNGLaunchConfigurationDelegate] Launching:
+  Classpath: C:\eclipse\plugins\org.testng.eclipse_6.9.12.201607091356\lib\testng-remote.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\bin D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpcore.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpclient.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org-apache-commons-logging.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\gson-2.2.2.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\jcommander.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org.json.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\testng-6.8.5.jar
+  VMArgs:    -ea
+  Class:     org.testng.remote.RemoteTestNG
+  Args:      -serport 61978 -protocol json -d D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\test-output D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\src\testng.xml
+java -ea -classpath C:\eclipse\plugins\org.testng.eclipse_6.9.12.201607091356\lib\testng-remote.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\bin:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpcore.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpclient.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org-apache-commons-logging.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\gson-2.2.2.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\jcommander.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org.json.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\testng-6.8.5.jar org.testng.remote.RemoteTestNG -serport 61978 -protocol json -d D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\test-output D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\src\testng.xml
+
+!ENTRY org.testng.eclipse 1 0 2017-03-23 10:56:21.578
+!MESSAGE [TestNGLaunchConfigurationDelegate] Launching:
+  Classpath: C:\eclipse\plugins\org.testng.eclipse_6.9.12.201607091356\lib\testng-remote.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\bin D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpcore.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpclient.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org-apache-commons-logging.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\gson-2.2.2.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\jcommander.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org.json.jar D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\testng-6.8.5.jar
+  VMArgs:    -ea
+  Class:     org.testng.remote.RemoteTestNG
+  Args:      -serport 62616 -protocol json -d D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\test-output D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\src\testng.xml
+java -ea -classpath C:\eclipse\plugins\org.testng.eclipse_6.9.12.201607091356\lib\testng-remote.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\bin:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpcore.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\apache-httpcomponents-httpclient.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org-apache-commons-logging.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\gson-2.2.2.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\jcommander.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\org.json.jar:D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\lib\testng-6.8.5.jar org.testng.remote.RemoteTestNG -serport 62616 -protocol json -d D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\test-output D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\src\testng.xml

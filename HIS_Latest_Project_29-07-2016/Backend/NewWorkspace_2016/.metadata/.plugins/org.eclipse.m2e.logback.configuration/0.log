@@ -4568,3 +4568,29 @@ java.lang.NullPointerException: null
 2017-03-23 08:30:06,383 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2017-03-23 08:30:06,398 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2017-03-23 08:30:06,398 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\HIS from svn\NewWorkspace_2016\HIS_API\src\test\resources
+2017-03-23 10:45:18,658 [Worker-8] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:45:18,814 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2017-03-23 10:45:18,983 [Worker-8] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:45:18,984 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\HIS_API\src\test\resources
+2017-03-23 10:45:42,021 [Worker-1] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for HIS_API
+2017-03-23 10:45:52,211 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:45:52,211 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2017-03-23 10:45:52,211 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:45:52,211 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\HIS_API\src\test\resources
+2017-03-23 10:46:26,216 [Worker-6] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for HIS_API
+2017-03-23 10:46:28,617 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:46:28,617 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2017-03-23 10:46:28,617 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:46:28,617 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\HIS_API\src\test\resources
+2017-03-23 10:46:40,406 [Worker-0] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2017-03-23 10:46:41,946 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.HIS_API:HIS_API:1.0-SNAPSHOT @ D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\HIS_API\pom.xml.
+2017-03-23 10:46:42,929 [Worker-0] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /HIS_API/src/main/java
+2017-03-23 10:46:42,929 [Worker-0] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /HIS_API/src/main/resources
+2017-03-23 10:46:42,929 [Worker-0] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /HIS_API/src/test/java
+2017-03-23 10:46:44,637 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.HIS_API:HIS_API:1.0-SNAPSHOT @ D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\HIS_API\pom.xml.
+2017-03-23 10:46:45,122 [Worker-0] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for HIS_API
+2017-03-23 10:46:45,138 [Worker-0] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 4 sec
+2017-03-23 10:46:47,671 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:46:47,686 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2017-03-23 10:46:47,686 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-23 10:46:47,686 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\HIS_API\src\test\resources

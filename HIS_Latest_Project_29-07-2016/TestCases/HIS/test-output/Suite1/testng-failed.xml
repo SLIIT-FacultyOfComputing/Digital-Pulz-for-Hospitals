@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite1]">
-  <test name="testPharmacy(failed)">
-    <groups>
-      <run>
-        <include name="his.pharmacy.test"/>
-        <include name="his.lab.test.prescription"/>
-      </run>
-    </groups>
+  <test name="testInward(failed)">
     <classes>
-      <class name="PrescriptionTestCase">
+      <class name="LiquidBalanceTestCase">
         <methods>
-          <include name="getPrescriptionsByPatientTestCase"/>
-          <include name="getPrescriptionsByPrescriptionTestCase"/>
-          <include name="addPrescriptionTestCase"/>
-          <include name="updatePrescriptionTestCase"/>
+          <include name="addNewchartDetails"/>
+          <include name="getChartDetails"/>
         </methods>
-      </class> <!-- PrescriptionTestCase -->
-      <class name="DrugTestCase">
-        <methods>
-          <include name="requestDrugTestCase"/>
-          <include name="insertDrugTestCase"/>
-          <include name="getAllRequestsTestCase"/>
-          <include name="addDrugBatchTestCase"/>
-          <include name="approveDrugRequestTestCase"/>
-        </methods>
-      </class> <!-- DrugTestCase -->
+      </class> <!-- LiquidBalanceTestCase -->
     </classes>
-  </test> <!-- testPharmacy(failed) -->
+  </test> <!-- testInward(failed) -->
 </suite> <!-- Failed suite [Suite1] -->

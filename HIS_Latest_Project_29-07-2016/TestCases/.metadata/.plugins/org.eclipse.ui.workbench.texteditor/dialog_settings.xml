@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="DeleteWardUrl" key="selection"/>
+		<item value="chartDetailsUrl" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="chartDetailsUrl"/>
 			<item value="DeleteWardUrl"/>
 			<item value="URL_APPEND_DELETE_URL"/>
 			<item value="deleteWard"/>
@@ -15,7 +16,6 @@
 			<item value="AddDiagnoseUrl"/>
 			<item value="AddwardUrl"/>
 			<item value="addWardAdmission"/>
-			<item value="getDrugRequest"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

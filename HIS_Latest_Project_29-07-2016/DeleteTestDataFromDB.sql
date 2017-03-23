@@ -70,7 +70,7 @@ DELETE FROM `ward_prescription_terms` WHERE `ward_prescription_terms`.`bht_no` =
 DELETE FROM `ward_nursenote` WHERE `ward_nursenote`.`note` = "testing";
 DELETE FROM `ward_admission` WHERE `bht_no` = "99999";
 DELETE FROM `ward_treatment` WHERE `bht_no`= "99999";
-SELECT * FROM `ward_liquidbalancechart` WHERE `bht_no` = "99999";
+DELETE FROM `ward_liquidbalancechart` WHERE `bht_no` = "99999";
 DELETE FROM `ward_temp_prescribe` WHERE `frequency` = "test" or `frequency` = "TestUpdate";
 
 
