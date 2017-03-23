@@ -1,0 +1,5 @@
+package core.resources;
+
+public interface IBaseDAO {
+
+}

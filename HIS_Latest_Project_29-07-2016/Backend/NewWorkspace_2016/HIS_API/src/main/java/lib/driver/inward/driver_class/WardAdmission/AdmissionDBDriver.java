@@ -51,7 +51,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return false;
+			}
+			else
+			{
 			return false;
+			}
 		}
 
 	}
@@ -75,7 +82,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -103,7 +117,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -130,7 +151,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -175,7 +203,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return false;
+			}
+			else
+			{
 			return false;
+			}
 		}
 		
 	}
@@ -210,7 +245,14 @@ public class AdmissionDBDriver {
 					}
 					throw ex;
 				}
+				else if (tx==null)
+				{
+					return false;
+				}
+				else
+				{
 				return false;
+				}
 			}
 			
 		}
@@ -238,7 +280,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -274,7 +323,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return false;
+			}
+			else
+			{
 			return false;
+			}
 		}
 		
 	}
@@ -301,7 +357,14 @@ public class AdmissionDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 }

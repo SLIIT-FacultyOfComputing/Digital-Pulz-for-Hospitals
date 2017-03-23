@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="OpdQuestionnaireTestCase">
+      <class name="LabTestCase">
         <methods>
-          <include name="getAllQuestionnaireTestCase"/>
-          <include name="saveOpdQuestionAnswer"/>
-          <include name="updateQuestionniareTestCase"/>
-          <include name="addOpdQuestionnaireTestCase"/>
-          <include name="getOpdQuestionByQID"/>
+          <include name="updateLaboratoryTestCase"/>
+          <include name="getAllLaboratoriesTestCase"/>
+          <include name="addLaboratoryTestCase"/>
+          <include name="deleteLabTestCase"/>
+          <include name="getLabTestRequestByID"/>
         </methods>
-      </class> <!-- OpdQuestionnaireTestCase -->
+      </class> <!-- LabTestCase -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

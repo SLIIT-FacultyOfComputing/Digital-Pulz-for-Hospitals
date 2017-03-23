@@ -116,7 +116,7 @@
 
 
             <div  style="position: relative;width:220px;margin-left: 15px;margin-top: 30%;"> 
-                <input class="btn btn-primary"  type="button" onClick="<?php echo "window.location='http://localhost:82/SEP_Project/index.php/queue_c/setQType'"; ?>" value="<?php
+                <input class="btn btn-primary"  type="button" onClick="<?php echo "window.location='/SEP_Project/index.php/queue_c/setQType'"; ?>" value="<?php
                 if (isset($qtype) && $qtype == 1)
                     echo 'Enable Regular Queue';
                 else

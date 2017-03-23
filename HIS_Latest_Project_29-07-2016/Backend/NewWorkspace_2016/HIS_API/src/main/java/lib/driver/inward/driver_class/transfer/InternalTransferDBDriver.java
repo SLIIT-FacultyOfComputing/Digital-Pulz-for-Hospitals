@@ -75,7 +75,13 @@ public class InternalTransferDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return false;
+			}
 		}
 
 	}
@@ -85,8 +91,8 @@ public class InternalTransferDBDriver {
 		
 		try{
 			tx = session.beginTransaction();
-			Query query =  session.createQuery("select i from InternalTransfer as i where i.transferId=:transferId");
-			query.setParameter("transferId", transferId);
+			Query query =  session.createQuery("select i from InternalTransfer as i where i.transferId="+transferId);
+
 			List<InternalTransfer> transferList =CastList.castList(InternalTransfer.class, query.list()); 
 			tx.commit();
 			return transferList;
@@ -102,7 +108,13 @@ public class InternalTransferDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 	
@@ -133,7 +145,13 @@ public class InternalTransferDBDriver {
 			}
 			throw ex;
 		}
-		return false;
+		else if(tx == null)
+		{
+			throw ex;
+		}
+		else{
+			return false;
+		}
 	}
 	
 }
@@ -159,7 +177,13 @@ public List<InternalTransfer> getNotReadInternalTransferByWard(String wardNo){
 			}
 			throw ex;
 		}
-		return null;
+		else if(tx == null)
+		{
+			throw ex;
+		}
+		else{
+			return null;
+		}
 	}
 }
 
@@ -185,7 +209,13 @@ public List<InternalTransfer> getInternalTransferByBHTNo(String bhtNo){
 			}
 			throw ex;
 		}
-		return null;
+		else if(tx == null)
+		{
+			throw ex;
+		}
+		else{
+			return null;
+		}
 	}
 }
 
@@ -211,7 +241,13 @@ public List<InternalTransfer> getInternalTransferByID(int  transferId){
 			}
 			throw ex;
 		}
-		return null;
+		else if(tx == null)
+		{
+			throw ex;
+		}
+		else{
+			return null;
+		}
 	}
 }
 }

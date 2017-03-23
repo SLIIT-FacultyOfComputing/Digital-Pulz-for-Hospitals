@@ -9,11 +9,13 @@
              console.log('calling drugs');
 
              var tex = "nul";
-
              $.ajax({ 
-                 url: 'http://172.16.21.251:8080/HIS_API/rest/PharmacyServices/drugStockTable',
-                 success: function(result) { 
 
+             	 type: 'GET',
+                 url: '<?php echo base_url('index.php/drugstock_c/getstock'); ?>',
+                 dataType:'json',  //'http://localhost:8080/HIS_API/rest/PharmacyServices/drugStockTable',
+                 success: function(result) { 
+                 							console.log("DRUGS="+result);
                                          //console.log("ajax called");
                                          //console.log(result);
                                          //drugs = $.parseJSON(result);

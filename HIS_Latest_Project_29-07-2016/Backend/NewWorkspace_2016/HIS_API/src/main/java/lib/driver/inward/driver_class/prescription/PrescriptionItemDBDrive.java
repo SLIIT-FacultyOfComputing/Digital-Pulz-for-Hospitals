@@ -5,10 +5,12 @@ import java.util.List;
 import lib.SessionFactoryUtil;
 import lib.classes.CasttingMethods.CastList;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 
 import core.classes.inward.prescription.PrescriptionItem;
 import core.classes.inward.prescription.PrescriptionTerms;
@@ -44,7 +46,14 @@ public class PrescriptionItemDBDrive {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		
 		
@@ -83,7 +92,14 @@ public class PrescriptionItemDBDrive {
 						}
 						throw ex;
 					}
-					return false;
+					else if(tx == null)
+					{
+						throw ex;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 	
@@ -109,7 +125,14 @@ public class PrescriptionItemDBDrive {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -136,8 +159,28 @@ public class PrescriptionItemDBDrive {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
+	}
+	
+	public String GetMaxTermID()
+	{
+		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Criteria c = session.createCriteria(PrescriptionTerms.class);
+		c.addOrder(Order.desc("term_id"));
+		c.setMaxResults(1);
+
+		PrescriptionTerms terms = (PrescriptionTerms) c.uniqueResult();
+
+		return Integer.toString(terms.getTerm_id());
+
 	}
 	
 }

@@ -545,7 +545,7 @@ tableRef.innerHTML = ""
 									<tbody>
 									
 								            <?php $presitems = array_map("unserialize", array_unique(array_map("serialize", $presitems))); ?>
-									     <?php $i=0; if ($pres != NULL) foreach ($pres as $item) { ?>
+									     <?php $i=0; if ($presitems != NULL) foreach ($presitems as $item) { ?>
 									    
                                                 <tr id="ts">
 											<td id="index"><?php echo ++$i; ?></td>

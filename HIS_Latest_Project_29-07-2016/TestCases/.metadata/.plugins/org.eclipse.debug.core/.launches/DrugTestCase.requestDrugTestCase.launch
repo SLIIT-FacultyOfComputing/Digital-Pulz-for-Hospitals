@@ -2,8 +2,9 @@
 <launchConfiguration type="org.testng.eclipse.launchconfig">
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.testng.remote.RemoteTestNG"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HIS"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -ea -ea    "/>
 <mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
-<mapEntry key="DrugTestCase" value="requestDrugTestCase;addDrugBatchTestCase;insertDrugTestCase;approveDrugRequestTestCase;getAllRequestsTestCase"/>
+<mapEntry key="DrugTestCase" value="requestDrugTestCase;addDrugBatchTestCase;insertDrugTestCase;getAllRequestsTestCase"/>
 </mapAttribute>
 <listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
 <listEntry value="DrugTestCase"/>
@@ -12,7 +13,6 @@
 <listEntry value="requestDrugTestCase"/>
 <listEntry value="addDrugBatchTestCase"/>
 <listEntry value="insertDrugTestCase"/>
-<listEntry value="approveDrugRequestTestCase"/>
 <listEntry value="getAllRequestsTestCase"/>
 </listAttribute>
 <listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>

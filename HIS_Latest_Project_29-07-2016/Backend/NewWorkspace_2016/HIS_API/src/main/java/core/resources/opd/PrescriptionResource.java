@@ -95,8 +95,18 @@ public class PrescriptionResource {
 				prescribeitem.setPrescribeItemsDosage(dosage);
 				prescribeitem.setPrescribeItemsFrequency(freq);
 				prescribeitem.setPrescribeItemsPeriod(period);
-				int dosage_int = Integer.parseInt(dosage);
 				
+				float dosage_float =0;
+				if(dosage.indexOf('/') >=0)
+				{
+					float no1 = Float.parseFloat(dosage.split("/")[0]);
+					float no2 = Float.parseFloat(dosage.split("/")[1]);
+					dosage_float = no1/no2;//Integer.parseInt(dosage);
+				}
+				else
+				{
+					dosage_float = Float.parseFloat(dosage);
+				}
 				//getting the day
 				int day = 0;
 				switch(freq){
@@ -144,7 +154,7 @@ public class PrescriptionResource {
 				}
 				
 				//multiply
-				qty = dosage_int * day * period_days;
+				qty = (int) Math.ceil(dosage_float * day * period_days);
 			
 			prescribeitem.setPrescribeItemsQuantity(qty);
 			//adding the item

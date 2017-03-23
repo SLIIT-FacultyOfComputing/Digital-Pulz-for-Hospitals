@@ -44,8 +44,8 @@ import org.hibernate.Transaction;
 
 public class UserDBDriver {
 	
-Session session = SessionFactoryUtil.getSessionFactory().openSession();
-DataHashing dataHashing=new DataHashing();
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	DataHashing dataHashing=new DataHashing();
 	
 	 /**
 	 * Select all registered users from the database

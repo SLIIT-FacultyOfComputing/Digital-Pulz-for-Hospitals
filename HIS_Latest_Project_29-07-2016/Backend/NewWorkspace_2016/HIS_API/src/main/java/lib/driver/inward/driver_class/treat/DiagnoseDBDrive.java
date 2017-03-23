@@ -45,7 +45,14 @@ public class DiagnoseDBDrive {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+				//return false;
+			}
+			else{
+				return false;
+			}
 		}
 		
 		
@@ -73,7 +80,14 @@ public class DiagnoseDBDrive {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
+			
 		}
 	}
 }

@@ -4,13 +4,14 @@
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HIS"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -ea   "/>
 <mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
-<mapEntry key="LabTestCase" value="addLaboratoryTestCase"/>
+<mapEntry key="LabTestCase" value="addLaboratoryTestCase;getAllLaboratoriesTestCase"/>
 </mapAttribute>
 <listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
 <listEntry value="LabTestCase"/>
 </listAttribute>
 <listAttribute key="org.testng.eclipse.METHOD_TEST_LIST">
 <listEntry value="addLaboratoryTestCase"/>
+<listEntry value="getAllLaboratoriesTestCase"/>
 </listAttribute>
 <listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>
 <mapAttribute key="org.testng.eclipse.PARAMETERS"/>

@@ -130,7 +130,7 @@ var opt = $('<option />');
                                 </fieldset>
                                 <?php echo form_close(); ?>
 
-                                 <button onclick=poorna()>Click me</button> 
+                                <!-- <button onclick=poorna()>Click me</button> -->
                             </div>
                         </div>
                     </div>

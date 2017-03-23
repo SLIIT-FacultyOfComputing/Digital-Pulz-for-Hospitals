@@ -1,0 +1,45 @@
+package lib;
+
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+
+public class BaseDaoImpl<T, PK extends Serializable> {
+
+	Transaction tx = null;
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	
+	protected Class<T> entityClass;
+
+
+	public T create(T t) {
+
+	    return t;
+	}
+
+	public T read(int id) {
+
+	}
+
+
+	public T update(T t) {
+ 
+	}
+
+
+	public void delete(T t) {
+
+	}
+	
+	public Transaction beginTrasaction()
+	{
+		tx = session.beginTransaction();
+		return tx;
+	}
+}

@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite1]">
-  <test name="testLaboratory(failed)">
+  <test name="testPharmacy(failed)">
+    <groups>
+      <run>
+        <include name="his.pharmacy.test"/>
+        <include name="his.lab.test.prescription"/>
+      </run>
+    </groups>
     <classes>
-      <class name="PCULabTestRequestTestCase">
+      <class name="PrescriptionTestCase">
         <methods>
-          <include name="getAllPcuLabTestCase"/>
-          <include name="getPcuLabTestByAdminID"/>
-          <include name="updatePCULabRequests"/>
-          <include name="deleteOPDLabTestRequest"/>
-          <include name="addPcuLabTestRequestTestCase"/>
-          <include name="getPcuLabTestByPatientID"/>
-          <include name="getPcuLabTestByReqID"/>
+          <include name="getPrescriptionsByPatientTestCase"/>
+          <include name="getPrescriptionsByPrescriptionTestCase"/>
+          <include name="addPrescriptionTestCase"/>
+          <include name="updatePrescriptionTestCase"/>
         </methods>
-      </class> <!-- PCULabTestRequestTestCase -->
+      </class> <!-- PrescriptionTestCase -->
+      <class name="DrugTestCase">
+        <methods>
+          <include name="requestDrugTestCase"/>
+          <include name="insertDrugTestCase"/>
+          <include name="getAllRequestsTestCase"/>
+          <include name="addDrugBatchTestCase"/>
+          <include name="approveDrugRequestTestCase"/>
+        </methods>
+      </class> <!-- DrugTestCase -->
     </classes>
-  </test> <!-- testLaboratory(failed) -->
+  </test> <!-- testPharmacy(failed) -->
 </suite> <!-- Failed suite [Suite1] -->

@@ -93,6 +93,13 @@ class PrescriptionModel {
 		$response = $curl_request->curl_GET_Request($service_url);
 		return $response;
 	}
-        
+    
+    public function getDrugStocks()
+	{
+		$service_url = SERVICE_BASE_URL."PharmacyServices/drugStockTable";
+		$curl_request = new ServiceCaller();
+		$response = $curl_request->curl_GET_Request($service_url);
+		return $response;
+	}
 }
 ?>

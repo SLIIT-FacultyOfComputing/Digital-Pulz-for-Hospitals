@@ -43,7 +43,14 @@ public class BedDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return false;
+			}
+			else
+			{
 			return false;
+			}
 		}
 
 	}
@@ -70,7 +77,14 @@ public class BedDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -96,7 +110,14 @@ public class BedDBDriver {
 			}
 			throw ex;
 		}
+		else if (tx==null)
+		{
+			return false;
+		}
+		else
+		{
 		return false;
+		}
 	}
 		
 	}
@@ -136,7 +157,14 @@ public class BedDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return false;
+			}
+			else
+			{
 			return false;
+			}
 		}
 		
 	}
@@ -165,7 +193,14 @@ public class BedDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	
@@ -192,7 +227,14 @@ public class BedDBDriver {
 				}
 				throw ex;
 			}
+			else if (tx==null)
+			{
+				return null;
+			}
+			else
+			{
 			return null;
+			}
 		}
 	}
 	

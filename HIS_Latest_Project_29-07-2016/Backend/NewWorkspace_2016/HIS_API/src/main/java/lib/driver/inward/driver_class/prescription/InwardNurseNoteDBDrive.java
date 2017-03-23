@@ -46,7 +46,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		
 		
@@ -79,7 +86,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 						}
 						throw ex;
 					}
-					return false;
+					else if(tx == null)
+					{
+						throw ex;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 	
@@ -105,7 +119,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	
@@ -127,7 +148,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	

@@ -13,14 +13,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONObject;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import core.ErrorConstants;
 import core.classes.inward.prescription.PrescriptionItem;
 import core.classes.inward.prescription.PrescriptionTerms;
+import core.resources.lims.SubCategoryResource;
 import flexjson.JSONException;
 import flexjson.JSONSerializer;
 import lib.SessionFactoryUtil;
@@ -28,7 +31,9 @@ import lib.driver.inward.driver_class.prescription.PrescriptionItemDBDrive;
 
 @Path("PrescriptionItem")
 public class PrescriptionItemResource {
-
+	
+	final static Logger log = Logger.getLogger(PrescriptionItemResource.class);
+	
 	PrescriptionItemDBDrive requestdbDriver = new PrescriptionItemDBDrive();
 	DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
@@ -36,8 +41,9 @@ public class PrescriptionItemResource {
 	@Path("/addNewPrescrptionItem")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addNewPrescrptionItem(JSONObject wJson) {
-
+	public String addNewPrescrptionItem(JSONObject wJson) throws org.codehaus.jettison.json.JSONException {
+		log.info("Entering the add NewPrescription method");
+		
 		try {
 			PrescriptionItem newterm = new PrescriptionItem();
 
@@ -48,22 +54,50 @@ public class PrescriptionItemResource {
 			newterm.setStatus(wJson.getString("status"));
 
 			requestdbDriver.addNewPrescrptionItem(newterm, drug_id, term_id);
-
-			return "true";
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-
-			return e.getMessage().toString();
+			log.info("Insert prescription item Successful, drugId = "+drug_id);
+			JSONSerializer serializer=new JSONSerializer();
+			String Result=serializer.exclude("*.class").serialize(newterm);
+			return Result;
+		} catch (JSONException e) {
+			log.error("JSON exception in Add prescription item, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			
+			
+			return jsonErrorObject.toString(); 
 		}
-
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in Add prescription item, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while adding prescription item, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
 	}
 
 	@POST
 	@Path("/UpdatePrescrptionItem")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String UpdatePrescrptionItem(JSONObject wJson) {
-
+	public String UpdatePrescrptionItem(JSONObject wJson) throws org.codehaus.jettison.json.JSONException {
+		log.info("Entering the update prescriptionItem method");
 		String result = "false";
 		boolean r = false;
 
@@ -73,18 +107,31 @@ public class PrescriptionItemResource {
 			String Frequnecy = wJson.getString("frequency");
 			String status = wJson.getString("status");
 			r = requestdbDriver.UpdatePrescrptionItem(auto_id,Dose,Frequnecy,status);
+			log.info("Update Prescription Item Successful, autoID = "+auto_id);
 			result = String.valueOf(r);
 
-			return result;
+			return ""+auto_id;
 
-		} catch (JSONException ex) {
-			ex.printStackTrace();
-			return result;
+		}	catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in updating Prescription Item, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
 		}
-
-		catch (Exception ex) {
-			ex.printStackTrace();
-			return ex.getMessage();
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while updating Prescription Item, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
 		}
 
 	}
@@ -92,38 +139,103 @@ public class PrescriptionItemResource {
 	@GET
 	@Path("/getPrescrptionItemsByBHTNo/{bhtNo}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getPrescrptionItemsByBHTNo(@PathParam("bhtNo") String bhtNo) {
+	public String getPrescrptionItemsByBHTNo(@PathParam("bhtNo") String bhtNo) throws org.codehaus.jettison.json.JSONException {
+		try{
+			log.info("Entering the get all prescriptionItems by BhtNo method");
+		
 		String result = "";
 		List<PrescriptionItem> req = requestdbDriver.getPrescrptionItemsByBHTNo(bhtNo);
 		JSONSerializer serializor = new JSONSerializer();
+		
 		result = serializor.serialize(req);
-		return result;
+		return result;}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in getting prescriptionItems by BHT_NO, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while getting prescriptionItems by BHT_NO, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
 	}
 
 	@GET
 	@Path("/getPrescrptionItemsByTermID/{term_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getPrescrptionItemsByTermID(@PathParam("term_id") int term_id) {
+	public String getPrescrptionItemsByTermID(@PathParam("term_id") int term_id) throws org.codehaus.jettison.json.JSONException {
+		try{
+			log.info("Entering the get all prescriptionItems by term_id method");
+		
 		String result = "";
 		List<PrescriptionItem> req = requestdbDriver.getPrescrptionItemsByTermID(term_id);
 		JSONSerializer serializor = new JSONSerializer();
 		result = serializor.serialize(req);
-		return result;
+		return result;}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in getting prescriptionItems by term_id, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while getting prescriptionItems by term_id, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
 	}
 
 	@GET
 	@Path("/getMaxTermID")
 
-	public String getMaxTermIDByUserID() {
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
-		Criteria c = session.createCriteria(PrescriptionTerms.class);
-		c.addOrder(Order.desc("term_id"));
-		c.setMaxResults(1);
-
-		PrescriptionTerms terms = (PrescriptionTerms) c.uniqueResult();
-
-		return Integer.toString(terms.getTerm_id());
-
+	public String getMaxTermIDByUserID() throws org.codehaus.jettison.json.JSONException {
+		try{
+			log.info("Entering the get max_term_id method");
+		
+		return requestdbDriver.GetMaxTermID();
+		}catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in getting MaxTermId, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while getting  MaxTermId, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
 	}
 
 }

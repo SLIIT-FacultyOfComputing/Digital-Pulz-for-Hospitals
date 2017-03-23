@@ -37,7 +37,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 		// TODO Auto-generated method stub
 	}
@@ -64,7 +71,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	public boolean addNewDiabeticchartDetails(DiabeticChart term, String bhtNo) {
@@ -89,7 +103,14 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	
 }}

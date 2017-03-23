@@ -482,4 +482,186 @@
 		    "drug_srno":"8","drug_name":"TestDrug", "userId":"1","drugQty":"0","drug_reqid":"2","updatedDate":"2014-11-17 10:56:51"
 		}
 	</request>
+
+	
+	<!-- hasthi.d -->
+	<!-- AdmissionRequest -->
+	<request id="addAdmissionReq">
+		{
+			"request_unit" : "OPD", "is_read" : 0, "remark" : "TestCase", "is_user_doctor" : 0, "create_date_time" : "2015-11-09T11:02", "last_update_date_time" : "2015-11-19T11:02", "patient_id" : 1, "create_user" : 3, "last_update_user" : 3, "transfer_ward" : "Ward-01"
+		}
+	</request>
+	
+	<request id="updateAdmissionReq">
+		{
+			"bht_no" : 99999, "last_update_user" : 2, "last_update_date_time" : "2015-12-19T11:02,"	
+		}
+	</request>
+
+	<request id="addExternalTransfer">
+		{
+			"bhtNo" : 99999, "transferFrom" : "TestCase", "transferTo" : "TestCaseX", "resonForTrasnsfer" : "Testing", "reportOfSpacialExamination"	: "Heart patient", "treatmentSuggested" : "Give Aspin", "transferCreatedDate" : "2014-11-09T14:22:00", "transferCreatedUser" : 1, "nameOfGuardian" : "S.A Wijerathne", "addressOfGuardian" : "No-145/8/3, Dadagamuwa,Veyangoda"	
+		}
+	</request>
+	
+	<request id="addInternalTransfer">
+		{
+			"bhtNo" : 99999, "transferWard" : "Ward-02", "transferFromWard" : "Ward-01", "resonForTrasnsfer" : "TestCase", "reportOfSpacialExamination" : "heart attack", "treatmentSuggested" : "aspin", "transferCreatedDate" : "2014-11-12T00:15:00", "transferCreatedUser" : 1
+		}
+	</request>
+	
+	<request id="updateInternalTransfer">
+		{
+			"transferId" : 7, "NewbhtNo": 99999
+		}
+	</request>
+	
+	<request id="addPrescriptionTerm">
+		{
+			"start_date": "2014-11-19","end_date":"2015-11-19","bht_no":"99999","create_user":"1","no_of_terms":"423333"
+		}
+	</request>
+	
+	<request id="updateprescription">
+		{
+			"end_date":"2017-11-19"
+		}
+	
+	</request>
+
+	<request id="AddPrescriptionItem">
+		{
+		   "drug_id":"12","term_id":"38","dose":"1","frequency":"testing","status":"testingcase","bht_no":"99999"
+		}
+	</request>
+		<request id="updateprescriptionItem">
+		{
+		   "dose":"1","frequency":"testing","status":"testingcase"
+		}
+	</request>
+	
+	<request id="addWard">
+	{
+		"wardNo": "Ward-Test","category": "Test","wardGender": "Test"
+	}
+	
+	</request>
+	<request id="updateWard">
+		{
+			"wardNo":"Ward-Test","category":"Testcat","wardGender":"TestGender"
+		}
+	</request>
+	
+	<request id="deleteWard">
+		{
+			"wardNo":"Ward-Test"
+		}
+	</request>
+
+	<request id="addInwardNurseNote">
+		{
+			"bht_no":"99999","note":"testing","create_user":"3","date":"2015-09-10"
+		}
+		</request>
+	<request id="updateNurseNoteTermprecription">
+	{
+	"term_id":"100","end_date":"2015-09-10"
+	}
+	</request>	
+	
+	<request id="addChart">
+	{
+		"bloodSuger": 2.0,
+		"dateTime": "2017-01-01T10:05",
+		"bht_no":"99999"
+	}
+	</request>
+	
+	<!-- Admission Resource-->
+	<!-- Saugat-->
+	
+	<request id="addWardAdmission">
+		{
+		    "bhtNo":"99999", "patientID":"1", "bedNo":"1", "wardNo":"Ward-02", "dailyNo":"1", "monthlyNo":"1", "yearlyNo":"1", "DoctorID":"17", "admitDateTime":"2017-03-06T14:18", "patientComplain":"test", "previousHistory":"test", "AdmissionUnit":"Ward", "createdUser":"1", "createdDateTime":"2017-03-06T14:22", "LastUpdatedUser":"1", "LastUpdatedDateTime":"2017-03-06T14:23"
+		}
+	</request>
+	
+	<request id="updateDischarge">
+		{
+		    "bhtNo":"99999","discharjType":"test","remark":"none","outcomes":"test outcome","dischargediagnosis":"test diagnosis","referredto":"test doctor","LastUpdatedDateTime":"2017-03-06T14:23","LastUpdatedUser":"1"
+		}
+	</request>
+	
+	<request id="updateDischargeSign">
+		{
+		    "bhtNo":"99999","status":"test status","sign":"test url","LastUpdatedUser":"1"
+		}
+	</request>
+	
+	<request id="updateAdmissionBedNo">
+		{
+		    "bhtNo":"99999","bedNo":"8","LastUpdatedDateTime":"2017-03-06T10:04","LastUpdatedUser":"8"
+		}
+	</request>
+	
+		<!-- InwardBed-->
+	<!-- Saugat-->
+	
+	<request id="addBed">
+		{
+		    "bedNo":"13", "bedType":"Normal", "wardNo":"Ward-01", "availability":"Test"
+		}
+	</request>
+	
+	<request id="updateBed">
+		{
+		     "bedNo":"13", "bedType":"Special", "wardNo":"Ward-01", "availability":"Test", "patientID" : "0"
+		}
+	</request>
+	
+	<request id="AddChart">
+		{
+ 				"oral":"2.0",
+ 				"saline":"-150.0",
+ 				"output": "10.0",
+ 				"dateTime":"2011-06-14T04:12",
+ 				"bht_no":"99999"
+		}
+	</request>
+	
+	<!-- Sampath-->
+	<request id="AddNewTemp">
+		{
+			"temperature": "100",
+			"dateTime": "2017-01-01T01:10",
+			"bht_no" : "99999"
+		}
+	</request>
+	
+	<request id = "AddNewDiagnose">
+	{
+			"treat": "Test",
+			"image": "Test",
+			"create_user": "1",
+			"bht_no" : "99999"
+	}
+	</request>
+	
+	<request id="TempPrescribe">
+	{
+	"drug_id": 1,
+	"term_id":27,
+	"dose":5,
+	"frequency":"Test"
+	}
+	</request>
+	
+	<request id="TempPrescribeUpdate">
+	{
+		"drug_id": 1,
+		"term_id":27,
+		"dose":5,
+		"frequency":"TestUpdate"
+	}
+	</request>
 </Requests>

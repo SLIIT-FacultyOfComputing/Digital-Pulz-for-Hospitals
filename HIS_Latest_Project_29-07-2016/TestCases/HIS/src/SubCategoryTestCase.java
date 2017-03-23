@@ -55,7 +55,7 @@ public class SubCategoryTestCase extends BaseTestCase{
 		ArrayList<String> resArrayList = getHTTPResponse(properties.getProperty(TestCaseConstants.URL_APPEND_GET_ALL_SUBCATEGORY_BY_ID
 				)+subcategoryId,TestCaseConstants.HTTP_GET, null);
 
-		
+		System.out.println(resArrayList.get(0));
 		JSONArray jsonArray2 = new JSONArray(resArrayList.get(0));
 		String subCatId = jsonArray2.getJSONObject((jsonArray2.length() - 1)).getString("sub_CategoryID");
 		

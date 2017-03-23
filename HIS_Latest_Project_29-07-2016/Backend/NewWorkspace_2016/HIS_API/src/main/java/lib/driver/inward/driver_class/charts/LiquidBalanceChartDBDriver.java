@@ -25,8 +25,8 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("select d from LiquidBalanceChart as d");
-			@SuppressWarnings("unchecked")
+			Query query = session.createQuery("select l from LiquidBalanceChart l");
+			//@SuppressWarnings("unchecked")
 			List<LiquidBalanceChart> chartvalues = query.list();
 			tx.commit();
 			return chartvalues;
@@ -39,9 +39,15 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return null;
-		}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		// TODO Auto-generated method stub
+		}
 	}
 	public List<LiquidBalanceChart> getLiquidBalanceChartByBHTNo(String bhtNo) {
 		Transaction tx = null;
@@ -65,7 +71,13 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 	
@@ -92,7 +104,13 @@ Session session = SessionFactoryUtil.getSessionFactory().openSession();
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return false;
+			}
 		}
 		
 		

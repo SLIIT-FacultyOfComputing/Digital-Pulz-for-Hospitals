@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="getPatientsByPID" key="selection"/>
+		<item value="setQueueType" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="getPatientsByPID"/>
-			<item value="getRequestsByPatientID"/>
-			<item value="getReq"/>
-			<item value="ispat"/>
-			<item value="uni"/>
-			<item value="getDrugDetailsByDrugName"/>
-			<item value="getDrugDetailsByDName/"/>
-			<item value="getDrugNamesByCategory"/>
+			<item value="setQueueType"/>
+			<item value="Queue/setQueueType"/>
+			<item value="/getRequest"/>
+			<item value="DrugServices/getRequest"/>
+			<item value="TrnDrugsSupplied"/>
+			<item value="addBatch"/>
+			<item value="getDrugCategories"/>
+			<item value="add"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

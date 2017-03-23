@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite1]">
-  <test name="testLaboratory(failed)">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="PCULabTestRequestTestCase">
+      <class name="LabTestCase">
         <methods>
-          <include name="getAllPcuLabTestCase"/>
-          <include name="getPcuLabTestByAdminID"/>
-          <include name="updatePCULabRequests"/>
-          <include name="deleteOPDLabTestRequest"/>
-          <include name="addPcuLabTestRequestTestCase"/>
-          <include name="getPcuLabTestByPatientID"/>
-          <include name="getPcuLabTestByReqID"/>
+          <include name="updateLaboratoryTestCase"/>
+          <include name="getAllLaboratoriesTestCase"/>
+          <include name="addLaboratoryTestCase"/>
+          <include name="deleteLabTestCase"/>
+          <include name="getLabTestRequestByID"/>
         </methods>
-      </class> <!-- PCULabTestRequestTestCase -->
+      </class> <!-- LabTestCase -->
     </classes>
-  </test> <!-- testLaboratory(failed) -->
-</suite> <!-- Failed suite [Suite1] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -22,4 +22,19 @@
 <fullyQualifiedTypeName name="javassist.tools.rmi.ObjectNotFoundException"/>
 <fullyQualifiedTypeName name="org.hibernate.ObjectNotFoundException"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="javax.persistence.PersistenceContext"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+<fullyQualifiedTypeName name="org.hibernate.usertype.ParameterizedType"/>
+<fullyQualifiedTypeName name="java.lang.reflect.ParameterizedType"/>
+<fullyQualifiedTypeName name="java.lang.Readable"/>
+<fullyQualifiedTypeName name="core.resources.BaseDaoImpl"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="org.hibernate.Transaction"/>
+<fullyQualifiedTypeName name="org.hibernate.SessionFactory"/>
+<fullyQualifiedTypeName name="javax.annotation.Resource"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.hibernate.Criteria"/>
+<fullyQualifiedTypeName name="lib.BaseDaoImpl"/>
+<fullyQualifiedTypeName name="core.classes.lims.Laboratories"/>
 </qualifiedTypeNameHistroy>

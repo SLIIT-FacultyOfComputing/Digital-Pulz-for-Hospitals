@@ -1,5 +1,6 @@
 package lib.driver.lims.driver_class;
 
+import lib.BaseDaoImpl;
 import lib.SessionFactoryUtil;
 
 import org.hibernate.HibernateException;
@@ -7,24 +8,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.Collection;
 import java.util.List;
 
 import core.classes.api.user.AdminUser;
-import core.classes.lims.Category;
 import core.classes.lims.LabDepartments;
-
-import core.classes.lims.Category;
 import core.classes.lims.LabTypes;
 import core.classes.lims.Laboratories;
 
-import core.classes.lims.SampleCenterTypes;
-import core.classes.lims.SampleCenters;
-import core.classes.lims.SubCategory;
-import core.classes.lims.TestFieldsRange;
-import core.classes.opd.OutPatient;
 
-public class LaboratoriesDBDriver {
+public class LaboratoriesDBDriver extends BaseDaoImpl {
 
 	Session session = SessionFactoryUtil.getSessionFactory().openSession();
 	
@@ -32,12 +24,14 @@ public class LaboratoriesDBDriver {
 
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
+			tx = SetSession();
 			
-			LabTypes lLabType = (LabTypes)session.get(LabTypes.class, labTypeID);
-			LabDepartments lDeptsType = (LabDepartments)session.get(LabDepartments.class, labDepartmentID);
+		
+			LabTypes lLabType = (LabTypes)get(LabTypes.class, labTypeID);//(LabTypes)session.get(LabTypes.class, labTypeID);
+			LabDepartments lDeptsType = (LabDepartments)get(LabDepartments.class, labDepartmentID);
 			
-			AdminUser user = (AdminUser) session.get(AdminUser.class, userid);
+			AdminUser user = (AdminUser) get(AdminUser.class, userid);
 			
 			lab.setFlabType_ID(lLabType);
 			lab.setFlabDept_ID(lDeptsType);
@@ -45,8 +39,8 @@ public class LaboratoriesDBDriver {
 			lab.setFlabLast_UpdatedUserID(user);
 			lab.setFlab_AddedUserID(user);
 	
-			session.save(lab);
-			tx.commit();
+			save(lab);//session.save(lab);
+			CloseSession(tx);//tx.commit();
 			return true;
 		} catch (RuntimeException ex) {
 			if (tx != null && tx.isActive()) {
@@ -80,10 +74,10 @@ public class LaboratoriesDBDriver {
 		Transaction tx = null;
 		try {
 			//catID = 2;
-			tx = session.beginTransaction();
+			tx = SetSession();
 			Query query = session.createQuery("select l from Laboratories l" );
 			//query.setParameter("catID", catID);
-			List<Laboratories> labList = query.list();
+			List<Laboratories> labList = query.list(); // getAll(Laboratories.class);
 			tx.commit();
 			return labList;
 		} catch (RuntimeException ex) {
@@ -102,13 +96,13 @@ public class LaboratoriesDBDriver {
 	public Laboratories getLabID(int id) {
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			Query query = session.createQuery("select l from Laboratories l where l.lab_ID="+id);
-			List<Laboratories> labList = query.list();
-			if (labList.size() == 0)
+			tx = SetSession();
+			//Query query = session.createQuery("select l from Laboratories l where l.lab_ID="+id);
+			Laboratories lab = (Laboratories)get(Laboratories.class, id);//query.list();
+			if (lab == null)
 				return null;
-			tx.commit();
-			return (Laboratories)labList.get(0);
+			CloseSession(tx);;
+			return lab;
 		} catch (RuntimeException ex) {
 			if (tx != null && tx.isActive()) {
 				try {
@@ -127,18 +121,18 @@ public class LaboratoriesDBDriver {
 		Transaction tx = null;
 		try {
 
-			tx = session.beginTransaction();
-			Query query = session.createQuery("select t from LabTypes as t where t.labType_ID=:typeID");
-			query.setParameter("typeID", typeID);
-			List<LabTypes> testList = query.list();
-			LabTypes catObject=testList.get(0);
+			tx = SetSession();
+			//Query query = session.createQuery("select t from LabTypes as t where t.labType_ID=:typeID");
+			//query.setParameter("typeID", typeID);
+			///List<LabTypes> testList = query.list();
+			LabTypes catObject=(LabTypes)get(LabTypes.class, typeID);//testList.get(0);
 			tx.commit();
 
-			tx = session.beginTransaction();
+			tx = SetSession();
 			Query query1 = session.createQuery("select l from Laboratories as l where l.flabType_ID=:catObj");
 			query1.setParameter("catObj", catObject);
 			List<Laboratories> testList1 = query1.list();
-			tx.commit();
+			CloseSession(tx);
 			return testList1;
 			
 			
@@ -160,10 +154,10 @@ public class LaboratoriesDBDriver {
 	public boolean updateLaboratories(int labID, Laboratories lab,int labTypeID, int labDepartmentID, int userid) {
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			Laboratories labs = (Laboratories) session.get(Laboratories.class,labID);
-			LabTypes lLabType = (LabTypes)session.get(LabTypes.class, labTypeID);
-			LabDepartments lDeptsType = (LabDepartments)session.get(LabDepartments.class, labDepartmentID);
+			tx = SetSession();
+			Laboratories labs = (Laboratories) get(Laboratories.class,labID);
+			LabTypes lLabType = (LabTypes) get(LabTypes.class, labTypeID);
+			LabDepartments lDeptsType = (LabDepartments) get(LabDepartments.class, labDepartmentID);
 					
 			
 			labs.setLab_Name(lab.getLab_Name());
@@ -179,14 +173,14 @@ public class LaboratoriesDBDriver {
 			labs.setFlab_AddedUserID(lab.getFlab_AddedUserID());
 			labs.setLab_AddedDate(lab.getLab_AddedDate());
 			
-			AdminUser user = (AdminUser) session.get(AdminUser.class, userid);
+			AdminUser user = (AdminUser) get(AdminUser.class, userid);
 			labs.setFlabLast_UpdatedUserID(user);
 			labs.setLab_LastUpdatedDate(lab.getLab_LastUpdatedDate());
 			
 
-		
-			session.update(labs);
-			tx.commit();
+			merge(labs);
+			//session.update(labs);
+			CloseSession(tx);//tx.commit();
 			return true;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -213,13 +207,15 @@ public class LaboratoriesDBDriver {
 			Laboratories lab=new Laboratories();
 			lab.setLab_ID(LabID);
 			
-			Object object = session.load(Laboratories.class, LabID);
-			Laboratories deleteLab = (Laboratories) object;			
+			
+					
 			
 			System.out.println("Deleting Item ");
-			tx = session.beginTransaction();			
-			session.delete(deleteLab);
-			tx.commit();
+			tx = SetSession();
+			Object object = get(Laboratories.class, LabID);
+			Laboratories deleteLab = (Laboratories) object;	
+			delete(deleteLab);
+			CloseSession(tx);
 			
 		}
 		catch(Exception e)

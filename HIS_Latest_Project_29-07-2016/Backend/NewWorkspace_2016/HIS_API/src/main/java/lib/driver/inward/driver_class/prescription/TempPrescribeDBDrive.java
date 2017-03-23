@@ -42,7 +42,14 @@ public class TempPrescribeDBDrive {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+				
+			}
+			else{
+				return false;
+			}
 		}
 		
 		
