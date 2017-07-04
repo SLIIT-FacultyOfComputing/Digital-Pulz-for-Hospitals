@@ -1,0 +1,7 @@
+package core.classes.standards;
+
+import core.classes.BaseEntity;
+
+public class icd10 extends BaseEntity implements java.io.Serializable {
+
+}

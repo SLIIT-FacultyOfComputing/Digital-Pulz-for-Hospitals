@@ -221,7 +221,7 @@ public class VisitDBDriver {
 		}
 	}
 	 
-	public List<Visit> getVisitsForReport(Date fromDate, Date toDate, int doctor) {
+	public List<Visit> getVisitsForReport(Date fromDate, Date toDate, int doctorId) {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -230,7 +230,7 @@ public class VisitDBDriver {
 			String hql;
 			Query query;	 
 			 
-			if(doctor == 0)
+			if(doctorId == 0)
 			{	
 				hql = "from Visit where( cast(visitDate as date) between :fromDate AND :toDate)";
 				query = session.createQuery(hql);
@@ -238,6 +238,7 @@ public class VisitDBDriver {
 				query.setDate("toDate",toDate);
 			}else
 			{
+				AdminUser doctor = (AdminUser) session.get(AdminUser.class, doctorId);
 				hql = "from Visit where( cast(visitDate as date) between :fromDate AND :toDate AND visitDoctor=:doctor)";
 				query = session.createQuery(hql);
 				query.setDate("fromDate",fromDate);

@@ -1,3 +1,12 @@
+<?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
 <section class="content-header">
     <h1>
         My Queue
@@ -33,12 +42,15 @@
                                 <td>Queue Status </td>
                                 <td> : </td>
                                 <td><?php
+
                                     if (isset($qstatus) && $qstatus == '1')
                                         echo 'Full';
                                     if (isset($qstatus) && $qstatus == '0')
                                         echo 'Open';
                                     if (isset($qstatus) && $qstatus == '2')
                                         echo 'On Hold';
+                                    if (isset($qstatus) && $qstatus == '3')
+                                        echo 'Redirect';
                                     ?> 
                                 </td>
                             </tr>
@@ -78,17 +90,29 @@
                         <i class="fa fa-random"></i>
                         <h3 class="box-title">Queue Controller</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body" style="margin-top:6px">
-                        <br>
-                        <input class="btn btn-block btn-primary" onClick="<?php echo "window.location='../../queue_c/holdQueue'"; ?>" value="<?php
+                    <div class="box-body" style="margin-top:9px">
+                        <input type="button" class="btn btn-block btn-primary" onClick="<?php echo "window.location='../../queue_c/holdQueue'"; ?>" value="<?php
                         if (isset($qstatus) && $qstatus == '2')
                             echo 'Resume Queue';
                         else
                             echo 'Hold Queue';
                         ?>"  />
-                        <br><br>
-                        <input type="button" onClick="<?php echo "window.location='../../queue_c/redirectQueue'"; ?>" value="<?php echo "Redirect Queue"; ?>" class="btn btn-block btn-danger"  /> 
                         <br>
+                        <input type="button" onClick="<?php echo "window.location='../../queue_c/redirectQueue'"; ?>" value="<?php
+                        if (isset($qstatus) && $qstatus == '3')
+                            echo 'Resume Queue';
+                        else
+                            echo 'Redirect Queue';
+                        ?>" class="btn btn-block btn-danger"  />
+                        <br>
+                        <input type="button" onClick="<?php echo "window.location='/SEP_Project/index.php/queue_c/setQType'";?>"
+                        value="<?php
+                            if (isset($qtype) && $qtype == '1')
+                                echo 'Enable Regular Queue';
+                            else
+                                echo 'Enable Visit Queue';
+                        ?>" class="btn btn-block btn-default"  />
+
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div>
@@ -161,7 +185,7 @@
 <br>        
 
 
-<script src="<?= base_url('/Bootstrap/js/barcdeReader'); ?>"></script>
+<script src="<?php base_url('/Bootstrap/js/barcdeReader'); ?>"></script>
 <script type="text/javascript">
   
     function clickhere()

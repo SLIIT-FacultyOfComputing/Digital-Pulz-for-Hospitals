@@ -43,10 +43,15 @@ import core.classes.pharmacy.TrnRequestDrugs;
 
 
 
+
+
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,6 +70,8 @@ import java.util.List;
 
 
 
+
+import java.util.Set;
 
 import lib.SessionFactoryUtil;
 import lib.driver.opd.driver_class.PrescriptionDBDriver;
@@ -131,6 +138,53 @@ public class DrugDBDriver {
         //return status;
     }
    
+   public Boolean insertDrug(MstDrugsNew d, int cat, int dosageid, int freq)
+   {
+       Boolean status = false;
+       try
+       {
+			session.beginTransaction();
+			MstDrugCategory categories = (MstDrugCategory) session.
+					get(MstDrugCategory.class, cat);
+			MstDrugDosage dosage = (MstDrugDosage) session.
+					get(MstDrugDosage.class, dosageid);
+			MstDrugFrequency frequency = (MstDrugFrequency) session.
+					get(MstDrugFrequency.class, freq);
+			d.setCategories(categories);
+			
+			Set<MstDrugDosage> dosages = new HashSet<MstDrugDosage>();
+			dosages.add(dosage);
+			
+			Set<MstDrugFrequency> frequencies = new HashSet<MstDrugFrequency>();
+			frequencies.add(frequency);
+			
+			d.setDosages(dosages);
+			d.setFrequencies(frequencies);
+			session.save(d);
+			session.getTransaction().commit();
+			return status = true;
+          
+       }
+       catch(HibernateException e)
+       {
+       	e.printStackTrace();
+           status = false;
+           if (tx!=null)
+           {
+               tx.rollback(); 
+               e.printStackTrace();
+               throw e;
+           }
+           else if(tx==null)
+           {
+           	e.printStackTrace();
+           	throw e;
+           }
+           return status;
+       }
+       
+       //return status;
+   }
    
    /**
     * Updates a Drug
@@ -255,8 +309,8 @@ public class DrugDBDriver {
        {
             tx = session.beginTransaction();
             //Gets the values from the database and assign it to a List
-            drugs = session.createQuery("FROM TrnDrugsSupplied as s where DATEDIFF(NOW(),s.dExpiryDate)<=90").list();//***Query changed from DATEDIFF(s.dExpiryDate,NOW())<=90 
-
+            Query query = session.createQuery("FROM TrnDrugsSupplied as s where DATEDIFF(NOW(),s.dExpiryDate)<=90");//***Query changed from DATEDIFF(s.dExpiryDate,NOW())<=90 
+            drugs = (List<TrnDrugsSupplied>)query.list();
             tx.commit();
             
        }
@@ -859,6 +913,7 @@ public class DrugDBDriver {
 		try {
 			tx = session.beginTransaction();
 			batch = session.createQuery("FROM TrnDrugsSupplied as d where d.dName ='" + name + "'").list();
+			
             tx.commit();
 		} catch (HibernateException e) {
 
@@ -871,7 +926,60 @@ public class DrugDBDriver {
 		return batch;
 	}
 	
-	
+	public boolean deleteBatch(String dname, String batchId)
+	{		
+		try {
+			tx = session.beginTransaction();
+			List<TrnDrugsSupplied> batch = session.createQuery("FROM TrnDrugsSupplied as d where d.dName ='" + dname + "' and d.id.dBatchNo= '"+batchId+"'").list();
+			tx.commit();
+			
+			
+			if(batch.size() > 0)
+			{
+				int drugid = getDrugIDByDrugName(dname);
+				
+				tx = session.beginTransaction();
+				MstDrugsNew drug = (MstDrugsNew) session.get(MstDrugsNew.class, drugid);
+				
+				
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				Date today = Calendar.getInstance().getTime();        
+				String todayDate = df.format(today);
+				String createdDate = df.format(batch.get(0).getdCreateDate());
+				
+				System.out.println(todayDate);
+				System.out.println(createdDate);
+				if(todayDate.equals(createdDate) )
+				{
+					if(drug.getdQty() >= batch.get(0).getdQty())
+					{
+						drug.setdQty(drug.getdQty()- batch.get(0).getdQty());
+						session.update(drug);
+						Query query2 = session.createQuery("DELETE FROM TrnDrugsSupplied as d where d.dName ='" + dname + "' and d.id.dBatchNo= '"+batchId+"'");
+						query2.executeUpdate();
+					}
+					else
+					{
+						tx.commit();
+						return false;
+					}
+				}
+			}
+			
+			tx.commit();
+			return true;
+		} catch (HibernateException e) {
+
+			if (tx != null) {
+				tx.rollback();
+				e.printStackTrace();
+				
+			}
+			return false;
+		}
+
+		
+	}
 	
 	public List<TrnDispenseDrugs> getDispenseListByDate(String date){
 		List<TrnDispenseDrugs> drugs = null;
@@ -909,6 +1017,27 @@ public class DrugDBDriver {
 				
 			}
 
+			session.getTransaction().commit();
+
+			status = true;
+
+		} catch (HibernateException e) {
+			status = false;
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+			e.printStackTrace();
+		} 
+		return status;
+	}
+	
+	public boolean addDrugDosage(MstDrugDosage dosage)
+	{
+		boolean status = false;
+		try {
+			session.beginTransaction();
+			int i = 0;
+			session.saveOrUpdate(dosage);
 			session.getTransaction().commit();
 
 			status = true;
@@ -1020,7 +1149,52 @@ public class DrugDBDriver {
         }
         return frequencies;
 	}
+	
+	public String getFrequencyValue(String name){
+		List<MstDrugFrequency> frequencies= null;
+		String value = "-1";
+        try
+        {
+             tx = session.beginTransaction();
+             //Gets the values from the database and assign it to a List
+             frequencies = session.createQuery("FROM MstDrugFrequency as f WHERE f.frequency='"+name +"' ORDER BY freqId ").list();
+             if(frequencies.size() > 0)
+             {
+            	 value = frequencies.get(0).getValue();
+             }
+             tx.commit();
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return value;
+	}
+	
+	public MstDrugFrequency getFrequencyById(int Id){
 		
+		MstDrugFrequency frequency = null;
+        try
+        {
+        	tx = session.beginTransaction();     
+            frequency=(MstDrugFrequency) session.get(MstDrugFrequency.class, Id);
+            tx.commit();
+             
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return frequency;
+	}
 	
 	public boolean updateFrequency(MstDrugFrequency freq){
 		boolean results = true;

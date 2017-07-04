@@ -1,4 +1,12 @@
-var baseUrl="http://localhost";
+/*
+ ------------------------------------------------------------------------------------------------------------------------
+ DiPMIMS - Digital Pulz Medical Information Management System
+ Copyright (c) 2017 Sri Lanka Institute of Information Technology
+ <http: http://his.sliit.lk />
+ ------------------------------------------------------------------------------------------------------------------------
+ */
+
+var baseUrl="http://localhost/eHealth_proj";
 function userLogin(){
 document.getElementById("imgid").style.visibility = "visible";
 var userName = document.getElementById("userNameValue").value;
@@ -14,7 +22,7 @@ else
 {
     
     $.ajax({
-        url: base+'/eHealth_proj/index.php/user_controller/authenticate',
+        url: base+'/index.php/user_controller/authenticate',
         type: 'POST',
         crossDomain: true,
         data: {"userName":userName ,"password":password},
@@ -27,6 +35,7 @@ else
             }
             else
             {
+                
                  var json_parsed   = $.parseJSON(data);
                  var $userID       = json_parsed[0]['userID'];
                  var $userName     = json_parsed[0]['userName'];
@@ -53,7 +62,7 @@ else
 function createSessionUC(userID,userName,userRoleID,userRoleName,userPermissions,spclPermission)
 {
         $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/user_controller/createSession',
+        url: baseUrl+'/index.php/user_controller/createSession',
         type: 'POST',
         crossDomain: true,
         data: {"userID":userID ,"userName":userName,"userRoleID":userRoleID,"userRoleName":userRoleName,"userPermissions":userPermissions, "spclPermission":spclPermission},
@@ -61,10 +70,10 @@ function createSessionUC(userID,userName,userRoleID,userRoleName,userPermissions
                     data = trimData(data);
                    alert(data);
                    if(userRoleName=="Chief Pharmacist"){
-                   window.location = baseUrl+'/eHealth_proj/index.php/Report_Controller/report';
+                   window.location = baseUrl+'/index.php/Report_Controller/report';
                    }
                    else{
-                   window.location = baseUrl+'/eHealth_proj/index.php/Prescribe_Controller';    
+                   window.location = baseUrl+'/index.php/Prescribe_Controller';
                    }
                    }
     });
@@ -107,7 +116,7 @@ function addPharmacist(){
     else
     {
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/User_Controller/addUser',
+            url: baseUrl+'/index.php/User_Controller/addUser',
             type: 'POST',
             crossDomain: true,
             data: {"title":title ,"firstName":firstName,"lastName":lastName,"nic":nic,"dob":dob,"civilStatus":civilStatus,

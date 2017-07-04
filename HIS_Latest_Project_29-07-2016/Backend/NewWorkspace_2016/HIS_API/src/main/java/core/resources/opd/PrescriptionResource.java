@@ -42,6 +42,7 @@ public class PrescriptionResource {
 	final static Logger log = Logger.getLogger(PrescriptionResource.class);
 	
 	PrescriptionDBDriver prescriptionDBDriver = new PrescriptionDBDriver();
+	DrugDBDriver drugDBdriver = new DrugDBDriver();
 	DateFormat dateformat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	DateFormat dateformat2 = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -55,12 +56,12 @@ public class PrescriptionResource {
 	 * @throws
 	 */
 	@POST
-	@Path("/addPrescription/{PID}/{VISITID}/{userid}")
+	@Path("/addPrescription/{PID}/{VISITID}/{userid}/{presid}")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String addPrescription(JSONArray jsonarray,
 			@PathParam("PID") int PID, @PathParam("VISITID") int visitID,
-			@PathParam("userid") int userid) {
+			@PathParam("userid") int userid, @PathParam("presid") int presid) {
 		log.info("Entering the add Prescription with PID, visitID and userID method");
 		try {
 			System.out.println(jsonarray.toString());
@@ -69,15 +70,23 @@ public class PrescriptionResource {
 			System.out.println(userid);
 			int qty = 0;
 			
-			Prescription prescription = new Prescription();
+			Prescription prescription = null;
+			if(presid == -1)
+			{
+				prescription = new Prescription();
 
-			prescription.setPrescriptionPrescribedBy(userid);
-			prescription.setPrescriptionDate(new Date());
-			prescription.setPrescriptionLastUpdate(new Date());
-			prescription.setPrescriptionCreateUser(userid);
-			prescription.setPrescriptionCreateDate(new Date());
-			prescription.setPrescriptionLastUpdateUser(userid);
- 
+				prescription.setPrescriptionPrescribedBy(userid);
+				prescription.setPrescriptionDate(new Date());
+				prescription.setPrescriptionLastUpdate(new Date());
+				prescription.setPrescriptionCreateUser(userid);
+				prescription.setPrescriptionCreateDate(new Date());
+				prescription.setPrescriptionLastUpdateUser(userid);
+			}
+			else
+			{
+				prescription = prescriptionDBDriver.getPrescriptionById(presid);
+				prescription.prescribeItems.clear();
+			}
 			for (int i = 0; i < jsonarray.length(); i++) {
 
 				JSONObject prescrption = (JSONObject) jsonarray
@@ -97,19 +106,54 @@ public class PrescriptionResource {
 				prescribeitem.setPrescribeItemsPeriod(period);
 				
 				float dosage_float =0;
-				if(dosage.indexOf('/') >=0)
+				try{
+				System.out.println(dosage.split(" ")[0]);
+				//System.out.println(dosage.split(" ")[1]);
+				if(!dosage.endsWith("ml"))
 				{
-					float no1 = Float.parseFloat(dosage.split("/")[0]);
-					float no2 = Float.parseFloat(dosage.split("/")[1]);
-					dosage_float = no1/no2;//Integer.parseInt(dosage);
+					
+					if(dosage.indexOf('/') >=0)
+					{
+						float no1 = Float.parseFloat(dosage.split("/")[0]);
+						float no2 = Float.parseFloat(dosage.split("/")[1]);
+						dosage_float = no1/no2;//Integer.parseInt(dosage);
+					}
+					else
+					{
+						dosage_float = Float.parseFloat(dosage);
+					}
 				}
 				else
 				{
-					dosage_float = Float.parseFloat(dosage);
+					dosage_float = Float.parseFloat(dosage.split(" ")[0]);
+				}
+				}
+				catch(Exception e)
+				{
+					System.err.println(e.getMessage());
 				}
 				//getting the day
-				int day = 0;
-				switch(freq){
+				double day = 0;
+				System.out.println(freq.split(":")[0]);
+				if(!freq.split(":")[0].equals("s.o.s."))
+				{	
+					freq = drugDBdriver.getFrequencyValue(freq);
+				}
+				else
+				{
+					freq = freq.split(":")[1];
+				}
+				if(freq.indexOf('/') >=0)
+				{
+					float no1 = Float.parseFloat(freq.split("/")[0]);
+					float no2 = Float.parseFloat(freq.split("/")[1]);
+					day = no1/no2;//Integer.parseInt(dosage);
+				}
+				else
+				{
+					day = Float.parseFloat(freq);
+				}
+				/*switch(freq){
 				case "Once a Day":
 					day = 1;
 					break;
@@ -119,7 +163,7 @@ public class PrescriptionResource {
 				case "Thrice a Day":
 					day = 3;
 					break;
-				}
+				}*/
 				
 				//get period
 				int period_days = 0; //period to number of days
@@ -127,19 +171,19 @@ public class PrescriptionResource {
 				case "For 1 day":
 					period_days = 1;
 					break;
-				case "For 2 day":
+				case "For 2 days":
 					period_days = 2;
 					break;
-				case "For 4 day":
+				case "For 4 days":
 					period_days = 4;
 					break;
-				case "For 5 day":
+				case "For 5 days":
 					period_days = 5;
 					break;
 				case "For 1 week":
 					period_days = 7;
 					break;
-				case "For 2 week":
+				case "For 2 weeks":
 					period_days = 14;
 					break;
 				case "For 3 weeks":
@@ -163,7 +207,7 @@ public class PrescriptionResource {
 			}
 
 			
-			if (prescriptionDBDriver.insertPrescription(prescription, visitID))
+			if (prescriptionDBDriver.insertPrescription(prescription, visitID, presid))
 			{
 				log.info("Inserting Prescription and Prescription items Successful, prescription ID = "+ prescription.getPrescriptionID());
 				return prescription.getPrescriptionID() + "";
@@ -383,6 +427,12 @@ public class PrescriptionResource {
 		}
 	}
 	
-	
+	@GET
+	@Path("/getLastPrescriptionId")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getLastPrescriptionId() {
+
+		return prescriptionDBDriver.getLastPrescriptionId();
+	}
 	
 }

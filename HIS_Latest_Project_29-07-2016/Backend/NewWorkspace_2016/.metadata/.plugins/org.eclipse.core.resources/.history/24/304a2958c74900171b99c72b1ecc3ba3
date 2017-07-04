@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2014 2:42:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.opd.OpdTreatment" table="opd_treatment" catalog="HIS">
+		<id name="opdTreatmentId" type="java.lang.Integer">
+            <column name="OPDTREATMENTID" />
+            <generator class="identity" />
+        </id>
+        <property name="status" type="string">
+            <column name="Status" length="200" not-null="false" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="Remarks" length="200" not-null="false" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CreateDate" length="10" not-null="false" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CreateUser" length="200" not-null="false" />
+        </property>
+        <property name="lastUpDate" type="java.util.Date">
+            <column name="LastUpDate" length="10" not-null="false" />
+        </property>
+        <property name="lastUpDateUser" type="string">
+            <column name="LastUpDateUser" length="200" not-null="false" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="Active" not-null="false" />
+        </property>
+        <many-to-one name="treatments" class="core.classes.opd.Treatment" fetch="select">
+            <column name="TREATMENTID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="visitId" class="core.classes.opd.Treatment" fetch="select">
+            <column name="VISITID" not-null="true" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>

@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import core.classes.api.user.AdminPermission;
+import core.classes.api.user.AdminUser;
 import core.classes.hr.HrAttendance;
 
 public class HrAttendanceDBDriver extends DBDriverBase<HrAttendance>  {
@@ -79,6 +80,82 @@ public class HrAttendanceDBDriver extends DBDriverBase<HrAttendance>  {
 		}
 	}
 	
+	public boolean UpdateAttendance(int status, int userId){
+		Transaction tx = null;
+		try{	
+			tx = session.beginTransaction();
+			
+			AdminUser user = (AdminUser) session.get(AdminUser.class, userId);
+			
+			Query query =  session.createQuery("select a from HrAttendance as a where a.hrEmployee.empId = " + user.getHrEmployee().getEmpId());
+			HrAttendance attendanceList = new HrAttendance();
+			
+			if(query.list()!= null)
+			{	
+				attendanceList =CastList.castList(HrAttendance.class, query.list()).get(0); 
+				attendanceList.setStatus(status);
+			
+				
+				System.out.println(attendanceList);
+			
+			
+				session.update(attendanceList);
+			
+			}
+			tx.commit();
+			return true;
+		}catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+	}
+	
+	
+	public int UpdateAttendanceType(int type, int userId){
+		Transaction tx = null;
+		try{	
+			tx = session.beginTransaction();
+			
+			AdminUser user = (AdminUser) session.get(AdminUser.class, userId);
+			
+			Query query =  session.createQuery("select a from HrAttendance as a where a.hrEmployee.empId = " + user.getHrEmployee().getEmpId());
+			HrAttendance attendanceList = new HrAttendance();
+			
+			if(query.list()!= null)
+			{	
+				attendanceList =CastList.castList(HrAttendance.class, query.list()).get(0); 
+				attendanceList.setType(type);
+			
+				
+				System.out.println(attendanceList);
+			
+			
+				session.update(attendanceList);
+			
+			}
+			tx.commit();
+			return attendanceList.getType();
+		}catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return -1;
+		}
+	}
 	/***
 	 * Update permissions in the database
 	 * @param rpObj is a RolePermission type object that contains data about new updated data
@@ -173,6 +250,122 @@ public class HrAttendanceDBDriver extends DBDriverBase<HrAttendance>  {
 		}
 	}
 	
+	public List<HrAttendance> getAllAvailableAttendance(){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			Query query =  session.createQuery("select a from HrAttendance as a where a.isActive = true and a.status = 0");		
+			List<HrAttendance> attendanceList =CastList.castList(HrAttendance.class, query.list()); 
+			tx.commit();
+			return attendanceList;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	public List<HrAttendance> getAllAvailableAttendanceByType(int visitType){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			Query query =  session.createQuery("select a from HrAttendance as a where a.isActive = true and a.status = 0 and type="+visitType);		
+			List<HrAttendance> attendanceList =CastList.castList(HrAttendance.class, query.list()); 
+			tx.commit();
+			return attendanceList;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	public int getStatus(int doctorId){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			AdminUser admin = (AdminUser)session.get(AdminUser.class, doctorId);
+			HrAttendance attendance = new HrAttendance();
+			if(admin != null)
+			{
+				Query query =  session.createQuery("select a from HrAttendance as a where a.hrEmployee.empId = "+ admin.getHrEmployee().getEmpId());
+				if(query.list() != null)
+				{
+					attendance =CastList.castList(HrAttendance.class, query.list()).get(0); 
+				}
+			}
+			tx.commit();
+			return attendance.getStatus();
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return 0;
+		}
+	}
+	
+	public int getType(int doctorId){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			AdminUser admin = (AdminUser)session.get(AdminUser.class, doctorId);
+			HrAttendance attendance = new HrAttendance();
+			if(admin != null)
+			{
+				Query query =  session.createQuery("select a from HrAttendance as a where a.hrEmployee.empId = "+ admin.getHrEmployee().getEmpId());
+				if(query.list() != null)
+				{
+					attendance =CastList.castList(HrAttendance.class, query.list()).get(0); 
+				}
+			}
+			tx.commit();
+			return attendance.getType();
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return 0;
+		}
+	}
+	
 	
 	public List<HrAttendance> getAllAttendance(String today){
 		Transaction tx = null;
@@ -180,6 +373,31 @@ public class HrAttendanceDBDriver extends DBDriverBase<HrAttendance>  {
 		try{
 			tx = session.beginTransaction();
 			Query query =  session.createQuery("select a from HrAttendance as a where a.isActive = true and '"+today+"' between DATE(in_time) and DATE(out_time)");		
+			List<HrAttendance> attendanceList =CastList.castList(HrAttendance.class, query.list()); 
+			tx.commit();
+			return attendanceList;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	public List<HrAttendance> getAllAttendanceByType(String today, int visitType){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			Query query =  session.createQuery("select a from HrAttendance as a where a.isActive = true and '"+today+"' between DATE(in_time) and DATE(out_time) and type="+visitType);		
 			List<HrAttendance> attendanceList =CastList.castList(HrAttendance.class, query.list()); 
 			tx.commit();
 			return attendanceList;

@@ -1,0 +1,12 @@
+package core.classes.opd;
+
+import core.classes.BaseEntity;
+
+public class Treatment extends BaseEntity implements java.io.Serializable {
+
+	private int treatmentId;
+	private String treatment;
+	private String remark;
+	private String type;
+	
+}

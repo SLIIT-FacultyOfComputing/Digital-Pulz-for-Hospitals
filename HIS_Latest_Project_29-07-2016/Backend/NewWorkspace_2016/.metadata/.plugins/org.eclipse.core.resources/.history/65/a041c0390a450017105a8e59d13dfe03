@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2014 2:42:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.village" table="village" catalog="HIS">
+		<id name="vgeId" type="java.lang.Integer">
+            <column name="VGEID" />
+            <generator class="identity" />
+        </id>
+        <property name="province" type="string">
+            <column name="Province" length="50" not-null="false" />
+        </property>
+        <property name="district" type="string">
+            <column name="District" length="50" not-null="false" />
+        </property>
+        <property name="dsdivision" type="string">
+            <column name="DSDivision" length="50" not-null="false" />
+        </property>
+        <property name="active" type="java.lang.Integer">
+            <column name="Active" not-null="false" />
+        </property>
+        <property name="code" type="string">
+            <column name="code" length="15" not-null="false" />
+        </property>
+        <property name="createDate" type="date">
+            <column name="CreateDate" length="10" not-null="false" />
+        </property>
+        <property name="createUser" type="boolean">
+            <column name="CreateUser" not-null="false" />
+        </property>
+        <property name="lastUpDate" type="date">
+            <column name="LastUpDate" length="10" not-null="false" />
+        </property>
+        <property name="lastUpDateUser" type="string">
+            <column name="LastUpDateUser" length="200" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>

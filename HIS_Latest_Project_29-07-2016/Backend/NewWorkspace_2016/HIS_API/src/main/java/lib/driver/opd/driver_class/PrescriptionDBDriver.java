@@ -7,7 +7,6 @@ package lib.driver.opd.driver_class;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,10 +14,12 @@ import java.util.Locale;
 
 import lib.SessionFactoryUtil;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 
 import com.mysql.jdbc.Util;
 
@@ -33,7 +34,7 @@ public class PrescriptionDBDriver {
 
 	Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
 	
-	public boolean insertPrescription(Prescription prescription,int visitID) {
+	public boolean insertPrescription(Prescription prescription,int visitID, int presid) {
 
 		Transaction tx = null;
 		try {
@@ -44,7 +45,9 @@ public class PrescriptionDBDriver {
 			Visit visit=(Visit) session.get(Visit.class, visitID);
 			prescription.setVisit(visit);
 			
-			session.save(prescription);
+			if(presid == -1){
+				session.save(prescription);
+			}
 			
 			for (PrescribeItem item : prescription.prescribeItems) {
 				item.setPrescription(prescription);
@@ -145,7 +148,7 @@ public class PrescriptionDBDriver {
 			OutPatient patient = (OutPatient) session.get(OutPatient.class, patientID);
  
 			Query query = session
-					.createQuery("from Prescription as p where (p.visit.patient = :patient AND p.prescriptionStatus=0 AND p.prescriptionDate='" + dateformat.format(new Date()) +"')");
+					.createQuery("from Prescription as p where (p.visit.patient = :patient AND p.prescriptionStatus=0)");// AND p.prescriptionDate='" + dateformat.format(new Date()) +"')");
 
 			query.setParameter("patient", patient);
 			
@@ -288,5 +291,58 @@ public class PrescriptionDBDriver {
 	}
 	
 
+	public Prescription getPrescriptionById(int id){
+		
+		Transaction tx = null;
+		Prescription prescription = null;
+		try {
+			tx = session.beginTransaction();
 
+			prescription = (Prescription) session.get(Prescription.class, id);
+		
+			tx.commit();
+			
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+			throw ex;
+			}
+		}
+		return prescription;
+	
+	}
+
+	public String getLastPrescriptionId()
+	{
+		Transaction tx = null;
+		String id = "-1";
+		try {
+			tx = session.beginTransaction();
+
+			Criteria criteria = session
+				    .createCriteria(Prescription.class)
+				    .setProjection(Projections.max("prescriptionID"));
+				id = criteria.uniqueResult().toString();
+		
+			tx.commit();
+			
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+			throw ex;
+			}
+		}
+		
+		return id;
+	}
 }

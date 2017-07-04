@@ -1,0 +1,66 @@
+package core.resources.opd;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import lib.driver.opd.driver_class.TreatmentDBDriver;
+import lib.driver.standards.driver_class.ComplaintsDBDriver;
+
+import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import core.ErrorConstants;
+import core.classes.opd.Treatment;
+import flexjson.JSONSerializer;
+
+@Path("Treatment")
+public class TreamentResource {
+
+	final static Logger log = Logger.getLogger(TreamentResource.class);
+	TreatmentDBDriver treatmentDBDriver = new TreatmentDBDriver();
+	
+	@GET
+	@Path("/getAllTreatments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllTreatments() throws JSONException {
+		
+		
+		try {
+			List<Treatment> treatmentList=treatmentDBDriver.getAllTreatment();
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.serialize(treatmentList);
+			
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in get all Treatments, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting all Treatments, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+	}
+}

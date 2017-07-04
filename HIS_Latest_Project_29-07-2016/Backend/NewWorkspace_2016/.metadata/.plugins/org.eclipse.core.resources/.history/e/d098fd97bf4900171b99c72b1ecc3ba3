@@ -1,0 +1,65 @@
+package lib.driver.opd.driver_class;
+
+import java.util.List;
+
+import lib.SessionFactoryUtil;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import core.classes.api.user.AdminUser;
+import core.classes.opd.Allergy;
+import core.classes.opd.OpdTreatment;
+import core.classes.opd.OutPatient;
+import core.classes.opd.Treatment;
+
+public class TreatmentDBDriver {
+
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	
+	public List<Treatment> getAllTreatment()
+	{
+		Query query = session.createQuery("from Treatment");
+
+		@SuppressWarnings("unchecked")
+		List<Treatment> treatmentList = query.list();
+
+		return treatmentList;
+	}
+	
+	public String addOpdTreatment(OpdTreatment opdTreatment,int treatmentId, int userId)
+	{
+		try {
+			tx = session.beginTransaction();
+			Treatment treatment = (Treatment) session.get(Treatment.class, treatmentId);
+			AdminUser user = (AdminUser) session.get(AdminUser.class, userid);
+			allergy.setAllergyCreateUser(user);
+			allergy.setAllergyLastUpdateUser(user);
+			
+			allergy.setPatient(patient);
+			session.save(allergy);
+			tx.commit();
+			return true;
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+}

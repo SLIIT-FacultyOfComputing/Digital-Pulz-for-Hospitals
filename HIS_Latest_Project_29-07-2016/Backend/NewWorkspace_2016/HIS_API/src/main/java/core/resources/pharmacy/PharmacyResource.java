@@ -1,32 +1,37 @@
 package core.resources.pharmacy;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 
 
 
-
 import core.ErrorConstants;
+import core.classes.pharmacy.MstDrugsNew;
+import core.classes.pharmacy.PharmacyMainStock;
 import core.classes.pharmacy.PhramacyAssitanceStock;
 import core.resources.lims.LabResource;
 import flexjson.JSONSerializer;
+import lib.driver.pharmacy.driver_class.DrugDBDriver;
 import lib.driver.pharmacy.driver_class.PharmacyDBDriver;
 
 @Path("PharmacyServices")
 public class PharmacyResource {
 	PharmacyDBDriver pharmacyDriver =new PharmacyDBDriver();
-	
+	boolean exist;
 	final static Logger logger = Logger.getLogger(PharmacyResource.class);
 	
 	@POST
@@ -115,7 +120,6 @@ public class PharmacyResource {
 			JSONSerializer serializer = new JSONSerializer();
 			return serializer.exclude("*.class").serialize(dataillist);
 			
-			
 		}
 		catch (RuntimeException e) 
 		{
@@ -134,5 +138,174 @@ public class PharmacyResource {
 		}
 	}
 	
+	
+
+	/**
+	 * Checks the Drug quantity for a given Drug Name
+	 * @author Navoda.s
+	 * @param dname,D_qty
+	 * @return A JSON object that contains all the Drug Details
+	 * @throws JSONException 
+	 */
+	@GET
+	@Path("/checkDrug/{dname}/{d_qty}")
+	@Produces (MediaType.APPLICATION_JSON)
+	public String getDrugIdByDrugName(@PathParam("dname") String dname,@PathParam("d_qty") int qty) throws JSONException
+	{
+		System.out.println("checkDrug entered");
+		boolean status=false;
+		logger.info("Entering getDrugQuantityByDrugName...");
+		Integer stockQty=0;
+		try {
+			PharmacyDBDriver pd =new PharmacyDBDriver();
+			stockQty = pd.getDrugQuantityByDrugName(dname);
+			logger.info("DrugQuantity of "+dname+": "+stockQty);
+			
+			if(qty<stockQty){
+				
+				status=true;
+				
+			}
+			else status= false;
+		} 
+		catch(RuntimeException e){
+			logger.error("Exception in getting drug id of "+dname+": "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+								
+			
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Exception in getting drug id of "+dname+": "+e.getMessage());
+			return false +"";
+//			return e.toString();
+		}
+		
+		
+		System.out.println("result = "+ status);
+		return status +"";
+	}
+	
+	@GET
+	@Path("/checkDrugStatus/{drug_srno}")
+	@Produces (MediaType.APPLICATION_JSON)
+	public String checkdrug(@PathParam("drug_srno") int drug) throws JSONException
+	{
+		System.out.println("checkDrug entered");
+		boolean status=false;
+		logger.info("Entering getDrugQuantityByDrugName...");
+		try
+		{
+			
+			
+			PharmacyDBDriver pd =new PharmacyDBDriver();
+			
+
+			List<PhramacyAssitanceStock> dataillist = pd.getDrugStockTable();
+			
+				for(int j=0; j<dataillist.size(); j++)
+				{
+					
+					if(drug==(dataillist.get(j).getDrug_srno()))
+					{
+						
+					status=true;
+						break;
+					}
+					else
+					{
+						status =false;
+					}
+				}
+				
+            
+		}
+		
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Exception in getting drug id of "+drug+": "+e.getMessage());
+			return false +"";
+//			return e.toString();
+		}
+			
+		return status+"";	
+		}
+	
+	
+	//API changes by Navoda.s and gayesha.s
+	@GET
+	@Path("/drugMainStock")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String loadDrugs() throws JSONException
+	{
+		logger.info("Entering loadDrugs method...");
+		
+		System.out.println("\tLoad the Pharmacy Stock Details Table\n");
+		try
+		{
+			
+			DrugResource ds=new DrugResource();
+			PharmacyDBDriver pd =new PharmacyDBDriver();
+			
+
+			List<PhramacyAssitanceStock> dataillist = pd.getDrugStockTable();
+			
+		
+			//Type listType = 
+				    // new TypeToken<List<MstDrugsNew>>(){}.getType();
+			//List<MstDrugsNew> yourClassList = new Gson().fromJson(jsonArray, listType);
+			
+			
+			String sampleList =ds.getDrugNames();
+			//String json = new Gson().toJson(sampleList.get(0), MstDrugsNew.class);
+			
+			System.out.println(sampleList);
+			JSONArray arr = new JSONArray(sampleList);
+			
+			
+			for(int i= 0;  i<arr.length(); i++)
+            {
+				for(int j=0; j<dataillist.size(); j++)
+				{
+					System.out.println(arr.getJSONObject(i).get("dName")+""+dataillist.get(j).getDrug_name());
+					if(arr.getJSONObject(i).getString("dName").equals(dataillist.get(j).getDrug_name()))
+					{
+						arr.getJSONObject(i).put("stock", dataillist.get(j).getDrugQty());
+						arr.getJSONObject(i).put("exist", true);
+						break;
+					}
+					else
+					{
+						arr.getJSONObject(i).put("stock", 0);
+						arr.getJSONObject(i).put("exist", false);
+					}
+				}
+				
+            }
+			
+		//	System.out.println(arr);
+			return arr.toString();
+			
+			
+		}
+		catch (RuntimeException e) 
+		{
+			logger.error("Exception in loadNursesTable : "+e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+						
+			return jsonErrorObject.toString();
+		}
+		catch(Exception e){
+			logger.error("Exception in loadNursesTable : "+e.getMessage());
+			return e.getMessage().toString();
+			
+		}
+	}
 
 }

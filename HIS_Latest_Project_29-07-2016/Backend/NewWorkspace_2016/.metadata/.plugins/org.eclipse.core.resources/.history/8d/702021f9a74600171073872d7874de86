@@ -1,0 +1,72 @@
+package core.resources.hr;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import lib.driver.hr.driver_class.VillageDBDriver;
+import core.ErrorConstants;
+import core.classes.hr.Village;
+import flexjson.JSONSerializer;
+
+@Path("Village")
+public class VillageResource {
+
+	VillageDBDriver villageDBDriver = new VillageDBDriver();
+	
+	@GET
+	@Path("/getVillageOnSearch/{village}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getVillageOnSearch(@PathParam("village")  String villageName) {
+		
+		
+		try {
+			List<Village> villageList=villageDBDriver.getVillageOnSearch(villageName);
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.include("vgeId","province","province","district","dsdivision","gndivision").exclude("*").serialize(villageList);
+			
+		} 
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in adding new allergy, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (JSONException e) {
+
+			log.error("JSONException while adding new allergy, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while adding new allergy, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+	}
+}

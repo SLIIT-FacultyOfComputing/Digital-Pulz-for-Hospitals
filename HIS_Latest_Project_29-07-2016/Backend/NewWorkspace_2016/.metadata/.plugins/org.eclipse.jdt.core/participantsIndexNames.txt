@@ -1,11 +1,3 @@
 INDEX VERSION 1.127
-C:\repository\trunk\Releases\SourceCode\Source\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\317869516.index
-\HIS_API\src\main\java
-C:\Users\Thirumagal\Desktop\SVN commit 2-12-2016\NewWorkspace_2016\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\317869516.index
-\HIS_API\src\main\java
-C:\Users\Hansi\Desktop\Svn commit 29-11-2016\New\NewWorkspace_2016\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\317869516.index
-\HIS_API\src\main\java
-C:\HIS from svn\NewWorkspace_2016\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\317869516.index
-\HIS_API\src\main\java
-D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\317869516.index
+E:\Gitlab\HIS_Latest_Project_29-07-2016\Backend\NewWorkspace_2016\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\317869516.index
 \HIS_API\src\main\java

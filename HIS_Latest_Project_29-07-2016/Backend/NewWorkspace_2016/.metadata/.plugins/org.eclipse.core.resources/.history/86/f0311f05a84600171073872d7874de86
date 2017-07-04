@@ -1,0 +1,39 @@
+package core.resources.standards;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import lib.driver.hr.driver_class.VillageDBDriver;
+import lib.driver.standards.driver_class.ComplaintsDBDriver;
+import core.classes.hr.Village;
+import core.classes.standards.Complaint;
+import flexjson.JSONSerializer;
+
+@Path("Complaint")
+public class ComplaintResource {
+
+	ComplaintsDBDriver complaintsDBDriver = new ComplaintsDBDriver();
+	
+	@GET
+	@Path("/getComplainsOnSearch/{complaint}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getVillageOnSearch(@PathParam("complaint")  String complaintName) {
+		
+		
+		try {
+			List<Complaint> complaintList=complaintsDBDriver.getVillageOnSearch(complaintName);
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.exclude("*").serialize(complaintList);
+			
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+}

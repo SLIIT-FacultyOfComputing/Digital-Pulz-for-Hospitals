@@ -17,6 +17,7 @@ public class HrAttendance implements java.io.Serializable {
 	private int status;
 	private double otHours;
 	private boolean isActive;
+	private int type;
 
 	public HrAttendance() {
 	}
@@ -87,4 +88,21 @@ public class HrAttendance implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	
 }

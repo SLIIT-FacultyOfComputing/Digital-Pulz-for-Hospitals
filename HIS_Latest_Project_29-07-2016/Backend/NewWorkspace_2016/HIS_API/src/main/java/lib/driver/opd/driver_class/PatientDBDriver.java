@@ -113,7 +113,7 @@ public class PatientDBDriver {
  
 			}
 			patient.setPatientPassport(pat.getPatientPassport());
-			//patient.setPatientDateOfBirth(pat.getPatientDateOfBirth());
+			patient.setPatientDateOfBirth(pat.getPatientDateOfBirth());
 			patient.setPatientContactPName(pat.getPatientContactPName());
 			patient.setPatientContactPNo(pat.getPatientContactPNo());
 			patient.setPatientGender(pat.getPatientGender());

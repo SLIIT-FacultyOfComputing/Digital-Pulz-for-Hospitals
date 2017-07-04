@@ -1,4 +1,13 @@
-<?php if($reportType == "Visits" & $outType == "HTML format" ){?>	
+<?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
+<?php if($reportType == "Visits" & $outType == "HTML format" ){?>
 		
 			<div style="background-color: #ad6704; width:1000px; height:150px; margin:0px 0px 25px 210px;">
 			<IMG STYLE="position:absolute; TOP:20px; right:210px; WIDTH:100px; HEIGHT:120px" SRC="<?php  echo base_url('/application/images/Emblem_of_Sri_Lanka.svg.png'); ?>">

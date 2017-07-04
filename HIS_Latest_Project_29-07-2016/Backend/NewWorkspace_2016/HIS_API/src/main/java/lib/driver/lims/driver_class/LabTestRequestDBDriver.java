@@ -17,6 +17,7 @@ import core.classes.lims.Category;
 import core.classes.lims.LabTestRequest;
 import core.classes.lims.Laboratories;
 import core.classes.lims.MainResults;
+import core.classes.lims.OPDLabTestRequest;
 import core.classes.lims.Reports;
 import core.classes.lims.SampleCenters;
 import core.classes.lims.Specimen;
@@ -26,13 +27,14 @@ import core.classes.lims.SubCategory;
 import core.classes.lims.TestNames;
 import core.classes.opd.OutPatient;
 import core.classes.opd.Patient;
+import core.classes.opd.Visit;
 
 public class LabTestRequestDBDriver {
 
 	Session session = SessionFactoryUtil.getSessionFactory().openSession();
 	MainResultsDBDriver mDriver = new MainResultsDBDriver();
 	
-	public boolean addNewLabTestRequest(LabTestRequest testRequest, int testID, int patientID, int labID, int userid) {
+	public boolean addNewLabTestRequest(OPDLabTestRequest testRequest, int testID, int patientID, int labID, int userid, int visitId) {
 
 		Transaction tx = null;
 		try {
@@ -41,6 +43,7 @@ public class LabTestRequestDBDriver {
 			Laboratories ltype;
 			TestNames tstype = (TestNames) session.get(TestNames.class, testID);
 			OutPatient ptype = (OutPatient) session.get(OutPatient.class, patientID);
+			Visit vtype = (Visit) session.get(Visit.class, visitId);
 			 ltype = (Laboratories) session.get(Laboratories.class, labID);
 			
 			
@@ -48,7 +51,7 @@ public class LabTestRequestDBDriver {
 			
 			testRequest.setFtest_ID(tstype);
 			testRequest.setFpatient_ID(ptype);
-		
+			testRequest.setVisitID(vtype);
 			testRequest.setFlab_ID(ltype);
 			
 			testRequest.setFtest_RequestPerson(user);

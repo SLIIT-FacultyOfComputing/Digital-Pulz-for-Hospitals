@@ -5,8 +5,12 @@
 		<item value="true" key="BUILD_ALL"/>
 		<item value="false" key="TOGGLE_SELECTED"/>
 		<item value="441" key="DIALOG_HEIGHT"/>
-		<item value="433" key="DIALOG_X_ORIGIN"/>
+		<item value="false" key="BUILD_NOW"/>
 		<item value="113" key="DIALOG_Y_ORIGIN"/>
-		<item value="true" key="BUILD_NOW"/>
+		<item value="433" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1479703686864" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
 	</section>
 </section>

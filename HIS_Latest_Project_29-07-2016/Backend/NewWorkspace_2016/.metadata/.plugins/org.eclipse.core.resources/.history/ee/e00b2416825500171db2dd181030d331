@@ -1,0 +1,580 @@
+/*
+-----------------------------------------------------------------------------------------------------------------------------------
+HIS � Health Information System - RESTful  API
+-----------------------------------------------------------------------------------------------------------------------------------
+This is a free and open source API which can be used to develop and distributed in the hope that it will be useful to develop EMR systems.
+You can utilize the services provides by the API to speed up the development process. 
+You can modify the API to cater your requirements at your own risk. 
+ 
+-----------------------------------------------------------------------------------------------------------------------------------
+Authors: H.L.M.M De Silva, K.V.M Jayadewa, G.A.R Perera, S.I Kodithuwakku
+Supevisor: Dr. Koliya Pulasinghe | Dean /Faculty of Graduate Studies |SLIIT
+Co-Supervisor: Mr.Indraka Udayakumara | Senior Lecturer | SLIIT
+URL: https://sites.google.com/a/my.sliit.lk/his
+----------------------------------------------------------------------------------------------------------------------------------
+*/
+package lib.driver.api.driver_class.user;
+
+import lib.SessionFactoryUtil;
+import lib.classes.CasttingMethods.CastList;
+import lib.classes.securitymodel.encryption.DataHashing;
+import core.classes.api.user.AdminPermission;
+import core.classes.api.user.AdminUser;
+import core.classes.api.user.AdminUserroles;
+import core.classes.hr.HrEmployee;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+
+/**
+ * UserDBDriver class contains all the CRUD operation methods that required by UserResource class(web service)
+ * @author MIYURU
+ *
+ */
+
+public class UserDBDriver {
+	
+Session session = SessionFactoryUtil.getSessionFactory().openSession();
+DataHashing dataHashing=new DataHashing();
+	
+	 /**
+	 * Select all registered users from the database
+	 * @return returns a AdminUser type java List for the calling method
+	 */
+
+	public List<AdminUser> getUserDetails(){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			Query query =  session.createQuery("select u from AdminUser as u where u.isActive = true");
+			
+			List<AdminUser> userList =CastList.castList(AdminUser.class, query.list()); 
+			tx.commit();
+			return userList;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	
+	/***
+	 * Select all registered users from the database by user ID
+	 * @param usrID is an integer variable that contain user ID
+	 * @return returns a AdminUser type java List for the calling method
+	 */
+	
+	
+	public List<AdminUser> getUserDetailsByUserID(int usrID){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			Query query =  session.createQuery("select u from AdminUser as u where u.userId=:userId");
+			query.setParameter("userId", usrID);
+			List<AdminUser> userList =CastList.castList(AdminUser.class, query.list()); 
+			tx.commit();
+			return userList;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * Insert a new user into the database
+	 * @param usr is a AdminUser type object that contains data about new user
+	 * @return a boolean value. Returns true if data inserted successfully else returns false
+	 */
+	
+	//public boolean insertUser(AdminUser usr,int usrRoleID,int empID,int permissions[]){
+	public boolean insertUser(AdminUser usr,int usrRoleID,int empID){
+		Transaction tx = null;
+		//HashSet<AdminPermission> permissionSet=new HashSet<>();
+		try{	
+			tx = session.beginTransaction();
+			AdminUserroles role = (AdminUserroles) session.get(AdminUserroles.class, usrRoleID);
+			HrEmployee employee=(HrEmployee) session.get(HrEmployee.class, empID);
+			/*for(int i=0;i<permissions.length;i++){
+				AdminPermission permissionObj=(AdminPermission) session.get(AdminPermission.class, permissions[i]);
+				permissionSet.add(permissionObj);
+			}
+			usr.setSpecialPermissions(permissionSet);*/
+			usr.setAdminUserroles(role);
+			usr.setHrEmployee(employee);
+			usr.setIsActive(true);
+			
+			session.save(usr);
+			tx.commit();
+			return true;
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}
+				catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+	}
+	
+	/**
+	 * Delete a user from the database with that user's credential data.
+	 * @param usr is a AdminUser type object that contains data about deleting user's details
+	 * @return a boolean value. Returns true if user deleted Successfully else returns false
+	 */
+	
+	public boolean deleteUser(AdminUser usr){
+		Transaction tx=null;
+		
+		try {
+			
+			tx=session.beginTransaction();
+			usr.setIsActive(false);
+			session.update(usr);
+			tx.commit();
+			return true;
+			
+		} 
+		
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+		
+	}
+	
+	
+	/***
+	 * Insert updated data of a particular user into the database.
+	 * @param usrObj is a AdminUser type object that contains data about updating user
+	 * @return a boolean value. Returns true if user details updated Successfully else returns false
+	 */
+	
+	public boolean updateUserDetails(AdminUser usrObj,int userRoleID,int userEmployeeID){
+//	public boolean updateUserDetails(AdminUser usrObj,int userRoleID){
+		Transaction tx=null;
+		
+		try{
+			tx=session.beginTransaction();
+			AdminUser user=(AdminUser) session.get(AdminUser.class,usrObj.getUserId());
+			AdminUserroles role=(AdminUserroles) session.get(AdminUserroles.class, userRoleID);
+			HrEmployee emp=(HrEmployee)session.get(HrEmployee.class, userEmployeeID);
+			
+			user.setUserName(usrObj.getUserName());
+			user.setPassword(usrObj.getPassword());
+			user.setAdminUserroles(role);
+			user.setHrEmployee(emp);
+			
+			session.update(user);
+			tx.commit();
+			return true;
+		}
+		
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+		
+	}
+	
+	
+	
+	
+	
+	/***
+	 * Validate AdminUser's password and user name
+	 * @param usrcObj is a AdminUser Credentials type object that contains authentication data. 
+	 * @return a boolean value. Returns true if user login details are valid else returns false
+	 */
+	
+	public boolean validateUserLoginDetails(AdminUser usrObj){
+		
+		boolean result=false;
+		String password_Hash=getUserPassword_Hash(usrObj.getUserName());
+		String chk_Password=usrObj.getPassword();
+			System.out.println("Password Me :"+ password_Hash);
+			System.out.println("Password Me :"+ chk_Password);
+		try
+		{
+			//if(chk_Password.toString().equals(password_Hash.toString())){
+			if(dataHashing.validatePassword(chk_Password, password_Hash)){
+				return result=true;
+			}
+			else{
+				
+				return result;
+			}
+		}
+		
+		catch(Exception ex){
+			ex.printStackTrace();
+			return result;
+		}
+		
+	}
+	
+	
+	/***
+	 * Get the password hash from the database 
+	 * @param usrName is a string value and it contains the user name that entered by the user for login purpose. 
+	 * @return a string value that contains the real password hash that is saved in the DB.
+	 */
+	
+	private String getUserPassword_Hash(String usrName) {
+		
+		Transaction tx = null;
+		String password="";
+		
+		try{
+			tx = session.beginTransaction();
+			String hql="select uc from AdminUser as uc where uc.userName=:usrName";
+			Query query =  session.createQuery(hql);
+			query.setParameter("usrName", usrName);
+			List<AdminUser> userCList = CastList.castList(AdminUser.class,query.list());
+
+			tx.commit();
+			
+			for(int i = 0; i < userCList.size(); i++) {
+		            password=userCList.get(i).getPassword();
+		    }
+			
+			
+			return password;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+		
+		
+	}
+	
+	
+	/***
+	 * Get the valid user details from the database after validation the credentials of the user.
+	 * @param usr is an object that contains valid user name details.
+	 * @return a AdminUser type List that contains user details and particular user's permissions. 
+	 */
+	
+	
+	public List<AdminUser> getValidUserDetails(AdminUser usr){
+		
+		Transaction tx = null;
+		String userName=usr.getUserName().toString();
+		
+		
+		try{
+			tx = session.getTransaction();
+			String hql="select uc from AdminUser as uc where uc.userName=:usrName";
+			Query query =  session.createQuery(hql);
+			query.setParameter("usrName", userName);
+			
+			List<AdminUser> userList =CastList.castList(AdminUser.class, query.list()); 
+			
+			//System.out.println(userList);
+			
+			System.out.println("-----UserList------");
+			System.out.println(userList);
+			System.out.println("-----UserList------");
+			
+			//tx.commit();
+			return userList;
+			
+		}
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			
+			System.out.println(ex.getMessage());
+			
+			
+			return null;
+		}
+		
+	}
+	
+	
+	
+	/***
+	 * get available employees that are not on leave on present date.
+	 * @param empType string type parameter which holds data about employee's type 
+	 * @return a AdminUser type List that contains data about available employee's details and that employees user details
+	 */
+	
+	
+	public List<AdminUser> getAvailableEmployees(String empType)
+	{
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.beginTransaction();
+			Query query = session.createQuery("select u from AdminUser as u where u.employees.empID IN " +
+											"(select l.employee.empID from Leaves as l where  :toDay NOT BETWEEN l.leaveStartDate " +
+											"AND l.leaveEndDate AND l.employee.empType=:employeeType)");
+			
+			query.setParameter("employeeType",empType);
+			query.setParameter("toDay",new Date());
+			List<AdminUser> usrList=CastList.castList(AdminUser.class, query.list());
+			tx.commit();
+		    return usrList;	
+		    
+		}
+		
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}
+				catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	
+	
+	/***
+	 * Add special permissions for a specific user into the database
+	 * @param userID is the ID of the selected user that need to add special permissions
+	 * @param permissionArray is an integer array that contains the permissions(IDs) that need to add
+	 * @return a boolean value. Returns true if permissions added Successfully else returns false
+	 */	
+	
+	public boolean addSpecialUserPermission(int userID,int[] permissionArray){
+		Transaction tx=null;
+		AdminUser updateUserObj=new AdminUser();
+		try{
+			tx=session.beginTransaction();
+			updateUserObj=(AdminUser) session.get(AdminUser.class,userID);
+			//Set <AdminPermission> permissionSet =(Set <AdminPermission>)updateUserObj.getSpecialPermissions();
+			for(int i=0;i<permissionArray.length;i++){
+				AdminPermission permissionObj=(AdminPermission) session.get(AdminPermission.class, permissionArray[i]);
+			//	permissionSet.add(permissionObj);
+			}
+			
+			session.update(updateUserObj);
+			tx.commit();
+			return true;
+		}
+		
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+		
+	}
+	
+	
+	/***
+	 * Remove special permissions from a specific user in the database 
+	 * @param userID is the ID of the selected user that need remove special permissions
+	 * @param permissionArray is an integer array that contains the permissions(IDs) that need to remove
+	 * @return a boolean value. Returns true if permissions removed Successfully else returns false
+	 */
+	
+	public boolean removeSpecialUserPermission(int userID,int[] permissionArray){
+		Transaction tx=null;
+		AdminUser updateUserObj=new AdminUser();
+		try{
+			tx=session.beginTransaction();
+			updateUserObj=(AdminUser) session.get(AdminUser.class,userID);
+			//Set <AdminPermission> permissionSet =(Set <AdminPermission>)updateUserObj.getPermissions();
+			for(int i=0;i<permissionArray.length;i++){
+				AdminPermission permissionObj=(AdminPermission) session.get(AdminPermission.class, permissionArray[i]);
+				//permissionSet.remove(permissionObj);
+			}
+			
+			session.update(updateUserObj);
+			tx.commit();
+			return true;
+		}
+		
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+		
+	}
+	
+	
+	/***
+	 * Get AdminUser Details by user role name 
+	 * @param roleName string type parameter which holds data about role name 
+	 * @return AdminUser type List that contains data about available user details 
+	 */
+	
+	public List<AdminUser> getUserDetailsByUserRole(String rolName)
+	{
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.beginTransaction();
+			Query query = session.createQuery("select u from AdminUser as u where u.adminUserroles.roleName=:role");
+			query.setParameter("role",rolName);
+			List<AdminUser> usrList=CastList.castList(AdminUser.class, query.list());
+			tx.commit();
+		    return usrList;	
+		    
+		}
+		
+		catch(RuntimeException ex){
+			if(tx != null && tx.isActive())
+			{
+				try{
+					tx.rollback();
+				}
+				catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	/***
+	 * Update Password details
+	 * @param usrObj is an object that contains valid user credential details.
+	 * @return a boolean value. Returns true if user login details are valid else returns false
+	 */
+	public boolean updateUserPassword(AdminUser usrObj){
+		Transaction tx=null;
+		
+		try{
+			tx=session.beginTransaction();
+			AdminUser user=(AdminUser) session.get(AdminUser.class,usrObj.getUserId());			
+			//user.setUserPassword(usrObj.getUserPassword());
+			
+			session.update(user);
+			tx.commit();
+			return true;
+		}
+		
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+		
+	}
+	
+	public AdminUser getUserById(int id)
+	{
+		Transaction tx=null;
+		
+		try{
+			tx=session.beginTransaction();
+			AdminUser user=(AdminUser) session.get(AdminUser.class,id);	
+			tx.commit();
+			return user;
+		}
+		
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
+	
+	
+}

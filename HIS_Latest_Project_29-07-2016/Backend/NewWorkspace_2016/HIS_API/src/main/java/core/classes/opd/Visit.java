@@ -28,7 +28,8 @@ public class Visit implements java.io.Serializable {
 
 	private Set<Exams> exams = new HashSet<Exams>();
 	private Set<Prescription> prescriptions = new HashSet<Prescription>();
-	
+	private Set<OpdTreatment> opdTreatment = new HashSet<OpdTreatment>();
+	private Set<OpdInjection> opdInjection = new HashSet<OpdInjection>();
 	
 	public int getVisitID() {
 		return visitID;
@@ -108,7 +109,20 @@ public class Visit implements java.io.Serializable {
 	public void setPrescriptions(Set<Prescription> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
- 
+	public Set<OpdTreatment> getOpdTreatment() {
+		return opdTreatment;
+	}
+	public void setOpdTreatment(Set<OpdTreatment> opdTreatment) {
+		this.opdTreatment = opdTreatment;
+	}
+	public Set<OpdInjection> getOpdInjection() {
+		return opdInjection;
+	}
+	public void setOpdInjection(Set<OpdInjection> opdInjection) {
+		this.opdInjection = opdInjection;
+	}
+
+	
 	
 	 
 }

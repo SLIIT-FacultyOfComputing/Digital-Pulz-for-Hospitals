@@ -591,6 +591,8 @@ public class TestCaseConstants {
 	
 	public static final String ADD_OPD_VISIT = "addVisit";
 	
+	public static final String GET_OPD_VISIT_REPORT = "getVisitReport";
+	
 	public static final String URL_APPEND_UPDATE_OPD_VISIT = "updateVisitUrl";
 	
 	public static final String UPDATE_OPD_VISIT = "updateVisit";

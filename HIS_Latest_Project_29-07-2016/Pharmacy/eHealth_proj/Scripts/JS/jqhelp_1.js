@@ -1,6 +1,14 @@
+/*
+ ------------------------------------------------------------------------------------------------------------------------
+ DiPMIMS - Digital Pulz Medical Information Management System
+ Copyright (c) 2017 Sri Lanka Institute of Information Technology
+ <http: http://his.sliit.lk />
+ ------------------------------------------------------------------------------------------------------------------------
+ */
+var baseUrl="http://localhost/eHealth_proj";
 function getList() {
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/uprocess',
+        url: baseUrl+'/index.php/Drug_controller/uprocess',
         type: 'POST',
         //dataType:   "jsonp",
         crossDomain: true,
@@ -48,7 +56,7 @@ function getList() {
 
 function getList() {
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/uprocess',
+        url: baseUrl+'/index.php/Drug_controller/uprocess',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -98,7 +106,7 @@ function gettable() {
     var val;
     val = $("#dropdown option:selected").text();
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/tablerocess/'+val,
+        url: baseUrl+'/index.php/Drug_controller/tablerocess/'+val,
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -169,7 +177,7 @@ function getData(_row) {
     var myOrderString = texto;
     alert(myOrderString);
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/UpdateValues',
+        url: baseUrl+'/index.php/Drug_controller/UpdateValues',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString},  // fix: need to append your data to the call
@@ -208,7 +216,7 @@ function getViewData(_row) {
     var myOrderString = texto;
     alert(myOrderString);
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/UpdateValues',
+        url: baseUrl+'/index.php/Drug_controller/UpdateValues',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString},  // fix: need to append your data to the call
@@ -245,7 +253,7 @@ function getDataAfterEdit(_row) {
     var myOrderString = texto;
     alert(myOrderString);
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/UpdateValues',
+        url: baseUrl+'/index.php/Drug_controller/UpdateValues',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString},  // fix: need to append your data to the call
@@ -432,7 +440,7 @@ else{
 
 
     $.ajax({
-        url: 'http://localhost/eHealth_proj/index.php/Drug_controller/updateDrug',
+        url: baseUrl+'/index.php/Drug_controller/updateDrug',
         type: 'POST',
         crossDomain: true,
         data: {"dsr":$sr ,"dcat":cat_val_chckd , "dname":nam_val_chckd ,"dprice":price_val_chckd,"dqty":qty_va_chckd},

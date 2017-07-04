@@ -1,3 +1,11 @@
+/*
+ ------------------------------------------------------------------------------------------------------------------------
+ DiPMIMS - Digital Pulz Medical Information Management System
+ Copyright (c) 2017 Sri Lanka Institute of Information Technology
+ <http: http://his.sliit.lk />
+ ------------------------------------------------------------------------------------------------------------------------
+ */
+var baseUrl="http://localhost/eHealth_proj";
 $(document).ready(function() {
 
     var jo = [];
@@ -140,7 +148,7 @@ $(document).ready(function() {
 	
 function getDosages() {
             $.ajax({
-                url: 'http://localhost/eHealth_proj/index.php/Dosage_Controller/getDosages',
+                url: baseUrl+'/index.php/Dosage_Controller/getDosages',
                 type: 'POST',
                 crossDomain: true,
                 success: function(data) {

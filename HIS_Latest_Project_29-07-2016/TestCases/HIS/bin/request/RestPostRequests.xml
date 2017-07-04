@@ -159,7 +159,8 @@
 			"status" : "Report Issued",
 			"test_request_date" : "2016-11-24 10:21:20",
 			"test_due_date" : "2016-11-27 07:25:45",
-			"ftest_RequestPerson" : 1
+			"ftest_RequestPerson" : 1,
+			"visit_ID" : 1
 		}
 	</request>
 	
@@ -381,7 +382,7 @@
 		
 	<request id="addVisit">
 		{
-		    "pid":"50","DateandTime":"2016-12-07 12:14:50","Injury":"TEST","Doctor":"1","Remarks":"TestRemark","visitCreateUser":"1","visitLastUpDateUser":"1","toDate":"2016-12-07 12:14:50","VisitType":"OPD","visitActive":"0"
+		    "pid":"50","DateandTime":"2016-12-07 12:14:50","Injury":"TEST","Doctor":"1","Remarks":"TestRemark","visitCreateUser":"1","visitLastUpDateUser":"1","toDate":"2016-12-07 12:14:51","VisitType":"OPD","visitActive":"0"
 		}
 	</request>
 	
@@ -390,7 +391,11 @@
 		    "pid":"50","DateandTime":"2016-12-07 12:14:50","Injury":"TEST","Doctor":"1","Remarks":"TestRemarkUpdated","visitCreateUser":"1","visitLastUpDateUser":"1","toDate":"2016-12-07 12:14:50","VisitType":"NEWOPD","visitActive":"0"
 		}
 	</request>
-	
+	<request id="getVisitReport">
+		{
+		    "pid":"50","DateandTime":"2016-12-07","Injury":"TEST","Doctor":"1","Remarks":"TestRemark","visitCreateUser":"1","visitLastUpDateUser":"1","toDate":"2016-12-07","VisitType":"OPD","visitActive":"0"
+		}
+	</request>
 			
 	<request id="addQueue">
 		{

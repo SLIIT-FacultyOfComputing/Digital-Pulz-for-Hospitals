@@ -1,0 +1,11 @@
+package core.classes.hr;
+
+public class village implements java.io.Serializable{
+
+	private Integer vgeId;
+	private String province;
+	private String district;
+	private String dsdivision;
+	private Integer active;
+	private String Code;
+}

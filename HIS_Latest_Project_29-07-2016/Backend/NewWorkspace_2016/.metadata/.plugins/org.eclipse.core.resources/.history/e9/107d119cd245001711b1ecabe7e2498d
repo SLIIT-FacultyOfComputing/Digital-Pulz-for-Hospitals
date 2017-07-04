@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2014 2:42:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.opd.PatientInjection" table="patient_injection" catalog="HIS">
+		<id name="patientInjectionId" type="java.lang.Integer">
+            <column name="patient_injection_id" />
+            <generator class="identity" />
+        </id>
+        <one-to-one name="pid" class="core.classes.opd.Patient"
+			constrained="true"></one-to-one>			
+        <one-to-one name="injectionId" class="core.classes.opd.Injection"
+			constrained="true"></one-to-one>			
+        <property name="orderById" type="java.lang.Integer">
+            <column name="order_by_id" />
+        </property>
+                <property name="completeById" type="java.lang.Integer">
+            <column name="complete_by_id" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="11" not-null="true" />
+        </property>
+        <property name="episodeType" type="string">
+            <column name="episode_type" length="11" not-null="true" />
+        </property>
+        <property name="completeDate" type="string">
+            <column name="complete_date" length="11" not-null="false" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="Remarks" length="100" not-null="true" />
+        </property>
+        <property name="createDate" type="date">
+            <column name="CreateDate" length="10" not-null="false" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CreateUser" length="200" not-null="false" />
+        </property>
+        <property name="lastUpDate" type="date">
+            <column name="LastUpDate" length="10" not-null="false" />
+        </property>
+        <property name="lastUpDateUser" type="string">
+            <column name="LastUpDateUser" length="200" not-null="false" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="Active" not-null="false" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

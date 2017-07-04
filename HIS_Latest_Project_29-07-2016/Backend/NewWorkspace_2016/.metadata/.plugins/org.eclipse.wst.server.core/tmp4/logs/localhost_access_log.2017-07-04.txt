@@ -1,0 +1,7 @@
+127.0.0.1 - - [04/Jul/2017:08:26:07 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [04/Jul/2017:08:26:09 +0530] "GET /HIS_API/ HTTP/1.1" 200 67
+0:0:0:0:0:0:0:1 - - [04/Jul/2017:08:26:28 +0530] "POST /HIS_API/rest/UserService/userValidation HTTP/1.1" 200 122
+0:0:0:0:0:0:0:1 - - [04/Jul/2017:08:26:28 +0530] "GET /HIS_API/rest/DrugServices/drugreport HTTP/1.1" 200 1763
+0:0:0:0:0:0:0:1 - - [04/Jul/2017:08:26:29 +0530] "GET /HIS_API/rest/DrugServices/getDrugNames HTTP/1.1" 200 1539
+0:0:0:0:0:0:0:1 - - [04/Jul/2017:08:26:29 +0530] "GET /HIS_API/rest/DrugServices/getDrugCategories HTTP/1.1" 200 733
+0:0:0:0:0:0:0:1 - - [04/Jul/2017:08:26:29 +0530] "GET /HIS_API/rest/DrugServices/getDrugByID/ HTTP/1.1" 404 967

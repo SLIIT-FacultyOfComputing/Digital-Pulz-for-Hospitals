@@ -1,8 +1,15 @@
-var baseUrl="http://localhost";
+/*
+ ------------------------------------------------------------------------------------------------------------------------
+ DiPMIMS - Digital Pulz Medical Information Management System
+ Copyright (c) 2017 Sri Lanka Institute of Information Technology
+ <http: http://his.sliit.lk />
+ ------------------------------------------------------------------------------------------------------------------------
+ */
+var baseUrl="http://localhost/eHealth_proj";
 function getCategoryListRC() {
     //alert("ABC");
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Request_Controller/getCatList',
+        url: baseUrl+'/index.php/Request_Controller/getCatList',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -40,7 +47,7 @@ function getDrugByCategoryRC(){
     var val;
     val = $("#categoryDropDownRC option:selected").text();
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Request_Controller/getDrugList/'+val,
+        url: baseUrl+'/index.php/Request_Controller/getDrugList/'+val,
         type: 'POST',
         crossDomain: true,
                 success: function(data) {
@@ -126,7 +133,7 @@ for(i=1; i<=$('#tablecontent tr').length-1; i++)
 if(countOfUpdateValues>0)
     {
 $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Request_Controller/requestDrug',
+        url: baseUrl+'/index.php/Request_Controller/requestDrug',
         type: 'POST',
         crossDomain: true,
         //data: {"dsr":$sr_globe ,"dcat":cat_val_chckd , "dname":nam_val_chckd ,"dprice":price_val_chckd,"dqty":qty_va_chckd},
@@ -151,7 +158,7 @@ function getRequestToViewRC() {
 
     document.getElementById("post_requestDetails_tbl_RC").style.visibility = "visible";
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Request_Controller/viewRequestDrugs',
+        url: baseUrl+'/index.php/Request_Controller/viewRequestDrugs',
         type: 'POST',
         crossDomain: true,
         //data: {"myOrderString": myOrderString},  // fix: need to append your data to the call
@@ -165,66 +172,82 @@ function getRequestToViewRC() {
 }
 function createRequestViewTblRC(json){
 
+    var available = true;
+    $.each(json, function(index,el) {
+        // el = object in array
+        // access attributes: el.Id, el.Name, etc
+        //alert(el.drugs.dName);
+        if (el.processed == null || el.processed == false) {
+            available = false;
+        }
+    });
         //s0=json[0]['drugs']['dName'];
-         
+
         //alert(json);
 //    $sr_globe = sr;
     var pagecontent = "";
-//
-    pagecontent = "<table class='table table-bordered table-striped table-hover' id=pagetable>";
-    pagecontent += "<thead>";
-    pagecontent += "<tr>";
-    pagecontent += "<th>Request ID</th>";
-    pagecontent += "<th>Drug ID</th>";
-    pagecontent += "<th>Drug Name</th>";
-    pagecontent += "<th>Requested Quantity</th>";
-    pagecontent += "<th>Available Quantity</th>";
-    pagecontent += "<th>Date</th>";
-    pagecontent += "<th>Department</th>";
-    pagecontent += "<th>Status</th>";
-    pagecontent += "<th style='width:100px'>Approved Quantity</th>";
-    pagecontent += "<th>Approve</th>";
-    pagecontent += "</tr>";
-    pagecontent += "</thead>";
-    pagecontent += "<tbody>";
-    
-    var i=1;
-    $.each(json, function(index,el) {
+    if(available == false) {
+
+
+        pagecontent = "<table class='table table-bordered table-striped table-hover' id=pagetable>";
+        pagecontent += "<thead>";
+        pagecontent += "<tr>";
+        pagecontent += "<th>Request ID</th>";
+        pagecontent += "<th>Drug ID</th>";
+        pagecontent += "<th>Drug Name</th>";
+        pagecontent += "<th>Requested Quantity</th>";
+        pagecontent += "<th>Available Quantity</th>";
+        pagecontent += "<th>Date</th>";
+        pagecontent += "<th>Department</th>";
+        pagecontent += "<th>Status</th>";
+        pagecontent += "<th style='width:100px'>Approved Quantity</th>";
+        pagecontent += "<th>Approve</th>";
+        pagecontent += "</tr>";
+        pagecontent += "</thead>";
+        pagecontent += "<tbody>";
+
+        var i = 1;
+        $.each(json, function (index, el) {
             // el = object in array
             // access attributes: el.Id, el.Name, etc
             //alert(el.drugs.dName);
-    if(el.processed==null || el.processed==false)
-    {
-    pagecontent += "<tr>";
-    pagecontent += "<td name=reqid"+i+" id=reqid"+i+">"+el.requestId+"</td>";
-    pagecontent += "<td name=sr_val"+i+" id=sr_val"+i+" >"+el.drugs.dSrNo+"</td>";
-    pagecontent += "<td name=req_dname"+i+" id=req_dname"+i+" >"+el.drugs.dName+"</td>";
-    pagecontent += "<td name=req_qty"+i+" id=req_qty"+i+" >"+el.quantity+"</td>";
-    pagecontent += "<td name=avail_qty"+i+" id=avail_qty"+i+" >"+el.drugs.dQty+"</td>";
-    pagecontent += "<td>"+el.requestedDate+"</td>";
-    pagecontent += "<td>"+el.department+"</td>";
+            if (el.processed == null || el.processed == false) {
+                pagecontent += "<tr>";
+                pagecontent += "<td name=reqid" + i + " id=reqid" + i + ">" + el.requestId + "</td>";
+                pagecontent += "<td name=sr_val" + i + " id=sr_val" + i + " >" + el.drugs.dSrNo + "</td>";
+                pagecontent += "<td name=req_dname" + i + " id=req_dname" + i + " >" + el.drugs.dName + "</td>";
+                pagecontent += "<td name=req_qty" + i + " id=req_qty" + i + " >" + el.quantity + "</td>";
+                pagecontent += "<td name=avail_qty" + i + " id=avail_qty" + i + " >" + el.drugs.dQty + "</td>";
+                pagecontent += "<td>" + el.requestedDate + "</td>";
+                pagecontent += "<td>" + el.department + "</td>";
 
-    
-    pagecontent += "<td>Pending</td>";
-    pagecontent += "<td><input type=number name=appQtyValueRC"+i+" id=appQtyValueRC"+i+" value='"+el.quantity+"'/></td>";
-    pagecontent += "<td><input type=checkbox name=chkRequestValueRC"+i+" id=chkRequestValueRC"+i+" /></td>";
-    i++;    
-    }
-    pagecontent += "</tr>";
+
+                pagecontent += "<td>Pending</td>";
+                pagecontent += "<td><input type=number name=appQtyValueRC" + i + " id=appQtyValueRC" + i + " value='" + el.quantity + "'/></td>";
+                pagecontent += "<td><input type=checkbox name=chkRequestValueRC" + i + " id=chkRequestValueRC" + i + " /></td>";
+                i++;
+            }
+            pagecontent += "</tr>";
 //
 //disabled="true" document.getElementById("checkemail").disabled=true;
 //
-      
+
 //
         });
 //
-    pagecontent += "</tbody>";
-    pagecontent += "</table>";
-    pagecontent += "<input class='btn btn-primary' type=submit value=Approve onclick=getAllRequestRC()>";
-    
+        pagecontent += "</tbody>";
+        pagecontent += "</table>";
+        pagecontent += "<input class='btn btn-primary' type=submit value=Approve onclick=getAllRequestRC()>";
 
-   document.getElementById("pagespaceRC").innerHTML = pagecontent;
-   
+
+
+    }
+    else
+    {
+        pagecontent += "No new requests available at the moment";
+    }
+
+    document.getElementById("pagespaceRC").innerHTML = pagecontent;
    //cat_val_chckd = $("#pagetable #reqid1").text();
    //alert(cat_val_chckd);
    //getAllRequestDC();
@@ -316,7 +339,7 @@ for(i=1; i<=$('#pagetable tr').length-1; i++)
 if(countOfUpdateValues>0 && countInvalidQty ===0)
     {
 $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Request_Controller/approveRequest_new',
+        url: baseUrl+'/index.php/Request_Controller/approveRequest_new',
         type: 'POST',
         crossDomain: true,
         //data: {"dsr":$sr_globe ,"dcat":cat_val_chckd , "dname":nam_val_chckd ,"dprice":price_val_chckd,"dqty":qty_va_chckd},
@@ -331,7 +354,7 @@ $.ajax({
         }
         if(msg2 != "")
         {
-            alert(msg2+"\n");
+            //alert(msg2+"\n");
             getRequestAfterApproveRC();
         }
         
@@ -355,7 +378,7 @@ else{
 function getRequestAfterApproveRC() {
     alert('Pharmacy Stock Sccessfully Updated');
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Request_Controller/viewRequestDrugs',
+        url: baseUrl+'/index.php/Request_Controller/viewRequestDrugs',
         type: 'POST',
         crossDomain: true,
         //data: {"myOrderString": myOrderString},  // fix: need to append your data to the call

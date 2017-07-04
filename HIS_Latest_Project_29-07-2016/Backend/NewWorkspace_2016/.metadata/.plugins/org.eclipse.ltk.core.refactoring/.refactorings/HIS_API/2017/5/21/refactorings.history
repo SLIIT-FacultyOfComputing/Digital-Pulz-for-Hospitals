@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 5 elements from project &apos;HIS_API&apos;&#x0D;&#x0A;- Original project: &apos;HIS_API&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     BusinessLogicLayer&#x0D;&#x0A;     DataAccessLayer&#x0D;&#x0A;     EntityLayer&#x0D;&#x0A;     ServiceLayer&#x0D;&#x0A;     Utils" description="Delete elements" element1="src/main/java/DataAccessLayer" element2="src/main/java/Utils" element3="src/main/java/ServiceLayer" element4="src/main/java/EntityLayer" element5="src/main/java/BusinessLogicLayer" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="5" stamp="1495424292766" subPackages="false" version="1.0"/>
+</session>

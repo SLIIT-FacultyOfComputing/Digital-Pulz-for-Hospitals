@@ -1,0 +1,27 @@
+package lib.driver.opd.driver_class;
+
+import java.util.List;
+
+import lib.SessionFactoryUtil;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import core.classes.opd.Treatment;
+
+public class TreatmentDBDriver {
+
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	
+	public List<Treatment> getAllTreatment()
+	{
+		Query query = session.createQuery("from Treatment");
+
+		@SuppressWarnings("unchecked")
+		List<Treatment> treatmentList = query.list();
+
+		return treatmentList;
+	}
+}

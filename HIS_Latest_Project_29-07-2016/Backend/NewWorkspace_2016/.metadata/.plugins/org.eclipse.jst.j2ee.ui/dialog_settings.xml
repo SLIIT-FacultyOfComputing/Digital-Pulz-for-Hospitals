@@ -3,6 +3,8 @@
 	<item value="false" key="J2EE_EXPORT_OVERWRITE"/>
 	<item value="false" key="J2EE_EXPORT_SOURCE"/>
 	<list key="J2EE_EXPORT_JST_WEB">
+		<item value="C:\Users\Hansi\Downloads\HIS_API.war"/>
+		<item value="I:\HIS_API.war"/>
 		<item value="C:\JUnit\HIS_API.war"/>
 	</list>
 </section>

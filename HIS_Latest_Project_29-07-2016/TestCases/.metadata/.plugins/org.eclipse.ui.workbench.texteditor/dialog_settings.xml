@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="chartDetailsUrl" key="selection"/>
+		<item value="getWardAdmissionByPatientID" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="chartDetailsUrl"/>
-			<item value="DeleteWardUrl"/>
-			<item value="URL_APPEND_DELETE_URL"/>
-			<item value="deleteWard"/>
-			<item value="TempPrescribe"/>
-			<item value="AddDiagnoseUrl"/>
-			<item value="AddwardUrl"/>
-			<item value="addWardAdmission"/>
+			<item value="getWardAdmissionByPatientID"/>
+			<item value="addVisit"/>
+			<item value="URL_APPEND_OPD_VISIT_FOR_REPORTS"/>
+			<item value="getVisitForReports"/>
+			<item value="getVisitsForReport"/>
+			<item value="getVisitByVisitDate"/>
+			<item value="getTreatedByUseridUrl"/>
+			<item value="addSpecimenInfoUrl"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

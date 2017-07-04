@@ -1,8 +1,15 @@
-var baseUrl="http://localhost";
+/*
+ ------------------------------------------------------------------------------------------------------------------------
+ DiPMIMS - Digital Pulz Medical Information Management System
+ Copyright (c) 2017 Sri Lanka Institute of Information Technology
+ <http: http://his.sliit.lk />
+ ------------------------------------------------------------------------------------------------------------------------
+ */
+var baseUrl="http://localhost/eHealth_proj";
 //Drug controller
 function getCategoryListDC() {
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getCatList',
+        url: baseUrl+'/index.php/Drug_Controller/getCatList',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -38,7 +45,7 @@ function getDrugByCategoryDC(){
     var val;
     val = $("#categoryDropDownDC option:selected").text();
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugList/'+val,
+        url: baseUrl+'/index.php/Drug_Controller/getDrugList/'+val,
         type: 'POST',
         crossDomain: true,
                 success: function(data) {
@@ -100,7 +107,7 @@ function getDataToEditDC(rowNumber) {
     var myOrderString = drugNameFromColumn;
     
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getDrugDetails',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString},  // fix: need to append your data to the call
@@ -135,7 +142,7 @@ function getDataToViewDC(rowNumber) {
     var myOrderString = drugNameFromColumn;
 
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getDrugDetails',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString},  // fix: need to append your data to the call
@@ -303,7 +310,7 @@ else{
 if(countOfUpdateValues>0)
     {
 $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/updateDrug',
+        url: baseUrl+'/index.php/Drug_Controller/updateDrug',
         type: 'POST',
         crossDomain: true,
         data: {"dsr":$sr_globe ,"dcat":cat_val_chckd , "dname":nam_val_chckd ,"dprice":price_val_chckd,"dqty":qty_va_chckd},
@@ -330,7 +337,7 @@ function getDataAfterEditDC(rowNumber) {
     var myOrderString = drugNameFromColumn;
 
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getDrugDetails',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString},  
@@ -365,7 +372,7 @@ function addDrugDC(){
     else
     {
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/addDrug',
+            url: baseUrl+'/index.php/Drug_Controller/addDrug',
             type: 'POST',
             crossDomain: true,
             data: {"drugName":drugName ,"drugCat":drugCat,"drugType":drugType,
@@ -383,12 +390,12 @@ var userName = document.getElementById("userNameValue").value;
 var password = document.getElementById("passwordValue").value;
 
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/User_Controller/authenticate',
+        url: baseUrl+'/index.php/User_Controller/authenticate',
         type: 'POST',
         crossDomain: true,
         data: {"userName":userName ,"password":password},
         success: function(data) {
-
+                alert(data);
                  var json_parsed   = $.parseJSON(data);
                  var $userID       = json_parsed[0]['userID'];
                  var $userName     = json_parsed[0]['userName'];
@@ -402,7 +409,7 @@ var password = document.getElementById("passwordValue").value;
 function createSessionUC(userID,userName,userRoleID,userRoleName)
 {
         $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/User_Controller/createSession',
+        url: baseUrl+'/index.php/User_Controller/createSession',
         type: 'POST',
         crossDomain: true,
         data: {"userID":userID ,"userName":userName,"userRoleID":userRoleID,"userRoleName":userRoleName},
@@ -431,7 +438,7 @@ function addPharmacist(){
     var district    = document.getElementById("districtValue").value;
 
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/User_Controller/addUser',
+            url: baseUrl+'/index.php/User_Controller/addUser',
             type: 'POST',
             crossDomain: true,
             data: {"title":title ,"firstName":firstName,"lastName":lastName,"nic":nic,"dob":dob,"civilStatus":civilStatus,
@@ -507,7 +514,7 @@ function addPharmacist(){
 
 function getCategoryListBC() {
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getCatList',
+        url: baseUrl+'/index.php/Batch_Controller/getCatList',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -531,7 +538,7 @@ function getDrugByCategoryBC(){
     var val;
     val = $("#categoryDropDownBC option:selected").text();
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugList/'+val,
+        url: baseUrl+'/index.php/Batch_Controller/getDrugList/'+val,
         type: 'POST',
         crossDomain: true,
                 success: function(data) {
@@ -556,7 +563,7 @@ function addDrugBatchBC1(){
 
 
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/addBatch',
+            url: baseUrl+'/index.php/Batch_Controller/addBatch',
             type: 'POST',
             crossDomain: true,
             data: {"drugName":drugName ,"batchNo":batchNo,"quantity":quantity,
@@ -569,7 +576,7 @@ function addDrugBatchBC1(){
 
 function getDrugReportR() {
     
-    window.location = baseUrl+'/eHealth_proj/index.php/Report_Controller/drugReport';
+    window.location = baseUrl+'/index.php/Report_Controller/drugReport';
 
 }
 

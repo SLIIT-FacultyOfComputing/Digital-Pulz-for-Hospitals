@@ -1,0 +1,58 @@
+package core.classes.hr;
+
+import core.classes.BaseEntity;
+
+public class village extends BaseEntity implements java.io.Serializable {
+
+	private Integer vgeId;
+	private String province;
+	private String district;
+	private String dsdivision;
+	private String gsdivision;
+	private Integer active;
+	private String code;
+	
+	public Integer getVgeId() {
+		return vgeId;
+	}
+	public void setVgeId(Integer vgeId) {
+		this.vgeId = vgeId;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	public String getDsdivision() {
+		return dsdivision;
+	}
+	public void setDsdivision(String dsdivision) {
+		this.dsdivision = dsdivision;
+	}
+	public String getGsdivision() {
+		return gsdivision;
+	}
+	public void setGsdivision(String gsdivision) {
+		this.gsdivision = gsdivision;
+	}
+	public Integer getActive() {
+		return active;
+	}
+	public void setActive(Integer active) {
+		this.active = active;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+}

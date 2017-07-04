@@ -1,0 +1,111 @@
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is F06B-7D40
+
+ Directory of C:\xampp\htdocs\SEP_Project\application\views
+
+03/29/2015  08:01 PM    <DIR>          .
+03/29/2015  08:01 PM    <DIR>          ..
+02/12/2015  11:19 AM             8,149 allergy_m_v.php
+11/19/2014  01:33 AM             9,505 attachments_m_v.php
+11/19/2014  01:16 AM             2,112 attachments_v.php
+06/03/2014  12:29 PM               336 BNF_v.php
+01/12/2014  12:35 AM             1,323 bottom.php
+01/12/2014  12:35 AM                 0 doctor_home_v.php
+03/28/2015  02:57 AM             6,873 doctor_p_queue_v.php
+11/19/2014  01:57 AM             8,419 exam_m_v.php
+01/12/2014  12:35 AM               866 exam_v.php
+06/02/2014  10:11 AM               883 ex_pham_log_v.php
+07/22/2014  10:01 AM             4,122 ex_pham_reg_v.php
+03/29/2015  08:01 PM                 0 filename.txt
+03/22/2015  09:14 PM               244 front.php
+02/10/2015  12:04 PM             8,225 header.php
+11/20/2014  03:42 PM             9,221 headerInward.php
+11/19/2014  01:58 AM             5,631 history_m_v.php
+03/22/2015  07:50 PM    <DIR>          inward
+03/22/2015  07:50 PM    <DIR>          Lab
+08/25/2014  11:50 PM             4,577 laborder_m_v.php
+03/12/2015  12:37 AM            11,413 laborder_v.php
+03/28/2015  02:58 AM    <DIR>          layouts
+03/19/2015  11:13 PM            12,578 left_navbar_v.php
+06/02/2014  02:08 PM             4,053 login_v.php
+03/23/2015  08:53 PM             1,839 login_view.php
+01/12/2014  12:35 AM                 0 operator_home_v.php
+03/22/2015  02:00 AM             5,731 operator_queue_v.php
+08/26/2014  11:58 PM            13,560 patients_full_search_v.php
+03/22/2015  02:15 AM             9,719 patients_full_view_v.php
+03/28/2015  03:01 AM             2,051 patients_v.php
+11/20/2014  02:33 PM             3,675 patient_card_p_v.php
+11/19/2014  01:25 AM            28,743 patient_m_v.php
+03/28/2015  02:57 AM            24,530 patient_overview_v.php
+03/15/2015  12:22 AM             1,753 patient_profile_mini_v.php
+11/17/2014  12:08 PM             4,255 patient_profile_v.php
+01/12/2014  12:35 AM               981 patient_slip_p.php
+11/19/2014  01:32 AM             1,231 patient_token_p_v.php
+01/12/2014  12:35 AM             3,597 patient_visit_summary_p.php
+03/19/2015  11:08 PM            10,532 patient_visit_v.php
+01/12/2014  12:35 AM             2,064 perscription_p_v.php
+01/12/2014  12:35 AM                 1 preferences_v.php
+01/30/2015  11:22 PM            17,768 prescription_m_v.php
+02/12/2015  11:23 AM             7,711 prints_p.php
+08/26/2014  03:29 PM             4,947 questionnaire_answer_m_v.php
+03/26/2015  02:24 PM            11,604 questionnaire_m_v.php
+07/27/2014  10:27 PM             6,977 questionnaire_v.php
+11/13/2014  11:50 PM             5,891 queue_m_v.php
+11/19/2014  05:31 PM             3,375 reports_m_v.php
+02/06/2015  12:42 AM            48,237 viewBNF.php
+02/12/2015  01:54 AM             9,128 visit_m_v.php
+01/21/2015  01:22 PM             1,933 welcome_message.php
+              47 File(s)        330,363 bytes
+               5 Dir(s)  105,013,776,384 bytes free
+
+
+
+Need this on on or before tomorrow 
+
+public void Taskselector(String[] tasks,bool alreadydesigned,int currenttaskno){
+
+	if(alreadydesigned){
+		
+		System.out.println("Jump to next task and mention in comments");
+		for(int i=0; i<tasks.length();i++){
+
+			if(currenttaskno==i){
+			System.out.println(tasks[i+1]);
+			}
+		}
+		
+	}
+
+	else{
+		System.out.println("Do the Asigned Task");
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

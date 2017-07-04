@@ -11,7 +11,7 @@
 <listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>
 <stringAttribute key="org.testng.eclipse.PROTOCOL" value="json"/>
 <listAttribute key="org.testng.eclipse.SUITE_TEST_LIST">
-<listEntry value="D:\HISbk\Digital-Pulz-for-Hospitals\HIS_Latest_Project_29-07-2016\TestCases\HIS\src\testng.xml"/>
+<listEntry value="C:\HIS from svn\TestCases\HIS\src\testng.xml"/>
 </listAttribute>
 <intAttribute key="org.testng.eclipse.TYPE" value="3"/>
 <booleanAttribute key="org.testng.eclipse.VERBOSE" value="false"/>

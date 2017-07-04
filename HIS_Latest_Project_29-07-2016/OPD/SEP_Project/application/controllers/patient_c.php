@@ -1,4 +1,13 @@
 <?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
+<?php
 session_start();
     class Patient_c  extends CI_Controller{
             var $_site_base_url=SITE_BASE_URL;
@@ -117,8 +126,17 @@ session_start();
 					 
 					}
 				}else
-				{				
-					$upload_data['full_path'] = null;
+				{	
+					$upload_data;
+					
+					if(!empty($this->input->post('imageName')))
+					{
+						$upload_data['full_path'] = $this->input->post('imageName');
+					}
+					else
+					{
+						$upload_data['full_path'] = NULL;	
+					}
 				}
 				
 					$this->load->model('PatientModel','patient');
@@ -134,7 +152,14 @@ session_start();
 					$this->patient->set_contactpname($this->input->post('contactpname'));
 					$this->patient->set_contactpno($this->input->post('contactpno'));
 					$this->patient->set_cstatus($this->input->post('cstatus'));
-					$this->patient->set_address($this->input->post('address'));
+
+					if($this->input->post('address1') != "" && $this->input->post('address2') != "")
+						$this->patient->set_address($this->input->post('address1') .", " .$this->input->post('address2') .", ".$this->input->post('village'));
+					else if($this->input->post('address1') != "")
+						$this->patient->set_address($this->input->post('address1') .", ".$this->input->post('village'));
+					else
+						$this->patient->set_address($this->input->post('village'));
+
 					$this->patient->set_telephone($this->input->post('telephone'));
 					$this->patient->set_lang($this->input->post('lang'));
 					$this->patient->set_citizen($this->input->post('citizen'));
@@ -188,8 +213,16 @@ session_start();
 					}
 				
 				}else 
-				{			 
-					$upload_data['full_path'] = NULL;
+				{	
+					$upload_data;
+					if(!empty($this->input->post('imageName')))
+					{
+						$upload_data['full_path'] = $this->input->post('imageName');
+					}
+					else
+					{
+						$upload_data['full_path'] = NULL;	
+					}
 				}
 				
 				$this->patient->set_pid($pid);
@@ -205,7 +238,14 @@ session_start();
 				$this->patient->set_contactpname($this->input->post('contactpname'));
 				$this->patient->set_contactpno($this->input->post('contactpno'));
 				$this->patient->set_cstatus($this->input->post('cstatus'));
-				$this->patient->set_address($this->input->post('address'));
+
+				if($this->input->post('address1') != "" && $this->input->post('address2') != "")
+						$this->patient->set_address($this->input->post('address1') .", " .$this->input->post('address2') .", ".$this->input->post('village'));
+					else if($this->input->post('address1') != "")
+						$this->patient->set_address($this->input->post('address1') .", ".$this->input->post('village'));
+					else
+						$this->patient->set_address($this->input->post('village'));
+
 				$this->patient->set_active($this->input->post('active'));
 				$this->patient->set_telephone($this->input->post('telephone'));
 				$this->patient->set_lang($this->input->post('lang'));
@@ -221,13 +261,13 @@ session_start();
 			
 			public function search()
 			{
-                            if (isset($_SESSION["user"])) {
-                                if ($_SESSION["user"] == -1) {
-                                    redirect($this->_site_base_url);
-                                }
-                                } else {
-                                    redirect($this->_site_base_url);
-                                }
+	       		if (isset($_SESSION["user"])) {
+	                if ($_SESSION["user"] == -1) {
+	                    redirect($this->_site_base_url);
+	                }
+	            } else {
+	                redirect($this->_site_base_url);
+	            }
 				$data['status'] = '0';
 				$this->load->view('Components/headerInward',$data);
 
@@ -247,6 +287,38 @@ session_start();
 			} 
 
 			
-			
+			public function saveImage()
+			{
+				if(isset($_POST['img']))
+				{
+					$img = $_POST['img'];
+					$path = $_POST['path'];
+
+					//$img = str_replace('data:image/png;base64,', '', $img);
+					//$img = str_replace(' ', '+', $img);
+
+					$img = explode( ',', $img );
+					$data = base64_decode($img[1]);
+					$root = $_SERVER['DOCUMENT_ROOT'];
+					$success = file_put_contents($root.'/SEP_Project'.$path, $data);
+					if($success)
+					{
+						echo "successful";
+					}
+					else
+					{
+						echo "failed";
+					}
+				}
+
+			}
+
+			public function getVillageOnSearch($village)
+			{
+				$this->load->model('PatientModel','patient');
+				$result = $this->patient->getVillageOnSearch($village);
+				print_r($result);
+				return $result;
+			}
         }
 ?>
