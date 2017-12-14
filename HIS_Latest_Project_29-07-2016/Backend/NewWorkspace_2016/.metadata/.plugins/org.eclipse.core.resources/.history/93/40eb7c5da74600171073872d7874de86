@@ -1,0 +1,8 @@
+package core.resources.standards;
+
+import javax.ws.rs.Path;
+
+@Path("Complaints")
+public class ComplaintsResource {
+
+}

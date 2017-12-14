@@ -1,0 +1,5 @@
+package core.classes;
+
+public class BaseEntity {
+
+}

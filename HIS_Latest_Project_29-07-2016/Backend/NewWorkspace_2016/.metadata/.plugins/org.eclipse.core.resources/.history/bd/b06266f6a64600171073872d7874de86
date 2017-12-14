@@ -1,0 +1,28 @@
+package lib.driver.standards.driver_class;
+
+import java.util.List;
+
+import lib.SessionFactoryUtil;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import core.classes.hr.Village;
+import core.classes.standards.Complaints;
+
+public class ComplainDBDriver {
+
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	
+	public List<Complaints> getVillageOnSearch(String villageName)
+	{
+		Query query = session.createQuery("from Village w where w.gndivision like '%"+ villageName + "%'");
+
+		@SuppressWarnings("unchecked")
+		List<Village> empList = query.list();
+
+		return empList;
+	}
+}

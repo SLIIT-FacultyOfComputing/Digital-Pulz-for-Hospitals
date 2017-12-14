@@ -69,7 +69,7 @@ public class OpdAttachmentTestCase extends BaseTestCase {
 	 *             Exception throws when process Json
 	 */
 
-	@Test(groups = "his.opd.test", dependsOnMethods = { "addOpdAttachmentTestCase" })
+	@Test(groups = "his.opd.test", dependsOnMethods = { "addOpdAttachmentTestCase", "getOpdTestRequestByPID"})
 	public void updateOpdAttachmentTestCase() throws IOException, JSONException {
 
 		// Get JSON Request body to send LAb update Request
@@ -142,7 +142,7 @@ public class OpdAttachmentTestCase extends BaseTestCase {
 	 *             Exception throws when process Json
 	 */
 	@Test(groups = "his.opd.test", dependsOnMethods = {
-			"addOpdAttachmentTestCase", "updateOpdAttachmentTestCase" })
+			"addOpdAttachmentTestCase" })
 	public void getOpdTestRequestByPID() throws IOException, JSONException {
 
 		ArrayList<String> resArrayList = getHTTPResponse(

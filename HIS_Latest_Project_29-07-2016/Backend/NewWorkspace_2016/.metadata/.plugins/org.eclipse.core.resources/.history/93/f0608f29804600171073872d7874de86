@@ -1,0 +1,12 @@
+package lib.driver.hr.driver_class;
+
+import lib.SessionFactoryUtil;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+public class VillageDBDriver {
+
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+}

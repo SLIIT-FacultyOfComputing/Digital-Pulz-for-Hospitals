@@ -1,0 +1,5 @@
+package core.resources.hr;
+
+public class VillageResource {
+
+}

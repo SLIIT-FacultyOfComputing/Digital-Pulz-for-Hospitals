@@ -228,6 +228,7 @@ public abstract class Patient  {
 	public void setAnswerSets(Set<AnswerSet> answerSets) {
 		this.answerSets = answerSets;
 	}
+	
 
 	
   

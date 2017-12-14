@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/controllers/Report_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/views/Add_Drug_Names.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/Scripts/JS/jqPharmacyDC.js</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/controllers/Batch_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/controllers/Request_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/views/View_Request.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/Scripts/JS/jqPharmacyUC.js</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/Scripts/JS/jqPharmacyBC.js</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/Scripts/JS/jqPharmacyRC.js</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/views/drugReport.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/config/config.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/models/Drug_model.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/controllers/Prescribe_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/views/drug_dispense.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/views/layout/header_pharmacy.php</file>
+            <file>file:/C:/xampp/htdocs/eHealth_proj/application/views/drugRequestEmail.php</file>
+        </group>
+    </open-files>
+</project-private>

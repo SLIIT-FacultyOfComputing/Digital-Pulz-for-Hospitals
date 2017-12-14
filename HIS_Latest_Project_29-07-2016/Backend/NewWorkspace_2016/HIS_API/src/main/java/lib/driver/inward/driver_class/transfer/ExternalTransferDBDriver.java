@@ -34,7 +34,13 @@ public class ExternalTransferDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 	
@@ -55,7 +61,13 @@ public class ExternalTransferDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return false;
+			}
 		}
 
 	}
@@ -82,7 +94,13 @@ public class ExternalTransferDBDriver {
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 	

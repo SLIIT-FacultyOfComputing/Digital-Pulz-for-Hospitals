@@ -1,0 +1,56 @@
+package core.classes.opd;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import core.classes.BaseEntity;
+
+public class Treatment extends BaseEntity implements java.io.Serializable {
+
+	private int treatmentId;
+	private String treatment;
+	private String remarks;
+	private String type;
+	private Boolean active;
+	private Set<OpdTreatment> opdTreatment = new HashSet<OpdTreatment>();
+	
+	public int getTreatmentId() {
+		return treatmentId;
+	}
+	public void setTreatmentId(int treatmentId) {
+		this.treatmentId = treatmentId;
+	}
+	public String getTreatment() {
+		return treatment;
+	}
+	public void setTreatment(String treatment) {
+		this.treatment = treatment;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public Set getOpdTreatment() {
+		return opdTreatment;
+	}
+	public void setOpdTreatment(Set opdTreatment) {
+		this.opdTreatment = opdTreatment;
+	}
+
+	
+	
+}

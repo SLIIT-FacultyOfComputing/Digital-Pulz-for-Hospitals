@@ -1,0 +1,369 @@
+<html>
+<head>
+<title>TestNG:  testInward</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>testInward</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>58/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Thu Apr 27 14:08:34 IST 2017</td>
+</tr>
+<tr><td>Total time:</td><td>17 seconds (17484 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='InwardNurseNoteTestCase.AddInwardNurseNoteTestCase()'><b>AddInwardNurseNoteTestCase</b><br>Test class: InwardNurseNoteTestCase</td>
+<td></td>
+<td>0</td>
+<td>InwardNurseNoteTestCase@3e6fa38a</td></tr>
+<tr>
+<td title='PrescriptionTermTestCase.AddPresceiptionTermTestCase()'><b>AddPresceiptionTermTestCase</b><br>Test class: PrescriptionTermTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTermTestCase@77caeb3e</td></tr>
+<tr>
+<td title='PrescriptionItemTestCase.AddPrescriptionItem()'><b>AddPrescriptionItem</b><br>Test class: PrescriptionItemTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionItemTestCase@1bce4f0a</td></tr>
+<tr>
+<td title='WardTestCase.AddWardTestCase()'><b>AddWardTestCase</b><br>Test class: WardTestCase</td>
+<td></td>
+<td>0</td>
+<td>WardTestCase@604ed9f0</td></tr>
+<tr>
+<td title='ExternalTransferResourseTestCase.CreateExternalTransfer()'><b>CreateExternalTransfer</b><br>Test class: ExternalTransferResourseTestCase</td>
+<td></td>
+<td>0</td>
+<td>ExternalTransferResourseTestCase@6a4f787b</td></tr>
+<tr>
+<td title='InternalTransferResourceTestCase.CreateInternalTransfer()'><b>CreateInternalTransfer</b><br>Test class: InternalTransferResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>InternalTransferResourceTestCase@1e88b3c</td></tr>
+<tr>
+<td title='WardTestCase.DeleteWardTestCase()'><b>DeleteWardTestCase</b><br>Test class: WardTestCase</td>
+<td></td>
+<td>0</td>
+<td>WardTestCase@604ed9f0</td></tr>
+<tr>
+<td title='TempreturechartTestcase.TemperaturechartResource()'><b>TemperaturechartResource</b><br>Test class: TempreturechartTestcase</td>
+<td></td>
+<td>0</td>
+<td>TempreturechartTestcase@3bfdc050</td></tr>
+<tr>
+<td title='TempPrescribeResourceTestCase.UpdatePrescrptionItem()'><b>UpdatePrescrptionItem</b><br>Test class: TempPrescribeResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>TempPrescribeResourceTestCase@66a3ffec</td></tr>
+<tr>
+<td title='PrescriptionItemTestCase.UpdatePrescrptionItemTestCase()'><b>UpdatePrescrptionItemTestCase</b><br>Test class: PrescriptionItemTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionItemTestCase@1bce4f0a</td></tr>
+<tr>
+<td title='PrescriptionTermTestCase.UpdateTermPrescrptionTestCase()'><b>UpdateTermPrescrptionTestCase</b><br>Test class: PrescriptionTermTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTermTestCase@77caeb3e</td></tr>
+<tr>
+<td title='InwardNurseNoteTestCase.UpdateTermPrescrptionTestCase()'><b>UpdateTermPrescrptionTestCase</b><br>Test class: InwardNurseNoteTestCase</td>
+<td></td>
+<td>0</td>
+<td>InwardNurseNoteTestCase@3e6fa38a</td></tr>
+<tr>
+<td title='AdmissionRequestResourceTestCase.addAdmissionRequest()'><b>addAdmissionRequest</b><br>Test class: AdmissionRequestResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionRequestResourceTestCase@5e3a8624</td></tr>
+<tr>
+<td title='BedTestCase.addBedTestCase()'><b>addBedTestCase</b><br>Test class: BedTestCase</td>
+<td></td>
+<td>0</td>
+<td>BedTestCase@6f7fd0e6</td></tr>
+<tr>
+<td title='DiagnoseResourceTestcase.addDiagnose()'><b>addDiagnose</b><br>Test class: DiagnoseResourceTestcase</td>
+<td></td>
+<td>0</td>
+<td>DiagnoseResourceTestcase@91161c7</td></tr>
+<tr>
+<td title='DiabeticChartTestCase.addNewDiabeticchartDetailsTestCase()'><b>addNewDiabeticchartDetailsTestCase</b><br>Test class: DiabeticChartTestCase</td>
+<td></td>
+<td>0</td>
+<td>DiabeticChartTestCase@47c62251</td></tr>
+<tr>
+<td title='TempPrescribeResourceTestCase.addNewPrescrptionItemTestCase()'><b>addNewPrescrptionItemTestCase</b><br>Test class: TempPrescribeResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>TempPrescribeResourceTestCase@66a3ffec</td></tr>
+<tr>
+<td title='TempreturechartTestcase.addNewTempchartDetails()'><b>addNewTempchartDetails</b><br>Test class: TempreturechartTestcase</td>
+<td></td>
+<td>0</td>
+<td>TempreturechartTestcase@3bfdc050</td></tr>
+<tr>
+<td title='LiquidBalanceTestCase.addNewchartDetails()'><b>addNewchartDetails</b><br>Test class: LiquidBalanceTestCase</td>
+<td></td>
+<td>0</td>
+<td>LiquidBalanceTestCase@42d80b78</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.addWardTestCase()'><b>addWardTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='TempPrescribeResourceTestCase.deleteWard()'><b>deleteWard</b><br>Test class: TempPrescribeResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>TempPrescribeResourceTestCase@66a3ffec</td></tr>
+<tr>
+<td title='BedTestCase.getAllBedByWardNoTestCase()'><b>getAllBedByWardNoTestCase</b><br>Test class: BedTestCase</td>
+<td></td>
+<td>0</td>
+<td>BedTestCase@6f7fd0e6</td></tr>
+<tr>
+<td title='DiabeticChartTestCase.getAllChartTestCase()'><b>getAllChartTestCase</b><br>Test class: DiabeticChartTestCase</td>
+<td></td>
+<td>0</td>
+<td>DiabeticChartTestCase@47c62251</td></tr>
+<tr>
+<td title='BedTestCase.getBedByWardNoAndBedNoTestCase()'><b>getBedByWardNoAndBedNoTestCase</b><br>Test class: BedTestCase</td>
+<td></td>
+<td>0</td>
+<td>BedTestCase@6f7fd0e6</td></tr>
+<tr>
+<td title='LiquidBalanceTestCase.getChartDetails()'><b>getChartDetails</b><br>Test class: LiquidBalanceTestCase</td>
+<td></td>
+<td>0</td>
+<td>LiquidBalanceTestCase@42d80b78</td></tr>
+<tr>
+<td title='LiquidBalanceTestCase.getDiabeticChartByBHTNo()'><b>getDiabeticChartByBHTNo</b><br>Test class: LiquidBalanceTestCase</td>
+<td></td>
+<td>0</td>
+<td>LiquidBalanceTestCase@42d80b78</td></tr>
+<tr>
+<td title='DiabeticChartTestCase.getDiabeticChartByBHTNoTestCase()'><b>getDiabeticChartByBHTNoTestCase</b><br>Test class: DiabeticChartTestCase</td>
+<td></td>
+<td>0</td>
+<td>DiabeticChartTestCase@47c62251</td></tr>
+<tr>
+<td title='TempreturechartTestcase.getDiabeticChartByBHTNoTestCase()'><b>getDiabeticChartByBHTNoTestCase</b><br>Test class: TempreturechartTestcase</td>
+<td></td>
+<td>0</td>
+<td>TempreturechartTestcase@3bfdc050</td></tr>
+<tr>
+<td title='InwardNurseNoteTestCase.getDiabeticChartByBHTno()'><b>getDiabeticChartByBHTno</b><br>Test class: InwardNurseNoteTestCase</td>
+<td></td>
+<td>0</td>
+<td>InwardNurseNoteTestCase@3e6fa38a</td></tr>
+<tr>
+<td title='DiagnoseResourceTestcase.getDiagnoseByBHTNo()'><b>getDiagnoseByBHTNo</b><br>Test class: DiagnoseResourceTestcase</td>
+<td></td>
+<td>0</td>
+<td>DiagnoseResourceTestcase@91161c7</td></tr>
+<tr>
+<td title='BedTestCase.getFreeBedByWardNoTestCase()'><b>getFreeBedByWardNoTestCase</b><br>Test class: BedTestCase</td>
+<td></td>
+<td>0</td>
+<td>BedTestCase@6f7fd0e6</td></tr>
+<tr>
+<td title='InternalTransferResourceTestCase.getInternalTransferByBHTNo()'><b>getInternalTransferByBHTNo</b><br>Test class: InternalTransferResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>InternalTransferResourceTestCase@1e88b3c</td></tr>
+<tr>
+<td title='InternalTransferResourceTestCase.getInternalTransferByID()'><b>getInternalTransferByID</b><br>Test class: InternalTransferResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>InternalTransferResourceTestCase@1e88b3c</td></tr>
+<tr>
+<td title='PrescriptionItemTestCase.getMaxTermIdByUserId()'><b>getMaxTermIdByUserId</b><br>Test class: PrescriptionItemTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionItemTestCase@1bce4f0a</td></tr>
+<tr>
+<td title='AdmissionRequestResourceTestCase.getNotReadAdmissionRequestByWard()'><b>getNotReadAdmissionRequestByWard</b><br>Test class: AdmissionRequestResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionRequestResourceTestCase@5e3a8624</td></tr>
+<tr>
+<td title='InternalTransferResourceTestCase.getNotReadInternalTransferByWard()'><b>getNotReadInternalTransferByWard</b><br>Test class: InternalTransferResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>InternalTransferResourceTestCase@1e88b3c</td></tr>
+<tr>
+<td title='InwardNurseNoteTestCase.getNurseNote()'><b>getNurseNote</b><br>Test class: InwardNurseNoteTestCase</td>
+<td></td>
+<td>5</td>
+<td>InwardNurseNoteTestCase@3e6fa38a</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.getPatientInformationByBHTNoTestCase()'><b>getPatientInformationByBHTNoTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='PrescriptionItemTestCase.getPrescriptionItemByBHTno()'><b>getPrescriptionItemByBHTno</b><br>Test class: PrescriptionItemTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionItemTestCase@1bce4f0a</td></tr>
+<tr>
+<td title='PrescriptionItemTestCase.getPrescriptionItemByTermID()'><b>getPrescriptionItemByTermID</b><br>Test class: PrescriptionItemTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionItemTestCase@1bce4f0a</td></tr>
+<tr>
+<td title='TempPrescribeResourceTestCase.getPrescrptionItemsByTermID()'><b>getPrescrptionItemsByTermID</b><br>Test class: TempPrescribeResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>TempPrescribeResourceTestCase@66a3ffec</td></tr>
+<tr>
+<td title='AdmissionRequestResourceTestCase.getSelectAdmissionReq()'><b>getSelectAdmissionReq</b><br>Test class: AdmissionRequestResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionRequestResourceTestCase@5e3a8624</td></tr>
+<tr>
+<td title='InternalTransferResourceTestCase.getSelectInternalTransfer()'><b>getSelectInternalTransfer</b><br>Test class: InternalTransferResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>InternalTransferResourceTestCase@1e88b3c</td></tr>
+<tr>
+<td title='ExternalTransferResourseTestCase.getSelectInternalTransfer()'><b>getSelectInternalTransfer</b><br>Test class: ExternalTransferResourseTestCase</td>
+<td></td>
+<td>0</td>
+<td>ExternalTransferResourseTestCase@6a4f787b</td></tr>
+<tr>
+<td title='PrescriptionTermTestCase.getTermPrescriptionByBHTno()'><b>getTermPrescriptionByBHTno</b><br>Test class: PrescriptionTermTestCase</td>
+<td></td>
+<td>0</td>
+<td>PrescriptionTermTestCase@77caeb3e</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.getWardAdmissionByPatientIDTestCase()'><b>getWardAdmissionByPatientIDTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.getWardAdmissionByWardNoTestCase()'><b>getWardAdmissionByWardNoTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.getWardAdmissionDetailsByBHTNoTestCase()'><b>getWardAdmissionDetailsByBHTNoTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.getWardAdmissionTestCase()'><b>getWardAdmissionTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='WardTestCase.getWardByWardNoTestCase()'><b>getWardByWardNoTestCase</b><br>Test class: WardTestCase</td>
+<td></td>
+<td>0</td>
+<td>WardTestCase@604ed9f0</td></tr>
+<tr>
+<td title='WardTestCase.getWardTestCase()'><b>getWardTestCase</b><br>Test class: WardTestCase</td>
+<td></td>
+<td>0</td>
+<td>WardTestCase@604ed9f0</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.updateAdmissionBedNoTestCase()'><b>updateAdmissionBedNoTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='AdmissionRequestResourceTestCase.updateAdmissionRequest()'><b>updateAdmissionRequest</b><br>Test class: AdmissionRequestResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionRequestResourceTestCase@5e3a8624</td></tr>
+<tr>
+<td title='BedTestCase.updateBedTestCase()'><b>updateBedTestCase</b><br>Test class: BedTestCase</td>
+<td></td>
+<td>0</td>
+<td>BedTestCase@6f7fd0e6</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.updateDischargeSignTestCase()'><b>updateDischargeSignTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='AdmissionResourceTestCase.updateDischargeTestCase()'><b>updateDischargeTestCase</b><br>Test class: AdmissionResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>AdmissionResourceTestCase@5c3bd550</td></tr>
+<tr>
+<td title='InternalTransferResourceTestCase.updateInternalTransfer()'><b>updateInternalTransfer</b><br>Test class: InternalTransferResourceTestCase</td>
+<td></td>
+<td>0</td>
+<td>InternalTransferResourceTestCase@1e88b3c</td></tr>
+<tr>
+<td title='WardTestCase.updateWardDetailsTestCase()'><b>updateWardDetailsTestCase</b><br>Test class: WardTestCase</td>
+<td></td>
+<td>0</td>
+<td>WardTestCase@604ed9f0</td></tr>
+</table><p>
+</body>
+</html>

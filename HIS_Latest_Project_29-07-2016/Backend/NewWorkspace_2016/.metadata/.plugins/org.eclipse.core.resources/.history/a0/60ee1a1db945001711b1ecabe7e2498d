@@ -1,0 +1,60 @@
+package core.classes.opd;
+
+import core.classes.BaseEntity;
+
+public class OpdTreatment extends BaseEntity implements java.io.Serializable  {
+	
+	private int opdTreatmentId;
+	private int opdId;
+	private String treatment;
+	private String status;
+	private String remark;
+	private Boolean active;
+	private int treatmentId;
+	
+	public int getOpdTreatmentId() {
+		return opdTreatmentId;
+	}
+	public void setOpdTreatmentId(int opdTreatmentId) {
+		this.opdTreatmentId = opdTreatmentId;
+	}
+	public int getOpdId() {
+		return opdId;
+	}
+	public void setOpdId(int opdId) {
+		this.opdId = opdId;
+	}
+	public String getTreatment() {
+		return treatment;
+	}
+	public void setTreatment(String treatment) {
+		this.treatment = treatment;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public int getTreatmentId() {
+		return treatmentId;
+	}
+	public void setTreatmentId(int treatmentId) {
+		this.treatmentId = treatmentId;
+	}
+	
+	
+
+}

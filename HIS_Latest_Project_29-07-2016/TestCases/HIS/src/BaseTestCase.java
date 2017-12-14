@@ -148,7 +148,11 @@ public class BaseTestCase {
 			// if Request is HTTP PUT request sent with POST body
 			httpURLConnection = sendHTTPPostRequest(urlAppend, httpMethod, requestBody);
 			iStream = httpURLConnection.getInputStream();
-		}
+		}else if (httpMethod.equals(TestCaseConstants.HTTP_DELETE)) {
+			// if Request is HTTP PUT request sent with POST body
+			httpURLConnection = sendHTTPPostRequest(urlAppend, httpMethod, requestBody);
+			iStream = httpURLConnection.getInputStream();
+			}
 		BufferedReader in = new BufferedReader(new InputStreamReader(iStream));
 		String inputLine;
 		while ((inputLine = in.readLine()) != null) {

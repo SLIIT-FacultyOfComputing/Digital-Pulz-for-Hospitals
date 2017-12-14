@@ -1,0 +1,8 @@
+1496132589340	Rename resource 'village.hbm.xml'
+1496132648139	Rename resource 'village.java'
+1496132688112	Rename resource 'icd10.hbm.xml'
+1496132761375	Rename type 'icd10'
+1496133371678	Move 'Icd10.hbm.xml' to 'mappings'
+1496137885777	Move 'Complaints.hbm.xml' to 'mappings'
+1496203662570	Rename resource 'opdTreatment.java'
+1496213762775	Rename type 'patientInjection'

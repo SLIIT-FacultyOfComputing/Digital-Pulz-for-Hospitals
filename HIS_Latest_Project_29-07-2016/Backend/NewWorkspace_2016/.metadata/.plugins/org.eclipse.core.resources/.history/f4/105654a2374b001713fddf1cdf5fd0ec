@@ -1,0 +1,80 @@
+package core.classes.opd;
+
+import core.classes.BaseEntity;
+
+public class PatientInjection extends BaseEntity implements java.io.Serializable  {
+
+	private int patientInjectionId;
+	private Visit visitId;
+	private Injection injectionId;
+	private int orderById;
+	private int completeById;
+	private String status;
+	private String episodeType;
+	private String completeDate;
+	private String remarks;
+	private Boolean active;
+	
+	public int getPatientInjectionId() {
+		return patientInjectionId;
+	}
+	public void setPatientInjectionId(int patientInjectionId) {
+		this.patientInjectionId = patientInjectionId;
+	}
+	public Patient getPid() {
+		return pid;
+	}
+	public void setPid(Patient pid) {
+		this.pid = pid;
+	}
+	public Injection getInjectionId() {
+		return injectionId;
+	}
+	public void setInjectionId(Injection injectionId) {
+		this.injectionId = injectionId;
+	}
+	public int getOrderById() {
+		return orderById;
+	}
+	public void setOrderById(int orderById) {
+		this.orderById = orderById;
+	}
+	public int getCompleteById() {
+		return completeById;
+	}
+	public void setCompleteById(int completeById) {
+		this.completeById = completeById;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getEpisodeType() {
+		return episodeType;
+	}
+	public void setEpisodeType(String episodeType) {
+		this.episodeType = episodeType;
+	}
+	public String getCompleteDate() {
+		return completeDate;
+	}
+	public void setCompleteDate(String completeDate) {
+		this.completeDate = completeDate;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
+	
+}

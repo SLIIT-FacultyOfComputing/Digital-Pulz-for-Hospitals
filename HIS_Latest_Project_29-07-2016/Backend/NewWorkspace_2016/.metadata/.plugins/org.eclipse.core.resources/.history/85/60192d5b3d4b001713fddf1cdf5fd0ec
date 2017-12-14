@@ -1,0 +1,274 @@
+package core.resources.opd;
+
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import lib.driver.opd.driver_class.InjectionDBDriver;
+import lib.driver.opd.driver_class.TreatmentDBDriver;
+
+import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import core.ErrorConstants;
+import core.classes.opd.Injection;
+import core.classes.opd.OpdInjection;
+import core.classes.opd.OpdTreatment;
+import core.classes.opd.Treatment;
+import flexjson.JSONSerializer;
+
+@Path("Injection")
+public class InjectionResource {
+
+	final static Logger log = Logger.getLogger(InjectionResource.class);
+	InjectionDBDriver injectionDBDriver = new InjectionDBDriver();
+	
+	@GET
+	@Path("/getAllInjections")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllTreatments() throws JSONException {
+		
+		
+		try {
+			List<Injection> injectionList=injectionDBDriver.getAllInjection();
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.exclude("*.class").serialize(injectionList);
+			
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in get all Injections, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting all Injections, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+	}
+	
+	@GET
+	@Path("/getOpdInjectionsForVisit/{VISITID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getOpdTreatmentsForVisit(@PathParam("VISITID")int visitID) throws JSONException {
+		
+		
+		try {
+			List<OpdTreatment> treatmentList=treatmentDBDriver.getOpdTreatmentsForVisit(visitID);
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.exclude("*.class").serialize(treatmentList);
+			
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in get OpdInjections for visit id, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting OpdInjections for visit id,, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+	}
+	
+	@GET
+	@Path("/getAllOpdInjections")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getOpdTreatmentsForVisit() throws JSONException {
+		
+		
+		try {
+			List<OpdTreatment> treatmentList=treatmentDBDriver.getAllOpdTreatments();
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.exclude("*.class").serialize(treatmentList);
+			
+		}
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in get all OpdInjections, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while getting all OpdInjections, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+	}
+	
+	@POST
+	@Path("/addInjection")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addTreatment(JSONObject ajson) throws JSONException {
+
+		log.info("Entering the add OpdInjection method");
+		try {
+			OpdTreatment opdTreatment =new OpdTreatment();
+ 
+			System.out.println(ajson.toString());
+			int userid = ajson.getInt("userid");
+			int treatmentId = Integer.parseInt(ajson.getString("treatmentid").split(":")[0]);
+			int visitid = ajson.getInt("visitid");
+			
+			opdTreatment.setActive(true);
+			opdTreatment.setStatus(ajson.getString("status"));
+			opdTreatment.setRemarks(ajson.getString("remarks"));
+		 
+			treatmentDBDriver.addOpdTreatment(opdTreatment, treatmentId, visitid, userid);
+			
+			log.info("Adding OpdInjection Successful, treatmentId = " + opdTreatment.getOpdTreatmentId());
+			
+			return visitid + "";
+
+		}	
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in adding new OpdInjection, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (JSONException e) {
+
+			log.error("JSONException while adding new OpdInjection, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while adding new OpdInjection, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+		
+		
+	}
+	
+	@POST
+	@Path("/updateInjection")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateTreatment(JSONObject ajson) throws JSONException {
+
+		log.info("Entering the update OpdTreatment method");
+		try {
+			OpdTreatment opdTreatment =new OpdTreatment();
+ 
+			System.out.println(ajson.toString());
+			
+			int userid = ajson.getInt("userid");
+			
+			opdTreatment.setOpdTreatmentId(ajson.getInt("opdtreatmentid"));
+			opdTreatment.setStatus(ajson.getString("status"));
+			opdTreatment.setRemarks(ajson.getString("remarks"));
+		 
+			treatmentDBDriver.updateOpdTreatment(opdTreatment, userid);
+			
+			log.info("Updating OpdInjection Successful, opdInjectionId = " + opdTreatment.getOpdTreatmentId());
+			
+			return opdTreatment.getOpdTreatmentId() + "";
+
+		}	
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in updating OpdInjection, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (JSONException e) {
+
+			log.error("JSONException while updating OpdInjection, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch(Exception e)
+		{
+			log.error("Error while updating OpdInjection, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+			
+			return jsonErrorObject.toString(); 
+			
+		}
+		
+		
+	}
+}

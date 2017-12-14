@@ -1,17 +1,69 @@
+<?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
 <script>
 $(document).ready(function(){
-<?php
-if($exam[0]->active=='0'){
-      
-    echo "$('#myform :input:not(#active):not(.btn-primary)').attr('disabled', true); ";
-}
-?>
+  <?php
+  if($exam != null)
+  {
+    if($exam[0]->active=='0'){
+        
+      echo "$('#myform :input:not(#active):not(.btn-primary)').attr('disabled', true); ";
+    }
+  }
+  ?>
+
+  $("#DiastBPDefault").click(function(){
+    $("input[name='DiastBP']").val(80);
+  });
+
+  $("#SysBPDefault").click(function(){
+    $("input[name='SysBP']").val(120);
+  });
+
+  $("#TemperatureDefault").click(function(){
+    $("input[name='Temperature']").val(98.6);
+  });
+
+  $(".alert").removeClass("in").show();
+  $ (".alert").delay(200).addClass("in").fadeOut(2010);
 });
 
 </script>
-<div class="container">
+
+<section class="content-header">
+    <h1>
+        New Examination
+    </h1>
+    <div class="col-md-9">
+        <h4><small><b><?php
+            if ($pprofile->patientTitle == "Baby")
+                echo "$pprofile->patientTitle $pprofile->patientFullName";
+            else
+                echo "$pprofile->patientTitle $pprofile->patientFullName";
+        ?> </b> / <?php echo "$pprofile->patientGender"; ?> / <?php 
+                                date_default_timezone_set('Asia/Colombo');
+                                echo (date("Y") - date("Y",$pprofile->patientDateOfBirth/1000));  ?>Yrs <?php 
+                                date_default_timezone_set('Asia/Colombo');
+                                echo (date("m") - date("m",$pprofile->patientDateOfBirth/1000));  ?>Mths <?php 
+                                date_default_timezone_set('Asia/Colombo');
+                                echo (date("d") - date("d",$pprofile->patientDateOfBirth/1000));  ?>Dys / 
+                <?php echo "$pprofile->patientCivilStatus";?> / 
+                <?php echo "$pprofile->patientAddress" ;?>
+            </small></h4></div>
+    <div class="col-md-3" align="right"><h4><small><?php echo "$pprofile->patientHIN"; ?></small></h4></div>
+    <br>
+    <br>
+</section>
+
   
-  <div class="span10">
+
     
     <?php
     if(preg_match('/Edit/',$title))
@@ -22,35 +74,36 @@ if($exam[0]->active=='0'){
       echo form_open('exams_c/save/'.$pid."/".$visitid, array('name' => 'myform','id' => 'myform'));
     }
     ?>
-    <div class="form-horizontal">
       
       
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title"><?php echo $title; ?></h3>
-        </div>
-        <div >
+      
+<section class="content">
+  <div class="row">
+        <!-- left column -->
+    <div class="col-md-12">
+        <div class="box box-default">
+          <div class="box-header">
+            <h3 class="box-title">Examination</h3>
+          </div>
           
           
-          
-          
-          
+          <hr/>
           
           
           <!-- Message for operation status  ************************************************************** -->
           <?php
             if($status !== 0){
-              if((!preg_match('/Edit/',$title)) & $status == "True"){
+              if((!preg_match('/Edit/',$title)) & $status == $visitid){
           ?>
-          <div class="alert alert-success" style="margin-top: 5px">
-            <button type="button" class="close" data-dismiss="alert" style="margin-right: 5%">&times;</button>
-            <strong>Successfull !  </strong> Examination Added Successfully
+          <div class="alert alert-success fade" >
+            <button type="button" class="close" data-dismiss="alert" id="x">×</button>
+            <strong>Examination Successfully added..</strong>
           </div>
-          <?php }else if( preg_match('/Edit/',$title) & $status == "True"){  ?>
+          <?php }else if( preg_match('/Edit/',$title) & $status == $visitid){  ?>
           
-          <div class="alert alert-success" style="margin-top: 5px">
-            <button type="button" class="close" data-dismiss="alert" style="margin-right: 5%">&times;</button>
-            <strong>Successfull !  </strong> Examination updated Successfully
+          <div class="alert alert-success fade" >
+            <button type="button" class="close" data-dismiss="alert" id="x">×</button>
+            <strong>Examination Successfully updated..</strong>
           </div>
           
           <?php } ?>
@@ -59,7 +112,7 @@ if($exam[0]->active=='0'){
           <?php if((!preg_match('/Edit/',$title)) & $status == "False"){ ?>
           
           <div class="alert alert-danger" style="margin-top: 5px;height: 55px;padding-left: 15px;padding-top: 14px">
-            <strong>Fail !</strong> Faild to add the examination
+            <strong>Failed!</strong> Failed to add the examination
             <button type="button" class="close" data-dismiss="alert" style="margin-right: 5%">&times;</button>
             
           </div>
@@ -68,7 +121,7 @@ if($exam[0]->active=='0'){
           <?php }else if( preg_match('/Edit/',$title) & $status == "False"){  ?>
           <div class="alert alert-danger" style="margin-top: 5px;height: 55px;padding-left: 15px;padding-top: 14px">
             <button type="button" class="close" data-dismiss="alert" style="margin-right: 5%">&times;</button>
-            <strong>Fail !</strong> Faild to update the examination
+            <strong>Failed!</strong> Failed to update the examination
           </div>
           <?php } ?>
           <?php } ?>
@@ -99,7 +152,7 @@ if($exam[0]->active=='0'){
               
               <div class="form-group input-group" >
                 <!--<label class="control-label" >Height in cm</label>-->
-                <span style="width: 185px"  class="input-group-addon">Height in <b>cm</b></span>
+                <span style="width: 185px"  class="input-group-addon">Height in <b>cm</b>*</span>
                 
                 <input class="form-control" style="width:200px"  type="number" id="inputFName"  oninput="calBMI()" pattern="[0-9]+([\.|,][0-9]+)?" step="0.01"  min="15" max="200" value="<?php if (preg_match('/Edit/', $title)) {
                 echo $exam[0]->examHeight;
@@ -107,7 +160,7 @@ if($exam[0]->active=='0'){
               </div>
               
               <div class="form-group input-group" >
-                <span style="width: 185px"  class="input-group-addon">Weight in <b>Kg</b></span>
+                <span style="width: 185px"  class="input-group-addon">Weight in <b>Kg</b>*</span>
                 <!--<label class="control-label" >Weight in Kg</label>-->
                 
                 <input class="form-control" style="width:200px" type="number" id="inputLName"  oninput="calBMI()" pattern="[0-9]+([\.|,][0-9]+)?" step="0.01"  min="0" max="150" value="<?php if (preg_match('/Edit/', $title)) {
@@ -121,71 +174,68 @@ if($exam[0]->active=='0'){
                 <input  type="text" style="width:200px" class="form-control" id="bmi" readonly name="bmi" placeholder="">
                 
               </div>
-              <!--              <div data-role="main" class="ui-content">
-                <label for="points">Points:</label>-->
-               <!--  <div class="form-group input-group" >
-                  <span style="width: 185px"  class="input-group-addon">Points:</span>
-                  <input class="form-control" style="width:200px" type="number" name="points" id="points" value="50" min="0" max="100">
+                
+                
+              <div class="form-group input-group" >
+                <!--<label class="control-label" >Temperature in F*<sup>o</sup></label>-->
+                <span style="width: 185px"  class="input-group-addon">Temperature in <b>F*<sup>o</sup></b></span>
+                
+                <input class="form-control" style="width:200px" type="number" id="inputOName"   pattern="[0-9]+([\.|,][0-9]+)?" step="0.01" min="96" max="106" value="<?php if (preg_match('/Edit/', $title)) {
+                echo $exam[0]->examTemp;
+                } ?>" name="Temperature" placeholder="">
+                
+                <button type="button" class="glyphicon glyphicon-hand-left pull-right" id="TemperatureDefault"  title="Add Default Temperature"/>
+              </div>
+              
+              <div class="form-group input-group" >
+                <span style="width: 185px"  class="input-group-addon">Systolic Blood Preasure*</span>
+                <!--<label class="control-label" >Systolic Blood Preasure*</label>-->
+                
+                <input class="form-control" style="width:200px" type="number" id="inputOName"  required min="50" max="240" name="SysBP" placeholder="" value="<?php if (preg_match('/Edit/', $title)) {
+                echo $exam[0]->examSysBP;
+                } ?>">
+
+                <button type="button" class="glyphicon glyphicon-hand-left pull-right" id="SysBPDefault"  title="Add Default SysBP"/>
+              </div>
+              
+              
+              <div class="form-group input-group">
+                <span style="width: 185px"  class="input-group-addon">Diastolic Blood Preasure*</span>
+                <!--<label class="control-label" >Diastolic Blood Preasure*</label>-->
+                
+                <input class="form-control" style="width:200px" type="number" id="inputOName" name="DiastBP" placeholder="" required   min="30" max="140"  value="<?php if (preg_match('/Edit/', $title)) {
+                echo $exam[0]->examDisatBP;
+                } ?>">
+                
+                <button type="button" class="glyphicon glyphicon-hand-left pull-right" id="DiastBPDefault"  title="Add Default DiastBP"/>
+
+              </div>
+                
+                
+              <?php if(preg_match('/Edit/',$title)){?>
+              <div class="control-group">
+                <label class="control-label" for="gender">Active </label>
+                <div class="controls">
+                  <select id="active" name="active">
+                    <option  <?php if ($exam[0]->examActive == '1') {
+                      echo 'selected';
+                    } ?>   value="1">Yes</option>
+                    <option   <?php if ($exam[0]->examActive == '0') {
+                      echo 'selected';
+                    } ?>  value="0">No</option>
+                  </select>
                 </div>
-                 -->
-                
-                
-                
-                <div class="form-group input-group" >
-                  <!--<label class="control-label" >Temperature in F*<sup>o</sup></label>-->
-                  <span style="width: 185px"  class="input-group-addon">Temperature in <b>F*<sup>o</sup></b></span>
-                  
-                  <input class="form-control" style="width:200px" type="number" id="inputOName"   pattern="[0-9]+([\.|,][0-9]+)?" step="0.01" min="96" max="106" value="<?php if (preg_match('/Edit/', $title)) {
-                  echo $exam[0]->examTemp;
-                  } ?>" name="Temperature" placeholder="">
-                  
+              </div>
+              
+              <div class="control-group">
+                <div class="controls">
+                  <label  class="lastmod">Last edit by <?php echo $exam[0]->examLastUpdateUser->hrEmployee->firstName ." ".$exam[0]->examLastUpdateUser->hrEmployee->lastName. " on " . $exam[0]->examLastUpdate; ?></label>
                 </div>
+              </div>
+              
+              <?php } ?>
                 
-                <div class="form-group input-group" >
-                  <span style="width: 185px"  class="input-group-addon">Systolic Blood Preasure*</span>
-                  <!--<label class="control-label" >Systolic Blood Preasure*</label>-->
-                  
-                  <input class="form-control" style="width:200px" type="number" id="inputOName"  required min="50" max="240" name="SysBP" placeholder="" value="<?php if (preg_match('/Edit/', $title)) {
-                  echo $exam[0]->examSysBP;
-                  } ?>">
-                </div>
-                
-                
-                <div class="form-group input-group">
-                  <span style="width: 185px"  class="input-group-addon">Diastolic Blood Preasure*</span>
-                  <!--<label class="control-label" >Diastolic Blood Preasure*</label>-->
-                  
-                  <input class="form-control" style="width:200px" type="number" id="inputOName" name="DiastBP" placeholder="" required   min="30" max="140"  value="<?php if (preg_match('/Edit/', $title)) {
-                  echo $exam[0]->examDisatBP;
-                  } ?>">
-                  
-                </div>
-                
-                
-                <?php if(preg_match('/Edit/',$title)){?>
-                <div class="control-group">
-                  <label class="control-label" for="gender">Active </label>
-                  <div class="controls">
-                    <select id="active" name="active">
-                      <option  <?php if ($exam[0]->examActive == '1') {
-                        echo 'selected';
-                      } ?>   value="1">Yes</option>
-                      <option   <?php if ($exam[0]->examActive == '0') {
-                        echo 'selected';
-                      } ?>  value="0">No</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div class="control-group">
-                  <div class="controls">
-                    <label  class="lastmod">Last edit by <?php echo $exam[0]->examLastUpdateUser->hrEmployee->firstName ." ".$exam[0]->examLastUpdateUser->hrEmployee->lastName. " on " . $exam[0]->examLastUpdate; ?></label>
-                  </div>
-                </div>
-                
-                <?php } ?>
-                
-                
+               <div><b>Fields marked with an asterisk must be filled</b></div><br/>
                 
               </div>
               
@@ -198,15 +248,15 @@ if($exam[0]->active=='0'){
                   } else {
                   echo 'Save';
                   } ?></button>
-                  <button type="reset" class='btn'  onclick="history.go(-1);">Cancel</button>
+                 <!--  <button type="reset" class='btn'  onclick="history.go(-1);">Cancel</button> -->
                 </div>
               </div>
             </div>
-            
+            <br/>
           </div>
         </div>
       </div>
-
+</section>
       <script type="text/javascript">
 
       /*var h,w,bmi;

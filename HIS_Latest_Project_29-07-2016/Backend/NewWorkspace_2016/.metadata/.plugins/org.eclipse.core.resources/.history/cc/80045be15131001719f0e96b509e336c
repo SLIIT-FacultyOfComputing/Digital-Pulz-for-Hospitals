@@ -1,0 +1,315 @@
+/**
+ * 
+ */
+package lib.driver.opd.driver_class;
+
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import lib.SessionFactoryUtil;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.mysql.jdbc.Util;
+
+import core.classes.opd.*;
+import core.classes.pharmacy.MstDrugsNew;
+
+/**
+ * @author Prabhath
+ * 
+ */
+public class PrescriptionDBDriver {
+
+	Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
+	
+	public boolean insertPrescription(Prescription prescription,int visitID) {
+
+		Transaction tx = null;
+		try {
+			if(!session.isOpen())
+				session = SessionFactoryUtil.getSessionFactory().openSession();
+
+			tx = session.beginTransaction();
+			Visit visit=(Visit) session.get(Visit.class, visitID);
+			prescription.setVisit(visit);
+			
+			session.save(prescription);
+			
+			for (PrescribeItem item : prescription.prescribeItems) {
+				item.setPrescription(prescription);
+				session.save(item);
+			}
+			 
+			tx.commit();
+			return true;
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+	}
+
+	
+	
+	public boolean updatePrescription(Prescription pres,int presid) {
+
+		Transaction tx = null;
+		try {
+			if(!session.isOpen())
+				session = SessionFactoryUtil.getSessionFactory().openSession();
+
+			tx = session.beginTransaction();
+			Prescription prescription=(Prescription) session.get(Prescription.class, presid);
+		   
+			Query query = session.createQuery("delete PrescribeItem where prescription=:p");
+			query.setParameter("p", prescription);
+			query.executeUpdate();
+
+		 	for (PrescribeItem item : pres.prescribeItems) {
+				item.setPrescription(prescription);
+				session.merge(item);
+			} 
+		 	
+			tx.commit();
+			return true;
+		} catch (Exception ex) {
+			System.out.println("DB " + ex.getMessage());
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+	}
+
+	
+	
+	public Prescription getPrescription(int PRES_ID) {
+
+		Transaction tx = null;
+		try {
+			
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Prescription where prescriptionID = :PRES_ID");
+			query.setParameter("PRES_ID", PRES_ID);
+
+			Prescription prescription = (Prescription) query.list().get(0);
+
+			tx.commit();
+			return prescription;
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+
+	}
+
+	public List<Prescription> getPrescriptionsByPatientID(int patientID) {
+
+		Transaction tx = null;
+		try {
+			DateFormat dateformat = new SimpleDateFormat("YYYY-MM-dd");
+			
+			tx = session.beginTransaction();
+
+			OutPatient patient = (OutPatient) session.get(OutPatient.class, patientID);
+ 
+			Query query = session
+					.createQuery("from Prescription as p where (p.visit.patient = :patient AND p.prescriptionStatus=0 AND p.prescriptionDate='" + dateformat.format(new Date()) +"')");
+
+			query.setParameter("patient", patient);
+			
+			List<Prescription> prescription = query.list();
+			System.out.println(prescription.size());
+			
+			tx.commit();
+			return prescription;
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+
+	}
+	
+	public boolean updatePrescription(Prescription pres){
+		
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Prescription prescription = (Prescription) session.get(Prescription.class, pres.getPrescriptionID());
+			prescription.setPrescriptionStatus(pres.getPrescriptionStatus());
+			session.update(prescription);
+			tx.commit();
+			return true;
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return false;
+		}
+		
+	}
+	
+	
+	public List<Prescription>getPrescriptionsByPatientIDAfterprescribe(int patientID,String date){
+
+		Transaction tx = null;
+		try {
+			
+			
+			tx = session.beginTransaction();
+
+			OutPatient patient = (OutPatient) session.get(OutPatient.class, patientID);
+		
+			
+			Query query = session
+					.createQuery("from Prescription as p where (p.visit.patient = :patient AND p.prescriptionStatus=1)");
+
+			query.setParameter("patient", patient);
+
+			List<Prescription> prescription = query.list();
+			List<Prescription>prescriptions = new ArrayList<>();
+			
+			for (Prescription prescription2 : prescription) {
+				System.out.print(prescription2.getPrescriptionDate().toString());
+				String p[] = prescription2.getPrescriptionDate().toString().split(" ");
+				System.out.print(p[0]);
+				if(p[0].equals(date))
+				{
+					prescriptions.add(prescription2);
+				}
+			}
+			System.out.println(prescription.size());
+			
+			tx.commit();
+			return prescriptions;
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+					System.out.print(ex.getMessage());
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+
+	}
+	
+	
+	public List<List>getPrescriptionsByPatientIDAfterprescribedetails(int patientID) {
+
+		Transaction tx = null;
+		try {
+			DateFormat dateformat = new SimpleDateFormat("YYYY-MM-dd");
+			List<List> l = new ArrayList<List>();
+			tx = session.beginTransaction();
+
+			OutPatient patient = (OutPatient) session.get(OutPatient.class, patientID);
+ 
+			Query query = session
+					.createQuery("from Prescription as p where (p.visit.patient = :patient AND p.prescriptionStatus=1)");
+
+			query.setParameter("patient", patient);
+			
+			List<Prescription> prescription = query.list();
+			System.out.println(prescription.size());
+			for (Prescription prescription2 : prescription) {
+				List<String> details = new ArrayList<>();
+				details.add(prescription2.getPrescriptionDate()+"");
+				details.add(prescription2.getVisit().getVisitRemarks());
+				String fname = prescription2.getVisit().getVisitCreateUser().getHrEmployee().getFirstName();
+			    String lname = prescription2.getVisit().getVisitCreateUser().getHrEmployee().getLastName();
+			    String fullname = fname+" "+lname;
+			    details.add(fullname);
+			    l.add(details);
+			}
+			
+			
+			tx.commit();
+			return l;
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+					System.out.print(ex.getMessage());
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+
+	}
+	
+
+	public Prescription getPrescriptionById(int id){
+		
+		Transaction tx = null;
+		Prescription prescription = null;
+		try {
+			tx = session.beginTransaction();
+
+			prescription = (Prescription) session.get(Prescription.class, id);
+		
+			tx.commit();
+			return prescription;
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+			throw ex;
+		}
+	
+	}
+
+}

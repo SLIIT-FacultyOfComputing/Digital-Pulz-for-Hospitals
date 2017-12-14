@@ -1,4 +1,13 @@
 <?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
+<?php
 session_start();
 /*
  * To change this template, choose Tools | Templates
@@ -45,8 +54,8 @@ class AdmissionRequestC extends CI_Controller {
          //$this->load->view('headerInward');
       
        
-	    $data['pid'] = $pid;
-       
+	       //$data['pid'] = $this->input->post('pid');
+         $data['patient_id']= $this->input->post('pid');
        
         //echo $pid;
        // die();
@@ -79,12 +88,17 @@ class AdmissionRequestC extends CI_Controller {
        }else{
            $data['status']="fail";
        }
+
+
+
         $this->load->view('Components/headerInward');
+        //$this->load->view('layout/headerInward', $data);        
+      
+        //$this->load->view('layout/footerInward');
+        $data['leftnavpage'] = 'admission';
+        $this->load->view('Components/left_navbar',$data);
         $this->load->view('inward/AdmissionRequestSucess',$data);
-         $data['leftnavpage'] = 'admission';
-          $this->load->view('Components/left_navbar', $data);
-         //$this->load->view('inward/AdmissionRequestView');
-          $this->load->view('Components/bottom');
+        $this->load->view('Components/bottom');
        
     }
       

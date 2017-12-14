@@ -19,6 +19,7 @@ import core.classes.lims.LabTestRequest;
 import core.classes.lims.LabTypes;
 import core.classes.lims.Laboratories;
 import core.classes.lims.MainResults;
+import core.classes.lims.OPDLabTestRequest;
 import core.classes.lims.ParentTestFields;
 import core.classes.lims.PcuLabTestRequest;
 import core.classes.lims.Reports;
@@ -391,7 +392,7 @@ SubTestFieldsResultsDBDriver subtestfieldresultsDBDriver = new SubTestFieldsResu
 			
 
 			try {
-				LabTestRequest testRequest = new LabTestRequest();
+				OPDLabTestRequest testRequest = new OPDLabTestRequest();
 				
 				int testID = pJson.getInt("ftest_ID");
 				int patientID = pJson.getInt("fpatient_ID");
@@ -405,7 +406,7 @@ SubTestFieldsResultsDBDriver subtestfieldresultsDBDriver = new SubTestFieldsResu
 				testRequest.setTest_DueDate(new Date());
 				
 				
-				requestDBDriver.addNewLabTestRequest(testRequest, testID, patientID, labID, userid);
+				requestDBDriver.addNewLabTestRequest(testRequest, testID, patientID, labID, userid, 1);
 				
 				 
 				JSONSerializer jsonSerializer = new JSONSerializer();
@@ -544,7 +545,7 @@ SubTestFieldsResultsDBDriver subtestfieldresultsDBDriver = new SubTestFieldsResu
 			}
 			try {
 			
-				PcuLabTestRequest request = new PcuLabTestRequest();
+				OPDLabTestRequest request = new OPDLabTestRequest();
 				int testID = pJson.getInt("ftest_ID");
 				int labID = pJson.getInt("flab_ID");
 				int admissionID = pJson.getInt("admintionID");
@@ -555,7 +556,7 @@ SubTestFieldsResultsDBDriver subtestfieldresultsDBDriver = new SubTestFieldsResu
 				request.setStatus(pJson.getString("status").toString());
 				request.setTest_RequestDate(new Date());
 				request.setTest_DueDate(new Date());
-				requestDBDriver.addNewLabTestRequest(request, testID, admissionID, labID, userid);
+				requestDBDriver.addNewLabTestRequest(request, testID, admissionID, labID, userid, 1);
 				 
 				JSONSerializer jsonSerializer = new JSONSerializer();
 				return jsonSerializer.include("pcu_lab_test_request_id").serialize(request);

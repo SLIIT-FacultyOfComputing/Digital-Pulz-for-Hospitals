@@ -1,0 +1,1399 @@
+/*
+-----------------------------------------------------------------------------------------------------------------------------------
+HIS � Health Information System - RESTful  API
+-----------------------------------------------------------------------------------------------------------------------------------
+This is a free and open source API which can be used to develop and distributed in the hope that it will be useful to develop EMR systems.
+You can utilize the services provides by the API to speed up the development process. 
+You can modify the API to cater your requirements at your own risk. 
+ 
+-----------------------------------------------------------------------------------------------------------------------------------
+Authors: H.L.M.M De Silva, K.V.M Jayadewa, G.A.R Perera, S.I Kodithuwakku
+Supevisor: Dr. Koliya Pulasinghe | Dean /Faculty of Graduate Studies |SLIIT
+Co-Supervisor: Mr.Indraka Udayakumara | Senior Lecturer | SLIIT
+URL: https://sites.google.com/a/my.sliit.lk/his
+----------------------------------------------------------------------------------------------------------------------------------
+*/
+package lib.driver.pharmacy.driver_class;
+
+
+
+import core.classes.opd.Prescription;
+import core.classes.pharmacy.MstDrugCategory;
+import core.classes.pharmacy.MstDrugDosage;
+import core.classes.pharmacy.MstDrugFrequency;
+import core.classes.pharmacy.MstDrugsNew;
+import core.classes.pharmacy.MstMailHistory;
+import core.classes.pharmacy.TrnDispenseDrugs;
+import core.classes.pharmacy.TrnDrugsSupplied;
+import core.classes.pharmacy.TrnRequestDrugs;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Set;
+
+import lib.SessionFactoryUtil;
+import lib.driver.opd.driver_class.PrescriptionDBDriver;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+
+
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+public class DrugDBDriver {
+    
+	Session session = SessionFactoryUtil.getSessionFactory().openSession();
+	Transaction tx;
+    
+	
+	/**
+	 * Inserts a new Master Drug
+	 * @author Vishwa
+	 * @param d
+	 * @param cat
+	 * @return
+	 */
+   public Boolean insertDrug(MstDrugsNew d, int cat)
+    {
+        Boolean status = false;
+        try
+        {
+			session.beginTransaction();
+			MstDrugCategory categories = (MstDrugCategory) session.
+					get(MstDrugCategory.class, cat);
+			d.setCategories(categories);
+			session.save(d);
+			session.getTransaction().commit();
+			return status = true;
+           
+        }
+        catch(HibernateException e)
+        {
+        	e.printStackTrace();
+            status = false;
+            if (tx!=null)
+            {
+                tx.rollback(); 
+                e.printStackTrace();
+                throw e;
+            }
+            else if(tx==null)
+            {
+            	e.printStackTrace();
+            	throw e;
+            }
+            return status;
+        }
+        
+        //return status;
+    }
+   
+   public Boolean insertDrug(MstDrugsNew d, int cat, int dosageid, int freq)
+   {
+       Boolean status = false;
+       try
+       {
+			session.beginTransaction();
+			MstDrugCategory categories = (MstDrugCategory) session.
+					get(MstDrugCategory.class, cat);
+			MstDrugDosage dosage = (MstDrugDosage) session.
+					get(MstDrugDosage.class, dosageid);
+			MstDrugFrequency frequency = (MstDrugFrequency) session.
+					get(MstDrugFrequency.class, freq);
+			d.setCategories(categories);
+			
+			Set<MstDrugDosage> dosages = new HashSet<MstDrugDosage>();
+			dosages.add(dosage);
+			
+			Set<MstDrugFrequency> frequencies = new HashSet<MstDrugFrequency>();
+			frequencies.add(frequency);
+			
+			d.setDosages(dosages);
+			d.setFrequencies(frequencies);
+			session.save(d);
+			session.getTransaction().commit();
+			return status = true;
+          
+       }
+       catch(HibernateException e)
+       {
+       	e.printStackTrace();
+           status = false;
+           if (tx!=null)
+           {
+               tx.rollback(); 
+               e.printStackTrace();
+               throw e;
+           }
+           else if(tx==null)
+           {
+           	e.printStackTrace();
+           	throw e;
+           }
+           return status;
+       }
+       
+       //return status;
+   }
+   
+   /**
+    * Updates a Drug
+    * @author Vishwa
+    * @param d
+    * @return
+    */
+   public boolean updateDrugDetails(MstDrugsNew d)
+	{
+
+	   Boolean status = false;
+	   //tx=session.beginTransaction();
+		Date date = new Date();
+		int srNo = getDrugIDByDrugName(d.getdName());
+		try {
+			tx=session.beginTransaction();
+			MstDrugsNew drug = (MstDrugsNew) session.get(MstDrugsNew.class, srNo);
+			drug.setdName(d.getdName());
+			drug.setdUnit(d.getdUnit());
+			drug.setdPrice(d.getdPrice());
+			drug.setdRemarks(d.getdRemarks());
+			drug.setdLastUpdateUser(d.getdLastUpdateUser());
+			drug.setdCreateDate(date);
+			drug.setdLastUpdate(date);
+			drug.setdCreateUser(d.getdCreateUser());
+			drug.setStatusDanger(d.getStatusDanger());
+			drug.setStatusReOrder(d.getStatusReOrder());
+			session.update(drug);
+			tx.commit();
+			status = true;
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			status = false;
+			if (tx != null) {
+				tx.rollback();
+				e.printStackTrace();
+				throw e;
+			}
+			else if(tx==null)
+			{
+				throw e;
+			}
+		}
+		return status;
+	   
+  }
+   
+  
+   /**
+    * Gives the pending requests
+    * @author Vishwa
+    * @return
+    */
+   public List<TrnRequestDrugs> getRequest()
+   {
+      List<TrnRequestDrugs> req = null;
+      try
+      {
+           tx = session.beginTransaction();
+           //Gets the values from the database and assign it to a List
+           req = session.createQuery("FROM TrnRequestDrugs").list();
+           System.out.println(req);
+           tx.commit();
+           
+      }
+      catch(HibernateException e1)
+      {
+          if (tx!=null)
+           {
+               tx.rollback(); 
+               e1.printStackTrace();
+           }
+      }
+      
+      return req;
+   }
+   
+   
+   /**
+    * Gives all the Drugs
+    * @author Vishwa
+    * @return
+    * @throws Exception
+    */
+   public List getDrugs() throws Exception
+   {
+       List drugs = null;
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            drugs = session.createQuery("FROM MstDrugs").list();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+            }
+       }
+       
+       return drugs;
+   }
+   
+   
+   /**
+    * Gives the details of drusg which are to be
+    * expired within 90 days
+    * @author Vishwa
+    * @return
+    */
+   public List<TrnDrugsSupplied> getDrugsByExpDate() 
+   {
+       Date date = new Date();
+       System.out.println(date);
+
+       List<TrnDrugsSupplied> drugs = null;
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            Query query = session.createQuery("FROM TrnDrugsSupplied as s where DATEDIFF(NOW(),s.dExpiryDate)<=90");//***Query changed from DATEDIFF(s.dExpiryDate,NOW())<=90 
+            drugs = (List<TrnDrugsSupplied>)query.list();
+            tx.commit();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+            }
+       }
+       
+       return drugs;
+   }
+   
+   
+   /**
+    * Gives the Drug Id for a given Drug Name
+    * @author Vishwa
+    * @param dname
+    * @return
+    */
+   public int getDrugIDByDrugName(String dname)
+   {
+
+       List<MstDrugsNew> drugs = null;
+       int srNo= 0;
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            drugs = session.createQuery("FROM MstDrugsNew as d where dName ='"+dname+"'").list();
+            for(Iterator iterator = drugs.iterator();iterator.hasNext();)
+            {
+                //Cast the Returned Drug object to MstDrugs object
+                MstDrugsNew drug = (MstDrugsNew) iterator.next();
+                srNo = drug.getdSrNo();
+            }
+            tx.commit();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+                throw e1;
+                
+            }
+           if(tx==null)
+           {
+        	   throw e1;
+           }
+       }
+       
+       catch (Exception e) {
+		// TODO: handle exception
+    	   throw e;
+	}
+       
+       return srNo;
+   }
+   
+   /**
+    * Gives the Drug details of a particular Drug ID
+    * @author Vishwa
+    * @param srNo
+    * @return
+    * @throws Exception
+    */
+   public List<MstDrugsNew> getDrugByID(int srNo) throws Exception
+   {
+
+       List<MstDrugsNew> drugs = null;
+       
+       try
+       {
+            tx = session.beginTransaction();
+            drugs = session.createQuery("FROM MstDrugsNew as d where dSrNo ="+srNo).list();
+            tx.commit();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+                throw e1;
+            }
+           else if(tx==null)
+           {
+        	   tx.rollback(); 
+               e1.printStackTrace();
+               throw e1;
+           }
+       }
+       
+       return drugs;
+   }
+   
+   /**
+    * Gives the list of Drug Categories
+    * @author Vishwa
+    * @return
+    */
+   public List<MstDrugCategory> getDrugCatagories()
+   {
+       List<MstDrugCategory> drugCat = null;
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            drugCat = session.createQuery("FROM MstDrugCategory").list();
+            //drugCat = session.createQuery("FROM MstDrugCategoryNew").list();
+            tx.commit();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+            }
+       }
+      
+       return drugCat;
+   }
+   
+   
+   /**
+    * Gives the category ID
+    * @author Vishwa
+    * @param cat
+    * @return
+    * @throws Exception
+    */
+   public int getDrugCatID(String cat) throws Exception
+   {
+       List drugCat = null;
+       MstDrugCategory drugCatNew=null;
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            drugCat = session.createQuery("FROM MstDrugCategory WHERE dCategory ='"+cat+"'").list();
+            
+            drugCatNew = (MstDrugCategory)drugCat.get(0);
+            //drugCat = session.createQuery("FROM MstDrugCategoryNew").list();
+            tx.commit();
+            
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+            }
+       }
+       
+       return drugCatNew.getdCategoryId();
+   }
+   
+   
+   /**
+    * Gives the details of the drugs of a particular category
+    * @author Vishwa
+    * @param category
+    * @return
+    */
+   public List<MstDrugsNew> getDrugFromCategory(String category)
+   {
+       List<MstDrugsNew> drug=null;
+       
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            drug = session.createQuery("FROM MstDrugsNew as d where d.categories.dCategory ='"+category+"' ORDER BY d.dName").list();
+            tx.commit();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+                throw e1;
+            }
+           else if(tx==null)
+           {
+        	   throw e1;
+           }
+           
+       }
+       
+       return drug;
+   }
+   
+   /**
+    * Gives the Drug details for a given Drug Name
+    * @author Vishwa
+    * @param name
+    * @return
+    */
+   public List<MstDrugsNew> GetDrugByDrugName(String name)
+   {
+       List<MstDrugsNew> drug=null;
+       
+       try
+       {
+            tx = session.beginTransaction();
+            //Gets the values from the database and assign it to a List
+            drug = session.createQuery("FROM MstDrugsNew as d where d.dName ='"+name+"'").list();
+            tx.commit();
+            
+       }
+       catch(HibernateException e1)
+       {
+           if (tx!=null)
+            {
+                tx.rollback(); 
+                e1.printStackTrace();
+            }
+       }
+      
+       return drug;
+   }
+   
+   
+   /**
+    * Inserts a new batch of a particular drug
+    * @author Vishwa
+    * @param b
+    * @param drugSrNo
+    * @param drugQty
+    * @param qty
+    * @return
+    */
+   public Boolean insertDrugBatch(TrnDrugsSupplied b,int drugSrNo,int drugQty,int qty) 
+    {
+        Boolean status = false;
+        try
+        {
+           tx = session.beginTransaction();
+           MstDrugsNew drug = (MstDrugsNew) session.get(MstDrugsNew.class,drugSrNo);
+		   drug.setdQty(drugQty + qty);
+		   session.update(drug);
+           session.save(b);
+           status = true;
+           tx.commit();
+           //session.getTransaction().commit();
+           
+           
+        }
+        catch(HibernateException e)
+        {
+            status = false;
+            
+            if (tx!=null)
+            {
+                tx.rollback(); 
+                e.printStackTrace();
+            }
+        }
+        
+        return status;
+    }
+   	
+   /**
+    * Approves the pending drug requests
+    * @author Vishwa
+    * @param reqId
+    * @param appQty
+    * @return
+    */
+	public Boolean ApproveRequest(int[] reqId,int[] appQty) {
+		Boolean status = false;
+		
+		try {
+			//tx = session.beginTransaction();
+			tx = session.beginTransaction();
+			List request;
+			int i=0;
+
+			for(i=0; i<reqId.length;i++)
+			{
+				
+				//Update the Requested Drug. Set to Approved
+				TrnRequestDrugs req = (TrnRequestDrugs) session.get(TrnRequestDrugs.class,reqId[i]);
+				req.setProcessed(true);
+				session.update(req);
+				request = session.createQuery("FROM TrnRequestDrugs as r where r.requestId ="+reqId[i]).list();
+				
+//				//Reduce the Quantity from the Main Drug Table
+				TrnRequestDrugs requestedDrug = (TrnRequestDrugs)request.get(0);
+				MstDrugsNew drug = (MstDrugsNew) session.get(MstDrugsNew.class, requestedDrug.getDrugs().getdSrNo());
+				if(drug.getdQty() < appQty[i])
+				{
+					return false;
+				}
+				else if(requestedDrug.getQuantity() < appQty[i]){
+					return false;
+				}
+				else{
+					drug.setdQty(drug.getdQty()-appQty[i]);
+					session.update(req);
+					session.update(drug);
+				}
+				
+			}
+			//session.getTransaction().commit();
+			status = true;
+			tx.commit();
+
+		} catch (HibernateException e1) {
+			if (tx != null) {
+				tx.rollback();
+				e1.printStackTrace();
+			}
+		} finally {
+			// session.close();
+		}
+
+		return status;
+	}
+	
+	
+	/**
+	 * Adding new drug requests
+	 * @author Vishwa
+	 * @param requests
+	 * @return
+	 */
+	public Boolean insertDrugRequest(ArrayList<TrnRequestDrugs> requests)
+    {
+        Boolean status = false;
+        try
+        {
+           tx = session.beginTransaction();
+           for(int i=0; i<requests.size();i++)
+           {
+        	   TrnRequestDrugs req = requests.get(i);
+        	   //session.beginTransaction();
+        	   //session.getTransaction().begin();
+        	   session.save(req);
+        	   session.flush();
+        	   session.evict(req);    	   
+        	   
+        	  
+           }
+           //session.getTransaction().commit();
+           status = true;
+           tx.commit();
+           
+        }
+        catch(HibernateException e)
+        {
+            status = false;
+            //JOptionPane.showMessageDialog(null,"This Batch Number already Exists...!!!");
+            if (tx!=null)
+            {
+                tx.rollback(); 
+                e.printStackTrace();
+            }
+        }
+        
+        return status;
+    }
+	
+	public List<MstDrugsNew> GetDrugDetailsByName(String name)
+	{
+	       List<MstDrugsNew> drug=null;
+	       
+	       try
+	       {
+	            tx = session.beginTransaction();
+	            //Gets the values from the database and assign it to a List
+	            drug = session.createQuery("FROM MstDrugsNew as d where d.dName ='"+name+"'").list();
+	            tx.commit();
+	       }
+	       catch(HibernateException e1)
+	       {
+	           if (tx!=null)
+	            {
+	                tx.rollback(); 
+	                e1.printStackTrace();
+	            }
+	       }
+	       return drug;
+	}
+	
+	
+	
+	public String GetDrugById(int id)
+    {
+        List<MstDrugsNew> drug=null;
+        String drugName = null;
+        
+        try
+        {
+             session.beginTransaction();
+             //Gets the values from the database and assign it to a List
+             drug = session.createQuery("FROM MstDrugsNew as d where d.dSrNo ='"+id+"'").list();
+             
+             MstDrugsNew drugVal = (MstDrugsNew) drug.get(0);
+             drugName = drugVal.getdName();
+           
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        finally
+        {
+            //session.close();
+        }
+        return drugName;
+    }
+	
+	public MstDrugsNew getDrugObjectById(int drug_id) throws Exception {
+
+		List<MstDrugsNew> drugs = null;
+		MstDrugsNew drug = null;
+		int srNo = 0;
+		try {
+			tx = session.beginTransaction();
+			// Gets the values from the database and assign it to a List
+			drugs = session.createQuery(
+					"FROM MstDrugsNew as d where d.dSrNo ='" + drug_id + "'")
+					.list();
+			if (!drugs.isEmpty()) {
+				drug = drugs.get(0);
+			}
+			tx.commit();
+
+		} catch (HibernateException e1) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+				e1.printStackTrace();
+			}
+		} finally {
+			// session.close();
+		}
+		return drug;
+	}
+
+	/**
+	 * save dispense drug transaction
+	 * 
+	 * @author IT11055068
+	 * @param dispenseList
+	 * @return status if transaction completed.
+	 */	
+	public boolean dispenseDrugs(List<TrnDispenseDrugs> dispenseList,Prescription prescription) {
+		
+		boolean status = false;
+		PrescriptionDBDriver prescriptionDBDriver = new PrescriptionDBDriver();
+		System.out.println("222222222222222222222");
+		try {
+			System.out.println("33333333333333333333");
+			tx = session.beginTransaction();
+			int i = 0;
+            for (TrnDispenseDrugs dispense : dispenseList) {                
+            	//tx = session.beginTransaction();
+            	//session.beginTransaction();
+            	System.out.println("444444444444444444");
+                Query query = session.createSQLQuery("CALL procedDispensedDrug(:drugs_srno,:userId,:quantity,:drugQuantity,:dname)");
+                System.out.println("5555555555555555555555");
+                query.setParameter("drugs_srno", dispense.getDrugs().getdSrNo());
+                query.setParameter("drugQuantity", dispense.getDrugs().getdQty());
+                query.setParameter("userId", dispense.getUserId());
+                query.setParameter("quantity", dispense.getQuantity());
+                query.setParameter("dname", dispense.getDrugs().getdName());
+                List result = query.list();
+                //query.list();
+               
+                System.out.println("777777777777777777");
+                
+                session.flush();
+            }
+            System.out.println("88888888888888888888888");      
+            tx.commit();
+            System.out.println("999999999999999999999999");      
+            prescriptionDBDriver.updatePrescription(prescription);
+            //session.update(prescription);
+//			session.flush();
+//			session.evict(prescription);
+            //session.getTransaction().commit();
+			
+//			session.beginTransaction();
+//			session.update(prescription);
+//			session.getTransaction().commit();
+            //prescription related
+            //updatePrescription(prescription);
+
+            status = true;
+
+		} catch (HibernateException e) {
+			System.out.println(e);
+			status = false;
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+				e.printStackTrace();
+			}
+		} finally {
+			// session.close();
+			
+		}
+		return status;
+	}
+	
+	
+	public boolean updateBatch(String name,String batchId,int qty,String catergory,String usr,int dsr,String dStatus){
+		List<TrnDrugsSupplied> batch = null;
+		Date date = new Date();
+		Boolean status = false;
+		try {
+			System.out.println("batch no = "+batchId);
+			tx = session.beginTransaction();
+			batch = session.createQuery("FROM TrnDrugsSupplied as d where d.dName ='" + name + "'").list();
+			
+			for (Iterator iterator = batch.iterator(); iterator.hasNext();) {
+				TrnDrugsSupplied batchs = (TrnDrugsSupplied) iterator.next();
+				System.out.println(batchs.getId().getdBatchNo());
+				System.out.println(batchs.getBatchStatus());
+				if ((batchs.getId().getdBatchNo().equalsIgnoreCase(batchId))) {
+					System.out.println(dStatus);
+                    int olddetails = batchs.getdQty();
+					batchs.setdLastUpdate(date);
+					//batchs.setdLastUpdateUser(usr);
+					MstDrugsNew drug1 = (MstDrugsNew) session.get(MstDrugsNew.class,
+							dsr);
+						int drugqty = drug1.getdQty();
+					System.out.println(drug1.getdQty());
+                    if(batchs.getdQty()>qty )
+                    {
+                    	System.out.println(drug1.getdQty());
+					    int x = drugqty - (olddetails - qty);
+					    drug1.setdQty(x);
+
+                    }
+                    else if(batchs.getdQty()<=qty)
+                    {
+    					int x = drugqty + (qty - olddetails);
+    					drug1.setdQty(x);                   	
+                    }
+                    
+                    session.update(drug1);
+                    
+                    if(!batchs.getBatchStatus().equals(dStatus))
+                    {
+                    	int y = drug1.getdQty();
+                    	if(batchs.getBatchStatus().equals("Enabled") && dStatus.equals("Disabled"))
+                    	{
+                    		drug1.setdQty(y-batchs.getdQty());
+                    		batchs.setBatchStatus(dStatus);
+                    	}
+                    	else if(batchs.getBatchStatus().equals("Disabled") && dStatus.equals("Enabled"))
+                    	{
+                    		drug1.setdQty(y+batchs.getdQty());
+                    		batchs.setBatchStatus(dStatus);                   		
+                    	}
+                    }
+					batchs.setdQty(qty);                    
+					session.update(drug1);
+				}
+			}
+			tx.commit();
+			status = true;
+			
+		} catch (HibernateException e) {
+
+			if (tx != null) {
+				tx.rollback();
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return status;		
+		
+	}
+	
+	
+	public List<TrnDrugsSupplied> getBatchIds(String name){
+		List<TrnDrugsSupplied> batch = null;
+
+		try {
+			tx = session.beginTransaction();
+			batch = session.createQuery("FROM TrnDrugsSupplied as d where d.dName ='" + name + "'").list();
+			
+            tx.commit();
+		} catch (HibernateException e) {
+
+			if (tx != null) {
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}
+
+		return batch;
+	}
+	
+	public boolean deleteBatch(String dname, String batchId)
+	{		
+		try {
+			tx = session.beginTransaction();
+			List<TrnDrugsSupplied> batch = session.createQuery("FROM TrnDrugsSupplied as d where d.dName ='" + dname + "' and d.id.dBatchNo= '"+batchId+"'").list();
+			tx.commit();
+			
+			
+			if(batch.size() > 0)
+			{
+				int drugid = getDrugIDByDrugName(dname);
+				
+				tx = session.beginTransaction();
+				MstDrugsNew drug = (MstDrugsNew) session.get(MstDrugsNew.class, drugid);
+				
+				System.out.println(batch.get(0).getdCreateDate());
+				System.out.println((new Calendar()).toString());
+				if(batch.get(0).getdCreateDate() == (new Date()) )
+				{
+					if(drug.getdQty() >= batch.get(0).getdQty())
+					{
+						drug.setdQty(drug.getdQty()- batch.get(0).getdQty());
+						session.update(drug);
+						Query query2 = session.createQuery("DELETE FROM TrnDrugsSupplied as d where d.dName ='" + dname + "' and d.id.dBatchNo= '"+batchId+"'");
+						query2.executeUpdate();
+					}
+					else
+					{
+						tx.commit();
+						return false;
+					}
+				}
+			}
+			
+			tx.commit();
+			return true;
+		} catch (HibernateException e) {
+
+			if (tx != null) {
+				tx.rollback();
+				e.printStackTrace();
+				
+			}
+			return false;
+		}
+
+		
+	}
+	
+	public List<TrnDispenseDrugs> getDispenseListByDate(String date){
+		List<TrnDispenseDrugs> drugs = null;
+
+		try {
+			session.beginTransaction();
+			// Gets the values from the database and assign it to a List
+			drugs = session.createQuery(
+					"FROM TrnDispenseDrugs as d  where d.dispensedDate BETWEEN '" + date+" 00:00:00" + "' AND  '" + date+" 23:59:00" + "'")
+					.list();
+			session.getTransaction().commit();
+		} catch (HibernateException e1) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+			e1.printStackTrace();
+			throw e1;
+		} finally {
+			// session.close();
+		}
+		return drugs;
+	}
+	
+	
+	public boolean insertDrugDosages(List<MstDrugDosage> dosages){
+		boolean status = false;
+		try {
+			session.beginTransaction();
+			int i = 0;
+			for (MstDrugDosage dosage : dosages) {
+			
+				session.saveOrUpdate(dosage);
+				session.flush();
+				session.evict(dosage);
+				
+			}
+
+			session.getTransaction().commit();
+
+			status = true;
+
+		} catch (HibernateException e) {
+			status = false;
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+			e.printStackTrace();
+		} 
+		return status;
+	}
+	
+	public boolean addDrugDosage(MstDrugDosage dosage)
+	{
+		boolean status = false;
+		try {
+			session.beginTransaction();
+			int i = 0;
+			session.saveOrUpdate(dosage);
+			session.getTransaction().commit();
+
+			status = true;
+
+		} catch (HibernateException e) {
+			status = false;
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+			e.printStackTrace();
+		} 
+		return status;
+	}
+	
+	public List<MstDrugDosage> getDrugDosages(){
+		
+		List<MstDrugDosage> dosages = null;
+
+		try {
+			session.beginTransaction();
+			// Gets the values from the database and assign it to a List
+			dosages = session.createQuery("FROM MstDrugDosage").list();
+		} catch (HibernateException e1) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+			e1.printStackTrace();
+		} 
+		return dosages;
+		
+	}
+	
+	public List<MstDrugDosage> getDosagesByID(int dosageId){
+		List<MstDrugDosage> dosages = null;
+
+		try {
+			session.beginTransaction();
+			// Gets the values from the database and assign it to a List
+			dosages = session.createQuery("FROM MstDrugDosage as d WHERE d.dosId='" + dosageId + "'").list();
+		} catch (HibernateException e1) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();		
+			}
+			e1.printStackTrace();
+		} 
+		return dosages;
+	}
+	
+	/*public List<User> getReport(){
+		List<User> Udetails= null;
+        try
+        {
+             tx = session.beginTransaction();
+             //Gets the values from the database and assign it to a List
+             Udetails = session.createQuery("FROM User").list();
+         System.out.println("got data inside");    
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        finally
+        {
+            session.close();
+        }
+        return Udetails;
+	}*/
+	
+	public List<MstDrugsNew> getDrugReport(){
+		 List<MstDrugsNew> drugDetails= null;
+	        try
+	        {
+	             tx = session.beginTransaction();
+	             //Gets the values from the database and assign it to a List
+	             drugDetails = session.createQuery("FROM MstDrugsNew as d where d.dQty <= d.statusReOrder").list();
+	        // System.out.println("got data inside");    
+	        }
+	        catch(HibernateException e1)
+	        {
+	            if (tx!=null)
+	             {
+	                 tx.rollback(); 
+	                 e1.printStackTrace();
+	             }
+	        }
+	        return drugDetails;
+	}
+	
+	public List<MstDrugFrequency> getFrequency(){
+		List<MstDrugFrequency> frequencies= null;
+        try
+        {
+             tx = session.beginTransaction();
+             //Gets the values from the database and assign it to a List
+             frequencies = session.createQuery("FROM MstDrugFrequency ORDER BY freqId").list();
+             
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return frequencies;
+	}
+	
+	public String getFrequencyValue(String name){
+		List<MstDrugFrequency> frequencies= null;
+		String value = "-1";
+        try
+        {
+             tx = session.beginTransaction();
+             //Gets the values from the database and assign it to a List
+             frequencies = session.createQuery("FROM MstDrugFrequency as f WHERE f.frequency='"+name +"' ORDER BY freqId ").list();
+             if(frequencies.size() > 0)
+             {
+            	 value = frequencies.get(0).getValue();
+             }
+             tx.commit();
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return value;
+	}
+	
+	public MstDrugFrequency getFrequencyById(int Id){
+		
+		MstDrugFrequency frequency = null;
+        try
+        {
+        	tx = session.beginTransaction();     
+            frequency=(MstDrugFrequency) session.get(MstDrugFrequency.class, Id);
+            tx.commit();
+             
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return frequency;
+	}
+	
+	public boolean updateFrequency(MstDrugFrequency freq){
+		boolean results = true;
+        try
+       
+        {
+             tx = session.beginTransaction();     
+             MstDrugFrequency frequency=(MstDrugFrequency) session.get(MstDrugFrequency.class, freq.getFreqId());
+             frequency.setFrequency(freq.getFrequency());
+             session.update(frequency);
+             tx.commit();
+             
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+            	results =false;
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return results;
+	}
+	
+	public boolean addFrequency(MstDrugFrequency freq){
+		boolean results = true;
+        try
+        {
+       	    tx=session.beginTransaction();
+            session.save(freq);
+            tx.commit();
+ 
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+            	results =false;
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+ 
+        return results;
+	}
+	
+	public boolean insertEmail(int drugID,MstMailHistory mail){
+		
+		boolean results = true;
+    	
+    	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    	Date date = new Date();
+    	try
+        {
+        	tx=session.beginTransaction();
+            MstDrugsNew drugs=(MstDrugsNew) session.get(MstDrugsNew.class, drugID);
+            mail.setMailHistory_Drug(drugs);
+            mail.setMailHistory_SendDate(date);            
+            //Save the employee in database
+            session.save(mail);
+     
+            //Commit the transaction
+            tx.commit();   
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+            	results =false;
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return results;
+		
+	}
+	
+	public List<MstMailHistory> getMailHistroy(){
+		List<MstMailHistory> mHistory = null;
+        try
+        {
+             tx = session.beginTransaction();
+             //Gets the values from the database and assign it to a List
+             mHistory = session.createQuery("FROM MstMailHistory").list();
+             
+        }
+        catch(HibernateException e1)
+        {
+            if (tx!=null)
+             {
+                 tx.rollback(); 
+                 e1.printStackTrace();
+             }
+        }
+        return mHistory;
+	}
+	
+	//New method1
+		//Gets all the Drug Names
+		public List<MstDrugsNew> getDrugNames() throws Exception {
+			List<MstDrugsNew> drugName = null;
+			try {
+				tx = session.beginTransaction();
+				// Gets the values from the database and assign it to a List
+				drugName = session.createQuery("FROM MstDrugsNew ORDER BY dName").
+						list();
+				// drugCat = session.createQuery("FROM MstDrugCategoryNew").list();
+
+			} catch (HibernateException e1) {
+				if (tx != null) {
+					tx.rollback();
+					e1.printStackTrace();
+				}
+			} finally {
+				// session.close();
+			}
+			return drugName;
+		}
+		
+		//Gets the Details of the Drug of which the Quantity is less than the Re Order Level 
+		//New method2
+		public List<MstDrugsNew> getDrugDetails() throws Exception {
+			List<MstDrugsNew> drugDetails = null;
+			try {
+				tx = session.beginTransaction();
+				// Gets the values from the database and assign it to a List
+				drugDetails = session.createQuery("FROM MstDrugsNew as d where d.dQty <= d.statusReOrder").
+						list();
+				// drugCat = session.createQuery("FROM MstDrugCategoryNew").list();
+
+			} catch (HibernateException e1) {
+				if (tx != null) {
+					tx.rollback();
+					e1.printStackTrace();
+				}
+			} finally {
+				// session.close();
+			}
+			return drugDetails;
+		}
+		
+		//new method 3
+		//Gets the Drug Details By the Drug Name
+		public List<MstDrugsNew> getDrugDetailsByDName(String dname) throws Exception {
+
+			List<MstDrugsNew> drugs = null;
+			//int srNo = 0;
+			try {
+				tx = session.beginTransaction();
+				// Gets the values from the database and assign it to a List
+				drugs = session.createQuery(
+						"FROM MstDrugsNew as d where dName ='" +
+				dname + "'").list();
+
+			} catch (HibernateException e1) {
+				if (tx != null) {
+					tx.rollback();
+					e1.printStackTrace();
+				}
+			} finally {
+				// session.close();
+			}
+			return drugs;
+		}
+
+		public List getDrugBatch(int dSrNo) {
+			List<TrnDrugsSupplied> supp = null;
+			List batchNo = new ArrayList<>();
+			String dname = GetDrugById(dSrNo);
+			try {
+				//session.beginTransaction();
+				// Gets the values from the database and assign it to a List
+				supp = session.createQuery("FROM TrnDrugsSupplied as s WHERE s.dName='"+dname+"'").
+						list();
+				System.out.println(supp);
+				
+				
+				for (Iterator iterator = supp.iterator();
+						iterator.hasNext();) {
+					// Cast the Returned Drug object to MstDrugs object
+					
+					TrnDrugsSupplied batch = (TrnDrugsSupplied) iterator.next();
+					
+					batchNo.add(batch.getId().getdBatchNo());
+					
+					//System.out.println(batch.getId());
+				}
+				System.out.println(batchNo.toString());
+
+			} catch (HibernateException e1) {
+				System.out.println(e1.getMessage());
+				if (tx != null) {
+					tx.rollback();
+					e1.printStackTrace();
+				}
+			} finally {
+				session.close();
+			}
+			return batchNo;
+		}
+
+	
+	
+
+}
+
+

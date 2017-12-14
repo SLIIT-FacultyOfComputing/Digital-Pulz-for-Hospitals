@@ -1,0 +1,8 @@
+package core.resources.hr;
+
+import javax.ws.rs.Path;
+
+@Path("Village")
+public class VillageResource {
+
+}

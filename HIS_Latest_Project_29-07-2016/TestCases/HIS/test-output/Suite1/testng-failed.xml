@@ -3,17 +3,20 @@
 <suite name="Failed suite [Suite1]">
   <test name="testLaboratory(failed)">
     <classes>
-      <class name="PCULabTestRequestTestCase">
+      <class name="LabTestRequestTestCase">
         <methods>
-          <include name="getAllPcuLabTestCase"/>
-          <include name="getPcuLabTestByAdminID"/>
-          <include name="updatePCULabRequests"/>
-          <include name="deleteOPDLabTestRequest"/>
-          <include name="addPcuLabTestRequestTestCase"/>
-          <include name="getPcuLabTestByPatientID"/>
-          <include name="getPcuLabTestByReqID"/>
+          <include name="getSpecimenByRequestIDTestCase"/>
+          <include name="getAllSpecimenRetTypesTestCase"/>
+          <include name="getRequestsByPatientIDTestCase"/>
+          <include name="getAllTestRequestsTestCase"/>
+          <include name="getSpecimenIDByRequestIDTestCase"/>
+          <include name="setStatusTestCase"/>
+          <include name="addSpecimenInfoTestCase"/>
+          <include name="getAllSpecimenTypeTestCase"/>
+          <include name="addNewLabTestRequestTestCase"/>
+          <include name="getTestRequestByRequestIDTestCase"/>
         </methods>
-      </class> <!-- PCULabTestRequestTestCase -->
+      </class> <!-- LabTestRequestTestCase -->
     </classes>
   </test> <!-- testLaboratory(failed) -->
 </suite> <!-- Failed suite [Suite1] -->

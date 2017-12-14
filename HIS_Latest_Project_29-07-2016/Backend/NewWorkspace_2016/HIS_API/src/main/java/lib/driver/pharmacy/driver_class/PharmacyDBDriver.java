@@ -17,6 +17,9 @@ import org.hibernate.Transaction;
 
 
 
+
+
+import core.classes.pharmacy.MstDrugCategory;
 import core.classes.pharmacy.MstDrugsNew;
 import core.classes.pharmacy.PhramacyAssitanceStock;
 import core.classes.pharmacy.TrnRequestDrugs;
@@ -126,5 +129,61 @@ public boolean MainStock(PhramacyAssitanceStock pas) {
 		return details;
 	}
 
+	  /**
+	    * Gives the Quantity
+	    * @author Navoda.s
+	    * @param drugname
+	    * @return
+	    * @throws Exception
+	    */
+	 public int getDrugQuantityByDrugName(String dname)
+	   {
+
+	       List<PhramacyAssitanceStock> drugs = null;
+	       int qty= 0;
+	       try
+	       {
+	            tx = session.beginTransaction();
+	            //Gets the values from the database and assign it to a List
+	            drugs = session.createQuery("FROM PhramacyAssitanceStock as d where drug_name ='"+dname+"'").list();
+	            
+	            for(Iterator iterator = drugs.iterator();iterator.hasNext();)
+	            {
+	                //Cast the Returned Drug object to MstDrugs object
+	            	PhramacyAssitanceStock drug = (PhramacyAssitanceStock) iterator.next();
+	                qty = drug.getDrugQty();
+	            }
+	            tx.commit();
+	            
+	       }
+	       catch(HibernateException e1)
+	       {
+	           if (tx!=null)
+	            {
+	                tx.rollback(); 
+	                e1.printStackTrace();
+	                throw e1;
+	                
+	            }
+	           if(tx==null)
+	           {
+	        	   throw e1;
+	           }
+	       }
+	       
+	       catch (Exception e) {
+			// TODO: handle exception
+	    	   throw e;
+		}
+	       
+	       return qty;
+	   }
+	   
+	
+	
+	
+	
+	
+	
 }
 

@@ -552,7 +552,29 @@ DataHashing dataHashing=new DataHashing();
 		
 	}
 	
-	
+	public AdminUser getUserByEmpId(int id)
+	{
+		Transaction tx=null;
+		
+		try{
+			tx=session.beginTransaction();
+			Query query = session.createQuery("select u from AdminUser as u where u.hrEmployee.empId="+id);
+			AdminUser user=CastList.castList(AdminUser.class, query.list()).get(0);
+			tx.commit();
+			return user;
+		}
+		catch (RuntimeException ex) {
+			if(tx != null && tx.isActive()){
+				try{
+					tx.rollback();
+				}catch(HibernateException he){
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}
+			return null;
+		}
+	}
 	
 	
 }

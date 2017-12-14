@@ -1,0 +1,5 @@
+package core.resources.standards;
+
+public class ComplaintsResource {
+
+}

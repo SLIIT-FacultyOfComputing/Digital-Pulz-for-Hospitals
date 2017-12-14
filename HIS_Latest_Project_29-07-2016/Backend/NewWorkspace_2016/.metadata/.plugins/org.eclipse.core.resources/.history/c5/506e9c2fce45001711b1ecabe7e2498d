@@ -1,0 +1,10 @@
+package core.classes.opd;
+
+import core.classes.BaseEntity;
+
+public class patientInjection extends BaseEntity implements java.io.Serializable  {
+
+	private int patientInjectionId;
+	private int pid;
+	private 
+}

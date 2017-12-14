@@ -1,10 +1,16 @@
-
-var baseUrl="http://localhost";
+/*
+ ------------------------------------------------------------------------------------------------------------------------
+ DiPMIMS - Digital Pulz Medical Information Management System
+ Copyright (c) 2017 Sri Lanka Institute of Information Technology
+ <http: http://his.sliit.lk />
+ ------------------------------------------------------------------------------------------------------------------------
+ */
+var baseUrl="http://localhost/eHealth_proj";
 function getCategoryListDC() {
     //document.getElementById("imgid").style.visibility = "visible";
 
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getcatlist',
+        url: baseUrl+'/index.php/Drug_Controller/getcatlist',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -25,7 +31,7 @@ function getCategoryListDC() {
         
 
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugNames',
+            url: baseUrl+'/index.php/Drug_Controller/getDrugNames',
             type: 'POST',
             crossDomain: true,
             success: function(data) {  
@@ -49,7 +55,7 @@ function getCategoryListDC() {
 function getCategoryListDCUpdate() {
     
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getCatList',
+        url: baseUrl+'/index.php/Batch_Controller/getCatList',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -67,7 +73,7 @@ function getCategoryListDCUpdate() {
     });
     
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugNames',
+            url: baseUrl+'/index.php/Batch_Controller/getDrugNames',
             type: 'POST',
             crossDomain: true,
                     success: function(data) {
@@ -100,20 +106,25 @@ function getDrugDetailsByDNameDC() {
     
    
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getDrugDetails',
         type: 'POST',
         crossDomain: true,
        data: {'myOrderString': drugId},
         success: function(data) {
+
 //             $("#dangerValueDC").val("sdss");              
             data = trimData(data);
             var json_parsed = $.parseJSON(data);
+            if(json_parsed != null)
+            {
             //alert(json_parsed[0]['categories']['dCategory']);
             $("#priceValueDC").val(json_parsed[0]['dPrice'].toString());
             $("#reorderValueDC").val(json_parsed[0]['statusReOrder'].toString());
             $("#dangerValueDC").val(json_parsed[0]['statusDanger'].toString());
             //$("#categoryDropDownDC").val(json_parsed[0]['categories']['dCategory'].toString());
             $("#drugTypeDC").val(json_parsed[0]['dUnit'].toString());
+            $("#remarksValueDC").val(json_parsed[0]['dRemarks'].toString());
+        }
             //document.getElementById("imgid").style.visibility = "hidden";
         },
          error: function (error) {
@@ -146,7 +157,7 @@ function getDrugByCategoryDCUpdate(){
     if (val == "All")
     {
         $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugNames',
+            url: baseUrl+'/index.php/Batch_Controller/getDrugNames',
             type: 'POST',
             crossDomain: true,
                     success: function(data) {
@@ -166,7 +177,7 @@ function getDrugByCategoryDCUpdate(){
     else
     {
         $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugList/'+val,
+            url: baseUrl+'/index.php/Batch_Controller/getDrugList/'+val,
             type: 'POST',
             crossDomain: true,
                     success: function(data) {
@@ -208,7 +219,7 @@ function getDrugByCategoryDC(){
     var val;
     val = $("#categoryDropDownDC option:selected").text();
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugList/'+val,
+        url: baseUrl+'/index.php/Drug_Controller/getDrugList/'+val,
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -234,7 +245,7 @@ function createDrugOptiontableDC() {
     var myArray = [];
     
     $.ajax({
-    url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getBatchList/'+drugId,
+    url: baseUrl+'/index.php/Drug_Controller/getBatchList/'+drugId,
     type: 'POST',
     crossDomain: true,
             success: function(data) {
@@ -262,7 +273,7 @@ function createDrugOptiontableDC() {
             tablecontents += "<td>" + json_parsed[i] + "</td>";
             tablecontents += "<td onclick=getDataToEditDC("+j+")>" + "<a href='#detailsPost' class='btn btn-info btn-md'>" + "Edit" + "</a></td>";
             tablecontents += "<td onclick=getDataToViewDC("+j+")>" + "<a href='#detailsPost' class='btn btn-info btn-md'>" + "View" + "</a></td>";
-            tablecontents += "<td onclick=test_onclick()>" + "<a href='#' class='btn btn-info btn-md'>" + "Delete" + "</a></td>";
+            tablecontents += "<td onclick=deleteBatchDC("+j+")>" + "<a href='#detailsPost' class='btn btn-info btn-md'>" + "Delete" + "</a></td>";
             tablecontents += "</tr>";
             
             j++;
@@ -292,7 +303,7 @@ function getDataToEditDC(rowNumber) {
     var myOrderString = $_drugNameFromColumn;
     var mybatchString = $_batchIdFromColumn;
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getBatchDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getBatchDetails',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString,"mybatchString":mybatchString},  // fix: need to append your data to the call
@@ -304,7 +315,8 @@ function getDataToEditDC(rowNumber) {
            s1=json_parsed[1];
            s2=json_parsed[2];
            s3=json_parsed[3];
-           //alert(s3);
+
+
            createDrugUpdateTblDC(s0,s1,s2,s3);
 
         }
@@ -324,7 +336,7 @@ function getDataToViewDC(rowNumber) {
     var mybatchString = $_batchIdFromColumn;
 
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getBatchDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getBatchDetails',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString,"mybatchString":mybatchString},  // fix: need to append your data to the call
@@ -338,14 +350,38 @@ function getDataToViewDC(rowNumber) {
            s3=json_parsed[3];
            s4=json_parsed[4];
            s5=json_parsed[5];
-           createviewTblDC(s0,s1,s3,s4,s2,s5);
+           s6=json_parsed[7];
+           s7=json_parsed[8];
+           createviewTblDC(s0,s1,s3,s4,s2,s5,s6,s7);
 
         }
     });
 
 }
 
-function createviewTblDC(batch_num,name,createUser,LastUpdated,quantity,LastUpdatedUser){
+function deleteBatchDC(rowNumber){
+     document.getElementById("post_drugDetails_tbl_DC").style.visibility = "visible";
+
+    $('#tablecontent tr td').each(function(){
+         $_drugNameFromColumn  = $("#tablecontent tr:nth-child("+rowNumber+") td:nth-child(1)").text()
+         $_batchIdFromColumn  = $("#tablecontent tr:nth-child("+rowNumber+") td:nth-child(2)").text();
+      });
+    var myOrderString = $_drugNameFromColumn;
+    var mybatchString = $_batchIdFromColumn;
+
+    $.ajax({
+        url: baseUrl+'/index.php/Drug_Controller/deleteBatch',
+        type: 'POST',
+        crossDomain: true,
+        data: {"myOrderString": myOrderString,"mybatchString":mybatchString},  // fix: need to append your data to the call
+        success: function (data) {
+           window.location =  baseUrl+'/index.php/Drug_Controller/drugInformationview';
+
+        }
+    });
+}
+
+function createviewTblDC(batch_num,name,createUser,LastUpdated,quantity,LastUpdatedUser,manufactureDate,expireDate){
 
 
     var pagecontent = "";
@@ -390,6 +426,17 @@ function createviewTblDC(batch_num,name,createUser,LastUpdated,quantity,LastUpda
     pagecontent += "<td>"+quantity+"</td>";
     pagecontent += "</tr>";
 
+    pagecontent += "<tr>";
+    pagecontent += "<td>Manufacture Date</td>";
+    pagecontent += "<td>"+manufactureDate+"</td>";
+    pagecontent += "</tr>";
+
+
+    pagecontent += "<tr>";
+    pagecontent += "<td>Expire Date</td>";
+    pagecontent += "<td>"+expireDate+"</td>";
+    pagecontent += "</tr>";
+
     pagecontent += "</tbody>";
     pagecontent += "</table>";
 
@@ -421,18 +468,18 @@ function createDrugUpdateTblDC(batch_num,name,quantity,status){
     pagecontent += "<td><div class='col-sm-6'><input class='form-control' value="+quantity+" type=number name=quantityValueDC id=quantityValueDC /></div></td>";
     pagecontent += "</tr>";
     
-    pagecontent += "<tr>";
-    pagecontent += "<td>Batch Status</td>";
-    pagecontent += "<td><div class='col-sm-6'><input class='form-control' value='status' name=statusValueDC id=statusValueDC /></div></td>";
-    pagecontent += "</tr>";
+    // pagecontent += "<tr>";
+    // pagecontent += "<td>Batch Status</td>";
+    // pagecontent += "<td><div class='col-sm-6'><input class='form-control' value='status' name=statusValueDC id=statusValueDC /></div></td>";
+    // pagecontent += "</tr>";
     
     pagecontent += "<tr>";
     pagecontent += "<td>Change Batch Status</td>";
     pagecontent += "<form>";
     if(status=="Enabled")
     {
-        pagecontent += "<td><input  class='form-control' type=radio name=status id=Enabled value=Enabled checked=true >Enable</br>";
-        pagecontent += "<input  class='form-control' type=radio name=status id=Enabled value=Disabled >Disable</td>";
+        pagecontent += "<td><input type=radio name=status id=Enabled value=Enabled checked=true >Enable</br>";
+        pagecontent += "<input type=radio name=status id=Enabled value=Disabled >Disable</td>";
     }
     else
     {
@@ -467,10 +514,10 @@ var cat_val_chckd,nam_val_chckd,batch_val_chckd,price_val_chckd,qty_va_chckd;
 var r=confirm("Are you sure you want to update the following data ?");
 if (r==true)
     {
-        alert(drug_id);
+        //alert(drug_id);
     
 $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/updateBatch',
+        url: baseUrl+'/index.php/Drug_Controller/updateBatch',
         type: 'POST',
         crossDomain: true,
         data: {"dbatchno":$batch_num_globe ,"dcat":cat_val_chckd , "dname":$name_global ,"dqty":qty_va_chckd,"dstatus":batch_val_chckd,"drugId":drug_id},
@@ -492,7 +539,7 @@ $.ajax({
 function getAll() {
 
  //document.getElementById("imgid").style.visibility = "visible";
-    alert("dfggfd");
+   // alert("dfggfd");
     var drugName  = $("#drugNameDropDownDC option:selected").text();
      
    
@@ -526,7 +573,7 @@ function getAll() {
         if(r==true)
         {
     $.ajax({
-           url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/addDrug',
+           url: baseUrl+'/index.php/Drug_Controller/addDrug',
             type: 'POST',
             crossDomain: true,
             data: {"drugName":drugName, "drugType":drugType,
@@ -568,7 +615,7 @@ function getDataAfterEditDC() {
     var mybatchString = $_batchIdFromColumn;
 
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getBatchDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getBatchDetails',
         type: 'POST',
         crossDomain: true,
         data: {"myOrderString": myOrderString,"mybatchString":mybatchString},  // fix: need to append your data to the call
@@ -627,7 +674,7 @@ function addDrugDC1(){
         if(r==true)
         {
     $.ajax({
-           url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/addDrug',
+           url: baseUrl+'/index.php/Drug_Controller/addDrug',
             type: 'POST',
             crossDomain: true,
             data: {"drugName":drugName, "drugType":drugType,
@@ -655,7 +702,7 @@ function getDrugDetailsToViewDC() {
 
     //document.getElementById("post_requestDetails_tbl_RC").style.visibility = "visible";
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Drug_Controller/getDrugOrderDetails',
+        url: baseUrl+'/index.php/Drug_Controller/getDrugOrderDetails',
         type: 'POST',
         crossDomain: true,
         //data: {"myOrderString": myOrderString},  // fix: need to append your data to the call

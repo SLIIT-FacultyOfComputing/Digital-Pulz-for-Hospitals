@@ -1,0 +1,120 @@
+package core.classes.opd;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import core.classes.api.user.AdminUser;
+
+/***
+ * Visit class contains all the attributes and there getters and setters.
+ * @author MIYURU
+ *
+ */
+public class Visit implements java.io.Serializable {
+
+	private int visitID;
+	private Date visitDate;
+	private String visitComplaint;
+	private AdminUser visitDoctor;
+	private String visitRemarks; 
+	private AdminUser visitCreateUser;
+	private Date visitLastUpdate;
+	private AdminUser visitLastUpDateUser;
+	private String visitType;
+	private int visitActive;
+
+	private OutPatient patient;
+
+	private Set<Exams> exams = new HashSet<Exams>();
+	private Set<Prescription> prescriptions = new HashSet<Prescription>();
+	private Set<OpdTreatment> opdTreatment = new HashSet<OpdTreatment>();
+	
+	public int getVisitID() {
+		return visitID;
+	}
+	public void setVisitID(int visitID) {
+		this.visitID = visitID;
+	}
+	public Date getVisitDate() {
+		return visitDate;
+	}
+	public void setVisitDate(Date visitDate) {
+		this.visitDate = visitDate;
+	}
+	public String getVisitComplaint() {
+		return visitComplaint;
+	}
+	public void setVisitComplaint(String visitComplaint) {
+		this.visitComplaint = visitComplaint;
+	}
+	public AdminUser getVisitDoctor() {
+		return visitDoctor;
+	}
+	public void setVisitDoctor(AdminUser visitDoctor) {
+		this.visitDoctor = visitDoctor;
+	}
+	public String getVisitRemarks() {
+		return visitRemarks;
+	}
+	public void setVisitRemarks(String visitRemarks) {
+		this.visitRemarks = visitRemarks;
+	}
+	public AdminUser getVisitCreateUser() {
+		return visitCreateUser;
+	}
+	public void setVisitCreateUser(AdminUser visitCreateUser) {
+		this.visitCreateUser = visitCreateUser;
+	}
+	public Date getVisitLastUpdate() {
+		return visitLastUpdate;
+	}
+	public void setVisitLastUpdate(Date visitLastUpdate) {
+		this.visitLastUpdate = visitLastUpdate;
+	}
+	public AdminUser getVisitLastUpDateUser() {
+		return visitLastUpDateUser;
+	}
+	public void setVisitLastUpDateUser(AdminUser visitLastUpDateUser) {
+		this.visitLastUpDateUser = visitLastUpDateUser;
+	}
+	public String getVisitType() {
+		return visitType;
+	}
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
+	}
+	public int getVisitActive() {
+		return visitActive;
+	}
+	public void setVisitActive(int visitActive) {
+		this.visitActive = visitActive;
+	}
+	public OutPatient getPatient() {
+		return patient;
+	}
+	public void setPatient(OutPatient patient) {
+		this.patient = patient;
+	}
+	public Set<Exams> getExams() {
+		return exams;
+	}
+	public void setExams(Set<Exams> exams) {
+		this.exams = exams;
+	}
+	public Set<Prescription> getPrescriptions() {
+		return prescriptions;
+	}
+	public void setPrescriptions(Set<Prescription> prescriptions) {
+		this.prescriptions = prescriptions;
+	}
+	public Set<OpdTreatment> getOpdTreatment() {
+		return opdTreatment;
+	}
+	public void setOpdTreatment(Set<OpdTreatment> opdTreatment) {
+		this.opdTreatment = opdTreatment;
+	}
+	
+	
+	 
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/HIS</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.connection.password"></property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.current_session_context_class">thread</property>
+  <mapping resource="lib/driver/api/mappings/user/AdminUser.hbm.xml"/>
+  <mapping resource="lib/driver/api/mappings/user/AdminUserroles.hbm.xml"/>
+  <mapping resource="lib/driver/api/mappings/user/AdminPermission.hbm.xml"/>
+  <mapping resource="lib/driver/api/mappings/user/AdminPermissionrequest.hbm.xml"/>
+  <!-- lims -->
+  <mapping resource="lib/driver/lims/mappings/Category.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SubCategory.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SpecimenType.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SpecimenRetentionType.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/TestNames.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/ParentTestFields.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SubTestFields.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/TestFieldsRange.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/LabTestRequest.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SampleCenters.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SampleCenterTypes.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/Specimen.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/MainResults.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/SubFieldResults.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/Reports.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/LabDepartments.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/Laboratories.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/LabTypes.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/PcuLabTestRequest.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/OpdLabTestRequest.hbm.xml"/>
+  <mapping resource="lib/driver/lims/mappings/InwardLabTestRequest.hbm.xml"/>   
+  
+  
+   <mapping resource="lib/driver/inward/mappings/admin/ward.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/WardAdmission/WardAdmission.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/charts/Temperaturechart.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/charts/DiabeticChart.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/charts/LiquidBalanceChart.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/admin/Bed.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/transfer/ExternalTransfer.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/transfer/InternalTransfer.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/WardAdmission/Admission.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/WardAdmission/InPatient.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/WardAdmission/AdmissionRequest.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/prescription/InwardNurseNote.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/prescription/PrescriptionItem.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/prescription/PrescriptionTerms.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/prescription/TempPrescribe.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/treat/Diagnose.hbm.xml"/>
+  <mapping resource="lib/driver/inward/mappings/treat/Discharge.hbm.xml"/>
+   
+  
+  
+  <mapping resource="lib/driver/pharmacy/mappings/TrnDrugsSupplied.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstDrugCategory.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstDrugsNew.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstManufacturer.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstPharmDepartment.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/TrnDispenseDrugs.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/TrnRequestDrugs.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstDrugFrequency.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstDrugDosage.hbm.xml"/>
+  <mapping resource="lib/driver/pharmacy/mappings/MstMailHistory.hbm.xml"/>
+   <mapping resource="lib/driver/pharmacy/mappings/PhramacyAssitanceStock.hbm.xml"/>
+<mapping resource="lib/driver/opd/mappings/Patient.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Visit.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Allergy.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Attachments.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Exams.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Prescription.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/PrescriptionItems.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Queue.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Questionnaire.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/Record.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/LiveAllergy.hbm.xml"/>
+  <mapping resource="lib/driver/opd/mappings/LiveInjury.hbm.xml"/>
+  <!-- HR -->
+  <mapping resource="lib/driver/hr/mappings/HrAttendance.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrContact.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrContacttype.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrDepartment.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrDesignation.hbm.xml"/>
+   <mapping resource="lib/driver/hr/mappings/HrDesignationgroup.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrEmployee.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrEmployeeView.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrHasleaves.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrIdentity.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrIdentitytype.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrLeavetype.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrShifttimes.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrTakeleaves.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrWorkin.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/HrAssignschedule.hbm.xml"/>
+  <mapping resource="lib/driver/hr/mappings/village.hbm.xml"/>
+  <!-- PCU -->
+  <mapping resource="lib/driver/pcu/mappings/PcuItems.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuAdmition.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuNursenote.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuItembatchrelation.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuItembatch.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuPrescription.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuPrescriptionitems.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuPrescriptiondispense.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuManualdispense.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuViewinventory.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuExpireditems.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuRequesteditems.hbm.xml"/>
+  <mapping resource="lib/driver/pcu/mappings/PcuItemstockday.hbm.xml"/>
+  
+  
+  <mapping resource="lib/driver/sync/mappings/Cps.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

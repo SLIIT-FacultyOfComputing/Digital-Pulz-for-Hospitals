@@ -1,0 +1,37 @@
+package core.classes;
+
+import java.util.Date;
+
+public class BaseEntity {
+	
+	private Date createDate;
+	private int createUser;
+	private Date lastUpDate;
+	private int lastUpDateUser;
+	
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public int getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(int createUser) {
+		this.createUser = createUser;
+	}
+	public Date getLastUpDate() {
+		return lastUpDate;
+	}
+	public void setLastUpDate(Date lastUpDate) {
+		this.lastUpDate = lastUpDate;
+	}
+	public int getLastUpDateUser() {
+		return lastUpDateUser;
+	}
+	public void setLastUpDateUser(int lastUpDateUser) {
+		this.lastUpDateUser = lastUpDateUser;
+	}
+	
+}

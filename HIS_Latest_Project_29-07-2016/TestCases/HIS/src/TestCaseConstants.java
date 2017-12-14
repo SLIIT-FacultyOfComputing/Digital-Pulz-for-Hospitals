@@ -591,6 +591,8 @@ public class TestCaseConstants {
 	
 	public static final String ADD_OPD_VISIT = "addVisit";
 	
+	public static final String GET_OPD_VISIT_REPORT = "getVisitReport";
+	
 	public static final String URL_APPEND_UPDATE_OPD_VISIT = "updateVisitUrl";
 	
 	public static final String UPDATE_OPD_VISIT = "updateVisit";
@@ -760,4 +762,241 @@ public class TestCaseConstants {
 	
 	public static final String LOAD_PHARMACY_TABLE = "loadPharmacyUrl";
 	
+	
+	
+	
+	/*hasthi.d*/
+	/*-----------------WardAdmission-----------------*/
+	
+	/*-----------------AdmissionRequestResource----------------*/
+	
+	public static final String URL_ADD_ADMISSION_REQ = "addAdmissionReqUrl";
+	
+	public static final String ADD_ADMISSION_REQ = "addAdmissionReq";
+	
+	public static final String URL_UPDATE_ADMISSION_REQ = "updateAdmissionReqUrl";
+	
+	public static final String UPDATE_ADMISSION_REQ = "updateAdmissionReq";
+	
+	public static final String GET_SELECT_ADMISSION_REQ = "getSelectAdmissionReqUrl";
+	
+	public static final String GET_NOT_READ_ADMIS_REQ_BY_WARD = "getNotReadAdmissionRequestByWardUrl";
+	
+	public static final String TRANSFER_WARD = "transferWardNo";
+	
+	/*-----------------ExternalTransfer-------------------------*/
+	
+	public static final String URL_EXTERNAL_TRANSFER = "ExternalTransferUrl";
+	
+	public static final String ADD_EXTERNAL_TRANSFER = "addExternalTransfer";
+	
+	public static final String URL_ADD_EXTERNAL_TRANSFER = "addExternalTransferUrl";
+	
+	public static final String EXTERNAL_BHTNO = "ExternalBhtNo";
+	
+	
+	/*hasthi.d*/
+	/*-----------------------InternalTransfer-------------------*/
+	
+	public static final String ADD_INTERNAL_TRANSFER = "addInternalTransfer";
+	
+	public static final String URL_INTERNAL_TRANSFER = "InternalTransferUrl";
+	
+	public static final String URL_GET_SELECTED_INTERNAL_TRANSFER =  "getSelectInternalTransferUrl";
+	
+	public static final String URL_UPDATE_INTERNAL_TRANSFER = "updateInternalTransferUrl";
+	
+	public static final String UPDATE_INTERNAL_TRANSFER =  "updateInternalTransfer"; 
+	
+	public static final String URL_GET_NOT_READ_INTERNAL_TRANSFER =  "getNotReadInternalTransferByWardUrl";
+	
+	public static final String WARD_NO_INTERNAL_TRANSFER = "WardNo"; 
+	
+	public static final String URL_GET_INTERNAL_TRANSFER_BY_ID = "getInternalTransferByIDUrl";
+	
+	public static final String URL_GET_INTERNAL_TRANSFER_BY_BHT_NO = "getInternalTransferByBHTNoUrl";
+	
+	public static final String BHT_NO_INTERNAL = "BhtNo";
+	
+	
+	/*Navoda.S,Gayesha.S*/
+	/*PrescriptionTermResourse*/
+	
+	public static final String URL_APPEND_ADD_PRESCRIPTION_TERM="AddTermPrescriptionUrl";
+	
+	public static final String ADD_PRESCRRIPTION_TERM="addPrescriptionTerm";
+	
+	public static final String URL_APPEND_GET_TERM_PRESCRIPTION_BY_BHT_NO="GetTermPrescriptionByBHTnoUrl";
+	
+	public static final String URL_APPEND_UPDATE_PRESCRIPTION_TERM="UpdateTermPrescriptionUrl";
+	
+	public static final String UPDATE_PRESCRIPTION_TERM="updateprescription";
+	
+	/*Gayesha.S*/
+	/*Inward PrescriptionItemResourse*/
+	
+	public static final String URL_APPEND_ADD_PRESCRIPTION_ITEM="AddPrescriptionItemUrl";
+	
+	public static final String ADD_PRESCRIPTION_ITEM="AddPrescriptionItem";
+	
+	public static final String URL_GET_MAX_TERM_ID_BY_USERID="GetMaxTermIDByUserIDUrl";
+	
+	public static final String URL_GET_PRESCRIPTION_ITEM_BY_BHTNO="GetPrescriptionitemByBhtNoUrl";
+	
+	public static final  String URL_APPEND_GET_TERM_PRESCRIPTION_BY_TERM_ID="GetPrescriptionitemByTermIDUrl";
+	
+	public static final String URL_APPEND_UPDATE_PRESCRIPTION_ITEM="UpdateItemPrescriptionUrl";
+	
+	public static final String UPDATE_PRESCRIPTION_ITEM ="updateprescriptionItem";
+	
+/*Gayesha.S*/
+	/*InWardNurseResource*/
+	public static final String URL_APPEND_ADD_INWARD_NURSE_NOTE="AddInwardNurseNoteUrl";
+	
+	public static final String ADD_INWARD_NURSE_NOTE="addInwardNurseNote";
+	
+	public static final String URL_APPEND_GET_DIABETIC_CHART_BY_BHTNO="GetNurseNoteByBhtNoUrl";
+	
+	public static final String URL_APPEND_GET_NURSE_NOTE="GetNurseNoteUrl";
+	
+	public static final String URL_APPEND_UPDATE_NURSE_NOTE_TERM_PRESCRIPTION="UpdateNurseNoteTermPrescriptionUrl";
+	
+	public static final String UPDATE_NURSENOTE_TERM_PRESCRIPTION="updateNurseNoteTermprecription";
+	
+	/*Navoda.S,Gayesha.S*/
+	/*Inward-WardResourse*/
+	
+	public static final String URL_APPPEND_ADD_WARD="AddWardUrl";
+	
+	public static final String ADD_WARD="addWard";
+	
+	public static final String URL_APPPEND_GET_WARD="GetWardUrl";
+	
+	public static final String URL_APPEND_GET_WARD_BY_ID="GetWardByIdUrl";
+	
+	public static final String URL_APPEND_UPDATE_WARD_DETAILS="UpdateWardDetailsUrl";
+	
+	public static final String UPDATE_WARD ="updateWard";
+	
+	public static final String URL_APPEND_DELETE_URL="DeleteWardUrl";
+	
+	public static final String DELETE_WARD="deleteWard";
+	
+
+	public static final String URL_APPEND_GET_ALL_CHART = "getAllChartUrl";
+	
+	public static final String URL_APPEND_ADD_CHART = "addChartUrl";
+	
+	public static final String ADD_CHART = "addChart";
+	
+	public static final String URL_APPEND_GET_DIABETIC_CHART = "getDiabeticChartByBHTNo";
+
+
+	/*saugat.a*/
+	/*Inward-BedResource*/
+	
+	public static final String URL_APPEND_ADD_BED = "addBedUrl";
+	
+	public static final String ADD_INWARD_BED = "addBed";
+	
+	public static final String URL_APPEND_GET_BED_BY_WARD_NO="getBedByWardNo";
+	
+	public static final String URL_APPEND_UPDATE_BED = "updateBedUrl";
+	
+	public static final String UPDATE_BED = "updateBed";
+	
+	public static final String UPDATE_BED_SUCCESS_MESSAGE="bed.updateBed";
+	
+	public static final String WARD_NO="wardNo";
+	
+	public static final String URL_APPEND_GET_BED_BY_WARD_NO_AND_BED_NO="getBedByWardNoAndBedNo";
+	
+	public static final String BED_WARD_NO="bedWardNo";
+	
+	public static final String BED_NO="bedNo";
+	
+	public static final String URL_APPEND_GET_FREE_BED_BY_WARD_NO="getFreeBedByWardNo";
+	
+	public static final String FREE_BED_WARD_NO="freeBedWardNo";
+	
+	/*saugat.a*/
+	/*Admission Resource*/
+	
+	public static final String URL_APPEND_ADD_WARD_ADMISSION = "addWardAdmissionUrl";
+	
+	public static final String ADD_WARD_ADMISSION = "addWardAdmission";
+	
+	public static final String URL_GET_WARD_ADMISSION = "getWardAdmission";
+	
+	public static final String URL_GET_WARD_ADMISSION_DETAILS_BY_BHT_NO = "getWardAdmissionDetails";
+	
+	public static final String URL_GET_WARD_ADMISSION_BY_PATIENT_ID = "getWardAdmissionByPatientID";
+	
+	public static final String URL_GET_WARD_ADMISSION_BY_WARD_NO = "getWardAdmissionByWardNo";
+	
+	public static final String URL_GET_PATIENT_INFORMATION_BY_BHT_NO = "getPatientInformation";
+	
+	public static final String UPDATE_DISCHARGE = "updateDischarge";
+	
+	public static final String URL_APPEND_UPDATE_DISCHARGE = "updateDischargeUrl";
+	
+	public static final String UPDATE_DISCHARGE_SIGN = "updateDischargeSign";
+	
+	public static final String URL_APPEND_UPDATE_DISCHARGE_SIGN = "updateDischargeSignUrl";
+	
+	public static final String UPDATE_ADMISSION_BED_NO = "updateAdmissionBedNo";
+	
+	public static final String URL_APPEND_UPDATE_ADMISSION_BED_NO = "updateAdmissionBedNoUrl";
+	
+	//h.deshan 
+		//LiquidBalance
+		
+		public static final String GET_CHART = "chartDetailsUrl";
+		
+		public static final String CHART_BHT = "chartbhtNo";
+		
+		public static final String URL_APPEND_NEW_CHART = "AddNewChartUrl";
+		
+		public static final String ADD_NEW_CHART = "AddChart" ;
+		
+		public static final String GET_DIABETIC_CHART = "getDiabeticChartByBHTNoUrl";
+		
+		//H.N.Sampath
+		public static final String URL_APPEND_ADD_TEMP_DET = "AddNewTempUrl";
+		
+		public static final String ADD_TEMP_DET = "AddNewTemp";
+		
+		public static final String URL_APPEND_CHART_DET = "ChartDetailUrl";
+		
+		public static final String CHART_DET = "ChartDetail";
+		
+		public static final String URL_APPEND_GET_DIABITIC = "GetdiabiticUrl";
+		
+		public static final String GET_DIABITIC = "Getdiabitic";
+		
+		public static final String URL_APPEND_ADD_DIAGNOSE = "AddDiagnoseUrl";
+		
+		public static final String ADD_DIAGNOSE = "AddNewDiagnose";
+		
+		public static final String URL_APPEND_GET_DIAGNOSE = "GetDiagnoseUrl";
+		
+		public static final String GET_DIAGNOSE = "GetDiagnose";
+		
+		public static final String URL_APPEND_TEMP_PRESCRIBE = "TempPrescribeUrl";
+		
+		public static final String TEMP_PRESCRIBE = "TempPrescribe";	
+		
+		public static final String URL_APPEND_UPDATE_ITEM = "UpdateItemUrl";
+		
+		public static final String UPDATE_ITEM = "TempPrescribeUpdate";
+		
+		public static final String URL_APPEND_GET_ITEM = "GetItemUrl";
+		
+		public static final String GET_ITEM = "GetItem";
+		
+		public static final String URL_APPEND_ADD_WARD = "AddwardUrl";
+		
+		public static final String URL_APPEND_DELETE_WARD = "DeleteWardTempPrescriptionUrl";
+		
 }
+

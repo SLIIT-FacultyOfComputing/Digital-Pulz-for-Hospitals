@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2014 2:42:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.opd.OpdTreatment" table="opd_treatment" catalog="HIS">
+		<id name="opdTreatmentId" type="java.lang.Integer">
+            <column name="OPDTREATMENTID" />
+            <generator class="identity" />
+        </id>
+        <id name="opdId" type="java.lang.Integer">
+            <column name="OPDID" />
+        </id>
+        <property name="treatment" type="string">
+            <column name="Treatment" length="500" not-null="false" />
+        </property>
+        <property name="status" type="string">
+            <column name="Status" length="1000" not-null="false" />
+        </property>
+        <property name="dsdivision" type="string">
+            <column name="DSDivision" length="50" not-null="false" />
+        </property>
+        <property name="gndivision" type="string">
+            <column name="GNDivision" length="50" not-null="false" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="Active" not-null="false" />
+        </property>
+        <property name="code" type="string">
+            <column name="code" length="15" not-null="false" />
+        </property>
+        <property name="createDate" type="date">
+            <column name="CreateDate" length="10" not-null="false" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CreateUser" length="200" not-null="false" />
+        </property>
+        <property name="lastUpDate" type="date">
+            <column name="LastUpDate" length="10" not-null="false" />
+        </property>
+        <property name="lastUpDateUser" type="string">
+            <column name="LastUpDateUser" length="200" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>

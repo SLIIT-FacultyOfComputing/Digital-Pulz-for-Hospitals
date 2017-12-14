@@ -1,4 +1,13 @@
 <?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
+<?php
 
 include_once 'servicecaller.php';
 
@@ -36,7 +45,15 @@ class QueueModel {
 		$response = $curl_request->curl_GET_Request($service_url);
 		return $response;
 	}
-	
+
+    public function getQueuePatientsByDoctorID($doctorid)
+    {
+        $service_url = SERVICE_BASE_URL."Queue/getQueuePatientsByDoctorID/".$doctorid;
+        $curl_request = new ServiceCaller();
+        $response = $curl_request->curl_GET_Request($service_url);
+        return $response;
+    }
+
 	public function addToQueue()
 	{
 		$queueJson   = json_encode($this->jsonSerialize());
@@ -46,10 +63,20 @@ class QueueModel {
 	    $response =  $curl_request->curl_POST_Request($service_url,$queueJson,$MediaType);
 		return $response;
 	}
-	
-	public function removeFromQueue($patientID)
+
+    public function addToQueueAuto()
+    {
+        $queueJson   = json_encode($this->jsonSerialize());
+        $service_url = SERVICE_BASE_URL."Queue/addPatientToQueueAuto";
+        $MediaType = "application/json";
+        $curl_request  = new ServiceCaller();
+        $response =  $curl_request->curl_POST_Request($service_url,$queueJson,$MediaType);
+        return $response;
+    }
+
+	public function removeFromQueue($patientID, $userID)
 	{
-		$service_url = SERVICE_BASE_URL."Queue/checkoutPatient/".$patientID;
+		$service_url = SERVICE_BASE_URL."Queue/checkoutPatient/".$patientID."/".$userID;
 		$curl_request = new ServiceCaller();
 		$response = $curl_request->curl_GET_Request($service_url);
 		return $response;
@@ -127,12 +154,30 @@ class QueueModel {
 		$curl_request = new ServiceCaller();
 		$response = $curl_request->curl_GET_Request($service_url);
 		return $response;
-	} 
-	
-		
-	public function getNextAssignDoctor($patientid = -1)
+	}
+
+    public function getQTypeForDoctor($doctorid)
+    {
+        $service_url = SERVICE_BASE_URL."Queue/getQueueType/".$doctorid;
+        $curl_request = new ServiceCaller();
+        $response = $curl_request->curl_GET_Request($service_url);
+        return $response;
+    }
+
+    public function setQTypeForDoctor($type,$doctorid)
+    {
+        $service_url = SERVICE_BASE_URL."Queue/setQueueType/".$type."/".$doctorid;
+        $curl_request = new ServiceCaller();
+        $response = $curl_request->curl_GET_Request($service_url);
+        return $response;
+    }
+
+    public function getNextAssignDoctor($patientid = -1)
 	{
-		$service_url = SERVICE_BASE_URL."Queue/getNextAssignDoctor/".$patientid;
+        date_default_timezone_set("Asia/Colombo");
+        $dt=new DateTime();
+
+		$service_url = SERVICE_BASE_URL."Queue/getNextAssignDoctor/".$patientid."/".$dt->format("Y-m-d");
 		$curl_request = new ServiceCaller();
 		$response = $curl_request->curl_GET_Request($service_url);
 		return $response;

@@ -13,18 +13,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import lib.driver.inward.driver_class.WardAdmission.AdmissionRequestDBDriver;
 
-
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONObject;
 
+import core.ErrorConstants;
 import core.classes.inward.WardAdmission.AdmissionRequest;
+import core.resources.inward.transfer.InternalTransferResource;
 import flexjson.JSONException;
 import flexjson.JSONSerializer;
 
 
 @Path("AdmissionRequest")
 public class AdmissionRequestResource {
+	
+	final static Logger log = Logger.getLogger(AdmissionRequestResource.class);
 	
 	AdmissionRequestDBDriver requestdbDriver = new AdmissionRequestDBDriver();
 	DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -33,9 +38,11 @@ public class AdmissionRequestResource {
 	@Path("/addAdmissionRequest")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String addAdmissionRequest(JSONObject wJson)
+	public String addAdmissionRequest(JSONObject wJson) throws org.codehaus.jettison.json.JSONException
 	{
-				
+		
+		log.info("Entering the add Admission Request method");
+		
 		try {
 			AdmissionRequest wardadmission  =  new AdmissionRequest();
 			
@@ -52,21 +59,55 @@ public class AdmissionRequestResource {
 			String ward=wJson.getString("transfer_ward");				 
 			requestdbDriver.insertAdmissionRequest(wardadmission,pid,createUser,UpdateUser,ward);
 			 			
-			return "true";
-		} catch (Exception e) {
-			 System.out.println(e.getMessage());
-			 
-			return e.getMessage().toString(); 
+			JSONSerializer serializor=new JSONSerializer();
+			String result= serializor.serialize(wardadmission);
+			
+			log.info("add Admission Request Successful, Remark = "+wardadmission.getRemark());
+			
+			return result;//"true";
+			
+		} catch (JSONException e) {
+			log.error("JSON exception in add Admission Request, message:" + e.getMessage());
+			
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+			
+			return jsonErrorObject.toString(); 
 		}
+	
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in add Admission Request, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
 
+			return jsonErrorObject.toString(); 
+		}
+	
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			 log.error("Error while adding Admission Request, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
 	}
 	
+	// Update exceptions are not done hasthi.d
 	
 	@PUT
 	@Path("/updateAdmisiionRequest")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public  String updateAdmisiionRequest(JSONObject wJson){
+		
+		log.info("Entering the update Admisiion Request method");	
 		
 		String result="false";
 		boolean r=false;
@@ -79,6 +120,8 @@ public class AdmissionRequestResource {
 			r=requestdbDriver.updateAdmisiionRequest(BhtNo,LastUpdatedUser,LastUpdatedDateTime,autoid);
 			result=String.valueOf(r);
 		
+			log.info("Get Select update Admisiion Request successful");
+			
 			return result;
 			
 		}
@@ -97,25 +140,84 @@ public class AdmissionRequestResource {
 	@GET
 	@Path("/getSelectAdmissionReq/{auto_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getSelectAdmissionReq(@PathParam("auto_id")  int auto_id)
+	public String getSelectAdmissionReq(@PathParam("auto_id")  int auto_id) throws org.codehaus.jettison.json.JSONException
 	{
+		
+		log.info("Entering the get Select Admission Req method");
+		
+		try{
 		 String result="";
 		 List<AdmissionRequest> req =requestdbDriver.getSelectAdmissionReq(auto_id);
 		 JSONSerializer serializor=new JSONSerializer();
 		 result= serializor.serialize(req);
+		 
+		 log.info("Get Select Internal Transfer successful, list count = " + req.size());
+		 
 		 return result;
+		}
+		
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in get Select Admission Req, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while getting Select Admission Req, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
 	}
 	
 	@GET
 	@Path("/getNotReadAdmissionRequestByWard/{transfer_ward}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getNotReadAdmissionRequestByWard(@PathParam("transfer_ward")  String transfer_ward)
+	public String getNotReadAdmissionRequestByWard(@PathParam("transfer_ward")  String transfer_ward) throws org.codehaus.jettison.json.JSONException
 	{
-				 String result="";
+		
+		log.info("Entering the get Not Read Admission Request By Ward method");
+		
+		try{
+		
+		 String result="";
 		 List<AdmissionRequest> req =requestdbDriver.getNotReadAdmissionRequestByWard(transfer_ward);
 		 JSONSerializer serializor=new JSONSerializer();
 		 result= serializor.serialize(req);
 		 return result;
+		}
+		
+		catch(RuntimeException e)
+		{
+			log.error("Runtime Exception in get Not Read Admission Request By Ward, message:" + e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+			
+			
+			return jsonErrorObject.toString(); 
+		}
+		catch (Exception e) {
+			 System.out.println(e.getMessage());
+			 log.error("Error while getting Not Read Admission Request By Ward, message: " + e.getMessage());
+			 JSONObject jsonErrorObject = new JSONObject();
+				
+			jsonErrorObject.put("errorcode", ErrorConstants.NO_DATA.getCode());
+			jsonErrorObject.put("message", ErrorConstants.NO_DATA.getMessage());
+				
+			return jsonErrorObject.toString();
+		}
+		
 	}
 
 }

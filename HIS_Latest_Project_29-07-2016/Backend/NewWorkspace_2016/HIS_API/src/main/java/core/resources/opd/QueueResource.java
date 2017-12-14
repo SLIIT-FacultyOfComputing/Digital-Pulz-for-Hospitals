@@ -1,10 +1,14 @@
 package core.resources.opd;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.text.DateFormatter;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,11 +22,13 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import core.ErrorConstants;
+import core.classes.hr.HrAttendance;
 import core.classes.opd.Queue;
 import core.classes.opd.Visit;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
 import lib.driver.api.driver_class.user.UserDBDriver;
+import lib.driver.hr.driver_class.HrAttendanceDBDriver;
 import lib.driver.opd.driver_class.QueueDBDriver;
 import lib.driver.opd.driver_class.VisitDBDriver;
 import core.classes.api.user.AdminPermission;
@@ -44,10 +50,11 @@ public class QueueResource {
 
 	//
 	public final static int MAX_PATIENT_PER_DAY = 5;
+	public static int rotationNumber = 0;
 	
 	public static class QueueStatus {
 		public int user;
-		public int qStatus = 0; // 0 : Open , 1 : Full , 2 : OnHold , 3 : Redirect
+		public static int qStatus = 0; // 0 : Open , 1 : Full , 2 : OnHold , 3 : Redirect
 	}
 
 	
@@ -61,7 +68,8 @@ public class QueueResource {
 	public static int lastAssignedDcotor = -1;
 	
 	QueueDBDriver queueDBDriver = new QueueDBDriver();
-
+	HrAttendanceDBDriver hrAttendanceDBDriver = new HrAttendanceDBDriver();
+	
 	/**
 	 * @param qJson
 	 * @return
@@ -74,6 +82,8 @@ public class QueueResource {
 	public String addToQueue(JSONObject qJson) throws JSONException {
 		logger.info("add patient to queue");
 
+		UserDBDriver userDBDriver = new UserDBDriver();
+		
 		Queue queue = new Queue();
 		try {
  
@@ -82,23 +92,35 @@ public class QueueResource {
 			queue.setQueueStatus("Waiting");
 			int patientID = qJson.getInt("patient");
 			int assignedBy = qJson.getInt("queueAssignedBy");
-			int assignedTo = qJson.getInt("queueAssignedTo");
+			int assignedTo = userDBDriver.getUserByEmpId(qJson.getInt("queueAssignedTo")).getUserId();
+			
+			
+			
 			
 			lastAssignedDcotor = assignedTo;
 			 
-			if((new QueueDBDriver().getQueuePatientsByUserID(assignedTo).size() + 1) == MAX_PATIENT_PER_DAY)
+			if((new QueueDBDriver().getQueuePatientsByUserID(assignedTo).size()) == MAX_PATIENT_PER_DAY)
 			{
 				  System.out.println("Making Q Full for " + assignedTo); 
 				  QueueStatus qs = new QueueStatus();
 				  qs.user = assignedTo;
 				  qs.qStatus = 1;
+				  hrAttendanceDBDriver.UpdateAttendance(qs.qStatus, qs.user);
 				  queueStatusList.add(qs); 
+				  JSONObject jsonobj = new JSONObject();
+				  jsonobj.put("status","False");
+				  jsonobj.put("full",assignedTo);
+				  return jsonobj.toString();
 			}
+			else
+			{
 			
 			queueDBDriver.addToQueue(queue, patientID, assignedBy, assignedTo);
 			logger.info("successfully queue added");
 			JSONSerializer jsonSerializer = new JSONSerializer();
-			return jsonSerializer.include("patient").serialize(queue);
+			JSONObject jsonobje=new JSONObject(jsonSerializer.include("patient").serialize(queue)).put("status","True").put("full","");
+			return jsonobje.toString();
+			}
 
 		} catch (JSONException e) {
 			logger.error("error adding queue: "+e.getMessage());
@@ -123,6 +145,99 @@ public class QueueResource {
 
 	}
 
+	@POST
+	@Path("/addPatientToQueueAuto/{visittype}")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addToQueueAuto(JSONObject qJson, @PathParam("visittype") int visittype) throws JSONException {
+		logger.info("add patient to queue automatically");
+		UserDBDriver userDBDriver = new UserDBDriver();
+		
+		Queue queue = new Queue();
+		try {
+ 
+			queue.setQueueRemarks(qJson.getString("queueRemarks"));
+			queue.setQueueTokenAssignTime(new Date());
+			queue.setQueueStatus("Waiting");
+			int patientID = qJson.getInt("patient");
+			int assignedBy = qJson.getInt("queueAssignedBy");
+			
+			List<HrAttendance> attendants = hrAttendanceDBDriver.getAllAvailableAttendanceByType(visittype);
+			int empId = 0;
+			
+			if(rotationNumber < attendants.size())
+			{
+				empId = attendants.get(rotationNumber).getHrEmployee().getEmpId();
+				rotationNumber++;
+			}
+			else
+			{
+				if(attendants.size() == 0)
+				{
+					JSONObject jsonobj = new JSONObject();
+					jsonobj.put("status","False");
+					jsonobj.put("full","");
+					jsonobj.put("available", "false");
+					return jsonobj.toString();
+				}
+				rotationNumber = 0;
+				empId = attendants.get(rotationNumber).getHrEmployee().getEmpId();
+			}
+			
+			AdminUser user = userDBDriver.getUserByEmpId(empId);
+			
+			//////////
+			int assignedTo = user.getUserId();//qJson.getInt("queueAssignedTo");
+			
+			lastAssignedDcotor = assignedTo;
+			 
+			if((new QueueDBDriver().getQueuePatientsByUserID(assignedTo).size()) == MAX_PATIENT_PER_DAY)
+			{
+				  System.out.println("Making Q Full for " + assignedTo); 
+				  QueueStatus qs = new QueueStatus();
+				  qs.user = assignedTo;
+				  qs.qStatus = 1;
+				  hrAttendanceDBDriver.UpdateAttendance(qs.qStatus, qs.user);
+				  queueStatusList.add(qs); 
+				  JSONObject jsonobj = new JSONObject();
+				  jsonobj.put("status","False");
+				  jsonobj.put("full",assignedTo);
+				  jsonobj.put("available", "true");
+				  return jsonobj.toString();
+			}
+			else
+			{
+			
+			queueDBDriver.addToQueue(queue, patientID, assignedBy, assignedTo);
+			logger.info("successfully queue added automatically");
+			JSONSerializer jsonSerializer = new JSONSerializer();
+			JSONObject jsonobje=new JSONObject(jsonSerializer.include("patient").exclude("queueAssignedTo.*").serialize(queue)).put("status","True").put("full","");
+			return jsonobje.toString();
+			}
+
+		} catch (JSONException e) {
+			logger.error("error adding queue automatically: "+e.getMessage());
+			JSONObject jsonErrorObject = new JSONObject();
+			jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+			jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());		
+			
+			return jsonErrorObject.toString(); 
+		}catch (RuntimeException e)
+			{
+				logger.error("error adding queue automatically: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		} catch (Exception e) {
+			logger.error("error adding queue: "+e.getMessage());
+			return null;
+		}
+
+	}
+	
 	/**
 	 * @param pID
 	 * @return
@@ -133,6 +248,7 @@ public class QueueResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String checkinPatient(@PathParam("PID") int P) throws JSONException {
 		logger.info("checkin patient");
+		
 		try {
 
 			int status = queueDBDriver.checkInPatient(P);
@@ -167,14 +283,25 @@ public class QueueResource {
 	 * @throws JSONException 
 	 */
 	@GET
-	@Path("/checkoutPatient/{PID}")
+	@Path("/checkoutPatient/{PID}/{userId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String checkoutPatient(@PathParam("PID") int pID) throws JSONException {
+	public String checkoutPatient(@PathParam("PID") int pID, @PathParam("userId") int userId) throws JSONException {
 		logger.info("checkout patient");
 		try {
 			int status = queueDBDriver.checkoutPatient(pID);
 			
-			
+			if((new QueueDBDriver().getQueuePatientsByUserID(userId).size()) < MAX_PATIENT_PER_DAY)
+			{
+				hrAttendanceDBDriver.UpdateAttendance(0, userId);
+				for (QueueStatus queuestatus : queueStatusList) {
+					
+					if (queuestatus.user == userId) {
+						queuestatus.qStatus = 0;
+						
+					}
+				}
+				
+			}
 			if (status == 1){
 				logger.info("successfully checked patient");
 				return String.valueOf(status);
@@ -228,7 +355,39 @@ public class QueueResource {
 			return null;
 		}
 	}
+	
+	
+	@GET
+	@Path("/getQueuePatientsByDoctorID/{doctorid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getQueuePatientsByDoctorID(@PathParam("doctorid") int doctorid) throws JSONException {
+		logger.info("get queue patient by user id");
+		try {
+			List<Queue> queueRecord = queueDBDriver
+					.getQueuePatientsByDoctorID(doctorid);
+			JSONSerializer serializer = new JSONSerializer();
+			logger.info("successfully getting queue patient");
 
+			return serializer
+					.include("patient.patientGender", "patient.patientTitle",
+							"patient.patientFullName", "patient.patientID","patient.patientHIN",
+							"queueTokenNo", "queueStatus").exclude("*")
+					.serialize(queueRecord);
+		} catch (RuntimeException e)
+			{
+				logger.error("error getting queue: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) {
+			logger.error("error getting queue: "+e.getMessage());
+			return null;
+		}
+	}
+	
 	@GET
 	@Path("/isPatientInQueue/{patientID}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -313,22 +472,41 @@ public class QueueResource {
 	}
 
 	@GET
-	@Path("/redirectQueue/{userid}")
+	@Path("/redirectQueue/{userid}/{type}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String redirectQueue(@PathParam("userid") int userid) throws JSONException {
+	public String redirectQueue(@PathParam("userid") int userid,@PathParam("type") int type) throws JSONException {
 		logger.info("redirect queue");
+		HrAttendanceDBDriver hrAttendanceDB = new HrAttendanceDBDriver();
 		try {
-
-			int status = queueDBDriver.redirectQueue(userid);
-
-			if (status == 1){
-				logger.info("successfully redirect queue");
-				return String.valueOf(status);
+			if(QueueStatus.qStatus != 3)
+			{
+				int status = queueDBDriver.redirectQueue(userid,type);
+				hrAttendanceDB.UpdateAttendance(3, userid);
+				
+				if (status == 1){
+					
+					logger.info("successfully redirect queue");
+					return String.valueOf(status);
+				}
+				else{
+					logger.info("not redirect queue");
+					return String.valueOf(status);
+				}
 			}
 			else
-				logger.info("not redirect queue");
-			return String.valueOf(status);
-
+			{
+				QueueStatus.qStatus = 0;
+				for(QueueStatus queue : queueStatusList)
+				{
+					if(queue.user == userid)
+					{
+						queueStatusList.remove(queue);
+						break;
+					}
+				}
+				hrAttendanceDB.UpdateAttendance(0, userid);
+				return String.valueOf(QueueStatus.qStatus);
+			}
 		} catch (RuntimeException e)
 			{
 				logger.error("error getting redirect queue: "+e.getMessage());
@@ -349,14 +527,18 @@ public class QueueResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getUserQStatus(@PathParam("userid") int userid) throws JSONException {
 		logger.info("get user queue status");
+		
 		try {
-
+			
+			int val = hrAttendanceDBDriver.getStatus(userid);
 			for (QueueStatus status : queueStatusList) {
 				if (status.user == userid)
+					
+					val = hrAttendanceDBDriver.getStatus(userid);
 					logger.info("successfully getting queue status");
-					return String.valueOf(status.qStatus);
+					return String.valueOf(val);
 			}
-			return "0";
+			return String.valueOf(val);
 		} catch (RuntimeException e)
 			{
 				logger.error("error getting queue status: "+e.getMessage());
@@ -400,7 +582,7 @@ public class QueueResource {
 			return null;
 		}
 	}
-
+	
 	@GET
 	@Path("/getQueueType")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -423,12 +605,63 @@ public class QueueResource {
 		}
 	}
 	
+	@GET
+	@Path("/setQueueType/{type}/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String setQueueTypeForDoctor(@PathParam("type") int type,@PathParam("userid") int userid) throws JSONException {
+		logger.info("set queue type for doctor");
+		try {
+
+			int typeValue = hrAttendanceDBDriver.UpdateAttendanceType(type, userid);
+			logger.info("successfully setting queue type for doctor");
+			return String.valueOf(typeValue);
+
+		} catch (RuntimeException e)
+			{
+				logger.error("error setting queue type for doctor: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		}catch (Exception e) { 
+			logger.error("error setting queue type for doctor: "+e.getMessage());
+			return null;
+		}
+	}
+
+	@GET
+	@Path("/getQueueType/{userid}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getQueueTypeForDoctor(@PathParam("userid") int userid) throws JSONException {
+		logger.info("get queue type  for doctor");
+		
+		try {
+			return String.valueOf(hrAttendanceDBDriver.getType(userid));
+		}catch (RuntimeException e)
+			{
+				logger.error("error setting queue type for doctor: "+e.getMessage());
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
+				
+				return jsonErrorObject.toString();
+		
+		} catch (Exception e) { 
+			logger.error("error setting queue type for doctor: "+e.getMessage());
+			return null;
+		}
+	}
+	
 	
 	@GET
 	@Path("/holdQueue/{userid}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String holdQueue(@PathParam("userid") int userid) throws JSONException {
-		logger.info("hold queue");
+		logger.info("hold queue, UserId = " +userid);
+		HrAttendanceDBDriver hrAttendanceDB = new HrAttendanceDBDriver();
+		
 		try {
 			boolean bExists = false;
 			
@@ -440,13 +673,17 @@ public class QueueResource {
 					
 					if (status.qStatus == 2)
 					{ 
+						
+						hrAttendanceDB.UpdateAttendance(0, userid);
 						queueStatusList.remove(status);
 						return String.valueOf(status.qStatus);
 						
 					}
 					else if (status.qStatus == 0)
 					{
-						status.qStatus = 2; 
+						
+						status.qStatus = 2;
+						hrAttendanceDB.UpdateAttendance(status.qStatus, userid);
 						return String.valueOf(status.qStatus);
 					} 
 				}
@@ -457,6 +694,7 @@ public class QueueResource {
 				QueueStatus qstat = new QueueStatus();
 				qstat.user = userid;
 				qstat.qStatus = 2;
+				hrAttendanceDB.UpdateAttendance(qstat.qStatus, userid);
 				queueStatusList.add(qstat);
 			}
 			logger.info("successfully holding queue");
@@ -468,9 +706,7 @@ public class QueueResource {
 				JSONObject jsonErrorObject = new JSONObject();
 				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
 				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());				
-				
 				return jsonErrorObject.toString();
-		
 		}catch (Exception e) {
 			logger.error("error holding queue: "+e.getMessage());
 			return null;
@@ -484,16 +720,29 @@ public class QueueResource {
 	 * @throws JSONException 
 	 */
 	@GET
-	@Path("/getNextAssignDoctor/{patientID}")
+	@Path("/getNextAssignDoctor/{patientID}/{date}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getNextAssignDoctor(@PathParam("patientID") int patientID) throws JSONException{
+	public String getNextAssignDoctor(@PathParam("patientID") int patientID, @PathParam("date") String date) throws JSONException{
 		logger.info("get next assign doctor");
 		try {
 			
 			JSONSerializer serializer = new JSONSerializer();
 			String roleName="Doctor";
-			List<AdminUser> userList = new UserDBDriver().getUserDetailsByUserRole(roleName);
+			List<HrAttendance> attendenceList = new HrAttendanceDBDriver().getAllAttendance(date);
+			List<AdminUser> adminUserList = new UserDBDriver().getUserDetailsByUserRole(roleName);
+			List<AdminUser> userList = new ArrayList<AdminUser>();
 			
+			
+			for(AdminUser user : adminUserList)
+			{
+				for(HrAttendance attendant : attendenceList)
+				{
+					if(attendant.getHrEmployee().getEmpId() == user.getHrEmployee().getEmpId())
+					{
+						userList.add(user);
+					}
+				}
+			}
 		
 			System.out.println("queueStatusList  " + queueStatusList.toString());
 			 
@@ -526,7 +775,7 @@ public class QueueResource {
 					{
 						if(userList.get(i).getUserId() == user.getUserId())
 						{
-							return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);
+							return serializer.include("hrEmployee.firstName","hrEmployee.lastName","hrEmployee.empId","userId").exclude("*").serialize(user);
 						}
 					} 
 					
@@ -539,7 +788,7 @@ public class QueueResource {
 							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
 						}
 					} 
-					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","hrEmployee.empId","userId").exclude("*").serialize(user);
 				}else
 				{
 					// recent visit doctor is not available in the userlist
@@ -551,7 +800,7 @@ public class QueueResource {
 							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
 						}
 					} 
-					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","hrEmployee.empId","userId").exclude("*").serialize(user);
 					 
 				}
 				 
@@ -561,7 +810,7 @@ public class QueueResource {
 				if(lastAssignedDcotor == -1)
 				{ 
 					AdminUser user = userList.get(0);
-					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);  
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","hrEmployee.empId","userId").exclude("*").serialize(user);  
 				}else
 				{	
 				
@@ -573,7 +822,7 @@ public class QueueResource {
 							user =  (i + 1) < userList.size()  ? userList.get(i+1) :   userList.get(0); 
 						}
 					}  
-					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","userId").exclude("*").serialize(user);  
+					return serializer.include("hrEmployee.firstName","hrEmployee.lastName","hrEmployee.empId","userId").exclude("*").serialize(user);  
 				}
 			}
 			
@@ -596,12 +845,27 @@ public class QueueResource {
 	
 	//********
 	
-	public int getNextAssignDoctorID(int patientID){
+	public int getNextAssignDoctorID(int patientID, int visitType){
 		try {
 			
 			String roleName="Doctor";
-			List<AdminUser> userList = new UserDBDriver().getUserDetailsByUserRole(roleName);
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = Calendar.getInstance().getTime();
+			List<HrAttendance> attendenceList = new HrAttendanceDBDriver().getAllAttendanceByType(df.format(today), visitType);
+			List<AdminUser> adminUserList = new UserDBDriver().getUserDetailsByUserRole(roleName);
+			List<AdminUser> userList = new ArrayList<AdminUser>();
 			
+			
+			for(AdminUser user : adminUserList)
+			{
+				for(HrAttendance attendant : attendenceList)
+				{
+					if(attendant.getHrEmployee().getEmpId() == user.getHrEmployee().getEmpId())
+					{
+						userList.add(user);
+					}
+				}
+			}
 		
 			System.out.println("queueStatusList  " + queueStatusList.toString());
 			 

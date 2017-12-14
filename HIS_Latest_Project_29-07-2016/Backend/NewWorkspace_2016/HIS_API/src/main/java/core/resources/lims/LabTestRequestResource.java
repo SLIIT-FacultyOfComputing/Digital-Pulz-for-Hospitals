@@ -22,6 +22,7 @@ import core.ErrorConstants;
 import core.classes.lims.Category;
 import core.classes.lims.LabTestRequest;
 import core.classes.lims.MainResults;
+import core.classes.lims.OPDLabTestRequest;
 import core.classes.lims.ParentTestFields;
 import core.classes.lims.Reports;
 import core.classes.lims.Specimen;
@@ -56,23 +57,27 @@ LabTestRequestDBDriver requestDBDriver= new LabTestRequestDBDriver();
 		try {
 			LabTestRequest testRequest = new LabTestRequest();
 			
+			OPDLabTestRequest opdLabRequest = new OPDLabTestRequest();
+			
 			int testID = pJson.getInt("ftest_ID");
 			int patientID = pJson.getInt("fpatient_ID");
 			int labID = pJson.getInt("flab_ID");
 			int userid = pJson.getInt("ftest_RequestPerson");
+			int visitId = pJson.getInt("visit_ID");
 			
-			testRequest.setComment(pJson.getString("comment").toString());
-			testRequest.setPriority(pJson.getString("priority").toString());
-			testRequest.setStatus(pJson.getString("status").toString());
-			testRequest.setTest_RequestDate(new Date());
-			testRequest.setTest_DueDate(new Date());
+			opdLabRequest.setComment(pJson.getString("comment").toString());
+			opdLabRequest.setPriority(pJson.getString("priority").toString());
+			opdLabRequest.setStatus(pJson.getString("status").toString());
+			opdLabRequest.setTest_RequestDate(new Date());
+			opdLabRequest.setTest_DueDate(new Date());
 			
 			
-			requestDBDriver.addNewLabTestRequest(testRequest, testID, patientID, labID, userid);
-			logger.info("Added new Lab test request "+testRequest);
+			
+			requestDBDriver.addNewLabTestRequest(opdLabRequest, testID, patientID, labID, userid, visitId);
+			logger.info("Added new Lab test request "+opdLabRequest);
 			 
 			JSONSerializer jsonSerializer = new JSONSerializer();
-			return jsonSerializer.include("labTestRequest_ID").serialize(testRequest);
+			return jsonSerializer.include("labTestRequest_ID").serialize(opdLabRequest);
 		} 
 		catch(RuntimeException ex)
 		{
@@ -366,9 +371,9 @@ LabTestRequestDBDriver requestDBDriver= new LabTestRequestDBDriver();
 					
 			requestDBDriver.addSpecimenInfo(speci, useridC, useridR, useridD, retID, specID, reqID);
 			logger.info("Added Specimen info: "+speci);
-			 
+			 speci.getfSpecimen_ReceivededBy().getUserId();
 			JSONSerializer jsonSerializer = new JSONSerializer();
-			return jsonSerializer.include("specimen_ID").serialize(speci);
+			return jsonSerializer.include("specimen_ID, fSpecimen_DeliveredBy.UserId,fSpecimen_ReceivededBy.UserId, fSpecimen_DeliveredBy.UserId").exclude("fSpecimen_DeliveredBy.*, fSpecimen_ReceivededBy.*, fSpecimen_DeliveredBy.UserId").serialize(speci);
 		} 
 		catch(JSONException e)
 		{

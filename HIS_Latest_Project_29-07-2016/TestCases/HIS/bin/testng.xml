@@ -55,4 +55,23 @@
 			<class name="ParmacyTestCase" />
 		</classes>
 	</test>
+	
+	<test name="testInward">
+		<classes>
+			<class name="AdmissionResourceTestCase"/>
+			<class name="InternalTransferResourceTestCase"/>
+			<class name="ExternalTransferResourseTestCase"/>
+			<class name="AdmissionRequestResourceTestCase"/>
+			<class name="WardTestCase"/>
+			<class name="DiabeticChartTestCase"/>
+			<class name="InwardNurseNoteTestCase"/>
+			<class name="PrescriptionItemTestCase"/>
+			<class name="PrescriptionTermTestCase"/>
+			<class name="BedTestCase"/>
+			<class name="DiagnoseResourceTestcase"/>
+			<class name="TempreturechartTestcase"/>
+			<class name="TempPrescribeResourceTestCase"/>
+			<class name="LiquidBalanceTestCase"/>
+		</classes>
+	</test>
 </suite>

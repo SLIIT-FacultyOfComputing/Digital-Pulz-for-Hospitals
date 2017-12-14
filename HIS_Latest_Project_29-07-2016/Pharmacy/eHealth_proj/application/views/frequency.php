@@ -1,3 +1,12 @@
+<?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />

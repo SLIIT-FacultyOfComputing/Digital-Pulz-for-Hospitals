@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 21, 2013 10:58:15 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="core.classes.opd.Visit" table="opd_patient_visit"  lazy="false">
+    
+        <id name="visitID" type="int" access="field">
+            <column name="visit_id" />
+            <generator class="native" />
+        </id>
+
+ 
+        <many-to-one name="patient" class="core.classes.opd.OutPatient" fetch="join">
+        	<column name="patient_id" not-null="true"/>
+        </many-to-one> 
+        
+        <property name="visitDate" type="java.util.Date">
+            <column name="visit_date" />
+        </property>
+        <property name="visitComplaint" type="java.lang.String">
+            <column name="visit_complaint" />
+        </property>
+        
+      
+        <many-to-one name="visitDoctor" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="visit_doctor" not-null="true"/>
+        </many-to-one> 
+        
+        
+        <property name="visitRemarks" type="java.lang.String">
+            <column name="visit_remarks" />
+        </property>
+        
+         <many-to-one name="visitCreateUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="visit_create_user" not-null="true"/>
+        </many-to-one> 
+        
+        
+        <property name="visitLastUpdate" type="timestamp">
+            <column name="visit_last_update_date" />	
+        </property>
+         
+         
+         <many-to-one name="visitLastUpDateUser" class="core.classes.api.user.AdminUser" lazy="false" fetch="join">
+        	<column name="visit_last_update_user" not-null="true"/>
+        </many-to-one> 
+        
+        
+        <property name="visitType" type="java.lang.String">
+            <column name="visit_type" />
+        </property>
+        <property name="visitActive" type="int">
+            <column name="visit_active" />
+        </property>
+   
+   
+       <set name="exams" table="opd_patient_examination" inverse="true" lazy="false" fetch="select" cascade="all">
+			<key column="visit_id" not-null="true"/>
+         	<one-to-many class="core.classes.opd.Exams"/>
+        </set>        
+        
+        <set name="prescriptions" table="opd_prescription" inverse="true" lazy="false" fetch="select" cascade="all">
+			<key column="visit_id" not-null="true"/>
+         	<one-to-many class="core.classes.opd.Prescription"/>
+        </set>    
+        <set name="opdTreatment" table="opd_treatment" inverse="true" lazy="false" fetch="select" cascade="all">
+            <key>
+                <column name="VISITID" />
+            </key>
+            <one-to-many class="core.classes.opd.OpdTreatment" />
+        </set>
+          
+         
+        
+       
+    </class>
+</hibernate-mapping>

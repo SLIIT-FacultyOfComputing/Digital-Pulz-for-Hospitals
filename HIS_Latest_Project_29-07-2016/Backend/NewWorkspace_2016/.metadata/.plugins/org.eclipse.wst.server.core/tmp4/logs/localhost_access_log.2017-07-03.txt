@@ -1,0 +1,16 @@
+127.0.0.1 - - [03/Jul/2017:08:20:46 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:08:20:47 +0530] "GET /HIS_API/ HTTP/1.1" 200 67
+127.0.0.1 - - [03/Jul/2017:10:36:06 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:06 +0530] "GET /HIS_API/ HTTP/1.1" 200 67
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:13 +0530] "POST /HIS_API/rest/UserService/userValidation HTTP/1.1" 200 122
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:13 +0530] "GET /HIS_API/rest/PharmacyServices/drugStockTable HTTP/1.1" 200 309
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:15 +0530] "GET /HIS_API/rest/DrugServices/getDrugCategories HTTP/1.1" 200 733
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:16 +0530] "GET /HIS_API/rest/DrugServices/getDrugNamesByCategory/Narcotics HTTP/1.1" 200 1441
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:35 +0530] "POST /HIS_API/rest/UserService/userValidation HTTP/1.1" 200 122
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:35 +0530] "GET /HIS_API/rest/DrugServices/drugreport HTTP/1.1" 200 1763
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:35 +0530] "GET /HIS_API/rest/DrugServices/getDrugNames HTTP/1.1" 200 1539
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:35 +0530] "GET /HIS_API/rest/DrugServices/getDrugCategories HTTP/1.1" 200 733
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:35 +0530] "GET /HIS_API/rest/DrugServices/getDrugByID/ HTTP/1.1" 404 967
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:36:36 +0530] "GET /HIS_API/rest/DrugServices/getRequest HTTP/1.1" 200 966
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:39:03 +0530] "POST /HIS_API/rest/UserService/userValidation HTTP/1.1" 200 122
+0:0:0:0:0:0:0:1 - - [03/Jul/2017:10:39:04 +0530] "GET /HIS_API/rest/PharmacyServices/drugStockTable HTTP/1.1" 200 309

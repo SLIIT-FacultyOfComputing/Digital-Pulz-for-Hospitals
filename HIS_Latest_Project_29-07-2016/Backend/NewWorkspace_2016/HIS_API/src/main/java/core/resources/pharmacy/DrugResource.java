@@ -130,40 +130,58 @@ public class DrugResource {
 			System.out.println(json);
 			MstDrugsNew drug = new MstDrugsNew();
 
-			drug.setdName(json.get("dname").toString());
+			drug.setdName(json.getString("dname"));
 			drug.setdUnit(json.get("dtype").toString());
-			drug.setdPrice(Double.parseDouble(json.get("dprice").toString()));
-			drug.setdRemarks(json.get("drem").toString());
+			drug.setdPrice(json.getDouble("dprice"));
+			drug.setdRemarks(json.getString("drem"));
+			//drug.setdQty(json.getInt("dqty"));
 			drug.setdCreateDate(date);
 			drug.setdLastUpdate(date);			
 			drug.setdCreateUser(json.getInt("userid"));
 			drug.setdLastUpdateUser(json.getInt("userid"));			
 			drug.setdQty(0);
-			drug.setStatusDanger(Integer.parseInt(json.get("ddanger").toString()));
-			drug.setStatusReOrder(Integer.parseInt(json.get("dreorder").toString()));
+			drug.setStatusDanger(json.getInt("ddanger"));
+			drug.setStatusReOrder(json.getInt("dreorder"));
 			drug.setdActive(false);
-			MstDrugDosage dos = new MstDrugDosage();
-
-			dos.setDosId(Integer.parseInt(json.get("ddosageid").toString()));
-			dos.setDosage(json.get("ddosage").toString());
-
-			Set<MstDrugDosage> dosages = new HashSet<MstDrugDosage>(0);
-			dosages.add(dos);
-			drug.setDosages(dosages);
+			int dosageid = json.getInt("ddosageid");
+			int frequencyId = json.getInt("dfrequencyid");
+//			MstDrugDosage dos = new MstDrugDosage();
+//			List<MstDrugDosage> list = drugDbDriver.getDosagesByID(Integer.parseInt(json.get("ddosageid").toString()));
+//			if(list == null)
+//			{
+//				
+//				dos.setDosId(Integer.parseInt(json.get("ddosageid").toString()));
+//				dos.setDosage(json.get("ddosage").toString());
+//			}
+//			else
+//			{
+//				dos = list.get(0);
+//			}
+//			Set<MstDrugDosage> dosages = new HashSet<MstDrugDosage>(0);
+//			dosages.add(dos);
+//			drug.setDosages(dosages);
 
 			// drug.getDosages().add(dos);
 
-			MstDrugFrequency freq = new MstDrugFrequency();
-			freq.setFreqId(Integer.parseInt(json.get("dfrequencyid").toString()));
-			freq.setFrequency(json.get("dfrequency").toString());
-
-			Set<MstDrugFrequency> frequencies = new HashSet<MstDrugFrequency>(0);
-			frequencies.add(freq);
-			drug.setFrequencies(frequencies);
+			
+//			MstDrugFrequency freq = null;
+//			
+//			freq = drugDbDriver.getFrequencyById(Integer.parseInt(json.get("dfrequencyid").toString()));
+//			
+//			if(freq == null)
+//			{
+//				freq = new MstDrugFrequency();
+//				freq.setFreqId(Integer.parseInt(json.get("dfrequencyid").toString()));
+//				freq.setFrequency(json.get("dfrequency").toString());
+//			}
+//
+//			Set<MstDrugFrequency> frequencies = new HashSet<MstDrugFrequency>(0);
+//			frequencies.add(freq);
+//			drug.setFrequencies(frequencies);
 			// drug.getFrequencies().add(freq);
 			catid = Integer.parseInt(json.get("dcatid").toString());
 
-			if (drugDbDriver.insertDrug(drug, catid)) {
+			if (drugDbDriver.insertDrug(drug, catid, dosageid, frequencyId)) {
 				status = "Drug Added Successfully!!!";
 				logger.info("Drug inserted ");
 			} else {
@@ -386,7 +404,7 @@ public class DrugResource {
 			logger.info("Getting drug of drug Id "+srNo+": "+drug);
 			
 			JSONSerializer serializer = new JSONSerializer();
-			return serializer.include("dSrNo","dName","dUnit","categories.dCategory","dPrice","dQty","frequency.frequency","dosage.dosage","statusDanger","statusReOrder").exclude("*").serialize(drug);
+			return serializer.include("dSrNo","dName","dUnit","categories.dCategory","dPrice","dQty","frequency.frequency","dosage.dosage","statusDanger","statusReOrder", "dRemarks").exclude("*").serialize(drug);
 		} 
 		catch(RuntimeException e){
 			logger.error("Exception in getting drug of drug Id "+srNo+": "+e.getMessage());
@@ -762,7 +780,7 @@ public class DrugResource {
 		
 		logger.info("Entering add batch method...");
 		
-		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");		
 		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Colombo"));
         Date date = new Date();
         
@@ -804,10 +822,10 @@ public class DrugResource {
         }
         
 		try {
-			System.out.println("66");
-			 Date ManDate = dateFormat.parse(json.getString("b_mdate").toString());
+			System.out.println(json.getString("b_mdate"));
+			 Date ManDate = dateFormat.parse(json.getString("b_mdate"));
 			 logger.info("Manufacture date parsed");
-	         Date ExpDate = dateFormat.parse(json.getString("b_edate").toString());
+	         Date ExpDate = dateFormat.parse(json.getString("b_edate"));
 	         logger.info("Expiry date parsed");
 	         System.out.println(ManDate);
 	         
@@ -837,7 +855,7 @@ public class DrugResource {
 			}
 			else
 			{
-				status = "failed to add a batch";
+				status = "failed to add a batch, batch number already exists.";
 				logger.error("Error in adding new batch");
 			}
 
@@ -1114,7 +1132,7 @@ public class DrugResource {
 
 						drug.setdLastUpdate(date);
 						drug.setdLastUpdateUser(Integer.parseInt(json.get("userid").toString()));
-						drug.setdQty(drug.getdQty() - drugQuantity);
+						//drug.setdQty(drug.getdQty() - drugQuantity);
 
 					} else {
 						logger.info("Drug not available");
@@ -1267,6 +1285,8 @@ public class DrugResource {
 						list1.put(drugs.getdCreateUser());
 						list1.put(drugs.getdLastUpdate());
 						list1.put(drugs.getdLastUpdateUser());
+						list1.put(drugs.getdManufactDate());
+						list1.put(drugs.getdExpiryDate());
 					}
 
 				}
@@ -1304,6 +1324,62 @@ public class DrugResource {
 			}
 	 }
 	 
+	 /**
+	  * Delete the batch
+	  * @author Vishwa
+	  * @param json
+	  * @return
+	  * @throws JSONException 
+	  */
+	 @POST
+	 @Path("/deleteBatch")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 public String DeleteBatch(JSONObject json) throws JSONException{
+		 logger.info("Entering getDrugdetailsByDrugName method...");
+
+			try {
+				String drugName = json.get("dname").toString();
+				String batchId = json.get("dbatch").toString();
+				boolean result = drugDbDriver.deleteBatch(drugName, batchId);
+				
+				if(result)
+				{
+					return "true";
+				}
+				else
+				{
+					return "false";
+				}
+
+			} 
+			catch(RuntimeException e)
+			{
+				logger.error("Exception in getDrugdetailsByDrugName method..."+e.getMessage());
+				
+				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch(JSONException e)
+			{
+				logger.error("Exception in getDrugdetailsByDrugName method..."+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+							
+				return jsonErrorObject.toString();
+			}
+			catch (Exception e) {
+				logger.error("Exception in getDrugdetailsByDrugName method... "+e.getMessage());
+				return "error";
+			}
+	 }
 	 
 	 /**
 	  * Gives the List of prescriptions for a given date
@@ -1429,6 +1505,68 @@ public class DrugResource {
 					logger.error("Error in saving dosages ");
 					return "fail !";
 				}
+			} 
+			catch(RuntimeException e)
+			{
+				logger.error("Exception in saveDosages method "+e.getMessage());
+				
+				e.printStackTrace();
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+				jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+				
+				return jsonErrorObject.toString(); 	
+			}
+			catch(JSONException e)
+			{
+				logger.error("Exception in saveDosages method "+e.getMessage());
+				
+				JSONObject jsonErrorObject = new JSONObject();
+				jsonErrorObject.put("errorcode", ErrorConstants.FILL_REQUIRED_FIELDS.getCode());
+				jsonErrorObject.put("message", ErrorConstants.FILL_REQUIRED_FIELDS.getMessage());
+							
+				return jsonErrorObject.toString();
+			}
+			catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error("Exception in saveDosages method "+e.getMessage());
+				return "JSON Error ! "+ e.getMessage();
+			}
+	 }
+	 
+	 /**
+	  * Saving Dosages
+	  * @author Vishwa
+	  * @param json
+	  * @return 
+	 * @throws JSONException 
+	  */
+	 @POST
+	 @Path("/addDosage")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.TEXT_PLAIN)
+	 public String AddDosage(JSONObject json) throws JSONException{
+		 
+		 logger.info("entering saveDosages method...");
+		 
+		try {
+			System.out.println("Came in!!!");
+				
+			MstDrugDosage dosage = new MstDrugDosage();
+						
+			dosage.setDosage(json.get("dosage").toString());
+			dosage.setRecordStatus(Integer.parseInt(json.get(
+								"recordStatus").toString()));
+
+					
+			if (drugDbDriver.addDrugDosage(dosage)) {
+				logger.info("add dosage " +dosage);
+				return "success";
+			} else {
+				logger.error("Error in saving dosages ");
+				return "fail !";
+			}
 			} 
 			catch(RuntimeException e)
 			{
@@ -1983,6 +2121,66 @@ public class DrugResource {
 				return e.getMessage();
 			}
 		}
+		
+		/**
+		  * Saving drug list
+		  * @author Nisal
+		  * @param json
+		  * @return 
+		 * @throws JSONException 
+		  */
+		 @POST
+		 @Path("/addDrugList")
+		 @Consumes(MediaType.APPLICATION_JSON)
+		 @Produces(MediaType.TEXT_PLAIN)
+		 public String AddDrugList(JSONObject json) throws JSONException{
+			 
+			 logger.info("entering add Drug list method...");
+			 
+			try {
+				System.out.println(json.getJSONArray("array").toString());
+				
+				JSONArray jsonArray = json.getJSONArray("array");
+				
+				boolean status = false;
+				for(int i=0; i<jsonArray.length(); i++)
+				{
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					String result = insertDrug(jsonObj);
+					if(result.equals("Drug Added Successfully!!!"))
+					{
+						status = true;
+					}
+					else
+					{
+						status = false;
+						break;
+					}
+				}
+				if(!status)
+				{
+					//rollback the added drug if at least on drug from the list fails
+					//to do
+				}
+				return String.valueOf(status);
+			} 
+			catch(RuntimeException e)
+			{
+				logger.error("Exception in adding Drug list method "+e.getMessage());
+					
+				e.printStackTrace();
+					
+				JSONObject jsonErrorObject = new JSONObject();
+					jsonErrorObject.put("errorcode", ErrorConstants.NO_CONNECTION.getCode());
+					jsonErrorObject.put("message", ErrorConstants.NO_CONNECTION.getMessage());
+					
+				return jsonErrorObject.toString(); 	
+			}
+			catch (Exception e) {
+				logger.error("Exception in adding Drug list method "+e.getMessage());
+				return "JSON Error ! "+ e.getMessage();
+				}
+		 }
 	
 	
 	 

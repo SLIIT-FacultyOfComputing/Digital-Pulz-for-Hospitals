@@ -1,0 +1,63 @@
+package core.classes.opd;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import core.classes.BaseEntity;
+
+public class Injection extends BaseEntity implements java.io.Serializable  {
+
+	private int injectionId;
+	private String name;
+	private String dosage;
+	private String remarks;
+	private Boolean active;
+	private String route;
+	private Set<PatientInjection> patientInjection = new HashSet<PatientInjection>();
+	
+	public int getInjectionId() {
+		return injectionId;
+	}
+	public void setInjectionId(int injectionId) {
+		this.injectionId = injectionId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDosage() {
+		return dosage;
+	}
+	public void setDosage(String dosage) {
+		this.dosage = dosage;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public String getRoute() {
+		return route;
+	}
+	public void setRoute(String route) {
+		this.route = route;
+	}
+	public Set<PatientInjection> getPatientInjection() {
+		return patientInjection;
+	}
+	public void setPatientInjection(Set<PatientInjection> patientInjection) {
+		this.patientInjection = patientInjection;
+	}
+
+	
+	
+}

@@ -1,0 +1,5 @@
+package core.classes.opd;
+
+public class Injection {
+
+}

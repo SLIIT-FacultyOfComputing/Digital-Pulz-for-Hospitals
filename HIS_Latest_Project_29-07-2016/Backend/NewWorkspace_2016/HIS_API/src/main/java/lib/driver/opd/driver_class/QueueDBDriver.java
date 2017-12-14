@@ -3,6 +3,7 @@ package lib.driver.opd.driver_class;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,8 +19,10 @@ import java.util.TreeSet;
 
 
 
+
 import lib.SessionFactoryUtil;
 import lib.driver.api.driver_class.user.UserDBDriver;
+import lib.driver.hr.driver_class.HrAttendanceDBDriver;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -27,6 +30,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import core.classes.api.user.AdminUser;
+import core.classes.hr.HrAttendance;
 import core.classes.hr.HrEmployee;
 import core.classes.opd.OutPatient;
 import core.classes.opd.Queue;
@@ -265,6 +269,43 @@ public class QueueDBDriver {
 		}
 	}
 
+	
+	public List<Queue> getQueuePatientsByDoctorID(int doctorID) {
+		Transaction tx = null;
+		try {
+			if(!session.isOpen())  session = SessionFactoryUtil.getSessionFactory()
+					.openSession();
+			tx = session.beginTransaction();
+			Query query = session
+					.createQuery("from AdminUser as a where a.hrEmployee.empId="+doctorID);
+			AdminUser user = (AdminUser) castList(AdminUser.class, query.list()).get(0);
+			Query query2 = session
+					.createQuery("from Queue where queueAssignedTo=:userID AND queueStatus!='Delete'");
+			
+			query2.setParameter("userID", user);
+
+			List<Queue> queueRecord = castList(Queue.class, query2.list());
+			tx.commit();
+			return queueRecord;
+
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive()) {
+				try {
+					tx.rollback();
+				} catch (HibernateException he) {
+					System.err.println("Error rolling back transaction");
+				}
+				throw ex;
+			}else if(tx == null)
+			{
+				throw ex;
+			}
+			else{
+			return null;
+			}
+		}
+	}
+	
 	public Queue isPatientInQueue(int patientID) {
 		Transaction tx = null;
 		try {
@@ -342,7 +383,7 @@ public class QueueDBDriver {
 			tx = session.beginTransaction();
 
 			Query query = session
-					.createQuery("from Queue where (queueAssignedTo=:user AND queueStatus='Delete')");
+					.createQuery("from Queue where (queueAssignedTo=:AdminUser AND queueStatus='Delete')");
 			AdminUser user = (AdminUser) session.get(AdminUser.class, userID);
 			query.setParameter("AdminUser", user);
 			List<Queue> queueRecord = castList(Queue.class, query.list());
@@ -367,7 +408,7 @@ public class QueueDBDriver {
 		}
 	}
 
-	public int redirectQueue(int userID) {
+	public int redirectQueue(int userID, int visitType) {
 		Transaction tx = null;
 		try {
 
@@ -386,6 +427,16 @@ public class QueueDBDriver {
 			// delete all queue entries belong to this doctor
 			AdminUser user = (AdminUser) session.get(AdminUser.class, userID); 
 			
+			String roleName="Doctor";
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = Calendar.getInstance().getTime();
+			List<HrAttendance> attendenceList = new HrAttendanceDBDriver().getAllAttendanceByType(df.format(today), visitType);
+			
+			if(attendenceList.size() == 1)
+			{
+				return 0;
+			}
+			
 			
 			Query query = session
 					.createQuery("delete Queue where (queueAssignedTo=:user AND queueStatus!='Delete')");
@@ -400,7 +451,7 @@ public class QueueDBDriver {
 			{ 
 				Queue q = (Queue) ite.next();
 				addToQueue(q, q.getPatient().getPatientID(), q
-								.getQueueAssignedBy().getUserId(),  qr.getNextAssignDoctorID( q.getPatient().getPatientID())); 
+								.getQueueAssignedBy().getUserId(),  qr.getNextAssignDoctorID( q.getPatient().getPatientID(), visitType)); 
 			}
 		  
 			return 1; 

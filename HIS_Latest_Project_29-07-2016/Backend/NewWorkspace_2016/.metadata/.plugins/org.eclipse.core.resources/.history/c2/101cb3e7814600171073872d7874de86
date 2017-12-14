@@ -1,0 +1,38 @@
+package core.resources.hr;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import lib.driver.hr.driver_class.VillageDBDriver;
+import core.classes.hr.Village;
+
+import flexjson.JSONSerializer;
+
+@Path("Village")
+public class VillageResource {
+
+	VillageDBDriver villageDBDriver = new VillageDBDriver();
+	
+	@GET
+	@Path("/getVillageOnSearch/{village}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getVillageOnSearch(@PathParam("village")  String villageName) {
+		
+		
+		try {
+			List<Village> villageList=villageDBDriver.getVillageOnSearch(villageName);
+			
+			JSONSerializer serializer = new JSONSerializer();
+
+			return serializer.exclude("*.class").serialize(villageList);
+			
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+}

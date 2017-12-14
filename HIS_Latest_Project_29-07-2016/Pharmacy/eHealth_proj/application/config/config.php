@@ -15,7 +15,7 @@
 |http://localhost/eHealth_proj/
 */
 $config['base_url']	= 'http://localhost/eHealth_proj/';
-define('SERVICE_BASE_URL','http://172.16.21.251:8080/HIS_API/rest/');
+define('SERVICE_BASE_URL','http://localhost:8080/HIS_API/rest/');
 define('CLIENT_BASE_URL', 'http://localhost/eHealth_proj/');
 
 $config['enable_hooks'] = TRUE;

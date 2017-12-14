@@ -1,3 +1,12 @@
+<?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
 <body onload="getCategoryListDC()">
 <section class="content-header">
           <h1>

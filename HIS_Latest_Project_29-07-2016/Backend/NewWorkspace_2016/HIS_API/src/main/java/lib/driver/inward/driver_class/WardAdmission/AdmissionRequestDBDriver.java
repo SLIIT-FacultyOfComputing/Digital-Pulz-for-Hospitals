@@ -53,7 +53,15 @@ public class AdmissionRequestDBDriver {
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				 throw ex;
+				}
+			else{
+				return false;
+			}
+		
+
 		}
 		
 		
@@ -90,7 +98,13 @@ Transaction tx=null;
 				}
 				throw ex;
 			}
-			return false;
+			else if(tx == null)
+			{
+				 throw ex;
+				}
+			else{
+				return false;
+			}
 		}
 	}
 
@@ -116,7 +130,13 @@ Transaction tx = null;
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+				 throw ex;
+				}
+			else{
+				return null;
+			}
 		}
 	}
 
@@ -142,7 +162,13 @@ Transaction tx = null;
 				}
 				throw ex;
 			}
-			return null;
+			else if(tx == null)
+			{
+			 throw ex;
+			}
+			else{
+				return null;
+			}
 		}
 	}
 

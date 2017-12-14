@@ -1,144 +1,176 @@
- 
-<div class="panel panel-info" >
-              <div class="panel-heading">
-               <h5 class="panel-title"><?php echo $title; ?></h5>
-              </div>
+<?php
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+?>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h5 class="panel-title"><?php echo $title; ?></h5>
+    </div>
+
     <div class="panel-body">
         
-   
-
-    <div class="form-horizontal">     
+        <div class="form-horizontal">     
           
             <!-- Message for operation status  ************************************************************** --> 
             <?php
             
             if ($status == "True") {
-                ?>
+            ?>
 
                 <div class="alert alert-success">
+                    <button onClick="<?php echo "javascript:window.open('../../print_c/print_token/" . $pid . "/" . $isonq->queueTokenNo . "','patientToken','width=490,height=250');"; ?>" style="float:right" class="btn btn-default"><i class='glyphicon         glyphicon-print'> </i> Print Token
+                    </button>
 
-                    <button onClick="<?php echo "javascript:window.open('../../print_c/print_token/" . $pid . "/" . $isonq->queueTokenNo . "','patientToken','width=490,height=250');"; ?>" style="float:right" class="btn btn-default"><i class='glyphicon glyphicon-print'> </i> Print Token</button>
-                    <strong> Token Number : <?php echo $isonq->queueTokenNo; ?></strong>  <br>
+                    <strong> 
+                    Token Number : <?php echo $isonq->queueTokenNo; ?>    
+                    </strong>
+                    <br>
                     <br>
                 </div>
-    </div>
-    </div>
-</div>
+            </div>
+
             <?php
             }
 
-if($status != "True"){ 
-		  
+            if($status != "True" && $full != "")
+            { ?>
+                <div class="alert alert-danger">
+                <strong> 
+                    Doctor <?php echo $full[0]->userName ?>'s queue is full.
+                </strong>
+                </div>
+            
 
-if(preg_match('/Edit/',$title))
-{
- //	echo form_open('visit_c/update/'.$pid."/".$visitid, array('name' => 'myform'));
-}else
-{
-	echo form_open('queue_c/save/'.$pid, array('name' => 'myform'));
-}
- ?>
- <!-- **************************************************************************************** --> 		
-	
-            <br>
+    
+            <?php
+            }
 
+            if($status != "True"){ 
+            		  
+                if(preg_match('/Edit/',$title))
+                {
+                 //	echo form_open('visit_c/update/'.$pid."/".$visitid, array('name' => 'myform'));
+                }
+                else{
+
+                	echo form_open('queue_c/save/'.$pid, array('name' => 'myform'));
+                }
+                ?>
+             <!-- **************************************************************************************** -->
+                <div class="form-group input-group" style="margin-top: 10px">
+                    <span style="width: 155px"  class="input-group-addon">Automatic Assignment</span>
+                    <button type="submit" class="btn btn-primary" style="width: 150px" id="autobtn" name="autobtn" value="auto">Auto Assign</button>
+                </div>
+                <hr/>
+            	<br>
 
                 <div class="form-group input-group" style="margin-top: 10px">
                     <span style="width: 155px"  class="input-group-addon">Assigned To*</span>
                     
-                        <select class="form-control" style="width: 350px" readonly name="doctor" required >
+                        <select class="form-control" style="width: 350px" name="doctor" required >
 
-                                <?php foreach ($doctors as $doctor) { ?>
+                                <?php foreach ($doctors as $doctor) {
+                                    if($doctor->status != '2'){
+                                    ?>
 
-                                    <option <?php if ($doctor->hrEmployee->empId == $assigndoc->userId) echo "selected"; ?>  value=" <?php echo $doctor->hrEmployee->empId; ?>" > <?php echo "Dr." . $doctor->hrEmployee->firstName." ".$doctor->hrEmployee->lastName; ?> </option>
+                                    <option <?php if ($doctor->hrEmployee->empId == $assigndoc->hrEmployee->empId) echo "selected"; ?>  value=" <?php echo $doctor->hrEmployee->empId; ?>" > <?php echo "Dr." . $doctor->hrEmployee->firstName." ".$doctor->hrEmployee->lastName; ?> </option>
 
-                                <?php } ?>
+                                <?php } } ?>
                         </select>                    
                 </div>
-            
-                 <div class="form-group input-group" style="margin-top: 10px">
+                        
+                <div class="form-group input-group" style="margin-top: 10px">
                      <span style="width: 155px"  class="input-group-addon">Date and Time </span>
                     
-                     <input class="form-control" style="width: 350px" type="text" id="inputDateandTime" readonly name="DateandTime" placeholder="" value="<?php if(preg_match('/Edit/',$title)){  echo date('Y-m-d H:i:s a',$visit[0]->dateOfVisit/1000);  }else{ echo date('Y-m-d H:i:s a');}?>">
-                    
+                     <input class="form-control" style="width: 350px" type="text" id="inputDateandTime" readonly name="DateandTime" placeholder="" value="<?php if(preg_match('/Edit/',$title)){  echo date('Y-m-d H:i:s a',$visit[0]->dateOfVisit/1000);  }else{ echo date('Y-m-d H:i:s a');}?>">   
                 </div>
-			  
-               
-                 <div class="form-group input-group" style="margin-top: 10px">
+            			  
+                           
+                <div class="form-group input-group" style="margin-top: 10px">
                      <span style="width: 155px"  class="input-group-addon">Assign By </span>
 
                             <input class="form-control" style="width: 350px" type="text" id="inputDoctor" readonly name="Doctor" placeholder="" value="<?php echo  $this->session->userdata("userfullname");?>">
-
                 </div>
-
-                
-				 
-				
-				
+            	
                 <div class="form-group input-group" style="margin-top: 10px">
                     <span style="width: 155px"  class="input-group-addon">Remarks</span>
                     <div class="controls">
                         <textarea class="form-control" style="min-width: 350px;max-width: 350px;min-height: 60px;height:auto" id="inputRemarks" name="Remarks" placeholder=""><?php  if(preg_match('/Edit/',$title)){ echo $visit[0]->remarks ; } ?></textarea>
                     </div>
                 </div>
-            
-
-    			
-            <div id="queuetable" style='float: right;    height: 4px;    top: -336px;    margin-left: 591px; margin-top: 80px;   position: relative;' >
-                    <h5 align="left">Available Doctors</h5>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th >Doctor</th>
-                                <th>Patient Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <?php foreach ($docpatients as $row) { ?>
+              		
+                <div id="queuetable" style='float: right;    height: 4px;    top: -336px;    margin-left: 591px; margin-top: 80px;   position: relative;' >
+                        <h5 align="left">Available Doctors</h5>
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td><?php echo "Dr." . $row[0].$row[1]; ?></td>
-                                    <td><?php echo $row[2]; ?></td>
+                                    <th >Doctor</th>
+                                    <th>Patient Count</th>
+                                    <th>Status</th>
                                 </tr>
-                            <?php } ?>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
+                                <?php foreach ($docpatients as $row) { ?>
+                                    <tr>
+                                        <td><?php echo "Dr." . $row[0].$row[1]; ?></td>
+                                        <td><?php echo $row[2]; ?></td>
+                                        <td><?php if($row[3]== 0) {
+                                                echo "OPEN";
+                                            }
+                                            else if($row[3]==1)
+                                            {
+                                                echo "FULL";
+                                            }
+                                            else if($row[3]==2)
+                                            {
+                                                echo "ON HOLD";
+                                            }
+                                            else
+                                            {
+                                                echo "REDIRECT";
+                                            }?>
+                                            </td>
+                                    </tr>
+                                <?php } ?>
 
-                    </table> 
+                            </tbody>
 
+                        </table> 
                 </div>
- 
- 
-				
-				
-	<?php if(preg_match('/Edit/',$title)){?> 
-            
+             
+             		
+            	<?php if(preg_match('/Edit/',$title))
+                { ?>
 
-                        <div class="form-group input-group" style="margin-top: 10px">
-                            <span style="width: 155px"  class="input-group-addon">Last edit by </span>
-                                 <input class ="form-control" style="width: 350px" readonly type="text" value= "<?php echo $lastmodusername . " on " . date('Y-m-d', $visit[0]->lastUpDate / 1000); ?>" placeholder="">
-                                                      
-                        </div>
-            
-	<?php } ?> 	
- 
-
-            <div class="container-fluid">
-                    <div class="form-actions">
-
-                        <button type="submit" class="btn btn-primary"><?php echo 'Add'; ?></button>
-
-                        <button type="reset" class='btn'  onclick="history.go(-1);">Cancel</button>
-
-
-                        <?php echo form_close(); ?>
-
+                    <div class="form-group input-group" style="margin-top: 10px">
+                        <span style="width: 155px"  class="input-group-addon">Last edit by </span>
+                             <input class ="form-control" style="width: 350px" readonly type="text" value= "<?php echo $lastmodusername . " on " . date('Y-m-d', $visit[0]->lastUpDate / 1000); ?>" placeholder="">                             
                     </div>
-                </div>
-</div>
-<!--Ending point of panel body-->
- <?php } ?> 	
- 
+                        
+            	<?php 
+                } ?> 	
 
+        <div class="container-fluid">
+                <div class="form-actions">
+
+                    <button type="submit" class="btn btn-primary"><?php echo 'Add'; ?></button>
+
+                    <button type="reset" class='btn'  onclick="history.go(-1);">Cancel</button>
+
+
+                    <?php echo form_close(); ?>
+
+                </div>
+        </div>
+    </div>
+<!--Ending point of panel body-->
+<?php 
+} ?> 	
 </div>
 

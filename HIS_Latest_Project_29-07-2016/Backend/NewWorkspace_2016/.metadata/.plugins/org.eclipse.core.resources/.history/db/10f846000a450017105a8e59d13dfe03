@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2014 2:42:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="core.classes.hr.village" table="village" catalog="HIS">
+		<id name="vgeId" type="java.lang.Integer">
+            <column name="VGEID" />
+            <generator class="identity" />
+        </id>
+        <property name="province" type="string">
+            <column name="Province" length="50" not-null="false" />
+        </property>
+        <property name="district" type="string">
+            <column name="District" length="50" not-null="false" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="50" not-null="false" />
+        </property>
+        <property name="isActive" type="boolean">
+            <column name="is_active" not-null="false" />
+        </property>
+        <property name="endDate" type="date">
+            <column name="end_date" length="10" not-null="false" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="50" not-null="false" />
+        </property>
+        <property name="isActive" type="boolean">
+            <column name="is_active" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>

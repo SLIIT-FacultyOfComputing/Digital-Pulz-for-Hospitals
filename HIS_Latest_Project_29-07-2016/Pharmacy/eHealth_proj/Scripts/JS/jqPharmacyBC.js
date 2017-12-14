@@ -1,7 +1,14 @@
-var baseUrl="http://localhost";
+/*
+------------------------------------------------------------------------------------------------------------------------
+DiPMIMS - Digital Pulz Medical Information Management System
+Copyright (c) 2017 Sri Lanka Institute of Information Technology
+<http: http://his.sliit.lk />
+------------------------------------------------------------------------------------------------------------------------
+*/
+var baseUrl="http://localhost/eHealth_proj";
 function getCategoryListBC() {
     $.ajax({
-        url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getCatList',
+        url: baseUrl+'/index.php/Batch_Controller/getCatList',
         type: 'POST',
         crossDomain: true,
         success: function(data) {
@@ -18,7 +25,7 @@ function getCategoryListBC() {
     });
     
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugNames',
+            url: baseUrl+'/index.php/Batch_Controller/getDrugNames',
             type: 'POST',
             crossDomain: true,
                     success: function(data) {
@@ -32,7 +39,7 @@ function getCategoryListBC() {
                      
                 }
         });
-       document.getElementById("imgid").style.visibility = "hidden";
+       //document.getElementById("imgid").style.visibility = "hidden";
 
 }
 
@@ -53,7 +60,7 @@ function getDrugByCategoryBC(){
     if (val === "All")
     {
         $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugNames',
+            url: baseUrl+'/index.php/Batch_Controller/getDrugNames',
             type: 'POST',
             crossDomain: true,
                     success: function(data) {
@@ -71,7 +78,7 @@ function getDrugByCategoryBC(){
     else
     {
         $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/getDrugList/'+val,
+            url: baseUrl+'/index.php/Batch_Controller/getDrugList/'+val,
             type: 'POST',
             crossDomain: true,
                     success: function(data) {
@@ -313,37 +320,79 @@ function calculateQuantityBT()
 
 function calculateQuantityBL()
 {
-//    alert("Came in calculateQuantityBL");
-    var noOfBottles = parseInt($("#numOfBottlesContentValueDC").val());
+    var noOfBottles = 0;
     var totalQty;
-    if(noOfBottles > 0)
+    if($('#drugNameDropDownBC').val().endsWith("ml"))
     {
-        totalQty = noOfBottles;
-        $("#quantityValueBC").val(totalQty);
-        
+        var unitQty = parseInt($("#drugUnitQuantity").val());
+        noOfBottles = parseInt($("#numOfBottlesContentValueDC").val());
+
+        if(noOfBottles > 0)
+        {
+            totalQty = noOfBottles * unitQty;
+            $("#quantityValueBC").val(totalQty);
+            
+        }
+        else
+        {
+            alert("Please enter valid Quantities!!!");
+        }
     }
     else
-    {
-        alert("Please enter valid Quantities!!!");
+    { 
+//    alert("Came in calculateQuantityBL");
+        noOfBottles = parseInt($("#numOfBottlesContentValueDC").val());
+        if(noOfBottles > 0)
+        {
+            totalQty = noOfBottles;
+            $("#quantityValueBC").val(totalQty);
+            
+        }
+        else
+        {
+            alert("Please enter valid Quantities!!!");
+        }
     }
 }
 
 function calculateQuantityCL()
 {
     //alert("Came in");
-    var noOfBottles = parseInt($("#numOfBottlesContentValueDC").val());
-    var noOfCartoons = parseInt($("#numOfCartoonsContentValueDC").val());
-    var totalQty;
-    if(noOfBottles > 0 && noOfCartoons > 0)
+    
+    if($('#drugNameDropDownBC').val().endsWith("ml"))
     {
-        totalQty = noOfBottles * noOfCartoons;
-        $("#quantityValueBC").val(totalQty);
+        var unitQty = parseInt($("#drugUnitQuantity").val());
+        noOfBottles = parseInt($("#numOfBottlesContentValueDC").val());
+        noOfCartoons = parseInt($("#numOfCartoonsContentValueDC").val());
+        var totalQty;
+        if(noOfBottles > 0 && noOfCartoons > 0)
+        {
+            totalQty = noOfBottles * noOfCartoons * unitQty;
+            $("#quantityValueBC").val(totalQty);
         
+        }
+        else
+        {
+            alert("Please enter valid Quantities!!!");
+        }
     }
     else
     {
-        alert("Please enter valid Quantities!!!");
+        noOfBottles = parseInt($("#numOfBottlesContentValueDC").val());
+        noOfCartoons = parseInt($("#numOfCartoonsContentValueDC").val());
+        var totalQty;
+        if(noOfBottles > 0 && noOfCartoons > 0)
+        {
+            totalQty = noOfBottles * noOfCartoons;
+            $("#quantityValueBC").val(totalQty);
+        
+        }
+        else
+        {
+            alert("Please enter valid Quantities!!!");
+        }
     }
+    
 }
 
 function calculateQuantityCTB()
@@ -438,15 +487,15 @@ function addDrugBatchBC(){
 //        alert("ajax ekata ");
         
     $.ajax({
-            url: baseUrl+'/eHealth_proj/index.php/Batch_Controller/addBatch',
+            url: baseUrl+'/index.php/Batch_Controller/addBatch',
             type: 'POST',
             crossDomain: true,
-            data: {drugName:drugName ,batchNo:batchNo,quantity:quantity,
-                   manufactureDate:manufactureDate,expireDate:expireDate},
-            success: function(data) {
-                console.log(data);
-                 data = trimData(data);
-//                 alert(data);
+            data: {"drugName":drugName ,"batchNo":batchNo,"quantity":quantity,
+                   "manufactureDate":manufactureDate,"expireDate":expireDate},
+            success: function(output) {
+                //console.log(data);
+                 data = trimData(output);
+                alert(data);
                  $("#quantityValueBC").val("");
                  document.getElementById("cartoonspaceBC").innerHTML = "";
                  document.getElementById("quantityspaceBC").innerHTML = "";
@@ -454,9 +503,19 @@ function addDrugBatchBC(){
 //                 alert("Successfully Added");
             },
             error:function() {
-             alert("Fail to add");
+             alert("Fail to add batch");
             }
          });
+
+    
+    document.getElementById('batchNoValueBC').value = "";
+    document.getElementById('manufactureDateValueBC').value = "mm/dd/yyyy";
+    document.getElementById('expireDateValueBC').value = "mm/dd/yyyy";
+
+    var d = $('#typeDropDownBC option:disabled').prop('disabled', '');
+    $('#typeDropDownBC').val(0);
+    d.prop('disabled', 'disabled');
+
     }
 }
 

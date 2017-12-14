@@ -7,6 +7,7 @@ public class MstDrugFrequency implements java.io.Serializable {
 
 	private int freqId;
 	private String frequency;
+	private String value;
 	private Set<MstDrugsNew> drug = new HashSet<MstDrugsNew>(0);
 	
 	public Set<MstDrugsNew> getDrug() {
@@ -56,7 +57,13 @@ public class MstDrugFrequency implements java.io.Serializable {
 		this.frequency = frequency;
 	}
 	
-	
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 	
 	
 }
